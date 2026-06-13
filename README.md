@@ -5,7 +5,7 @@
 **Entidad:** Subsecretaría de Promoción Humana — Ministerio de Desarrollo Social, Santiago del Estero
 
 > Este README es el documento de traspaso del proyecto: explica qué hay, cómo se corre y qué sigue.
-> La planificación detallada está en [ROADMAP.md](ROADMAP.md). La explicación de cada análisis y decisión, en [docs/documentacion-analisis.md](docs/documentacion-analisis.md).
+> La planificación detallada está en [ROADMAP.md](ROADMAP.md). El **Informe EDA** (entregable del Hito 3) está en [docs/informe-eda.md](docs/informe-eda.md); la explicación del *por qué* de cada análisis y decisión, en [docs/documentacion-analisis.md](docs/documentacion-analisis.md).
 
 ---
 
@@ -65,6 +65,10 @@ vivso-python/
 │                          #   components/data_loader.py centraliza la carga de CSVs
 ├── data/                  # CSVs generados (regenerables, gitignored)
 ├── docs/
+│   ├── informe-eda.md               # INFORME EDA (entregable Hito 3) — documento formal único
+│   ├── datos-a-confirmar.md         # checklist de supuestos para validar con el área (reunión)
+│   ├── generar_figuras.py           # regenera las figuras del informe desde el dataset
+│   ├── figuras/                     # PNGs del informe (regenerables)
 │   ├── documentacion-analisis.md    # POR QUÉ de cada análisis — para entender y explicar
 │   ├── prompt-pptx-hito2.md         # Prompt de la presentación Hito 2 (plantilla para H3)
 │   ├── guion-presentacion-hito2.md  # Guion de defensa (formato subtexto)
@@ -126,7 +130,7 @@ Cerrado en Hito 2 y posteriores:
 
 ## 6. Qué se planea hacer (resumen — el detalle está en ROADMAP.md)
 
-La prioridad inmediata es el **cierre de PP2 (Hito 3)**: entregable oficial = *"Informe EDA + prototipo funcionando"*. La brecha real es el **Informe EDA como documento único** — el prototipo ya funciona.
+La prioridad inmediata es el **cierre de PP2 (Hito 3)**: entregable oficial = *"Informe EDA + prototipo funcionando"*. El prototipo ya funciona y el **Informe EDA está redactado** ([docs/informe-eda.md](docs/informe-eda.md), con figuras generadas desde el dataset). Queda **validar el alcance con el profesor** y preparar la presentación.
 
 Después (preparación de PP3, en coordinación con el equipo de Desarrollo):
 
@@ -151,7 +155,7 @@ Ruta de onboarding sugerida (en este orden):
 
 Reglas para mantener la coherencia del proyecto:
 
-- El plazo contractual se cambia en **un solo lugar** (`PLAZO_CONSTRUCCION_DIAS`) y se regeneran los datos.
+- Los **supuestos del programa** (plazo, distribuciones, etapas del cuello de botella, umbrales de riesgo, etc.) están centralizados y etiquetados `[S#]` en el bloque *"SUPUESTOS DEL PROGRAMA"* al inicio de `synthetic/generate.py`. Para ajustarlos a la realidad: se edita el valor ahí y se regenera — nada de números escondidos en funciones. Cada `[S#]` se corresponde con una fila de [docs/datos-a-confirmar.md](docs/datos-a-confirmar.md), la checklist que se completa con el área.
 - Las columnas derivadas (`dias_activa`, `nivel_riesgo`) se calculan **solo** en `recalcular_derivados()` a partir de las fechas — no asignarlas a mano en otro lado.
 - Todo indicador nuevo debe responder una pregunta de gestión concreta ("¿a quién audito?", "¿a dónde mando al técnico?") — si no habilita una decisión, no entra.
 - Registrar las decisiones importantes en la bitácora del ROADMAP: este proyecto documenta su proceso de principio a fin.

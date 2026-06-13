@@ -32,18 +32,18 @@ Antes de VIVSO, esta información estaba distribuida en tres sistemas desconecta
 
 ### Fuente de datos
 
-El backend Java (equipo de Programación) está en desarrollo. Mientras no está disponible, el componente Python genera un **dataset sintético de 1.000 registros** que reproduce las distribuciones geográficas y estadísticas reales del programa. Cuando el backend esté disponible, el sistema cambia automáticamente a datos reales con una sola variable de configuración.
+El backend Java (equipo de Programación) está en desarrollo. Mientras no está disponible, el componente Python genera un **dataset sintético de 1.500 registros** que reproduce las distribuciones geográficas y estadísticas reales del programa. Cuando el backend esté disponible, el sistema cambia automáticamente a datos reales con una sola variable de configuración.
 
 ### Qué contiene el dataset
 
 | Tabla | Registros | Descripción |
 |-------|-----------|-------------|
-| `vivienda` | 1.000 | Una fila por expediente de obra |
+| `vivienda` | 1.500 | Una fila por expediente de obra |
 | `organizacion` | 3 | ONGs con sus datos institucionales |
 | `tecnico` | 6 | Técnicos con zona de cobertura |
-| `asignacion_tecnico` | ~600 | Qué obras tiene asignadas cada técnico |
-| `visita` | ~700 | Cada visita de campo con avance verificado |
-| `avance_rubro` | 15.000 | Avance de cada etapa constructiva por obra |
+| `asignacion_tecnico` | 901 | Qué obras tiene asignadas cada técnico |
+| `visita` | 1.057 | Cada visita de campo con avance verificado |
+| `avance_rubro` | 22.500 | Avance de cada etapa constructiva por obra |
 
 ### Variables clave de cada vivienda
 

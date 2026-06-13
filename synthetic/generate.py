@@ -21,6 +21,10 @@ from faker import Faker
 from sqlalchemy import create_engine
 from tqdm import tqdm
 
+# El catálogo oficial de rubros (nombres, pesos, orden) vive en un solo lugar: db/setup.py.
+# Importarlo es seguro: ese módulo no ejecuta nada al importarse (todo está bajo __main__).
+from db.setup import RUBROS_CATALOGO
+
 load_dotenv()
 
 fake = Faker("es_AR")
@@ -30,7 +34,7 @@ np.random.seed(42)
 DB_PATH = os.getenv("DB_PATH", "db/vivso_local.db")
 
 # ---------------------------------------------------------------------------
-# Distribución geográfica real de Santiago del Estero
+# [S15] Distribución geográfica real de Santiago del Estero
 # Los pesos reflejan la concentración poblacional de cada departamento
 # ---------------------------------------------------------------------------
 LOCALIDADES = [
@@ -67,17 +71,71 @@ CUITS_ONG = [
     "30-59804127-3",
 ]
 
-# ---------------------------------------------------------------------------
-# Plazo contractual de la etapa de construcción, en días. FUENTE ÚNICA DE VERDAD:
-# define el modelo de riesgo (una obra que lo supera y no avanza está en riesgo)
-# y el cronograma de referencia. Si el plazo cambia, se cambia solo acá.
-# ---------------------------------------------------------------------------
+# ═══════════════════════════════════════════════════════════════════════════
+# SUPUESTOS DEL PROGRAMA — A VALIDAR CON EL ÁREA
+# ═══════════════════════════════════════════════════════════════════════════
+# Estos son los parámetros que modelan el comportamiento del programa. Cada uno
+# está etiquetado [S#] y se corresponde con una fila de docs/datos-a-confirmar.md
+# (el documento que se completa en la reunión con el responsable del área).
+#
+# Para hacer el modelo más realista cuando el área corrija un supuesto: se edita
+# el valor ACÁ y se regenera con `python -m synthetic.generate`. El dashboard, las
+# figuras del informe y los notebooks se actualizan solos al leer los datos nuevos.
+# La idea es que NO haya números de estos escondidos dentro de las funciones.
+# ═══════════════════════════════════════════════════════════════════════════
+
+# [S1] Plazo contractual de la etapa de construcción, en días. Define el modelo de
+#      riesgo (una obra que lo supera y no avanza está en riesgo) y el cronograma.
 PLAZO_CONSTRUCCION_DIAS = 90
 
-# Probabilidades basadas en el programa real
+# [S2] Distribución de obras por estado.
 ESTADOS_PROB = {"Iniciada": 0.35, "Avanzada": 0.25, "Finalizada": 0.25, "Adjudicada": 0.15}
-TIPO_PROB    = {"Urbana": 0.55, "Rural": 0.38, "Económica": 0.07}
-DORM_PROB    = {2: 0.60, 3: 0.25, 1: 0.15}
+
+# [S3] Rango de avance físico (AFO %) coherente con cada estado.
+AVANCE_POR_ESTADO = {
+    "Iniciada":   (0,  35),
+    "Avanzada":   (36, 79),
+    "Finalizada": (80, 100),
+    "Adjudicada": (100, 100),
+}
+
+# [S4] De las obras activas, proporción que está DENTRO del plazo (el resto ya venció).
+PROP_ACTIVAS_EN_PLAZO = 0.35
+
+# [S5] Duración real de la construcción de una obra terminada (días, mín–máx).
+#      El plazo es 90 pero en la práctica se estira.
+DURACION_CONSTRUCCION_DIAS = (60, 300)
+
+# [S6] Umbrales de avance (%) del modelo de riesgo, sobre obras vencidas.
+RIESGO_AVANCE_MEDIO = 80   # vencida con avance < 80 → al menos riesgo medio
+RIESGO_AVANCE_ALTO  = 30   # vencida con avance < 30 → riesgo alto
+
+# [S7] Etapas constructivas (rubros) donde se concentran los bloqueos. Determinan
+#      DÓNDE aparece el cuello de botella en obras de riesgo. Si el área dice que
+#      las obras se traban en otra etapa, se cambian estos conjuntos.
+ETAPAS_ESTRUCTURALES = {3, 4, 5}         # mampostería y encadenado
+ETAPAS_TERMINACIONES = {6, 7, 8, 9}      # revoques y cielorrasos
+ETAPAS_INSTALACIONES = {10, 11, 12, 13}  # carpintería e instalaciones
+
+# [S8] Discrepancia entre el avance que reporta la ONG y el que verifica el técnico
+#      (en puntos de AFO; negativo = la ONG subestimó). Mide el sobre-reporte.
+DISCREPANCIA_ONG_PRIMERA = (-8, 15)
+DISCREPANCIA_ONG_SEGUNDA = (-5, 10)
+
+# [S9] Proporción de obras sin ONG gestora asignada.
+PROP_SIN_ONG = 0.20
+
+# [S10] Proporción de obras finalizadas con el acta atascada (cuello administrativo).
+PROP_ACTAS_ATASCADAS = 0.45
+
+# [S11] Cobertura de visitas por técnico (% de sus obras visitadas) y probabilidad
+#       de segunda visita. Modelan la capacidad real del equipo técnico.
+COBERTURA_POR_TECNICO = {1: 0.90, 2: 0.70, 3: 0.40, 4: 0.85, 5: 0.50, 6: 0.88}
+SEGUNDA_VISITA_PROB   = {1: 0.60, 2: 0.45, 3: 0.15, 4: 0.55, 5: 0.00, 6: 0.65}
+
+# [S12] Tipo de vivienda y cantidad de dormitorios.
+TIPO_PROB = {"Urbana": 0.55, "Rural": 0.38, "Económica": 0.07}
+DORM_PROB = {2: 0.60, 3: 0.25, 1: 0.15}
 
 # Sistema completo de clasificaciones del programa (sistema legacy VISOC — docs/tipos.jpeg)
 # criterio: Inclusion = apta para el programa | Exclusion = rechazada | Otro = caso especial
@@ -99,41 +157,21 @@ CLASIFICACIONES = {
     'OT': ('Otro',       'Otro'),
 }
 
-# Distribución de frecuencia por código (refleja la realidad del programa)
+# [S13] Distribución de frecuencia por código de clasificación (refleja la realidad del programa)
 CLASIF_PROB = {
     '1a': 0.18, '2a': 0.24, '2b': 0.12, '3a': 0.06,
     '4a': 0.05, '4b': 0.08, '4c': 0.05, '5f': 0.05, 'OT': 0.03,
     '5a': 0.02, '5b': 0.04, '5c': 0.03, '5d': 0.02, '5e': 0.02, '5g': 0.01,
 }
 
-# Rubros del AFO con su peso porcentual (suma = 100) — docs/afo.jpeg
-RUBROS_DEF = [
-    {"id": 1,  "peso": 3},
-    {"id": 2,  "peso": 5},
-    {"id": 3,  "peso": 10},
-    {"id": 4,  "peso": 10},
-    {"id": 5,  "peso": 5},
-    {"id": 6,  "peso": 10},
-    {"id": 7,  "peso": 8},
-    {"id": 8,  "peso": 5},
-    {"id": 9,  "peso": 4},
-    {"id": 10, "peso": 10},
-    {"id": 11, "peso": 7},
-    {"id": 12, "peso": 8},
-    {"id": 13, "peso": 7},
-    {"id": 14, "peso": 5},
-    {"id": 15, "peso": 3},
-]
+# [S14] Rubros del AFO con su peso porcentual (suma = 100) — docs/afo.jpeg.
+# Para no duplicar el dato, se derivan del catálogo oficial (db/setup.py → RUBROS_CATALOGO):
+# si el área corrige un peso, se cambia una sola vez allí.
+RUBROS_DEF = [{"id": r["id"], "peso": r["peso_pct"]} for r in RUBROS_CATALOGO]
 
 
 def _avance_coherente(estado: str) -> int:
-    rangos = {
-        "Iniciada":   (0,  35),
-        "Avanzada":   (36, 79),
-        "Finalizada": (80, 100),
-        "Adjudicada": (100, 100),
-    }
-    lo, hi = rangos[estado]
+    lo, hi = AVANCE_POR_ESTADO[estado]   # [S3]
     return random.randint(lo, hi)
 
 
@@ -141,9 +179,9 @@ def _fecha_inicio(estado: str) -> date:
     # Nota: faker interpreta 'd' como días e 'y' como años (NO usar 'm' = minutos).
     if estado in ("Finalizada", "Adjudicada"):
         return fake.date_between(start_date="-3y", end_date="-90d")
-    # Activas: mezcla realista respecto del plazo de 90 días.
-    # ~35% arrancaron hace poco (dentro de plazo); ~65% ya lo superaron (atraso crónico).
-    if random.random() < 0.35:
+    # Activas: mezcla realista respecto del plazo. Una parte arrancó hace poco (dentro
+    # de plazo); el resto ya lo superó (atraso crónico). Proporción en [S4].
+    if random.random() < PROP_ACTIVAS_EN_PLAZO:
         return fake.date_between(start_date="-90d", end_date="-5d")    # dentro de plazo
     return fake.date_between(start_date="-600d", end_date="-100d")     # pasada de plazo
 
@@ -180,8 +218,8 @@ def generar_viviendas(n: int) -> pd.DataFrame:
         f_ini = _fecha_inicio(estado)
         f_fin = None
         if estado in ("Finalizada", "Adjudicada"):
-            # Duración de construcción: el plazo es 90 días, en la práctica se estira (60–300).
-            f_fin = f_ini + timedelta(days=random.randint(60, 300))
+            # Duración de construcción: el plazo es 90 días, en la práctica se estira [S5].
+            f_fin = f_ini + timedelta(days=random.randint(*DURACION_CONSTRUCCION_DIAS))
 
         # Ruido gaussiano en coordenadas (~2 km de dispersión)
         lat = round(loc["lat"] + np.random.normal(0, 0.018), 6)
@@ -189,7 +227,7 @@ def generar_viviendas(n: int) -> pd.DataFrame:
 
         avance    = _avance_coherente(estado)
         dias_act  = _dias_activa(f_ini, f_fin)
-        cuit_org  = random.choice(CUITS_ONG) if random.random() > 0.20 else None
+        cuit_org  = random.choice(CUITS_ONG) if random.random() > PROP_SIN_ONG else None  # [S9]
         criterio  = CLASIFICACIONES[clasif][0]
 
         # nivel_riesgo y dias_activa se recalculan al final en recalcular_derivados(),
@@ -434,8 +472,9 @@ def generar_visitas(
     - Técnico 5 (Villafuerte): nuevo — 50% cobertura, todas primeras visitas
     - Técnico 6 (Ávalos):   eficiente — alta cobertura
     """
-    cobertura_por_tecnico = {1: 0.90, 2: 0.70, 3: 0.40, 4: 0.85, 5: 0.50, 6: 0.88}
-    segunda_visita_prob   = {1: 0.60, 2: 0.45, 3: 0.15, 4: 0.55, 5: 0.00, 6: 0.65}
+    # Cobertura y probabilidad de 2da visita por técnico centralizadas en [S11].
+    cobertura_por_tecnico = COBERTURA_POR_TECNICO
+    segunda_visita_prob   = SEGUNDA_VISITA_PROB
 
     avance_map = dict(zip(df_viviendas["num_exp"], df_viviendas["avance_obra"]))
     registros  = []
@@ -450,9 +489,9 @@ def generar_visitas(
 
         # Primera visita
         avance_real     = avance_map.get(viv_id, 0)
-        # El técnico verifica un avance que puede diferir del reportado por la ONG
-        # diferencia_ong > 0 → ONG sobreestimó; < 0 → ONG subestimó
-        diferencia      = random.randint(-8, 15)
+        # El técnico verifica un avance que puede diferir del reportado por la ONG.
+        # diferencia_ong > 0 → ONG sobreestimó; < 0 → ONG subestimó. Rango en [S8].
+        diferencia      = random.randint(*DISCREPANCIA_ONG_PRIMERA)
         avance_verif    = max(0, min(100, avance_real - diferencia))
         f_primera       = fake.date_between(start_date="-5m", end_date="-1m")
 
@@ -469,7 +508,7 @@ def generar_visitas(
 
         # Segunda visita (probabilidad por técnico)
         if random.random() < segunda_visita_prob.get(tec_id, 0.3):
-            diferencia2   = random.randint(-5, 10)
+            diferencia2   = random.randint(*DISCREPANCIA_ONG_SEGUNDA)  # [S8]
             avance_verif2 = max(avance_verif, min(100, avance_real - diferencia2))
             f_segunda     = fake.date_between(start_date=f_primera, end_date="today")
             registros.append({
@@ -532,11 +571,8 @@ def _avance_por_rubro(avance_total: int, nivel_riesgo: str, rng) -> list[int]:
     Rubros completados se registran como 97-100% para reflejar pequeñas
     imprecisiones habituales en el registro de campo (formularios en papel).
     """
-    # Etapas estructurales: alta complejidad, más propensas a bloqueos en riesgo alto
-    ETAPAS_ESTRUCTURALES = {3, 4, 5}       # mampostería y encadenado — dependen de cuadrilla y material
-    ETAPAS_TERMINACIONES = {6, 7, 8, 9}    # revoques y cielorrasos — requieren mano de obra especializada
-    ETAPAS_INSTALACIONES = {10, 11, 12, 13} # carpintería e instalaciones — dependen de aprobación municipal
-
+    # Las etapas donde se concentran los bloqueos están centralizadas en [S7]
+    # (ETAPAS_ESTRUCTURALES / TERMINACIONES / INSTALACIONES).
     resultado = []
     restante  = float(avance_total)
     etapa_activa_encontrada = False
@@ -634,10 +670,11 @@ def modelar_actas(df: pd.DataFrame) -> pd.DataFrame:
     hoy = date.today()
 
     idx_fin   = df[df["estado"] == "Finalizada"].index
-    atascadas = set(rng.choice(idx_fin, size=int(len(idx_fin) * 0.45), replace=False))
+    atascadas = set(rng.choice(idx_fin, size=int(len(idx_fin) * PROP_ACTAS_ATASCADAS),  # [S10]
+                               replace=False))
 
     for i in idx_fin:
-        dur    = int(rng.integers(60, 300))                        # duración de la construcción
+        dur    = int(rng.integers(*DURACION_CONSTRUCCION_DIAS))     # duración construcción [S5]
         espera = int(rng.integers(190, 560)) if i in atascadas \
                  else int(rng.integers(10, 150))                   # días esperando el acta
         f_fin = hoy - timedelta(days=espera)
@@ -667,10 +704,10 @@ def recalcular_derivados(df: pd.DataFrame) -> pd.DataFrame:
     df["dias_activa"] = (ff.fillna(hoy) - fi).dt.days
 
     vencida = (df["estado"].isin(["Iniciada", "Avanzada"])
-               & (df["dias_activa"] > PLAZO_CONSTRUCCION_DIAS))
+               & (df["dias_activa"] > PLAZO_CONSTRUCCION_DIAS))         # [S1]
     df["nivel_riesgo"] = "bajo"
-    df.loc[vencida & (df["avance_obra"] < 80), "nivel_riesgo"] = "medio"
-    df.loc[vencida & (df["avance_obra"] < 30), "nivel_riesgo"] = "alto"
+    df.loc[vencida & (df["avance_obra"] < RIESGO_AVANCE_MEDIO), "nivel_riesgo"] = "medio"  # [S6]
+    df.loc[vencida & (df["avance_obra"] < RIESGO_AVANCE_ALTO),  "nivel_riesgo"] = "alto"   # [S6]
     return df
 
 

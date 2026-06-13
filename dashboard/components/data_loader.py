@@ -1,6 +1,6 @@
 """
 Carga centralizada de datos para el dashboard.
-Prioriza datos procesados (con cluster y nivel_riesgo calculados),
+Prioriza datos procesados (con nivel_riesgo calculado),
 cae a los sintéticos crudos si no existen.
 """
 from pathlib import Path
@@ -52,6 +52,14 @@ def cargar_indicadores_ong() -> pd.DataFrame:
 @st.cache_data(ttl=120)
 def cargar_avance_rubros() -> pd.DataFrame:
     path = _ROOT / "data" / "avance_rubros.csv"
+    if not path.exists():
+        return pd.DataFrame()
+    return pd.read_csv(path)
+
+
+@st.cache_data(ttl=120)
+def cargar_visitas() -> pd.DataFrame:
+    path = _ROOT / "data" / "visitas.csv"
     if not path.exists():
         return pd.DataFrame()
     return pd.read_csv(path)

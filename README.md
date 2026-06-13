@@ -23,7 +23,7 @@ La misión de este componente: **modernizar la gestión** (de papel y planillas 
 ```
 API Java / MySQL ─┐
 Datos sintéticos ─┼─► ETL Python ─► SQLite local ─► Notebooks (colab/) ─► Dashboard Streamlit
-                  ┘                                  indicadores            5 vistas
+                  ┘                                  indicadores            inicio + 6 vistas
 ```
 
 Mientras el backend Java no tenga datos cargados, el sistema genera un **dataset sintético de 1.500 viviendas** con distribución geográfica y reglas de negocio realistas. Cuando la API esté disponible, se cambia una variable de entorno y todo corre igual con datos reales.
@@ -60,7 +60,9 @@ vivso-python/
 │   ├── 03_correlaciones   # Criterio×tipo, ANOVA, cohortes por año, riesgo por clasificación
 │   ├── 04_indicadores     # KPIs + confiabilidad ONG + actas + etapa activa + cronograma
 │   └── 05_tecnicos        # Cobertura, discrepancias, score de visitas, alerta sobre-reporte
-├── dashboard/             # Streamlit — 5 páginas (viviendas, ONGs, minería, técnicos, mis obras)
+├── dashboard/             # Streamlit — inicio (resumen ejecutivo) + 6 páginas
+│                          #   viviendas, ONGs, minería, evolución, técnicos, mis obras
+│                          #   components/data_loader.py centraliza la carga de CSVs
 ├── data/                  # CSVs generados (regenerables, gitignored)
 ├── docs/
 │   ├── documentacion-analisis.md    # POR QUÉ de cada análisis — para entender y explicar
@@ -117,7 +119,8 @@ Cerrado en Hito 2 y posteriores:
 - ✅ ETL con fallback API → CSV; generador sintético con reglas de negocio reales (15 clasificaciones + criterio, rubros AFO secuenciales, ciclo de actas, plazo 90)
 - ✅ 5 notebooks de análisis con hallazgos accionables (70% sin verificación, cuellos de botella, cohortes)
 - ✅ Indicadores de gestión: **índice de confiabilidad de ONG**, **score de priorización de visitas**, **alerta de sobre-reporte**, **actas atascadas**, **etapa activa / cuello de botella constructivo**
-- ✅ Dashboard Streamlit 5 páginas con mapa de riesgo
+- ✅ Dashboard Streamlit con **inicio de resumen ejecutivo** (KPIs globales, alerta de obras en riesgo sin visita, mapa provincial, navegación) + 6 páginas con mapa de riesgo
+- ✅ Página **Evolución**: series de tiempo del programa (inicios vs. finalizaciones por mes, backlog acumulado, tasa de finalización por trimestre)
 - ✅ Modelo de riesgo recalibrado al plazo real de 90 días (2026-06-10)
 - ✅ Documentación completa del análisis y guion de presentación
 

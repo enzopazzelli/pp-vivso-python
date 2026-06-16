@@ -7,6 +7,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 import pandas as pd
 from dashboard.components.data_loader import cargar_viviendas, cargar_organizaciones
+from dashboard.components.criterios import nota_criterio
 
 st.set_page_config(page_title="ONGs — VIVSO", layout="wide")
 st.title("🤝 ONGs gestoras")
@@ -26,6 +27,8 @@ c1.metric("ONGs registradas",  len(orgs))
 c2.metric("ONGs activas",      int((orgs["estado"] == "ACTIVA").sum()))
 c3.metric("Viviendas con ONG", int(df["cuit_org"].notna().sum()))
 c4.metric("Sin ONG asignada",  int(df["cuit_org"].isna().sum()))
+
+nota_criterio("ong_sin_asignar", "riesgo", "avance")
 
 st.divider()
 

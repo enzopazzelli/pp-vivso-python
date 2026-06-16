@@ -8,6 +8,7 @@ sys.path.append(str(Path(__file__).resolve().parent.parent.parent))
 import streamlit as st
 import plotly.express as px
 import pandas as pd
+from dashboard.components.criterios import nota_criterio
 
 st.set_page_config(page_title="Mis obras — VIVSO", layout="wide")
 st.title("🗂 Mis obras")
@@ -82,6 +83,8 @@ c3.metric("Falta 2da visita",   int((mis_viv["estado_visita"] == "Falta 2da visi
 c4.metric("Riesgo alto",        int((mis_viv["nivel_riesgo"] == "alto").sum()),
           delta_color="inverse")
 c5.metric("Visitas realizadas", int(mis_viv["visitas"].sum()))
+
+nota_criterio("cobertura", "riesgo")
 
 st.divider()
 

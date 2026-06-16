@@ -7,6 +7,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 from dashboard.components.data_loader import cargar_viviendas
+from dashboard.components.criterios import nota_criterio
 
 st.set_page_config(page_title="Evolución — VIVSO", layout="wide")
 st.title("📈 Evolución del programa")
@@ -49,6 +50,8 @@ k2.metric("Mes pico de inicios", str(mes_pico), delta=f"{int(m_ini.max())} obras
           delta_color="off")
 k3.metric("En obra (backlog actual)", f"{backlog_actual:,}".replace(",", "."))
 k4.metric("Tasa de finalización", f"{tasa_global:.1f}%")
+
+nota_criterio("tasa_finalizacion", "tiempos")
 
 st.divider()
 

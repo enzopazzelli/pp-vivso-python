@@ -15,6 +15,10 @@
 **Cómo completar:** marcar **✓** si el valor es correcto o **✗** si no, y en ese caso anotar el
 valor real en *"Corregir a"*. Si no se sabe en el momento, marcar *"Averiguar"*.
 
+> 💡 **En la demo:** cada indicador del dashboard tiene un desplegable **"ℹ️ Cómo se calcula /
+> criterio"** que muestra el criterio usado y su etiqueta **[S#]**. Conviene abrirlo frente al
+> responsable para que vea, indicador por indicador, qué se puede ajustar — y anotarlo acá.
+
 ---
 
 ## 1. Volumen y alcance del programa

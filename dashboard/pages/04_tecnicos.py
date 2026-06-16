@@ -61,7 +61,7 @@ c2.metric("Visitas realizadas", len(df_vis))
 c3.metric("Cobertura promedio", f"{carga['cobertura'].mean():.1f}%")
 c4.metric("Obras sin visitar",  int(carga["sin_visita"].sum()), delta_color="inverse")
 
-nota_criterio("cobertura", "sobre_reporte", "riesgo")
+nota_criterio("tecnicos")
 
 st.divider()
 

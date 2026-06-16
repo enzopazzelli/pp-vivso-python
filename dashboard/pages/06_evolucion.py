@@ -51,7 +51,7 @@ k2.metric("Mes pico de inicios", str(mes_pico), delta=f"{int(m_ini.max())} obras
 k3.metric("En obra (backlog actual)", f"{backlog_actual:,}".replace(",", "."))
 k4.metric("Tasa de finalización", f"{tasa_global:.1f}%")
 
-nota_criterio("tasa_finalizacion", "tiempos")
+nota_criterio("evolucion")
 
 st.divider()
 

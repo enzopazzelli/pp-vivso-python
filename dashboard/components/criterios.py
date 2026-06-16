@@ -1,87 +1,74 @@
 """
-Criterios de cálculo de cada indicador del dashboard, con la etiqueta [S#] del
-supuesto ajustable correspondiente (ver synthetic/generate.py y docs/datos-a-confirmar.md).
+Nota breve de "cómo se calcula" cada sección del dashboard, con la fuente de datos
+(qué tabla / qué tipo de info). Pensada para que el responsable del área entienda
+de un vistazo el indicador que está viendo, sin tecnicismos ni listado de supuestos.
 
-Por qué existe: que el responsable del área pueda ver, junto a cada indicador, con
-qué criterio se calculó y qué se puede corregir. Centralizar los textos acá hace que,
-si un criterio cambia, se edite en un solo lugar y se refleje en todo el dashboard.
+Centralizar los textos acá permite editarlos en un solo lugar. El detalle de los
+supuestos ajustables vive aparte, en docs/datos-a-confirmar.md.
 
 Uso en una página:
     from dashboard.components.criterios import nota_criterio
-    nota_criterio("riesgo", "cuello_botella")   # despliega un expander con esos criterios
-
-Nota: el helper se llama `nota_criterio` (no `criterio`) para no chocar con la
-variable de dominio `criterio` (Inclusión/Exclusión) que usan algunas páginas.
+    nota_criterio("riesgo")
 """
 import streamlit as st
 
-# Cada clave agrupa las líneas de criterio de un indicador. El texto entre [S#]
-# señala el supuesto editable en synthetic/generate.py.
-CRITERIOS = {
-    "estados": [
-        ("En obra", "viviendas en estado *Iniciada* o *Avanzada*."),
-        ("Terminadas", "viviendas *Finalizada* (obra completa) o *Adjudicada* (entregada a la familia)."),
-        ("Distribución por estado [S2]", "proporción de obras en cada estado del programa."),
-        ("Rango de avance por estado [S3]", "AFO esperado en cada estado (Iniciada 0–35%, Avanzada 36–79%, etc.)."),
-    ],
-    "avance": [
-        ("Avance Físico de Obra (AFO) [S14]",
-         "suma ponderada de 15 rubros constructivos (los pesos salen del sistema VISOC). "
-         "El promedio es el AFO medio de las obras mostradas."),
-    ],
-    "riesgo": [
-        ("Plazo contractual [S1]", "la etapa de construcción tiene un plazo de **90 días**."),
-        ("Riesgo alto [S1·S6]", "obra activa **vencida** (>90 días) y con avance **< 30%** — casi paralizada."),
-        ("Riesgo medio [S1·S6]", "obra activa **vencida** (>90 días) con avance **30–80%** — atrasada pero avanza."),
-        ("Sin riesgo", "obra en plazo, terminada, o vencida pero casi lista (avance ≥ 80%)."),
-    ],
-    "cuello_botella": [
-        ("Etapa activa", "primer rubro de la secuencia constructiva que no llegó al 98% "
-                         "(los rubros son secuenciales: el N arranca cuando el N-1 terminó)."),
-        ("Cuello de botella [S7]", "la etapa donde se concentran más obras activas. Las etapas "
-                                   "donde se modelan los bloqueos (mampostería, revoques, instalaciones) son ajustables."),
-    ],
-    "sobre_reporte": [
-        ("Discrepancia ONG vs. técnico [S8]",
-         "avance que reporta la ONG menos el que verifica el técnico en la visita. "
-         "Positivo = la ONG **sobre-reportó**; negativo = subestimó."),
-    ],
-    "cobertura": [
-        ("Cobertura de visitas [S11]", "porcentaje de obras de un técnico con **al menos una** visita."),
-        ("Regla de visitas", "máximo **2 visitas** por obra; entre visitas, la ONG cubre con reportes."),
-    ],
-    "tasa_finalizacion": [
-        ("Tasa de finalización [S2]", "viviendas *Finalizada* o *Adjudicada* sobre el total."),
-    ],
-    "tiempos": [
-        ("Tiempo de ejecución [S5]", "días entre inicio y fin. Solo obras **terminadas**: incluir las "
-                                     "activas sesgaría el promedio (su duración real es desconocida)."),
-    ],
-    "geografia": [
-        ("Distribución geográfica [S15]", "obras por departamento, según la concentración poblacional real."),
-    ],
-    "ong_sin_asignar": [
-        ("Obras sin ONG [S9]", "proporción de obras sin organización gestora asignada."),
-    ],
-    "actas": [
-        ("Actas atascadas [S10]", "obras *Finalizada* cuyo acta de finalización no se tramitó a tiempo "
-                                  "(cuello de botella administrativo)."),
-    ],
+# Una nota corta por sección: cómo se calcula + de dónde salen los datos (en negrita
+# el nombre de la tabla de origen). Breve a propósito.
+NOTAS = {
+    "resumen":
+        "Sobre la tabla **vivienda** (una fila por obra). *En obra*: estados "
+        "Iniciada/Avanzada · *Terminadas*: Finalizada/Adjudicada · *Avance promedio*: "
+        "promedio del AFO · *Riesgo alto*: obra vencida (más de 90 días) con avance menor al 30%.",
+
+    "mapa":
+        "Cada punto es una obra con coordenadas GPS (campos *lat/lng* de la tabla "
+        "**vivienda**), coloreada por su nivel de riesgo.",
+
+    "viviendas":
+        "Sobre la tabla **vivienda**, aplicando los filtros del panel lateral. "
+        "*Avance promedio*: promedio del AFO · *Riesgo alto*: obra vencida (más de 90 "
+        "días) con avance menor al 30%.",
+
+    "ongs":
+        "Cruza la tabla **vivienda** (avance, estado y riesgo de cada obra) con "
+        "**organizacion** (datos de cada ONG), agrupando por la ONG gestora de la obra.",
+
+    "riesgo":
+        "Cada obra se ubica por sus **días activa** y su **avance** (tabla **vivienda**). "
+        "El modelo marca *riesgo alto* si pasó los 90 días con avance menor al 30%, y "
+        "*riesgo medio* si pasó los 90 días con avance entre 30% y 80%.",
+
+    "rubros":
+        "Usa la tabla **avance_rubro**: el avance de cada una de las 15 etapas "
+        "constructivas por obra. La *etapa activa* es el primer rubro sin terminar; el "
+        "*cuello de botella* es la etapa donde se acumulan más obras.",
+
+    "tiempos":
+        "Días entre la fecha de inicio y la de fin (tabla **vivienda**). Solo obras "
+        "terminadas: las que siguen en curso todavía no tienen duración final.",
+
+    "tecnicos":
+        "Cruza **asignacion_tecnico** (qué obras tiene cada técnico), **visita** "
+        "(visitas hechas y avance verificado en el campo) y **vivienda**. *Cobertura*: "
+        "% de obras con al menos una visita · *Discrepancia*: avance que reporta la ONG "
+        "menos el que verifica el técnico.",
+
+    "mis_obras":
+        "Las obras asignadas al técnico (**asignacion_tecnico**), con sus **visitas** y "
+        "el riesgo de cada obra (**vivienda**). La cola se ordena por estado de visita y "
+        "nivel de riesgo.",
+
+    "evolucion":
+        "Agrupa por mes las fechas de inicio y de fin de la tabla **vivienda**. "
+        "*Backlog*: inicios acumulados menos finalizaciones acumuladas.",
 }
 
 
-def nota_criterio(*claves: str, titulo: str = "ℹ️ Cómo se calcula / criterio") -> None:
-    """
-    Despliega un expander con los criterios de las claves pedidas, cada uno con
-    su etiqueta [S#]. Pensado para ir debajo de un bloque de KPIs o un gráfico,
-    para que el responsable del área entienda y, si hace falta, marque correcciones.
-    """
+def nota_criterio(seccion: str, titulo: str = "ℹ️ Cómo se calcula") -> None:
+    """Despliega un expander breve con el cálculo y la fuente de datos de la sección."""
     with st.expander(titulo):
-        for clave in claves:
-            for nombre, desc in CRITERIOS.get(clave, []):
-                st.markdown(f"- **{nombre}:** {desc}")
+        st.markdown(NOTAS.get(seccion, ""))
         st.caption(
-            "Los valores entre **[S#]** son supuestos ajustables. ¿Algún criterio no "
-            "coincide con la realidad del programa? Se anota en `docs/datos-a-confirmar.md` "
-            "(cada fila tiene su [S#]) y se corrige en `synthetic/generate.py`."
+            "Datos del modelo sintético. Si algún criterio no coincide con la realidad "
+            "del programa, se anota en `docs/datos-a-confirmar.md`."
         )

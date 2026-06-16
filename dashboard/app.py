@@ -6,6 +6,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 from dashboard.components.data_loader import cargar_viviendas, cargar_visitas
+from dashboard.components.criterios import nota_criterio
 
 st.set_page_config(
     page_title="VIVSO — Resumen Ejecutivo",
@@ -59,6 +60,8 @@ k4.metric("Avance promedio", f"{avance:.1f}%")
 k5.metric("Riesgo alto",     n_alto, delta=f"{n_alto/total*100:.0f}% del total",
           delta_color="inverse")
 k6.metric("Departamentos",   n_deptos)
+
+nota_criterio("estados", "avance", "riesgo", "tasa_finalizacion")
 
 st.divider()
 
@@ -120,6 +123,7 @@ if not mapa_df.empty:
     fig_mapa.update_layout(margin=dict(l=0, r=0, t=0, b=0), height=380,
                            legend=dict(orientation="h", y=-0.05))
     st.plotly_chart(fig_mapa, width="stretch")
+    nota_criterio("geografia", "riesgo")
 
 st.divider()
 

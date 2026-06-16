@@ -8,6 +8,7 @@ import plotly.graph_objects as go
 import pandas as pd
 import numpy as np
 from dashboard.components.data_loader import cargar_viviendas, cargar_avance_rubros
+from dashboard.components.criterios import nota_criterio
 
 st.set_page_config(page_title="Minería — VIVSO", layout="wide")
 st.title("🔬 Minería de datos")
@@ -50,6 +51,8 @@ with tab_riesgo:
     c1.metric("Riesgo alto",  n_alto,  delta=f"{n_alto/total*100:.1f}% del total",  delta_color="inverse")
     c2.metric("Riesgo medio", n_medio, delta=f"{n_medio/total*100:.1f}% del total", delta_color="off")
     c3.metric("Sin riesgo",   n_bajo,  delta=f"{n_bajo/total*100:.1f}% del total",  delta_color="normal")
+
+    nota_criterio("riesgo")
 
     col_scatter, col_bar = st.columns([3, 2])
 
@@ -107,6 +110,7 @@ with tab_rubros:
         "El AFO total se calcula como la suma ponderada de 15 rubros de construcción "
         "(sistema legacy VISOC). Este análisis identifica qué etapas son el cuello de botella."
     )
+    nota_criterio("cuello_botella", "avance")
 
     if df_rubros.empty:
         st.info("No se encontró `data/avance_rubros.csv`. Ejecutá `python -m synthetic.generate`.")
@@ -169,6 +173,7 @@ with tab_tiempo:
         "Solo se consideran obras Finalizadas o Adjudicadas. Incluir obras en curso "
         "distorsionaría el promedio ya que su duración real todavía no está definida."
     )
+    nota_criterio("tiempos")
 
     terminadas = df[df["estado"].isin(["Finalizada","Adjudicada"])].copy()
 

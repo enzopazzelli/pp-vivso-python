@@ -9,6 +9,7 @@ import streamlit as st
 import plotly.express as px
 import plotly.graph_objects as go
 import pandas as pd
+from dashboard.components.criterios import nota_criterio
 
 st.set_page_config(page_title="Equipo técnico — VIVSO", layout="wide")
 st.title("👷 Equipo técnico — Vista del jefe de área")
@@ -59,6 +60,8 @@ c1.metric("Técnicos activos",   int(df_tec["activo"].sum()))
 c2.metric("Visitas realizadas", len(df_vis))
 c3.metric("Cobertura promedio", f"{carga['cobertura'].mean():.1f}%")
 c4.metric("Obras sin visitar",  int(carga["sin_visita"].sum()), delta_color="inverse")
+
+nota_criterio("cobertura", "sobre_reporte", "riesgo")
 
 st.divider()
 

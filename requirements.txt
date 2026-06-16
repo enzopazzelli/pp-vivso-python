@@ -1,19 +1,30 @@
+# Núcleo del análisis y el dashboard (lo que necesita el deploy en Streamlit Cloud)
 pandas>=2.0
 numpy>=1.26
+plotly>=5.20
+streamlit>=1.35
+
+# ETL, generación de datos y pipeline local
 sqlalchemy>=2.0
 requests>=2.31
 faker[es_ES]>=24.0
+python-dotenv
+openpyxl
+tqdm
+
+# Análisis estadístico y figuras del informe EDA
 scipy>=1.12
 scikit-learn>=1.4
 matplotlib>=3.8
 seaborn>=0.13
-plotly>=5.20
-streamlit>=1.35
-opencv-python>=4.9
-pytesseract>=0.3
-Pillow>=10.0
-python-dotenv
-openpyxl
-tqdm
-jupyter
-ipykernel
+
+# OCR (WS4 — PP3): se reactivan cuando se trabaje el pipeline de documentos.
+# Se quitaron del deploy porque opencv-python rompe el build en Streamlit Cloud
+# (requiere libGL) y el dashboard no las usa.
+# opencv-python>=4.9
+# pytesseract>=0.3
+# Pillow>=10.0
+
+# Notebooks: corren en Google Colab (no hacen falta localmente ni en el deploy).
+# jupyter
+# ipykernel

@@ -1,0 +1,7 @@
+id,nombre,apellido,dni,email,telefono,departamentos,activo
+1,Rodrigo,Peralta,28901234,rperalta@vivso.gob.ar,3854001122,"Capital,Banda,Silípica",1
+2,Valeria,Sosa,31456789,vsosa@vivso.gob.ar,3854003344,"Robles,Figueroa,Copo",1
+3,Marcos,Ibáñez,25678901,mibanez@vivso.gob.ar,3854005566,"Choya,Jiménez,Ojo de Agua",1
+4,Carolina,Medina,33012345,cmedina@vivso.gob.ar,3854007788,"Moreno,Salavina,Aguirre",1
+5,Hernán,Villafuerte,29345678,hvillafuerte@vivso.gob.ar,3854009900,"Mitre,Rivadavia,Atamisqui",1
+6,Luciana,Ávalos,36789012,lavalos@vivso.gob.ar,3854001234,"General Taboada,Guasayán",1

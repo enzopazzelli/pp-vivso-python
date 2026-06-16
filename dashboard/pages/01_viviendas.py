@@ -58,7 +58,7 @@ c4.metric("Avance promedio",f"{dff['avance_obra'].mean():.1f}%")
 c5.metric("Riesgo alto",    int((dff["nivel_riesgo"] == "alto").sum()),
           delta_color="inverse")
 
-nota_criterio("estados", "avance", "riesgo")
+nota_criterio("viviendas")
 
 st.divider()
 
@@ -127,7 +127,7 @@ if not mapa_df.empty:
     )
     fig_mapa.update_layout(margin=dict(l=0, r=0, t=30, b=0), height=450)
     st.plotly_chart(fig_mapa, width='stretch')
-    nota_criterio("riesgo", "geografia")
+    nota_criterio("mapa")
 else:
     st.info("Sin coordenadas GPS en los registros filtrados.")
 

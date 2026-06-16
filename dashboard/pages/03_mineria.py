@@ -110,7 +110,7 @@ with tab_rubros:
         "El AFO total se calcula como la suma ponderada de 15 rubros de construcción "
         "(sistema legacy VISOC). Este análisis identifica qué etapas son el cuello de botella."
     )
-    nota_criterio("cuello_botella", "avance")
+    nota_criterio("rubros")
 
     if df_rubros.empty:
         st.info("No se encontró `data/avance_rubros.csv`. Ejecutá `python -m synthetic.generate`.")

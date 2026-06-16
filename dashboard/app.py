@@ -61,7 +61,7 @@ k5.metric("Riesgo alto",     n_alto, delta=f"{n_alto/total*100:.0f}% del total",
           delta_color="inverse")
 k6.metric("Departamentos",   n_deptos)
 
-nota_criterio("estados", "avance", "riesgo", "tasa_finalizacion")
+nota_criterio("resumen")
 
 st.divider()
 
@@ -123,7 +123,7 @@ if not mapa_df.empty:
     fig_mapa.update_layout(margin=dict(l=0, r=0, t=0, b=0), height=380,
                            legend=dict(orientation="h", y=-0.05))
     st.plotly_chart(fig_mapa, width="stretch")
-    nota_criterio("geografia", "riesgo")
+    nota_criterio("mapa")
 
 st.divider()
 

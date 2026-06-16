@@ -63,7 +63,8 @@ vivso-python/
 ├── dashboard/             # Streamlit — inicio (resumen ejecutivo) + 6 páginas
 │                          #   viviendas, ONGs, minería, evolución, técnicos, mis obras
 │                          #   components/data_loader.py centraliza la carga de CSVs
-├── data/                  # CSVs generados (regenerables, gitignored)
+├── data/                  # CSVs: el dataset base se versiona (para el deploy en Streamlit
+│                          #   Cloud); los derivados de notebooks quedan gitignored. Regenerable.
 ├── docs/
 │   ├── informe-eda.md               # INFORME EDA (entregable Hito 3) — documento formal único
 │   ├── datos-a-confirmar.md         # checklist de supuestos para validar con el área (reunión)

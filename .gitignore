@@ -1,6 +1,15 @@
 ﻿.env
 db/*.db
+# Los CSV son regenerables (python -m synthetic.generate), pero versionamos el
+# dataset base para que el deploy en Streamlit Cloud tenga datos sin regenerar.
+# Los archivos derivados de los notebooks (procesadas, indicadores) siguen ignorados.
 data/*.csv
+!data/viviendas_sinteticas.csv
+!data/organizaciones.csv
+!data/tecnicos.csv
+!data/asignaciones.csv
+!data/visitas.csv
+!data/avance_rubros.csv
 data/*.xlsx
 __pycache__/
 *.pyc

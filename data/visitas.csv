@@ -1,0 +1,1058 @@
+vivienda_id,tecnico_id,fecha,tipo,avance_verificado,estado_relevado,observacion,diferencia_ong
+SIM-2025-0002,1,15-06-2026,primera,39,Avanzada,Se verificó avance conforme al cronograma.,10
+SIM-2024-0003,1,15-06-2026,primera,4,Iniciada,Sin actividad registrada en visita.,3
+SIM-2026-0004,1,15-06-2026,primera,25,Iniciada,,9
+SIM-2026-0004,1,15-06-2026,segunda,28,Iniciada,,6
+SIM-2026-0005,1,15-06-2026,primera,12,Iniciada,Sin actividad registrada en visita.,-8
+SIM-2026-0007,1,15-06-2026,primera,15,Iniciada,,0
+SIM-2026-0007,1,15-06-2026,segunda,17,Iniciada,Terreno con problemas de acceso.,-2
+SIM-2025-0010,1,15-06-2026,primera,84,Avanzada,"Terminaciones en curso, sin observaciones.",7
+SIM-2025-0010,1,15-06-2026,segunda,84,Avanzada,"Terminaciones en curso, sin observaciones.",9
+SIM-2024-0011,1,15-06-2026,primera,0,Iniciada,Obra paralizada por falta de materiales.,13
+SIM-2025-0013,6,15-06-2026,primera,8,Iniciada,Terreno con problemas de acceso.,8
+SIM-2025-0015,4,15-06-2026,primera,46,Avanzada,,9
+SIM-2025-0015,4,15-06-2026,segunda,57,Avanzada,,-2
+SIM-2024-0017,1,15-06-2026,primera,6,Iniciada,Equipo de trabajo reducido.,6
+SIM-2024-0017,1,15-06-2026,segunda,7,Iniciada,Equipo de trabajo reducido.,5
+SIM-2025-0021,1,15-06-2026,primera,70,Avanzada,Obra próxima a finalizar.,7
+SIM-2025-0021,1,15-06-2026,segunda,77,Avanzada,,0
+SIM-2026-0024,2,15-06-2026,primera,63,Avanzada,"Materiales en obra, trabajo activo.",-3
+SIM-2024-0025,2,15-06-2026,primera,76,Avanzada,Calidad de construcción satisfactoria.,14
+SIM-2025-0026,5,15-06-2026,primera,36,Avanzada,"Materiales en obra, trabajo activo.",-3
+SIM-2026-0027,1,15-06-2026,primera,75,Avanzada,"Terminaciones en curso, sin observaciones.",-8
+SIM-2025-0028,1,15-06-2026,primera,2,Iniciada,,14
+SIM-2025-0029,2,15-06-2026,primera,11,Iniciada,Obra paralizada por falta de materiales.,-5
+SIM-2025-0029,2,15-06-2026,segunda,11,Iniciada,Obra paralizada por falta de materiales.,8
+SIM-2024-0031,4,15-06-2026,primera,65,Avanzada,Se verificó avance conforme al cronograma.,13
+SIM-2024-0031,4,15-06-2026,segunda,76,Avanzada,,2
+SIM-2025-0032,1,15-06-2026,primera,20,Iniciada,Obra paralizada por falta de materiales.,-5
+SIM-2025-0032,1,15-06-2026,segunda,20,Iniciada,Terreno con problemas de acceso.,1
+SIM-2025-0036,1,15-06-2026,primera,65,Avanzada,Se verificó avance conforme al cronograma.,13
+SIM-2025-0036,1,15-06-2026,segunda,82,Avanzada,Obra próxima a finalizar.,-4
+SIM-2025-0038,1,15-06-2026,primera,0,Iniciada,,15
+SIM-2025-0038,1,15-06-2026,segunda,11,Iniciada,,-4
+SIM-2024-0039,1,15-06-2026,primera,4,Iniciada,,8
+SIM-2024-0039,1,15-06-2026,segunda,17,Iniciada,Equipo de trabajo reducido.,-5
+SIM-2026-0040,3,15-06-2026,primera,53,Avanzada,,-1
+SIM-2023-0042,1,15-06-2026,primera,76,Avanzada,Obra próxima a finalizar.,7
+SIM-2023-0042,1,15-06-2026,segunda,76,Avanzada,,7
+SIM-2025-0043,4,15-06-2026,primera,53,Avanzada,Obra en progreso normal.,-6
+SIM-2025-0044,2,15-06-2026,primera,53,Avanzada,Obra en progreso normal.,-6
+SIM-2025-0054,1,15-06-2026,primera,80,Avanzada,,5
+SIM-2025-0054,1,15-06-2026,segunda,83,Avanzada,,2
+SIM-2025-0056,2,15-06-2026,primera,2,Iniciada,Terreno con problemas de acceso.,5
+SIM-2025-0057,1,15-06-2026,primera,59,Avanzada,,13
+SIM-2025-0057,1,15-06-2026,segunda,63,Avanzada,,9
+SIM-2025-0061,1,15-06-2026,primera,48,Avanzada,,11
+SIM-2025-0061,1,15-06-2026,segunda,51,Avanzada,,8
+SIM-2025-0062,1,15-06-2026,primera,15,Iniciada,Terreno con problemas de acceso.,-3
+SIM-2025-0062,1,15-06-2026,segunda,15,Iniciada,Obra paralizada por falta de materiales.,-3
+SIM-2026-0064,1,15-06-2026,primera,45,Avanzada,,14
+SIM-2026-0064,1,15-06-2026,segunda,63,Avanzada,Se verificó avance conforme al cronograma.,-4
+SIM-2026-0074,1,15-06-2026,primera,28,Iniciada,,12
+SIM-2024-0075,3,15-06-2026,primera,2,Iniciada,,9
+SIM-2026-0078,1,15-06-2026,primera,5,Iniciada,,14
+SIM-2026-0078,1,15-06-2026,segunda,20,Iniciada,Obra paralizada por falta de materiales.,-1
+SIM-2024-0086,2,15-06-2026,primera,19,Iniciada,Terreno con problemas de acceso.,-6
+SIM-2025-0089,1,15-06-2026,primera,25,Iniciada,Terreno con problemas de acceso.,-1
+SIM-2024-0093,1,15-06-2026,primera,31,Iniciada,Se verificó avance conforme al cronograma.,1
+SIM-2024-0093,1,15-06-2026,segunda,31,Iniciada,"Materiales en obra, trabajo activo.",8
+SIM-2025-0096,4,15-06-2026,primera,67,Avanzada,"Materiales en obra, trabajo activo.",13
+SIM-2024-0098,2,15-06-2026,primera,56,Avanzada,"Materiales en obra, trabajo activo.",14
+SIM-2025-0100,1,15-06-2026,primera,89,Avanzada,,-2
+SIM-2025-0100,1,15-06-2026,segunda,89,Avanzada,Calidad de construcción satisfactoria.,0
+SIM-2025-0103,1,15-06-2026,primera,11,Iniciada,,-2
+SIM-2025-0104,4,15-06-2026,primera,79,Avanzada,,12
+SIM-2025-0104,4,15-06-2026,segunda,84,Avanzada,"Terminaciones en curso, sin observaciones.",7
+SIM-2026-0107,4,15-06-2026,primera,73,Avanzada,Calidad de construcción satisfactoria.,2
+SIM-2026-0107,4,15-06-2026,segunda,77,Avanzada,,-2
+SIM-2025-0108,6,15-06-2026,primera,31,Iniciada,Obra en progreso normal.,4
+SIM-2024-0109,1,15-06-2026,primera,16,Iniciada,Terreno con problemas de acceso.,7
+SIM-2024-0109,1,15-06-2026,segunda,16,Iniciada,Obra paralizada por falta de materiales.,8
+SIM-2025-0115,6,15-06-2026,primera,91,Avanzada,"Terminaciones en curso, sin observaciones.",-5
+SIM-2025-0115,6,15-06-2026,segunda,91,Avanzada,"Terminaciones en curso, sin observaciones.",-1
+SIM-2025-0116,6,15-06-2026,primera,97,Avanzada,Obra próxima a finalizar.,-7
+SIM-2025-0116,6,15-06-2026,segunda,97,Avanzada,Obra próxima a finalizar.,3
+SIM-2025-0120,3,15-06-2026,primera,66,Avanzada,,13
+SIM-2025-0120,3,15-06-2026,segunda,74,Avanzada,,5
+SIM-2025-0123,4,15-06-2026,primera,15,Iniciada,Terreno con problemas de acceso.,-1
+SIM-2026-0128,2,15-06-2026,primera,15,Iniciada,Terreno con problemas de acceso.,-1
+SIM-2025-0129,1,15-06-2026,primera,0,Iniciada,Obra paralizada por falta de materiales.,4
+SIM-2026-0130,1,15-06-2026,primera,68,Avanzada,,15
+SIM-2024-0131,1,15-06-2026,primera,41,Avanzada,Se verificó avance conforme al cronograma.,-5
+SIM-2024-0131,1,15-06-2026,segunda,41,Avanzada,,9
+SIM-2025-0134,5,15-06-2026,primera,30,Iniciada,Se verificó avance conforme al cronograma.,-8
+SIM-2025-0135,1,15-06-2026,primera,45,Avanzada,Obra en progreso normal.,4
+SIM-2025-0135,1,15-06-2026,segunda,52,Avanzada,Se verificó avance conforme al cronograma.,-3
+SIM-2024-0136,5,15-06-2026,primera,81,Avanzada,,15
+SIM-2026-0137,4,15-06-2026,primera,54,Avanzada,,-8
+SIM-2026-0137,4,15-06-2026,segunda,54,Avanzada,"Materiales en obra, trabajo activo.",10
+SIM-2026-0138,1,15-06-2026,primera,53,Avanzada,"Materiales en obra, trabajo activo.",-8
+SIM-2026-0138,1,15-06-2026,segunda,53,Avanzada,,9
+SIM-2025-0141,1,15-06-2026,primera,41,Avanzada,"Materiales en obra, trabajo activo.",14
+SIM-2025-0143,5,15-06-2026,primera,41,Avanzada,Se verificó avance conforme al cronograma.,4
+SIM-2025-0144,2,15-06-2026,primera,0,Iniciada,Equipo de trabajo reducido.,14
+SIM-2025-0144,2,15-06-2026,segunda,0,Iniciada,,10
+SIM-2025-0147,1,15-06-2026,primera,0,Iniciada,Obra paralizada por falta de materiales.,10
+SIM-2025-0147,1,15-06-2026,segunda,12,Iniciada,Terreno con problemas de acceso.,-5
+SIM-2024-0149,2,15-06-2026,primera,75,Avanzada,Calidad de construcción satisfactoria.,-8
+SIM-2024-0149,2,15-06-2026,segunda,75,Avanzada,"Terminaciones en curso, sin observaciones.",8
+SIM-2025-0150,1,15-06-2026,primera,33,Iniciada,Se verificó avance conforme al cronograma.,0
+SIM-2025-0150,1,15-06-2026,segunda,33,Iniciada,"Materiales en obra, trabajo activo.",0
+SIM-2026-0152,2,15-06-2026,primera,53,Avanzada,,11
+SIM-2026-0152,2,15-06-2026,segunda,68,Avanzada,,-4
+SIM-2025-0153,5,15-06-2026,primera,12,Iniciada,Equipo de trabajo reducido.,-1
+SIM-2025-0154,1,15-06-2026,primera,10,Iniciada,Terreno con problemas de acceso.,-7
+SIM-2025-0154,1,15-06-2026,segunda,10,Iniciada,Sin actividad registrada en visita.,4
+SIM-2025-0156,3,15-06-2026,primera,29,Iniciada,Terreno con problemas de acceso.,-3
+SIM-2026-0157,1,15-06-2026,primera,83,Avanzada,,-6
+SIM-2026-0157,1,15-06-2026,segunda,83,Avanzada,"Terminaciones en curso, sin observaciones.",0
+SIM-2025-0159,1,15-06-2026,primera,81,Avanzada,Obra próxima a finalizar.,-1
+SIM-2024-0162,1,15-06-2026,primera,53,Avanzada,Obra en progreso normal.,-5
+SIM-2024-0162,1,15-06-2026,segunda,53,Avanzada,,9
+SIM-2025-0166,1,15-06-2026,primera,37,Avanzada,Obra en progreso normal.,-3
+SIM-2025-0166,1,15-06-2026,segunda,39,Avanzada,Obra en progreso normal.,-5
+SIM-2026-0167,1,15-06-2026,primera,51,Avanzada,,8
+SIM-2026-0167,1,15-06-2026,segunda,63,Avanzada,Obra en progreso normal.,-4
+SIM-2024-0169,1,15-06-2026,primera,16,Iniciada,,-4
+SIM-2024-0169,1,15-06-2026,segunda,16,Iniciada,,6
+SIM-2025-0170,4,15-06-2026,primera,19,Iniciada,Obra paralizada por falta de materiales.,-1
+SIM-2025-0171,3,15-06-2026,primera,64,Avanzada,,11
+SIM-2025-0171,3,15-06-2026,segunda,68,Avanzada,Se verificó avance conforme al cronograma.,7
+SIM-2025-0172,2,15-06-2026,primera,65,Avanzada,,7
+SIM-2025-0172,2,15-06-2026,segunda,65,Avanzada,,7
+SIM-2023-0176,6,15-06-2026,primera,0,Iniciada,,12
+SIM-2023-0176,6,15-06-2026,segunda,0,Iniciada,,7
+SIM-2025-0178,2,15-06-2026,primera,30,Iniciada,Se verificó avance conforme al cronograma.,5
+SIM-2025-0178,2,15-06-2026,segunda,39,Avanzada,"Materiales en obra, trabajo activo.",-4
+SIM-2023-0181,1,15-06-2026,primera,57,Avanzada,Se verificó avance conforme al cronograma.,5
+SIM-2023-0181,1,15-06-2026,segunda,57,Avanzada,Obra en progreso normal.,5
+SIM-2025-0182,6,15-06-2026,primera,41,Avanzada,,12
+SIM-2025-0182,6,15-06-2026,segunda,54,Avanzada,,-1
+SIM-2025-0184,3,15-06-2026,primera,27,Iniciada,Equipo de trabajo reducido.,-1
+SIM-2025-0185,5,15-06-2026,primera,57,Avanzada,Se verificó avance conforme al cronograma.,4
+SIM-2026-0186,1,15-06-2026,primera,57,Avanzada,Obra en progreso normal.,-4
+SIM-2026-0186,1,15-06-2026,segunda,57,Avanzada,,-1
+SIM-2025-0190,5,15-06-2026,primera,67,Avanzada,Se verificó avance conforme al cronograma.,-7
+SIM-2026-0192,3,15-06-2026,primera,6,Iniciada,Sin actividad registrada en visita.,1
+SIM-2026-0192,3,15-06-2026,segunda,6,Iniciada,Terreno con problemas de acceso.,10
+SIM-2025-0194,1,15-06-2026,primera,24,Iniciada,Obra paralizada por falta de materiales.,8
+SIM-2025-0194,1,15-06-2026,segunda,29,Iniciada,Equipo de trabajo reducido.,3
+SIM-2025-0200,1,15-06-2026,primera,39,Avanzada,Se verificó avance conforme al cronograma.,3
+SIM-2025-0200,1,15-06-2026,segunda,39,Avanzada,Se verificó avance conforme al cronograma.,9
+SIM-2025-0201,1,15-06-2026,primera,82,Avanzada,,-7
+SIM-2025-0201,1,15-06-2026,segunda,82,Avanzada,,9
+SIM-2024-0203,4,15-06-2026,primera,56,Avanzada,,13
+SIM-2025-0208,3,15-06-2026,primera,66,Avanzada,,-4
+SIM-2025-0209,6,15-06-2026,primera,32,Iniciada,,6
+SIM-2025-0209,6,15-06-2026,segunda,39,Avanzada,Obra en progreso normal.,-1
+SIM-2024-0210,4,15-06-2026,primera,83,Avanzada,Obra próxima a finalizar.,4
+SIM-2024-0210,4,15-06-2026,segunda,83,Avanzada,Obra próxima a finalizar.,4
+SIM-2026-0211,1,15-06-2026,primera,1,Iniciada,Equipo de trabajo reducido.,10
+SIM-2026-0211,1,15-06-2026,segunda,8,Iniciada,,3
+SIM-2025-0212,2,15-06-2026,primera,98,Avanzada,Obra próxima a finalizar.,-6
+SIM-2025-0212,2,15-06-2026,segunda,98,Avanzada,,10
+SIM-2026-0213,3,15-06-2026,primera,18,Iniciada,,-3
+SIM-2024-0215,2,15-06-2026,primera,53,Avanzada,,6
+SIM-2024-0215,2,15-06-2026,segunda,53,Avanzada,,6
+SIM-2026-0221,1,15-06-2026,primera,21,Iniciada,,9
+SIM-2025-0222,1,15-06-2026,primera,12,Iniciada,,12
+SIM-2025-0222,1,15-06-2026,segunda,21,Iniciada,,3
+SIM-2025-0223,1,15-06-2026,primera,18,Iniciada,Obra paralizada por falta de materiales.,-1
+SIM-2025-0223,1,15-06-2026,segunda,18,Iniciada,Terreno con problemas de acceso.,3
+SIM-2024-0224,1,15-06-2026,primera,54,Avanzada,,15
+SIM-2024-0224,1,15-06-2026,segunda,65,Avanzada,,4
+SIM-2026-0225,1,15-06-2026,primera,97,Avanzada,,-4
+SIM-2026-0226,1,15-06-2026,primera,76,Avanzada,Obra próxima a finalizar.,-1
+SIM-2024-0229,4,15-06-2026,primera,0,Iniciada,Sin actividad registrada en visita.,8
+SIM-2024-0229,4,15-06-2026,segunda,0,Iniciada,Equipo de trabajo reducido.,5
+SIM-2026-0230,2,15-06-2026,primera,72,Avanzada,,7
+SIM-2026-0231,4,15-06-2026,primera,95,Avanzada,"Terminaciones en curso, sin observaciones.",-7
+SIM-2026-0231,4,15-06-2026,segunda,95,Avanzada,,10
+SIM-2025-0232,3,15-06-2026,primera,0,Iniciada,Equipo de trabajo reducido.,3
+SIM-2025-0238,1,15-06-2026,primera,15,Iniciada,Equipo de trabajo reducido.,-2
+SIM-2025-0238,1,15-06-2026,segunda,15,Iniciada,Terreno con problemas de acceso.,0
+SIM-2025-0239,1,15-06-2026,primera,75,Avanzada,Obra próxima a finalizar.,-6
+SIM-2024-0240,6,15-06-2026,primera,79,Avanzada,Obra próxima a finalizar.,9
+SIM-2025-0241,1,15-06-2026,primera,53,Avanzada,,14
+SIM-2026-0242,3,15-06-2026,primera,100,Finalizada,"Terminaciones en curso, sin observaciones.",-3
+SIM-2025-0243,4,15-06-2026,primera,48,Avanzada,,13
+SIM-2026-0244,1,15-06-2026,primera,8,Iniciada,Terreno con problemas de acceso.,-6
+SIM-2026-0244,1,15-06-2026,segunda,8,Iniciada,,-4
+SIM-2024-0248,6,15-06-2026,primera,46,Avanzada,,-7
+SIM-2025-0249,5,15-06-2026,primera,6,Iniciada,,-3
+SIM-2024-0250,1,15-06-2026,primera,20,Iniciada,,0
+SIM-2026-0251,6,15-06-2026,primera,79,Avanzada,Obra próxima a finalizar.,11
+SIM-2026-0251,6,15-06-2026,segunda,87,Avanzada,Calidad de construcción satisfactoria.,3
+SIM-2025-0252,1,15-06-2026,primera,42,Avanzada,,7
+SIM-2025-0254,3,15-06-2026,primera,22,Iniciada,,2
+SIM-2026-0256,1,15-06-2026,primera,65,Avanzada,"Materiales en obra, trabajo activo.",8
+SIM-2025-0260,1,15-06-2026,primera,37,Avanzada,,1
+SIM-2025-0260,1,15-06-2026,segunda,37,Avanzada,Obra en progreso normal.,9
+SIM-2025-0261,1,15-06-2026,primera,84,Avanzada,,-7
+SIM-2025-0261,1,15-06-2026,segunda,84,Avanzada,,-2
+SIM-2025-0264,3,15-06-2026,primera,0,Iniciada,Terreno con problemas de acceso.,15
+SIM-2025-0265,1,15-06-2026,primera,0,Iniciada,Sin actividad registrada en visita.,14
+SIM-2025-0265,1,15-06-2026,segunda,10,Iniciada,,4
+SIM-2026-0266,6,15-06-2026,primera,81,Avanzada,,7
+SIM-2026-0266,6,15-06-2026,segunda,81,Avanzada,Obra próxima a finalizar.,7
+SIM-2024-0267,3,15-06-2026,primera,87,Avanzada,"Terminaciones en curso, sin observaciones.",0
+SIM-2025-0274,1,15-06-2026,primera,39,Avanzada,Se verificó avance conforme al cronograma.,6
+SIM-2026-0275,1,15-06-2026,primera,41,Avanzada,"Materiales en obra, trabajo activo.",13
+SIM-2025-0278,1,15-06-2026,primera,58,Avanzada,,-3
+SIM-2025-0278,1,15-06-2026,segunda,58,Avanzada,,10
+SIM-2025-0279,1,15-06-2026,primera,25,Iniciada,,-7
+SIM-2025-0279,1,15-06-2026,segunda,25,Iniciada,,10
+SIM-2025-0283,1,15-06-2026,primera,10,Iniciada,Obra paralizada por falta de materiales.,5
+SIM-2025-0288,1,15-06-2026,primera,47,Avanzada,"Materiales en obra, trabajo activo.",-8
+SIM-2025-0288,1,15-06-2026,segunda,47,Avanzada,"Materiales en obra, trabajo activo.",-1
+SIM-2026-0292,1,15-06-2026,primera,28,Iniciada,,15
+SIM-2026-0292,1,15-06-2026,segunda,42,Avanzada,"Materiales en obra, trabajo activo.",1
+SIM-2026-0293,1,15-06-2026,primera,13,Iniciada,,6
+SIM-2026-0293,1,15-06-2026,segunda,15,Iniciada,,4
+SIM-2025-0301,6,15-06-2026,primera,59,Avanzada,"Materiales en obra, trabajo activo.",2
+SIM-2025-0301,6,15-06-2026,segunda,64,Avanzada,Se verificó avance conforme al cronograma.,-3
+SIM-2026-0305,1,15-06-2026,primera,17,Iniciada,,-1
+SIM-2026-0307,5,15-06-2026,primera,72,Avanzada,Calidad de construcción satisfactoria.,0
+SIM-2025-0308,1,15-06-2026,primera,72,Avanzada,,13
+SIM-2025-0308,1,15-06-2026,segunda,82,Avanzada,Obra próxima a finalizar.,3
+SIM-2026-0309,1,15-06-2026,primera,71,Avanzada,Obra próxima a finalizar.,6
+SIM-2026-0309,1,15-06-2026,segunda,80,Avanzada,,-3
+SIM-2025-0312,1,15-06-2026,primera,22,Iniciada,,9
+SIM-2025-0312,1,15-06-2026,segunda,27,Iniciada,,4
+SIM-2026-0314,6,15-06-2026,primera,47,Avanzada,,7
+SIM-2026-0314,6,15-06-2026,segunda,50,Avanzada,,4
+SIM-2026-0323,1,15-06-2026,primera,66,Avanzada,"Materiales en obra, trabajo activo.",15
+SIM-2026-0325,1,15-06-2026,primera,94,Avanzada,Calidad de construcción satisfactoria.,5
+SIM-2026-0325,1,15-06-2026,segunda,94,Avanzada,Obra próxima a finalizar.,10
+SIM-2026-0328,3,15-06-2026,primera,55,Avanzada,,1
+SIM-2024-0330,3,15-06-2026,primera,81,Avanzada,"Terminaciones en curso, sin observaciones.",-3
+SIM-2026-0333,1,15-06-2026,primera,78,Avanzada,Obra próxima a finalizar.,-6
+SIM-2026-0334,1,15-06-2026,primera,55,Avanzada,,-8
+SIM-2026-0334,1,15-06-2026,segunda,55,Avanzada,,3
+SIM-2026-0335,6,15-06-2026,primera,57,Avanzada,"Materiales en obra, trabajo activo.",6
+SIM-2024-0336,1,15-06-2026,primera,92,Avanzada,,6
+SIM-2024-0336,1,15-06-2026,segunda,95,Avanzada,,3
+SIM-2026-0338,1,15-06-2026,primera,37,Avanzada,Se verificó avance conforme al cronograma.,-6
+SIM-2024-0339,1,15-06-2026,primera,46,Avanzada,,0
+SIM-2025-0340,1,15-06-2026,primera,13,Iniciada,,-6
+SIM-2025-0340,1,15-06-2026,segunda,13,Iniciada,Equipo de trabajo reducido.,5
+SIM-2025-0341,5,15-06-2026,primera,0,Iniciada,Terreno con problemas de acceso.,12
+SIM-2025-0345,1,15-06-2026,primera,1,Iniciada,,8
+SIM-2025-0345,1,15-06-2026,segunda,9,Iniciada,Sin actividad registrada en visita.,0
+SIM-2026-0348,1,15-06-2026,primera,24,Iniciada,Sin actividad registrada en visita.,15
+SIM-2026-0348,1,15-06-2026,segunda,30,Iniciada,"Materiales en obra, trabajo activo.",9
+SIM-2025-0349,3,15-06-2026,primera,42,Avanzada,Obra en progreso normal.,-7
+SIM-2025-0349,3,15-06-2026,segunda,42,Avanzada,"Materiales en obra, trabajo activo.",6
+SIM-2026-0351,1,15-06-2026,primera,59,Avanzada,,5
+SIM-2026-0351,1,15-06-2026,segunda,59,Avanzada,,5
+SIM-2025-0353,3,15-06-2026,primera,30,Iniciada,,-5
+SIM-2024-0354,1,15-06-2026,primera,100,Finalizada,Calidad de construcción satisfactoria.,-4
+SIM-2023-0355,4,15-06-2026,primera,3,Iniciada,Obra paralizada por falta de materiales.,2
+SIM-2026-0357,2,15-06-2026,primera,54,Avanzada,Se verificó avance conforme al cronograma.,-1
+SIM-2026-0357,2,15-06-2026,segunda,55,Avanzada,Se verificó avance conforme al cronograma.,-2
+SIM-2026-0358,2,15-06-2026,primera,18,Iniciada,,-4
+SIM-2025-0361,1,15-06-2026,primera,4,Iniciada,,5
+SIM-2025-0362,3,15-06-2026,primera,1,Iniciada,Terreno con problemas de acceso.,7
+SIM-2026-0363,3,15-06-2026,primera,0,Iniciada,Obra paralizada por falta de materiales.,1
+SIM-2025-0366,1,15-06-2026,primera,100,Finalizada,Obra próxima a finalizar.,-5
+SIM-2026-0368,1,15-06-2026,primera,24,Iniciada,Equipo de trabajo reducido.,-5
+SIM-2026-0368,1,15-06-2026,segunda,24,Iniciada,Terreno con problemas de acceso.,-3
+SIM-2025-0373,1,15-06-2026,primera,9,Iniciada,,9
+SIM-2026-0375,2,15-06-2026,primera,0,Iniciada,,14
+SIM-2025-0380,1,15-06-2026,primera,0,Iniciada,,9
+SIM-2025-0380,1,15-06-2026,segunda,1,Iniciada,,7
+SIM-2024-0381,5,15-06-2026,primera,13,Iniciada,Terreno con problemas de acceso.,5
+SIM-2026-0384,2,15-06-2026,primera,85,Avanzada,Calidad de construcción satisfactoria.,-6
+SIM-2026-0384,2,15-06-2026,segunda,85,Avanzada,"Terminaciones en curso, sin observaciones.",10
+SIM-2025-0386,1,15-06-2026,primera,42,Avanzada,"Materiales en obra, trabajo activo.",-5
+SIM-2025-0388,1,15-06-2026,primera,2,Iniciada,Obra paralizada por falta de materiales.,2
+SIM-2025-0389,3,15-06-2026,primera,53,Avanzada,,-2
+SIM-2025-0389,3,15-06-2026,segunda,53,Avanzada,,2
+SIM-2023-0390,1,15-06-2026,primera,70,Avanzada,,8
+SIM-2023-0390,1,15-06-2026,segunda,77,Avanzada,Obra próxima a finalizar.,1
+SIM-2025-0391,1,15-06-2026,primera,49,Avanzada,,-2
+SIM-2025-0391,1,15-06-2026,segunda,49,Avanzada,Se verificó avance conforme al cronograma.,4
+SIM-2024-0394,6,15-06-2026,primera,0,Iniciada,Equipo de trabajo reducido.,10
+SIM-2024-0394,6,15-06-2026,segunda,11,Iniciada,,-2
+SIM-2025-0398,4,15-06-2026,primera,0,Iniciada,Obra paralizada por falta de materiales.,11
+SIM-2025-0398,4,15-06-2026,segunda,5,Iniciada,,1
+SIM-2025-0399,1,15-06-2026,primera,0,Iniciada,Obra paralizada por falta de materiales.,10
+SIM-2023-0401,3,15-06-2026,primera,71,Avanzada,Obra próxima a finalizar.,14
+SIM-2025-0403,1,15-06-2026,primera,0,Iniciada,Equipo de trabajo reducido.,13
+SIM-2025-0403,1,15-06-2026,segunda,8,Iniciada,,-2
+SIM-2024-0408,4,15-06-2026,primera,0,Iniciada,Obra paralizada por falta de materiales.,14
+SIM-2024-0408,4,15-06-2026,segunda,1,Iniciada,Obra paralizada por falta de materiales.,9
+SIM-2025-0417,2,15-06-2026,primera,88,Avanzada,Calidad de construcción satisfactoria.,5
+SIM-2026-0421,1,15-06-2026,primera,37,Avanzada,Se verificó avance conforme al cronograma.,12
+SIM-2026-0421,1,15-06-2026,segunda,47,Avanzada,Se verificó avance conforme al cronograma.,2
+SIM-2025-0424,1,15-06-2026,primera,93,Avanzada,"Terminaciones en curso, sin observaciones.",0
+SIM-2025-0424,1,15-06-2026,segunda,97,Avanzada,,-4
+SIM-2025-0428,1,15-06-2026,primera,5,Iniciada,Terreno con problemas de acceso.,-2
+SIM-2025-0428,1,15-06-2026,segunda,5,Iniciada,Obra paralizada por falta de materiales.,3
+SIM-2024-0431,1,15-06-2026,primera,68,Avanzada,Se verificó avance conforme al cronograma.,8
+SIM-2024-0431,1,15-06-2026,segunda,74,Avanzada,Calidad de construcción satisfactoria.,2
+SIM-2026-0436,1,15-06-2026,primera,76,Avanzada,,7
+SIM-2026-0436,1,15-06-2026,segunda,76,Avanzada,Obra próxima a finalizar.,10
+SIM-2025-0438,1,15-06-2026,primera,97,Avanzada,,-1
+SIM-2025-0438,1,15-06-2026,segunda,97,Avanzada,Calidad de construcción satisfactoria.,-1
+SIM-2026-0439,3,15-06-2026,primera,94,Avanzada,,0
+SIM-2026-0442,2,15-06-2026,primera,60,Avanzada,,1
+SIM-2026-0442,2,15-06-2026,segunda,63,Avanzada,Se verificó avance conforme al cronograma.,-2
+SIM-2025-0443,1,15-06-2026,primera,59,Avanzada,,-1
+SIM-2025-0444,1,15-06-2026,primera,13,Iniciada,,11
+SIM-2026-0447,1,15-06-2026,primera,0,Iniciada,Obra paralizada por falta de materiales.,8
+SIM-2026-0447,1,15-06-2026,segunda,0,Iniciada,,8
+SIM-2025-0448,1,15-06-2026,primera,48,Avanzada,"Materiales en obra, trabajo activo.",-2
+SIM-2025-0448,1,15-06-2026,segunda,48,Avanzada,Se verificó avance conforme al cronograma.,8
+SIM-2026-0449,1,15-06-2026,primera,0,Iniciada,Terreno con problemas de acceso.,12
+SIM-2026-0449,1,15-06-2026,segunda,0,Iniciada,,10
+SIM-2026-0454,2,15-06-2026,primera,32,Iniciada,Obra en progreso normal.,2
+SIM-2025-0455,1,15-06-2026,primera,49,Avanzada,,5
+SIM-2025-0455,1,15-06-2026,segunda,57,Avanzada,Obra en progreso normal.,-3
+SIM-2025-0456,2,15-06-2026,primera,79,Avanzada,"Terminaciones en curso, sin observaciones.",-7
+SIM-2026-0457,1,15-06-2026,primera,76,Avanzada,,-5
+SIM-2026-0458,5,15-06-2026,primera,83,Avanzada,Obra próxima a finalizar.,-4
+SIM-2025-0459,2,15-06-2026,primera,79,Avanzada,Calidad de construcción satisfactoria.,0
+SIM-2025-0459,2,15-06-2026,segunda,79,Avanzada,,3
+SIM-2026-0464,3,15-06-2026,primera,10,Iniciada,,-1
+SIM-2026-0464,3,15-06-2026,segunda,10,Iniciada,,3
+SIM-2026-0465,4,15-06-2026,primera,63,Avanzada,,12
+SIM-2026-0465,4,15-06-2026,segunda,65,Avanzada,,10
+SIM-2025-0466,1,15-06-2026,primera,26,Iniciada,,13
+SIM-2025-0468,5,15-06-2026,primera,18,Iniciada,,-2
+SIM-2025-0471,1,15-06-2026,primera,10,Iniciada,,8
+SIM-2025-0473,1,15-06-2026,primera,51,Avanzada,,5
+SIM-2025-0475,1,15-06-2026,primera,10,Iniciada,,9
+SIM-2025-0475,1,15-06-2026,segunda,21,Iniciada,,-2
+SIM-2025-0477,1,15-06-2026,primera,69,Avanzada,Obra en progreso normal.,13
+SIM-2026-0478,3,15-06-2026,primera,45,Avanzada,,-7
+SIM-2025-0479,3,15-06-2026,primera,11,Iniciada,Obra paralizada por falta de materiales.,-4
+SIM-2026-0480,4,15-06-2026,primera,77,Avanzada,Calidad de construcción satisfactoria.,-4
+SIM-2026-0481,2,15-06-2026,primera,35,Iniciada,,12
+SIM-2026-0489,1,15-06-2026,primera,11,Iniciada,Equipo de trabajo reducido.,14
+SIM-2026-0489,1,15-06-2026,segunda,30,Iniciada,Obra en progreso normal.,-5
+SIM-2025-0490,4,15-06-2026,primera,29,Iniciada,,13
+SIM-2025-0490,4,15-06-2026,segunda,45,Avanzada,,-3
+SIM-2026-0494,1,15-06-2026,primera,20,Iniciada,Sin actividad registrada en visita.,-4
+SIM-2026-0494,1,15-06-2026,segunda,20,Iniciada,Terreno con problemas de acceso.,0
+SIM-2025-0495,1,15-06-2026,primera,52,Avanzada,,-3
+SIM-2025-0495,1,15-06-2026,segunda,52,Avanzada,,1
+SIM-2025-0496,1,15-06-2026,primera,8,Iniciada,,11
+SIM-2025-0496,1,15-06-2026,segunda,14,Iniciada,Equipo de trabajo reducido.,5
+SIM-2025-0501,1,15-06-2026,primera,64,Avanzada,Se verificó avance conforme al cronograma.,-2
+SIM-2026-0502,1,15-06-2026,primera,97,Avanzada,,-6
+SIM-2026-0502,1,15-06-2026,segunda,97,Avanzada,,-1
+SIM-2025-0503,1,15-06-2026,primera,47,Avanzada,,14
+SIM-2023-0505,1,15-06-2026,primera,84,Avanzada,,4
+SIM-2023-0505,1,15-06-2026,segunda,89,Avanzada,Obra próxima a finalizar.,-1
+SIM-2025-0506,4,15-06-2026,primera,75,Avanzada,,-1
+SIM-2025-0506,4,15-06-2026,segunda,78,Avanzada,,-4
+SIM-2025-0507,1,15-06-2026,primera,45,Avanzada,"Materiales en obra, trabajo activo.",-6
+SIM-2025-0507,1,15-06-2026,segunda,45,Avanzada,Se verificó avance conforme al cronograma.,-3
+SIM-2025-0508,1,15-06-2026,primera,80,Avanzada,"Terminaciones en curso, sin observaciones.",-3
+SIM-2026-0511,1,15-06-2026,primera,72,Avanzada,,-1
+SIM-2026-0511,1,15-06-2026,segunda,72,Avanzada,,-1
+SIM-2026-0512,4,15-06-2026,primera,45,Avanzada,,15
+SIM-2026-0512,4,15-06-2026,segunda,55,Avanzada,"Materiales en obra, trabajo activo.",5
+SIM-2026-0513,1,15-06-2026,primera,57,Avanzada,Obra en progreso normal.,2
+SIM-2025-0516,2,15-06-2026,primera,0,Iniciada,Terreno con problemas de acceso.,15
+SIM-2025-0516,2,15-06-2026,segunda,6,Iniciada,Equipo de trabajo reducido.,-3
+SIM-2026-0517,1,15-06-2026,primera,98,Avanzada,Calidad de construcción satisfactoria.,-5
+SIM-2024-0521,3,15-06-2026,primera,7,Iniciada,,12
+SIM-2026-0522,6,15-06-2026,primera,16,Iniciada,Obra paralizada por falta de materiales.,3
+SIM-2026-0524,1,15-06-2026,primera,77,Avanzada,,1
+SIM-2026-0524,1,15-06-2026,segunda,81,Avanzada,,-3
+SIM-2026-0530,1,15-06-2026,primera,5,Iniciada,,13
+SIM-2026-0530,1,15-06-2026,segunda,8,Iniciada,,10
+SIM-2025-0532,6,15-06-2026,primera,76,Avanzada,"Terminaciones en curso, sin observaciones.",-4
+SIM-2025-0532,6,15-06-2026,segunda,76,Avanzada,"Terminaciones en curso, sin observaciones.",-4
+SIM-2026-0534,3,15-06-2026,primera,36,Avanzada,Obra en progreso normal.,5
+SIM-2023-0536,1,15-06-2026,primera,84,Avanzada,,0
+SIM-2023-0536,1,15-06-2026,segunda,84,Avanzada,Calidad de construcción satisfactoria.,5
+SIM-2024-0538,1,15-06-2026,primera,84,Avanzada,"Terminaciones en curso, sin observaciones.",8
+SIM-2024-0538,1,15-06-2026,segunda,90,Avanzada,"Terminaciones en curso, sin observaciones.",2
+SIM-2024-0539,1,15-06-2026,primera,16,Iniciada,Obra paralizada por falta de materiales.,2
+SIM-2024-0539,1,15-06-2026,segunda,18,Iniciada,,0
+SIM-2026-0540,3,15-06-2026,primera,21,Iniciada,,-7
+SIM-2026-0540,3,15-06-2026,segunda,21,Iniciada,Equipo de trabajo reducido.,10
+SIM-2023-0542,2,15-06-2026,primera,67,Avanzada,,11
+SIM-2025-0543,1,15-06-2026,primera,23,Iniciada,,-8
+SIM-2025-0546,4,15-06-2026,primera,100,Finalizada,"Terminaciones en curso, sin observaciones.",-4
+SIM-2025-0548,1,15-06-2026,primera,14,Iniciada,,0
+SIM-2025-0548,1,15-06-2026,segunda,19,Iniciada,Terreno con problemas de acceso.,-5
+SIM-2026-0550,1,15-06-2026,primera,8,Iniciada,,9
+SIM-2026-0550,1,15-06-2026,segunda,15,Iniciada,,2
+SIM-2024-0551,2,15-06-2026,primera,33,Iniciada,,-2
+SIM-2024-0551,2,15-06-2026,segunda,33,Iniciada,"Materiales en obra, trabajo activo.",3
+SIM-2025-0556,1,15-06-2026,primera,47,Avanzada,"Materiales en obra, trabajo activo.",14
+SIM-2025-0556,1,15-06-2026,segunda,61,Avanzada,,0
+SIM-2026-0557,1,15-06-2026,primera,44,Avanzada,,13
+SIM-2026-0557,1,15-06-2026,segunda,57,Avanzada,Se verificó avance conforme al cronograma.,0
+SIM-2025-0559,3,15-06-2026,primera,0,Iniciada,,15
+SIM-2026-0560,1,15-06-2026,primera,97,Avanzada,,1
+SIM-2026-0560,1,15-06-2026,segunda,97,Avanzada,,9
+SIM-2024-0562,1,15-06-2026,primera,58,Avanzada,,1
+SIM-2025-0563,1,15-06-2026,primera,16,Iniciada,,3
+SIM-2025-0565,1,15-06-2026,primera,65,Avanzada,,4
+SIM-2026-0566,1,15-06-2026,primera,56,Avanzada,,9
+SIM-2026-0566,1,15-06-2026,segunda,70,Avanzada,,-5
+SIM-2024-0567,5,15-06-2026,primera,18,Iniciada,Terreno con problemas de acceso.,1
+SIM-2025-0570,1,15-06-2026,primera,23,Iniciada,,-8
+SIM-2025-0571,1,15-06-2026,primera,47,Avanzada,,9
+SIM-2025-0571,1,15-06-2026,segunda,53,Avanzada,Obra en progreso normal.,3
+SIM-2024-0574,1,15-06-2026,primera,44,Avanzada,"Materiales en obra, trabajo activo.",14
+SIM-2024-0574,1,15-06-2026,segunda,54,Avanzada,,4
+SIM-2025-0575,1,15-06-2026,primera,23,Iniciada,Equipo de trabajo reducido.,1
+SIM-2025-0575,1,15-06-2026,segunda,23,Iniciada,Terreno con problemas de acceso.,6
+SIM-2025-0576,4,15-06-2026,primera,53,Avanzada,"Materiales en obra, trabajo activo.",14
+SIM-2025-0576,4,15-06-2026,segunda,68,Avanzada,,-1
+SIM-2025-0577,1,15-06-2026,primera,75,Avanzada,,14
+SIM-2025-0577,1,15-06-2026,segunda,91,Avanzada,,-2
+SIM-2026-0578,1,15-06-2026,primera,11,Iniciada,Obra paralizada por falta de materiales.,-2
+SIM-2026-0580,1,15-06-2026,primera,4,Iniciada,Terreno con problemas de acceso.,-2
+SIM-2026-0581,5,15-06-2026,primera,0,Iniciada,,5
+SIM-2025-0587,4,15-06-2026,primera,3,Iniciada,,2
+SIM-2025-0587,4,15-06-2026,segunda,3,Iniciada,,8
+SIM-2026-0588,1,15-06-2026,primera,55,Avanzada,,8
+SIM-2026-0588,1,15-06-2026,segunda,63,Avanzada,Obra en progreso normal.,0
+SIM-2026-0592,3,15-06-2026,primera,97,Avanzada,"Terminaciones en curso, sin observaciones.",-5
+SIM-2026-0592,3,15-06-2026,segunda,97,Avanzada,,-1
+SIM-2025-0595,4,15-06-2026,primera,40,Avanzada,Se verificó avance conforme al cronograma.,14
+SIM-2025-0596,6,15-06-2026,primera,0,Iniciada,Obra paralizada por falta de materiales.,15
+SIM-2026-0599,1,15-06-2026,primera,65,Avanzada,Se verificó avance conforme al cronograma.,13
+SIM-2026-0600,1,15-06-2026,primera,12,Iniciada,Obra paralizada por falta de materiales.,-7
+SIM-2026-0606,1,15-06-2026,primera,44,Avanzada,"Materiales en obra, trabajo activo.",10
+SIM-2026-0606,1,15-06-2026,segunda,52,Avanzada,Se verificó avance conforme al cronograma.,2
+SIM-2026-0608,3,15-06-2026,primera,13,Iniciada,,-8
+SIM-2026-0609,1,15-06-2026,primera,16,Iniciada,,-3
+SIM-2026-0609,1,15-06-2026,segunda,16,Iniciada,,1
+SIM-2025-0616,1,15-06-2026,primera,61,Avanzada,Se verificó avance conforme al cronograma.,6
+SIM-2025-0616,1,15-06-2026,segunda,70,Avanzada,Obra próxima a finalizar.,-3
+SIM-2024-0622,2,15-06-2026,primera,0,Iniciada,Sin actividad registrada en visita.,15
+SIM-2026-0623,4,15-06-2026,primera,74,Avanzada,,3
+SIM-2025-0625,3,15-06-2026,primera,68,Avanzada,,7
+SIM-2025-0628,1,15-06-2026,primera,7,Iniciada,,8
+SIM-2025-0628,1,15-06-2026,segunda,16,Iniciada,Obra paralizada por falta de materiales.,-1
+SIM-2025-0631,1,15-06-2026,primera,41,Avanzada,,-7
+SIM-2025-0631,1,15-06-2026,segunda,41,Avanzada,"Materiales en obra, trabajo activo.",7
+SIM-2026-0633,1,15-06-2026,primera,98,Avanzada,Calidad de construcción satisfactoria.,-8
+SIM-2026-0633,1,15-06-2026,segunda,98,Avanzada,,5
+SIM-2026-0634,1,15-06-2026,primera,82,Avanzada,,-3
+SIM-2026-0634,1,15-06-2026,segunda,82,Avanzada,"Terminaciones en curso, sin observaciones.",5
+SIM-2025-0635,4,15-06-2026,primera,24,Iniciada,Obra paralizada por falta de materiales.,-3
+SIM-2025-0635,4,15-06-2026,segunda,24,Iniciada,Equipo de trabajo reducido.,10
+SIM-2024-0636,1,15-06-2026,primera,30,Iniciada,,8
+SIM-2024-0636,1,15-06-2026,segunda,42,Avanzada,Se verificó avance conforme al cronograma.,-4
+SIM-2025-0640,2,15-06-2026,primera,62,Avanzada,,8
+SIM-2025-0641,3,15-06-2026,primera,31,Iniciada,"Materiales en obra, trabajo activo.",-1
+SIM-2025-0642,4,15-06-2026,primera,21,Iniciada,Obra paralizada por falta de materiales.,8
+SIM-2025-0642,4,15-06-2026,segunda,23,Iniciada,,6
+SIM-2026-0644,1,15-06-2026,primera,47,Avanzada,,-5
+SIM-2026-0644,1,15-06-2026,segunda,47,Avanzada,,-5
+SIM-2026-0645,1,15-06-2026,primera,26,Iniciada,,3
+SIM-2026-0645,1,15-06-2026,segunda,32,Iniciada,,-3
+SIM-2024-0646,1,15-06-2026,primera,77,Avanzada,,-3
+SIM-2025-0648,5,15-06-2026,primera,6,Iniciada,,0
+SIM-2025-0651,1,15-06-2026,primera,83,Avanzada,,14
+SIM-2024-0652,6,15-06-2026,primera,4,Iniciada,,11
+SIM-2024-0652,6,15-06-2026,segunda,11,Iniciada,,4
+SIM-2025-0653,4,15-06-2026,primera,65,Avanzada,,11
+SIM-2025-0654,1,15-06-2026,primera,73,Avanzada,Calidad de construcción satisfactoria.,6
+SIM-2025-0654,1,15-06-2026,segunda,73,Avanzada,,6
+SIM-2024-0656,1,15-06-2026,primera,3,Iniciada,Terreno con problemas de acceso.,10
+SIM-2024-0656,1,15-06-2026,segunda,9,Iniciada,Terreno con problemas de acceso.,4
+SIM-2025-0657,1,15-06-2026,primera,78,Avanzada,,-2
+SIM-2026-0658,1,15-06-2026,primera,96,Avanzada,Obra próxima a finalizar.,-1
+SIM-2026-0660,1,15-06-2026,primera,6,Iniciada,,10
+SIM-2025-0661,4,15-06-2026,primera,0,Iniciada,Sin actividad registrada en visita.,14
+SIM-2025-0661,4,15-06-2026,segunda,5,Iniciada,Sin actividad registrada en visita.,-2
+SIM-2025-0663,1,15-06-2026,primera,11,Iniciada,Equipo de trabajo reducido.,6
+SIM-2025-0663,1,15-06-2026,segunda,15,Iniciada,,2
+SIM-2025-0665,1,15-06-2026,primera,0,Iniciada,,13
+SIM-2025-0666,1,15-06-2026,primera,0,Iniciada,Obra paralizada por falta de materiales.,8
+SIM-2025-0669,1,15-06-2026,primera,35,Iniciada,,3
+SIM-2026-0670,1,15-06-2026,primera,86,Avanzada,,-4
+SIM-2026-0670,1,15-06-2026,segunda,86,Avanzada,Calidad de construcción satisfactoria.,8
+SIM-2025-0671,1,15-06-2026,primera,29,Iniciada,Terreno con problemas de acceso.,-4
+SIM-2025-0671,1,15-06-2026,segunda,29,Iniciada,Terreno con problemas de acceso.,-1
+SIM-2025-0672,4,15-06-2026,primera,8,Iniciada,Sin actividad registrada en visita.,9
+SIM-2025-0672,4,15-06-2026,segunda,20,Iniciada,,-3
+SIM-2025-0673,1,15-06-2026,primera,55,Avanzada,Se verificó avance conforme al cronograma.,9
+SIM-2025-0673,1,15-06-2026,segunda,65,Avanzada,,-1
+SIM-2024-0677,1,15-06-2026,primera,82,Avanzada,,2
+SIM-2025-0678,1,15-06-2026,primera,14,Iniciada,,-2
+SIM-2025-0678,1,15-06-2026,segunda,14,Iniciada,Terreno con problemas de acceso.,-1
+SIM-2025-0682,1,15-06-2026,primera,6,Iniciada,,0
+SIM-2025-0682,1,15-06-2026,segunda,11,Iniciada,,-5
+SIM-2025-0683,1,15-06-2026,primera,24,Iniciada,Sin actividad registrada en visita.,-1
+SIM-2023-0686,2,15-06-2026,primera,87,Avanzada,"Terminaciones en curso, sin observaciones.",-7
+SIM-2024-0688,2,15-06-2026,primera,0,Iniciada,Terreno con problemas de acceso.,13
+SIM-2026-0689,6,15-06-2026,primera,91,Avanzada,Obra próxima a finalizar.,-8
+SIM-2026-0689,6,15-06-2026,segunda,91,Avanzada,,-4
+SIM-2025-0690,1,15-06-2026,primera,11,Iniciada,,1
+SIM-2025-0690,1,15-06-2026,segunda,11,Iniciada,Sin actividad registrada en visita.,5
+SIM-2025-0692,1,15-06-2026,primera,6,Iniciada,,12
+SIM-2025-0694,2,15-06-2026,primera,14,Iniciada,Terreno con problemas de acceso.,12
+SIM-2025-0694,2,15-06-2026,segunda,23,Iniciada,Sin actividad registrada en visita.,3
+SIM-2025-0695,1,15-06-2026,primera,0,Iniciada,Equipo de trabajo reducido.,11
+SIM-2025-0695,1,15-06-2026,segunda,0,Iniciada,,9
+SIM-2025-0696,1,15-06-2026,primera,0,Iniciada,,5
+SIM-2025-0696,1,15-06-2026,segunda,0,Iniciada,Obra paralizada por falta de materiales.,6
+SIM-2024-0697,4,15-06-2026,primera,34,Iniciada,,7
+SIM-2025-0707,1,15-06-2026,primera,67,Avanzada,"Materiales en obra, trabajo activo.",0
+SIM-2023-0708,1,15-06-2026,primera,72,Avanzada,"Terminaciones en curso, sin observaciones.",-2
+SIM-2023-0708,1,15-06-2026,segunda,72,Avanzada,,-1
+SIM-2025-0709,1,15-06-2026,primera,59,Avanzada,,14
+SIM-2025-0709,1,15-06-2026,segunda,66,Avanzada,"Materiales en obra, trabajo activo.",7
+SIM-2026-0711,1,15-06-2026,primera,44,Avanzada,,-2
+SIM-2026-0712,2,15-06-2026,primera,92,Avanzada,Obra próxima a finalizar.,-5
+SIM-2026-0712,2,15-06-2026,segunda,92,Avanzada,"Terminaciones en curso, sin observaciones.",-2
+SIM-2025-0715,1,15-06-2026,primera,5,Iniciada,,8
+SIM-2025-0715,1,15-06-2026,segunda,5,Iniciada,Terreno con problemas de acceso.,9
+SIM-2025-0718,1,15-06-2026,primera,73,Avanzada,Obra próxima a finalizar.,-2
+SIM-2025-0719,1,15-06-2026,primera,57,Avanzada,Obra en progreso normal.,1
+SIM-2025-0720,1,15-06-2026,primera,82,Avanzada,Obra próxima a finalizar.,10
+SIM-2025-0721,1,15-06-2026,primera,14,Iniciada,,-7
+SIM-2025-0721,1,15-06-2026,segunda,14,Iniciada,Obra paralizada por falta de materiales.,3
+SIM-2025-0722,1,15-06-2026,primera,70,Avanzada,,-2
+SIM-2024-0725,4,15-06-2026,primera,8,Iniciada,Equipo de trabajo reducido.,9
+SIM-2025-0728,1,15-06-2026,primera,63,Avanzada,,7
+SIM-2025-0728,1,15-06-2026,segunda,70,Avanzada,Obra próxima a finalizar.,0
+SIM-2026-0729,1,15-06-2026,primera,72,Avanzada,,7
+SIM-2026-0729,1,15-06-2026,segunda,79,Avanzada,Obra próxima a finalizar.,0
+SIM-2024-0730,3,15-06-2026,primera,7,Iniciada,Terreno con problemas de acceso.,5
+SIM-2025-0738,1,15-06-2026,primera,28,Iniciada,,-1
+SIM-2026-0739,1,15-06-2026,primera,22,Iniciada,Obra paralizada por falta de materiales.,9
+SIM-2026-0741,1,15-06-2026,primera,53,Avanzada,,13
+SIM-2026-0741,1,15-06-2026,segunda,61,Avanzada,Se verificó avance conforme al cronograma.,5
+SIM-2026-0746,5,15-06-2026,primera,38,Avanzada,,14
+SIM-2026-0748,1,15-06-2026,primera,18,Iniciada,,13
+SIM-2026-0748,1,15-06-2026,segunda,21,Iniciada,,10
+SIM-2026-0749,6,15-06-2026,primera,51,Avanzada,Se verificó avance conforme al cronograma.,7
+SIM-2026-0749,6,15-06-2026,segunda,59,Avanzada,,-1
+SIM-2025-0752,3,15-06-2026,primera,98,Avanzada,Obra próxima a finalizar.,-8
+SIM-2025-0752,3,15-06-2026,segunda,98,Avanzada,Calidad de construcción satisfactoria.,0
+SIM-2025-0754,2,15-06-2026,primera,62,Avanzada,Se verificó avance conforme al cronograma.,13
+SIM-2025-0756,1,15-06-2026,primera,52,Avanzada,,-8
+SIM-2025-0756,1,15-06-2026,segunda,52,Avanzada,,9
+SIM-2026-0758,2,15-06-2026,primera,75,Avanzada,,4
+SIM-2024-0763,6,15-06-2026,primera,52,Avanzada,"Materiales en obra, trabajo activo.",-3
+SIM-2024-0763,6,15-06-2026,segunda,52,Avanzada,,7
+SIM-2026-0764,6,15-06-2026,primera,7,Iniciada,,-7
+SIM-2026-0764,6,15-06-2026,segunda,7,Iniciada,Terreno con problemas de acceso.,3
+SIM-2025-0768,6,15-06-2026,primera,11,Iniciada,Obra paralizada por falta de materiales.,-3
+SIM-2026-0769,4,15-06-2026,primera,25,Iniciada,,11
+SIM-2026-0769,4,15-06-2026,segunda,28,Iniciada,,8
+SIM-2025-0770,2,15-06-2026,primera,0,Iniciada,Terreno con problemas de acceso.,14
+SIM-2024-0771,4,15-06-2026,primera,0,Iniciada,Obra paralizada por falta de materiales.,11
+SIM-2025-0772,1,15-06-2026,primera,32,Iniciada,,6
+SIM-2025-0772,1,15-06-2026,segunda,42,Avanzada,,-4
+SIM-2026-0775,1,15-06-2026,primera,2,Iniciada,,3
+SIM-2026-0775,1,15-06-2026,segunda,2,Iniciada,Sin actividad registrada en visita.,7
+SIM-2025-0776,1,15-06-2026,primera,0,Iniciada,Sin actividad registrada en visita.,13
+SIM-2025-0776,1,15-06-2026,segunda,13,Iniciada,,-3
+SIM-2026-0777,1,15-06-2026,primera,4,Iniciada,,12
+SIM-2026-0777,1,15-06-2026,segunda,6,Iniciada,Equipo de trabajo reducido.,10
+SIM-2025-0778,6,15-06-2026,primera,32,Iniciada,,10
+SIM-2025-0778,6,15-06-2026,segunda,43,Avanzada,,-1
+SIM-2025-0779,5,15-06-2026,primera,52,Avanzada,,8
+SIM-2026-0781,4,15-06-2026,primera,80,Avanzada,,12
+SIM-2026-0784,1,15-06-2026,primera,7,Iniciada,Equipo de trabajo reducido.,12
+SIM-2026-0784,1,15-06-2026,segunda,16,Iniciada,,3
+SIM-2024-0790,1,15-06-2026,primera,0,Iniciada,,15
+SIM-2025-0791,2,15-06-2026,primera,51,Avanzada,,-8
+SIM-2025-0791,2,15-06-2026,segunda,51,Avanzada,,0
+SIM-2025-0793,3,15-06-2026,primera,76,Avanzada,Obra próxima a finalizar.,3
+SIM-2026-0794,3,15-06-2026,primera,0,Iniciada,Equipo de trabajo reducido.,10
+SIM-2026-0796,3,15-06-2026,primera,6,Iniciada,Equipo de trabajo reducido.,12
+SIM-2025-0797,1,15-06-2026,primera,10,Iniciada,,0
+SIM-2025-0798,1,15-06-2026,primera,9,Iniciada,,-2
+SIM-2026-0799,1,15-06-2026,primera,42,Avanzada,Obra en progreso normal.,-5
+SIM-2026-0799,1,15-06-2026,segunda,42,Avanzada,Se verificó avance conforme al cronograma.,5
+SIM-2023-0801,1,15-06-2026,primera,4,Iniciada,Terreno con problemas de acceso.,7
+SIM-2023-0801,1,15-06-2026,segunda,11,Iniciada,Equipo de trabajo reducido.,0
+SIM-2025-0804,1,15-06-2026,primera,49,Avanzada,,8
+SIM-2025-0807,4,15-06-2026,primera,54,Avanzada,"Materiales en obra, trabajo activo.",8
+SIM-2025-0807,4,15-06-2026,segunda,56,Avanzada,"Materiales en obra, trabajo activo.",6
+SIM-2026-0808,1,15-06-2026,primera,90,Avanzada,,0
+SIM-2026-0811,1,15-06-2026,primera,23,Iniciada,,-8
+SIM-2025-0813,1,15-06-2026,primera,89,Avanzada,,1
+SIM-2025-0813,1,15-06-2026,segunda,89,Avanzada,Calidad de construcción satisfactoria.,1
+SIM-2026-0814,3,15-06-2026,primera,62,Avanzada,,13
+SIM-2026-0816,1,15-06-2026,primera,13,Iniciada,,-5
+SIM-2026-0816,1,15-06-2026,segunda,13,Iniciada,Terreno con problemas de acceso.,0
+SIM-2025-0818,1,15-06-2026,primera,92,Avanzada,,0
+SIM-2025-0818,1,15-06-2026,segunda,92,Avanzada,"Terminaciones en curso, sin observaciones.",6
+SIM-2023-0820,5,15-06-2026,primera,68,Avanzada,Se verificó avance conforme al cronograma.,1
+SIM-2024-0825,1,15-06-2026,primera,68,Avanzada,,-2
+SIM-2024-0825,1,15-06-2026,segunda,68,Avanzada,,1
+SIM-2025-0827,4,15-06-2026,primera,68,Avanzada,Se verificó avance conforme al cronograma.,8
+SIM-2025-0827,4,15-06-2026,segunda,71,Avanzada,Calidad de construcción satisfactoria.,5
+SIM-2026-0828,1,15-06-2026,primera,94,Avanzada,,-4
+SIM-2026-0830,1,15-06-2026,primera,58,Avanzada,Se verificó avance conforme al cronograma.,-6
+SIM-2026-0830,1,15-06-2026,segunda,58,Avanzada,,7
+SIM-2025-0832,2,15-06-2026,primera,0,Iniciada,,10
+SIM-2024-0833,1,15-06-2026,primera,19,Iniciada,,-4
+SIM-2024-0833,1,15-06-2026,segunda,19,Iniciada,Terreno con problemas de acceso.,6
+SIM-2025-0836,4,15-06-2026,primera,16,Iniciada,,-4
+SIM-2026-0839,1,15-06-2026,primera,7,Iniciada,Terreno con problemas de acceso.,5
+SIM-2025-0842,1,15-06-2026,primera,59,Avanzada,,5
+SIM-2025-0842,1,15-06-2026,segunda,59,Avanzada,Obra en progreso normal.,9
+SIM-2026-0843,1,15-06-2026,primera,9,Iniciada,Terreno con problemas de acceso.,14
+SIM-2025-0844,1,15-06-2026,primera,15,Iniciada,,0
+SIM-2025-0844,1,15-06-2026,segunda,15,Iniciada,,8
+SIM-2025-0845,1,15-06-2026,primera,94,Avanzada,,2
+SIM-2026-0850,1,15-06-2026,primera,0,Iniciada,Obra paralizada por falta de materiales.,8
+SIM-2025-0852,5,15-06-2026,primera,44,Avanzada,Obra en progreso normal.,2
+SIM-2025-0853,3,15-06-2026,primera,28,Iniciada,Equipo de trabajo reducido.,1
+SIM-2024-0855,1,15-06-2026,primera,20,Iniciada,,-6
+SIM-2024-0855,1,15-06-2026,segunda,20,Iniciada,,-2
+SIM-2025-0856,1,15-06-2026,primera,85,Avanzada,"Terminaciones en curso, sin observaciones.",-6
+SIM-2025-0856,1,15-06-2026,segunda,85,Avanzada,,-4
+SIM-2026-0857,4,15-06-2026,primera,14,Iniciada,,5
+SIM-2026-0857,4,15-06-2026,segunda,21,Iniciada,Terreno con problemas de acceso.,-2
+SIM-2026-0858,6,15-06-2026,primera,88,Avanzada,,8
+SIM-2026-0858,6,15-06-2026,segunda,88,Avanzada,Calidad de construcción satisfactoria.,10
+SIM-2025-0861,1,15-06-2026,primera,7,Iniciada,,6
+SIM-2025-0863,4,15-06-2026,primera,65,Avanzada,,1
+SIM-2025-0863,4,15-06-2026,segunda,71,Avanzada,Calidad de construcción satisfactoria.,-5
+SIM-2026-0866,1,15-06-2026,primera,9,Iniciada,Obra paralizada por falta de materiales.,3
+SIM-2026-0866,1,15-06-2026,segunda,12,Iniciada,,0
+SIM-2026-0868,4,15-06-2026,primera,57,Avanzada,,-5
+SIM-2026-0868,4,15-06-2026,segunda,57,Avanzada,"Materiales en obra, trabajo activo.",-3
+SIM-2026-0869,2,15-06-2026,primera,29,Iniciada,Terreno con problemas de acceso.,12
+SIM-2024-0871,2,15-06-2026,primera,84,Avanzada,Obra próxima a finalizar.,15
+SIM-2025-0873,6,15-06-2026,primera,69,Avanzada,"Materiales en obra, trabajo activo.",7
+SIM-2025-0873,6,15-06-2026,segunda,70,Avanzada,Obra próxima a finalizar.,6
+SIM-2025-0874,1,15-06-2026,primera,70,Avanzada,,4
+SIM-2025-0874,1,15-06-2026,segunda,70,Avanzada,Obra próxima a finalizar.,9
+SIM-2025-0875,1,15-06-2026,primera,69,Avanzada,Se verificó avance conforme al cronograma.,7
+SIM-2026-0876,6,15-06-2026,primera,0,Iniciada,Equipo de trabajo reducido.,12
+SIM-2026-0876,6,15-06-2026,segunda,10,Iniciada,Obra paralizada por falta de materiales.,-4
+SIM-2025-0880,1,15-06-2026,primera,0,Iniciada,Equipo de trabajo reducido.,6
+SIM-2024-0882,4,15-06-2026,primera,11,Iniciada,,9
+SIM-2025-0888,1,15-06-2026,primera,6,Iniciada,Equipo de trabajo reducido.,-3
+SIM-2025-0888,1,15-06-2026,segunda,6,Iniciada,,1
+SIM-2025-0889,1,15-06-2026,primera,84,Avanzada,,-3
+SIM-2026-0890,1,15-06-2026,primera,21,Iniciada,Equipo de trabajo reducido.,-3
+SIM-2026-0891,1,15-06-2026,primera,83,Avanzada,,-5
+SIM-2025-0893,1,15-06-2026,primera,0,Iniciada,Terreno con problemas de acceso.,10
+SIM-2025-0893,1,15-06-2026,segunda,9,Iniciada,Equipo de trabajo reducido.,-1
+SIM-2025-0894,6,15-06-2026,primera,39,Avanzada,,3
+SIM-2025-0894,6,15-06-2026,segunda,41,Avanzada,Se verificó avance conforme al cronograma.,1
+SIM-2025-0895,6,15-06-2026,primera,76,Avanzada,Calidad de construcción satisfactoria.,-5
+SIM-2025-0895,6,15-06-2026,segunda,76,Avanzada,"Terminaciones en curso, sin observaciones.",10
+SIM-2026-0896,1,15-06-2026,primera,74,Avanzada,,-8
+SIM-2026-0896,1,15-06-2026,segunda,74,Avanzada,,3
+SIM-2025-0903,1,15-06-2026,primera,4,Iniciada,,14
+SIM-2025-0903,1,15-06-2026,segunda,9,Iniciada,,9
+SIM-2026-0904,4,15-06-2026,primera,3,Iniciada,Equipo de trabajo reducido.,10
+SIM-2026-0906,5,15-06-2026,primera,10,Iniciada,Equipo de trabajo reducido.,-3
+SIM-2026-0909,1,15-06-2026,primera,5,Iniciada,,8
+SIM-2025-0911,6,15-06-2026,primera,83,Avanzada,,14
+SIM-2025-0911,6,15-06-2026,segunda,95,Avanzada,Obra próxima a finalizar.,2
+SIM-2024-0912,1,15-06-2026,primera,8,Iniciada,Terreno con problemas de acceso.,-5
+SIM-2024-0912,1,15-06-2026,segunda,8,Iniciada,,-4
+SIM-2025-0913,6,15-06-2026,primera,19,Iniciada,Sin actividad registrada en visita.,-7
+SIM-2025-0913,6,15-06-2026,segunda,19,Iniciada,,9
+SIM-2026-0914,6,15-06-2026,primera,55,Avanzada,"Materiales en obra, trabajo activo.",10
+SIM-2026-0914,6,15-06-2026,segunda,59,Avanzada,,6
+SIM-2025-0916,5,15-06-2026,primera,33,Iniciada,,-1
+SIM-2026-0917,2,15-06-2026,primera,12,Iniciada,Terreno con problemas de acceso.,-7
+SIM-2026-0918,3,15-06-2026,primera,0,Iniciada,,4
+SIM-2026-0922,1,15-06-2026,primera,29,Iniciada,Equipo de trabajo reducido.,-6
+SIM-2025-0923,6,15-06-2026,primera,6,Iniciada,,10
+SIM-2026-0924,4,15-06-2026,primera,45,Avanzada,,-4
+SIM-2026-0924,4,15-06-2026,segunda,45,Avanzada,,6
+SIM-2025-0925,1,15-06-2026,primera,40,Avanzada,"Materiales en obra, trabajo activo.",-2
+SIM-2025-0926,6,15-06-2026,primera,16,Iniciada,,-7
+SIM-2025-0926,6,15-06-2026,segunda,16,Iniciada,,-5
+SIM-2025-0930,1,15-06-2026,primera,47,Avanzada,,13
+SIM-2025-0930,1,15-06-2026,segunda,62,Avanzada,Obra en progreso normal.,-2
+SIM-2024-0931,1,15-06-2026,primera,45,Avanzada,Obra en progreso normal.,15
+SIM-2024-0931,1,15-06-2026,segunda,51,Avanzada,"Materiales en obra, trabajo activo.",9
+SIM-2026-0932,5,15-06-2026,primera,83,Avanzada,,-5
+SIM-2025-0933,1,15-06-2026,primera,95,Avanzada,Obra próxima a finalizar.,-5
+SIM-2025-0933,1,15-06-2026,segunda,95,Avanzada,Calidad de construcción satisfactoria.,0
+SIM-2025-0940,2,15-06-2026,primera,0,Iniciada,Sin actividad registrada en visita.,15
+SIM-2026-0943,3,15-06-2026,primera,80,Avanzada,,11
+SIM-2026-0947,4,15-06-2026,primera,17,Iniciada,Terreno con problemas de acceso.,-2
+SIM-2026-0947,4,15-06-2026,segunda,20,Iniciada,,-5
+SIM-2024-0949,1,15-06-2026,primera,6,Iniciada,,1
+SIM-2024-0949,1,15-06-2026,segunda,6,Iniciada,Obra paralizada por falta de materiales.,4
+SIM-2025-0951,5,15-06-2026,primera,5,Iniciada,,9
+SIM-2026-0952,4,15-06-2026,primera,15,Iniciada,,2
+SIM-2025-0953,3,15-06-2026,primera,20,Iniciada,Terreno con problemas de acceso.,-4
+SIM-2024-0955,2,15-06-2026,primera,52,Avanzada,Se verificó avance conforme al cronograma.,10
+SIM-2025-0958,5,15-06-2026,primera,54,Avanzada,,4
+SIM-2025-0960,6,15-06-2026,primera,67,Avanzada,Obra en progreso normal.,12
+SIM-2026-0964,5,15-06-2026,primera,52,Avanzada,,14
+SIM-2026-0966,2,15-06-2026,primera,41,Avanzada,Se verificó avance conforme al cronograma.,6
+SIM-2026-0966,2,15-06-2026,segunda,41,Avanzada,,6
+SIM-2025-0970,1,15-06-2026,primera,64,Avanzada,Obra en progreso normal.,4
+SIM-2025-0970,1,15-06-2026,segunda,73,Avanzada,Obra próxima a finalizar.,-5
+SIM-2026-0975,1,15-06-2026,primera,32,Iniciada,,7
+SIM-2026-0975,1,15-06-2026,segunda,33,Iniciada,,6
+SIM-2025-0976,1,15-06-2026,primera,12,Iniciada,Obra paralizada por falta de materiales.,9
+SIM-2025-0976,1,15-06-2026,segunda,25,Iniciada,Obra paralizada por falta de materiales.,-4
+SIM-2025-0977,1,15-06-2026,primera,24,Iniciada,Equipo de trabajo reducido.,10
+SIM-2025-0977,1,15-06-2026,segunda,30,Iniciada,,4
+SIM-2025-0979,2,15-06-2026,primera,53,Avanzada,Obra en progreso normal.,2
+SIM-2025-0983,5,15-06-2026,primera,49,Avanzada,,14
+SIM-2025-0984,4,15-06-2026,primera,77,Avanzada,,-8
+SIM-2026-0985,2,15-06-2026,primera,12,Iniciada,,7
+SIM-2024-0988,1,15-06-2026,primera,76,Avanzada,,5
+SIM-2024-0988,1,15-06-2026,segunda,84,Avanzada,Calidad de construcción satisfactoria.,-3
+SIM-2025-0991,5,15-06-2026,primera,42,Avanzada,,5
+SIM-2024-0992,6,15-06-2026,primera,17,Iniciada,Terreno con problemas de acceso.,-5
+SIM-2024-0992,6,15-06-2026,segunda,17,Iniciada,Obra paralizada por falta de materiales.,-5
+SIM-2025-0998,2,15-06-2026,primera,80,Avanzada,,-8
+SIM-2025-1000,1,15-06-2026,primera,15,Iniciada,Sin actividad registrada en visita.,-1
+SIM-2025-1000,1,15-06-2026,segunda,17,Iniciada,Sin actividad registrada en visita.,-3
+SIM-2025-1001,4,15-06-2026,primera,49,Avanzada,Obra en progreso normal.,9
+SIM-2025-1003,1,15-06-2026,primera,7,Iniciada,Obra paralizada por falta de materiales.,6
+SIM-2024-1004,2,15-06-2026,primera,29,Iniciada,,2
+SIM-2025-1005,3,15-06-2026,primera,21,Iniciada,Obra paralizada por falta de materiales.,-7
+SIM-2023-1007,1,15-06-2026,primera,4,Iniciada,Obra paralizada por falta de materiales.,-1
+SIM-2026-1008,1,15-06-2026,primera,45,Avanzada,,8
+SIM-2026-1008,1,15-06-2026,segunda,52,Avanzada,,1
+SIM-2026-1009,1,15-06-2026,primera,0,Iniciada,Obra paralizada por falta de materiales.,14
+SIM-2026-1009,1,15-06-2026,segunda,9,Iniciada,Terreno con problemas de acceso.,0
+SIM-2025-1010,1,15-06-2026,primera,55,Avanzada,Se verificó avance conforme al cronograma.,14
+SIM-2025-1010,1,15-06-2026,segunda,68,Avanzada,Obra en progreso normal.,1
+SIM-2026-1011,2,15-06-2026,primera,51,Avanzada,,13
+SIM-2025-1013,2,15-06-2026,primera,14,Iniciada,,-3
+SIM-2026-1015,2,15-06-2026,primera,42,Avanzada,,0
+SIM-2026-1016,6,15-06-2026,primera,17,Iniciada,Obra paralizada por falta de materiales.,-4
+SIM-2026-1016,6,15-06-2026,segunda,17,Iniciada,,-1
+SIM-2024-1018,1,15-06-2026,primera,32,Iniciada,Se verificó avance conforme al cronograma.,0
+SIM-2024-1018,1,15-06-2026,segunda,32,Iniciada,,5
+SIM-2025-1019,5,15-06-2026,primera,63,Avanzada,,-6
+SIM-2026-1020,4,15-06-2026,primera,52,Avanzada,Se verificó avance conforme al cronograma.,13
+SIM-2026-1020,4,15-06-2026,segunda,62,Avanzada,,3
+SIM-2025-1024,6,15-06-2026,primera,3,Iniciada,Terreno con problemas de acceso.,9
+SIM-2025-1024,6,15-06-2026,segunda,7,Iniciada,Obra paralizada por falta de materiales.,5
+SIM-2026-1025,1,15-06-2026,primera,18,Iniciada,Obra paralizada por falta de materiales.,-3
+SIM-2025-1026,6,15-06-2026,primera,0,Iniciada,,11
+SIM-2026-1029,1,15-06-2026,primera,18,Iniciada,,11
+SIM-2026-1029,1,15-06-2026,segunda,27,Iniciada,,2
+SIM-2026-1030,1,15-06-2026,primera,74,Avanzada,Obra próxima a finalizar.,10
+SIM-2025-1032,6,15-06-2026,primera,39,Avanzada,,9
+SIM-2025-1032,6,15-06-2026,segunda,41,Avanzada,,7
+SIM-2025-1033,5,15-06-2026,primera,70,Avanzada,Obra próxima a finalizar.,7
+SIM-2024-1034,1,15-06-2026,primera,70,Avanzada,Obra próxima a finalizar.,-1
+SIM-2026-1038,4,15-06-2026,primera,38,Avanzada,,-2
+SIM-2024-1039,2,15-06-2026,primera,70,Avanzada,Calidad de construcción satisfactoria.,11
+SIM-2025-1043,2,15-06-2026,primera,14,Iniciada,Terreno con problemas de acceso.,-8
+SIM-2025-1043,2,15-06-2026,segunda,14,Iniciada,,8
+SIM-2026-1045,1,15-06-2026,primera,17,Iniciada,Sin actividad registrada en visita.,-2
+SIM-2026-1048,1,15-06-2026,primera,75,Avanzada,"Terminaciones en curso, sin observaciones.",-3
+SIM-2026-1048,1,15-06-2026,segunda,75,Avanzada,,0
+SIM-2026-1055,4,15-06-2026,primera,0,Iniciada,,13
+SIM-2026-1055,4,15-06-2026,segunda,14,Iniciada,Sin actividad registrada en visita.,-3
+SIM-2025-1059,1,15-06-2026,primera,75,Avanzada,,-6
+SIM-2025-1060,4,15-06-2026,primera,35,Iniciada,,9
+SIM-2025-1061,6,15-06-2026,primera,79,Avanzada,,13
+SIM-2023-1062,1,15-06-2026,primera,46,Avanzada,,9
+SIM-2024-1063,1,15-06-2026,primera,16,Iniciada,Obra paralizada por falta de materiales.,-4
+SIM-2024-1063,1,15-06-2026,segunda,16,Iniciada,,6
+SIM-2025-1065,4,15-06-2026,primera,28,Iniciada,,6
+SIM-2025-1065,4,15-06-2026,segunda,39,Avanzada,,-5
+SIM-2026-1067,1,15-06-2026,primera,57,Avanzada,Obra en progreso normal.,-8
+SIM-2026-1067,1,15-06-2026,segunda,57,Avanzada,Obra en progreso normal.,5
+SIM-2025-1068,1,15-06-2026,primera,11,Iniciada,,-3
+SIM-2025-1068,1,15-06-2026,segunda,11,Iniciada,Sin actividad registrada en visita.,-3
+SIM-2026-1069,2,15-06-2026,primera,0,Iniciada,,12
+SIM-2025-1070,4,15-06-2026,primera,0,Iniciada,,7
+SIM-2025-1073,1,15-06-2026,primera,55,Avanzada,,5
+SIM-2025-1073,1,15-06-2026,segunda,55,Avanzada,,9
+SIM-2024-1075,5,15-06-2026,primera,46,Avanzada,,13
+SIM-2025-1078,1,15-06-2026,primera,15,Iniciada,Terreno con problemas de acceso.,0
+SIM-2025-1078,1,15-06-2026,segunda,17,Iniciada,Obra paralizada por falta de materiales.,-2
+SIM-2026-1079,1,15-06-2026,primera,35,Iniciada,Se verificó avance conforme al cronograma.,5
+SIM-2026-1079,1,15-06-2026,segunda,38,Avanzada,Se verificó avance conforme al cronograma.,2
+SIM-2026-1082,2,15-06-2026,primera,49,Avanzada,,14
+SIM-2026-1082,2,15-06-2026,segunda,56,Avanzada,Se verificó avance conforme al cronograma.,7
+SIM-2026-1083,6,15-06-2026,primera,77,Avanzada,,13
+SIM-2026-1083,6,15-06-2026,segunda,86,Avanzada,,4
+SIM-2025-1084,1,15-06-2026,primera,74,Avanzada,,5
+SIM-2025-1084,1,15-06-2026,segunda,74,Avanzada,Obra próxima a finalizar.,7
+SIM-2025-1085,1,15-06-2026,primera,52,Avanzada,Se verificó avance conforme al cronograma.,11
+SIM-2025-1085,1,15-06-2026,segunda,59,Avanzada,Se verificó avance conforme al cronograma.,4
+SIM-2026-1086,2,15-06-2026,primera,51,Avanzada,Se verificó avance conforme al cronograma.,9
+SIM-2026-1086,2,15-06-2026,segunda,54,Avanzada,,6
+SIM-2026-1088,2,15-06-2026,primera,39,Avanzada,"Materiales en obra, trabajo activo.",12
+SIM-2026-1090,1,15-06-2026,primera,47,Avanzada,,10
+SIM-2026-1092,1,15-06-2026,primera,28,Iniciada,,4
+SIM-2026-1092,1,15-06-2026,segunda,36,Avanzada,,-4
+SIM-2025-1093,6,15-06-2026,primera,13,Iniciada,Equipo de trabajo reducido.,0
+SIM-2025-1094,1,15-06-2026,primera,24,Iniciada,,6
+SIM-2025-1094,1,15-06-2026,segunda,35,Iniciada,,-5
+SIM-2023-1097,3,15-06-2026,primera,38,Avanzada,Obra en progreso normal.,1
+SIM-2026-1102,1,15-06-2026,primera,0,Iniciada,,11
+SIM-2026-1102,1,15-06-2026,segunda,4,Iniciada,,1
+SIM-2026-1103,1,15-06-2026,primera,5,Iniciada,Sin actividad registrada en visita.,-2
+SIM-2025-1104,5,15-06-2026,primera,21,Iniciada,Terreno con problemas de acceso.,-1
+SIM-2026-1105,6,15-06-2026,primera,0,Iniciada,Obra paralizada por falta de materiales.,4
+SIM-2025-1106,1,15-06-2026,primera,58,Avanzada,,0
+SIM-2025-1106,1,15-06-2026,segunda,58,Avanzada,Obra en progreso normal.,3
+SIM-2026-1110,1,15-06-2026,primera,20,Iniciada,Equipo de trabajo reducido.,12
+SIM-2026-1111,1,15-06-2026,primera,34,Iniciada,Obra en progreso normal.,10
+SIM-2026-1111,1,15-06-2026,segunda,34,Iniciada,,10
+SIM-2026-1113,1,15-06-2026,primera,70,Avanzada,"Terminaciones en curso, sin observaciones.",8
+SIM-2026-1113,1,15-06-2026,segunda,82,Avanzada,,-4
+SIM-2025-1117,1,15-06-2026,primera,24,Iniciada,Equipo de trabajo reducido.,4
+SIM-2025-1117,1,15-06-2026,segunda,31,Iniciada,Se verificó avance conforme al cronograma.,-3
+SIM-2025-1128,6,15-06-2026,primera,4,Iniciada,,4
+SIM-2026-1130,1,15-06-2026,primera,9,Iniciada,,9
+SIM-2025-1132,2,15-06-2026,primera,6,Iniciada,Sin actividad registrada en visita.,10
+SIM-2025-1132,2,15-06-2026,segunda,9,Iniciada,,7
+SIM-2025-1134,1,15-06-2026,primera,100,Finalizada,Calidad de construcción satisfactoria.,-6
+SIM-2025-1134,1,15-06-2026,segunda,100,Finalizada,,5
+SIM-2025-1136,1,15-06-2026,primera,80,Avanzada,,-5
+SIM-2025-1138,2,15-06-2026,primera,59,Avanzada,,-7
+SIM-2026-1140,1,15-06-2026,primera,57,Avanzada,,4
+SIM-2026-1140,1,15-06-2026,segunda,63,Avanzada,Obra en progreso normal.,-2
+SIM-2024-1141,2,15-06-2026,primera,1,Iniciada,Sin actividad registrada en visita.,15
+SIM-2024-1141,2,15-06-2026,segunda,11,Iniciada,Equipo de trabajo reducido.,5
+SIM-2026-1145,6,15-06-2026,primera,0,Iniciada,Terreno con problemas de acceso.,10
+SIM-2026-1145,6,15-06-2026,segunda,0,Iniciada,Obra paralizada por falta de materiales.,7
+SIM-2026-1152,1,15-06-2026,primera,52,Avanzada,,12
+SIM-2026-1152,1,15-06-2026,segunda,65,Avanzada,"Materiales en obra, trabajo activo.",-1
+SIM-2025-1154,6,15-06-2026,primera,57,Avanzada,Se verificó avance conforme al cronograma.,-7
+SIM-2025-1158,1,15-06-2026,primera,0,Iniciada,,15
+SIM-2026-1159,6,15-06-2026,primera,0,Iniciada,Sin actividad registrada en visita.,5
+SIM-2026-1159,6,15-06-2026,segunda,6,Iniciada,,-5
+SIM-2025-1164,5,15-06-2026,primera,78,Avanzada,"Terminaciones en curso, sin observaciones.",3
+SIM-2026-1169,6,15-06-2026,primera,24,Iniciada,,1
+SIM-2026-1170,1,15-06-2026,primera,0,Iniciada,,8
+SIM-2026-1170,1,15-06-2026,segunda,3,Iniciada,Terreno con problemas de acceso.,-1
+SIM-2026-1173,1,15-06-2026,primera,56,Avanzada,,4
+SIM-2025-1175,5,15-06-2026,primera,69,Avanzada,Se verificó avance conforme al cronograma.,5
+SIM-2026-1176,1,15-06-2026,primera,89,Avanzada,,2
+SIM-2026-1176,1,15-06-2026,segunda,95,Avanzada,Calidad de construcción satisfactoria.,-4
+SIM-2025-1181,1,15-06-2026,primera,92,Avanzada,"Terminaciones en curso, sin observaciones.",-5
+SIM-2025-1181,1,15-06-2026,segunda,92,Avanzada,"Terminaciones en curso, sin observaciones.",9
+SIM-2025-1184,5,15-06-2026,primera,9,Iniciada,Terreno con problemas de acceso.,4
+SIM-2023-1185,1,15-06-2026,primera,74,Avanzada,"Terminaciones en curso, sin observaciones.",-5
+SIM-2026-1187,4,15-06-2026,primera,51,Avanzada,,3
+SIM-2026-1188,1,15-06-2026,primera,15,Iniciada,,0
+SIM-2026-1188,1,15-06-2026,segunda,15,Iniciada,,7
+SIM-2025-1190,1,15-06-2026,primera,60,Avanzada,Se verificó avance conforme al cronograma.,9
+SIM-2025-1190,1,15-06-2026,segunda,62,Avanzada,Se verificó avance conforme al cronograma.,7
+SIM-2026-1194,1,15-06-2026,primera,39,Avanzada,"Materiales en obra, trabajo activo.",-6
+SIM-2025-1195,2,15-06-2026,primera,79,Avanzada,,-8
+SIM-2025-1195,2,15-06-2026,segunda,79,Avanzada,,-1
+SIM-2026-1197,3,15-06-2026,primera,21,Iniciada,,-3
+SIM-2025-1198,3,15-06-2026,primera,9,Iniciada,,-5
+SIM-2025-1198,3,15-06-2026,segunda,9,Iniciada,Sin actividad registrada en visita.,3
+SIM-2025-1199,1,15-06-2026,primera,55,Avanzada,"Materiales en obra, trabajo activo.",5
+SIM-2025-1201,1,15-06-2026,primera,33,Iniciada,"Materiales en obra, trabajo activo.",9
+SIM-2025-1201,1,15-06-2026,segunda,42,Avanzada,Se verificó avance conforme al cronograma.,0
+SIM-2025-1203,1,15-06-2026,primera,15,Iniciada,Equipo de trabajo reducido.,-4
+SIM-2025-1203,1,15-06-2026,segunda,15,Iniciada,Terreno con problemas de acceso.,3
+SIM-2025-1208,3,15-06-2026,primera,10,Iniciada,,13
+SIM-2023-1209,1,15-06-2026,primera,5,Iniciada,,1
+SIM-2023-1209,1,15-06-2026,segunda,7,Iniciada,,-1
+SIM-2025-1211,1,15-06-2026,primera,89,Avanzada,Obra próxima a finalizar.,-6
+SIM-2025-1211,1,15-06-2026,segunda,89,Avanzada,Calidad de construcción satisfactoria.,9
+SIM-2024-1214,4,15-06-2026,primera,0,Iniciada,,7
+SIM-2023-1218,6,15-06-2026,primera,10,Iniciada,Sin actividad registrada en visita.,-6
+SIM-2025-1219,1,15-06-2026,primera,7,Iniciada,,1
+SIM-2026-1221,2,15-06-2026,primera,67,Avanzada,"Materiales en obra, trabajo activo.",-3
+SIM-2023-1222,1,15-06-2026,primera,97,Avanzada,,-6
+SIM-2023-1222,1,15-06-2026,segunda,97,Avanzada,,-5
+SIM-2025-1224,2,15-06-2026,primera,14,Iniciada,,-6
+SIM-2025-1224,2,15-06-2026,segunda,14,Iniciada,,2
+SIM-2026-1229,1,15-06-2026,primera,27,Iniciada,,14
+SIM-2026-1229,1,15-06-2026,segunda,39,Avanzada,"Materiales en obra, trabajo activo.",2
+SIM-2024-1231,1,15-06-2026,primera,17,Iniciada,Equipo de trabajo reducido.,-4
+SIM-2024-1231,1,15-06-2026,segunda,17,Iniciada,,2
+SIM-2026-1232,1,15-06-2026,primera,0,Iniciada,,14
+SIM-2024-1235,1,15-06-2026,primera,25,Iniciada,,14
+SIM-2024-1235,1,15-06-2026,segunda,35,Iniciada,,4
+SIM-2026-1236,1,15-06-2026,primera,15,Iniciada,Equipo de trabajo reducido.,5
+SIM-2026-1236,1,15-06-2026,segunda,17,Iniciada,,3
+SIM-2025-1238,5,15-06-2026,primera,0,Iniciada,Equipo de trabajo reducido.,5
+SIM-2025-1240,1,15-06-2026,primera,0,Iniciada,,7
+SIM-2025-1240,1,15-06-2026,segunda,9,Iniciada,Terreno con problemas de acceso.,-2
+SIM-2025-1241,2,15-06-2026,primera,22,Iniciada,Sin actividad registrada en visita.,11
+SIM-2026-1242,6,15-06-2026,primera,10,Iniciada,,0
+SIM-2026-1243,1,15-06-2026,primera,5,Iniciada,,10
+SIM-2025-1246,2,15-06-2026,primera,38,Avanzada,,-4
+SIM-2024-1248,4,15-06-2026,primera,52,Avanzada,,1
+SIM-2024-1248,4,15-06-2026,segunda,54,Avanzada,,-1
+SIM-2026-1250,1,15-06-2026,primera,36,Avanzada,,6
+SIM-2026-1250,1,15-06-2026,segunda,40,Avanzada,Obra en progreso normal.,2
+SIM-2025-1251,1,15-06-2026,primera,14,Iniciada,,11
+SIM-2025-1254,1,15-06-2026,primera,44,Avanzada,Obra en progreso normal.,-3
+SIM-2026-1257,1,15-06-2026,primera,3,Iniciada,Equipo de trabajo reducido.,10
+SIM-2026-1257,1,15-06-2026,segunda,15,Iniciada,Obra paralizada por falta de materiales.,-2
+SIM-2026-1259,1,15-06-2026,primera,59,Avanzada,Obra en progreso normal.,7
+SIM-2025-1260,4,15-06-2026,primera,82,Avanzada,,-3
+SIM-2025-1260,4,15-06-2026,segunda,83,Avanzada,,-4
+SIM-2024-1263,5,15-06-2026,primera,16,Iniciada,Obra paralizada por falta de materiales.,-4
+SIM-2026-1265,4,15-06-2026,primera,79,Avanzada,Calidad de construcción satisfactoria.,-8
+SIM-2026-1265,4,15-06-2026,segunda,79,Avanzada,Obra próxima a finalizar.,9
+SIM-2025-1266,1,15-06-2026,primera,13,Iniciada,,-8
+SIM-2025-1269,2,15-06-2026,primera,64,Avanzada,,9
+SIM-2024-1271,6,15-06-2026,primera,10,Iniciada,Obra paralizada por falta de materiales.,-5
+SIM-2026-1273,1,15-06-2026,primera,43,Avanzada,,4
+SIM-2026-1273,1,15-06-2026,segunda,45,Avanzada,,2
+SIM-2024-1274,3,15-06-2026,primera,2,Iniciada,,2
+SIM-2026-1275,1,15-06-2026,primera,18,Iniciada,,8
+SIM-2025-1277,4,15-06-2026,primera,34,Iniciada,,9
+SIM-2025-1277,4,15-06-2026,segunda,39,Avanzada,"Materiales en obra, trabajo activo.",4
+SIM-2024-1281,5,15-06-2026,primera,28,Iniciada,,13
+SIM-2024-1282,6,15-06-2026,primera,51,Avanzada,Se verificó avance conforme al cronograma.,-8
+SIM-2024-1283,6,15-06-2026,primera,39,Avanzada,,0
+SIM-2026-1285,1,15-06-2026,primera,75,Avanzada,,6
+SIM-2026-1285,1,15-06-2026,segunda,85,Avanzada,Calidad de construcción satisfactoria.,-4
+SIM-2024-1287,1,15-06-2026,primera,62,Avanzada,Obra en progreso normal.,0
+SIM-2025-1288,1,15-06-2026,primera,79,Avanzada,Obra próxima a finalizar.,3
+SIM-2026-1290,1,15-06-2026,primera,12,Iniciada,,-1
+SIM-2026-1290,1,15-06-2026,segunda,12,Iniciada,,9
+SIM-2023-1293,5,15-06-2026,primera,45,Avanzada,,11
+SIM-2025-1294,2,15-06-2026,primera,0,Iniciada,Obra paralizada por falta de materiales.,11
+SIM-2025-1294,2,15-06-2026,segunda,10,Iniciada,Equipo de trabajo reducido.,1
+SIM-2025-1295,1,15-06-2026,primera,12,Iniciada,Sin actividad registrada en visita.,-4
+SIM-2025-1295,1,15-06-2026,segunda,12,Iniciada,,9
+SIM-2025-1296,1,15-06-2026,primera,48,Avanzada,"Materiales en obra, trabajo activo.",9
+SIM-2025-1296,1,15-06-2026,segunda,59,Avanzada,"Materiales en obra, trabajo activo.",-2
+SIM-2025-1298,4,15-06-2026,primera,0,Iniciada,,7
+SIM-2025-1298,4,15-06-2026,segunda,12,Iniciada,Sin actividad registrada en visita.,-5
+SIM-2025-1300,1,15-06-2026,primera,3,Iniciada,,6
+SIM-2025-1300,1,15-06-2026,segunda,3,Iniciada,Equipo de trabajo reducido.,7
+SIM-2025-1304,1,15-06-2026,primera,11,Iniciada,Terreno con problemas de acceso.,-6
+SIM-2025-1304,1,15-06-2026,segunda,11,Iniciada,Terreno con problemas de acceso.,0
+SIM-2025-1306,2,15-06-2026,primera,13,Iniciada,,-8
+SIM-2026-1307,2,15-06-2026,primera,13,Iniciada,,-4
+SIM-2026-1308,3,15-06-2026,primera,7,Iniciada,Obra paralizada por falta de materiales.,8
+SIM-2024-1310,1,15-06-2026,primera,3,Iniciada,Equipo de trabajo reducido.,14
+SIM-2024-1310,1,15-06-2026,segunda,10,Iniciada,,7
+SIM-2025-1312,4,15-06-2026,primera,8,Iniciada,,-5
+SIM-2024-1313,1,15-06-2026,primera,15,Iniciada,Sin actividad registrada en visita.,-4
+SIM-2025-1319,3,15-06-2026,primera,52,Avanzada,,-4
+SIM-2024-1321,6,15-06-2026,primera,78,Avanzada,Calidad de construcción satisfactoria.,-6
+SIM-2024-1323,4,15-06-2026,primera,40,Avanzada,Obra en progreso normal.,15
+SIM-2024-1323,4,15-06-2026,segunda,49,Avanzada,,6
+SIM-2024-1326,5,15-06-2026,primera,80,Avanzada,Calidad de construcción satisfactoria.,-7
+SIM-2026-1328,1,15-06-2026,primera,30,Iniciada,Obra en progreso normal.,3
+SIM-2024-1330,1,15-06-2026,primera,26,Iniciada,Sin actividad registrada en visita.,15
+SIM-2024-1330,1,15-06-2026,segunda,36,Avanzada,Obra en progreso normal.,5
+SIM-2024-1331,2,15-06-2026,primera,100,Finalizada,,-2
+SIM-2024-1331,2,15-06-2026,segunda,100,Finalizada,,10
+SIM-2025-1332,1,15-06-2026,primera,0,Iniciada,,9
+SIM-2025-1338,1,15-06-2026,primera,17,Iniciada,Equipo de trabajo reducido.,-7
+SIM-2025-1338,1,15-06-2026,segunda,17,Iniciada,,3
+SIM-2025-1339,1,15-06-2026,primera,64,Avanzada,,-4
+SIM-2025-1339,1,15-06-2026,segunda,64,Avanzada,Obra en progreso normal.,6
+SIM-2025-1340,1,15-06-2026,primera,13,Iniciada,,3
+SIM-2024-1342,1,15-06-2026,primera,55,Avanzada,"Materiales en obra, trabajo activo.",-7
+SIM-2024-1342,1,15-06-2026,segunda,55,Avanzada,,-5
+SIM-2024-1344,1,15-06-2026,primera,18,Iniciada,,-5
+SIM-2025-1345,6,15-06-2026,primera,27,Iniciada,Obra paralizada por falta de materiales.,5
+SIM-2025-1348,3,15-06-2026,primera,13,Iniciada,Equipo de trabajo reducido.,6
+SIM-2025-1349,2,15-06-2026,primera,61,Avanzada,,-6
+SIM-2025-1350,2,15-06-2026,primera,100,Finalizada,,-8
+SIM-2025-1350,2,15-06-2026,segunda,100,Finalizada,,-3
+SIM-2025-1351,1,15-06-2026,primera,9,Iniciada,,1
+SIM-2025-1351,1,15-06-2026,segunda,9,Iniciada,Equipo de trabajo reducido.,4
+SIM-2023-1355,1,15-06-2026,primera,29,Iniciada,Equipo de trabajo reducido.,8
+SIM-2024-1357,6,15-06-2026,primera,9,Iniciada,Sin actividad registrada en visita.,0
+SIM-2025-1359,6,15-06-2026,primera,74,Avanzada,Calidad de construcción satisfactoria.,15
+SIM-2026-1363,6,15-06-2026,primera,89,Avanzada,,-4
+SIM-2026-1363,6,15-06-2026,segunda,89,Avanzada,,4
+SIM-2024-1365,1,15-06-2026,primera,72,Avanzada,,15
+SIM-2024-1365,1,15-06-2026,segunda,82,Avanzada,"Terminaciones en curso, sin observaciones.",5
+SIM-2026-1367,1,15-06-2026,primera,6,Iniciada,Equipo de trabajo reducido.,4
+SIM-2026-1367,1,15-06-2026,segunda,6,Iniciada,Terreno con problemas de acceso.,4
+SIM-2025-1368,1,15-06-2026,primera,57,Avanzada,,8
+SIM-2025-1369,1,15-06-2026,primera,39,Avanzada,Obra en progreso normal.,-4
+SIM-2025-1369,1,15-06-2026,segunda,39,Avanzada,,3
+SIM-2025-1370,2,15-06-2026,primera,1,Iniciada,Equipo de trabajo reducido.,15
+SIM-2025-1371,3,15-06-2026,primera,76,Avanzada,,14
+SIM-2025-1374,2,15-06-2026,primera,0,Iniciada,Equipo de trabajo reducido.,9
+SIM-2025-1374,2,15-06-2026,segunda,2,Iniciada,Terreno con problemas de acceso.,2
+SIM-2025-1376,6,15-06-2026,primera,12,Iniciada,,-4
+SIM-2025-1376,6,15-06-2026,segunda,12,Iniciada,Sin actividad registrada en visita.,-4
+SIM-2025-1381,1,15-06-2026,primera,56,Avanzada,,6
+SIM-2025-1381,1,15-06-2026,segunda,56,Avanzada,,6
+SIM-2025-1382,5,15-06-2026,primera,63,Avanzada,Obra en progreso normal.,10
+SIM-2025-1383,4,15-06-2026,primera,57,Avanzada,,2
+SIM-2025-1383,4,15-06-2026,segunda,63,Avanzada,"Materiales en obra, trabajo activo.",-4
+SIM-2024-1387,5,15-06-2026,primera,44,Avanzada,,-8
+SIM-2026-1389,5,15-06-2026,primera,34,Iniciada,,-6
+SIM-2025-1390,1,15-06-2026,primera,13,Iniciada,Obra paralizada por falta de materiales.,4
+SIM-2025-1390,1,15-06-2026,segunda,13,Iniciada,,4
+SIM-2024-1392,4,15-06-2026,primera,53,Avanzada,"Materiales en obra, trabajo activo.",4
+SIM-2024-1392,4,15-06-2026,segunda,62,Avanzada,"Materiales en obra, trabajo activo.",-5
+SIM-2026-1393,1,15-06-2026,primera,14,Iniciada,Terreno con problemas de acceso.,-1
+SIM-2026-1396,2,15-06-2026,primera,63,Avanzada,,-3
+SIM-2025-1401,4,15-06-2026,primera,46,Avanzada,,2
+SIM-2026-1403,4,15-06-2026,primera,55,Avanzada,Se verificó avance conforme al cronograma.,-7
+SIM-2026-1407,1,15-06-2026,primera,67,Avanzada,Obra en progreso normal.,-7
+SIM-2026-1407,1,15-06-2026,segunda,67,Avanzada,,0
+SIM-2025-1409,6,15-06-2026,primera,38,Avanzada,,12
+SIM-2025-1409,6,15-06-2026,segunda,41,Avanzada,,9
+SIM-2025-1413,1,15-06-2026,primera,94,Avanzada,"Terminaciones en curso, sin observaciones.",1
+SIM-2025-1413,1,15-06-2026,segunda,94,Avanzada,,9
+SIM-2024-1417,1,15-06-2026,primera,94,Avanzada,,3
+SIM-2024-1417,1,15-06-2026,segunda,94,Avanzada,,6
+SIM-2025-1420,1,15-06-2026,primera,32,Iniciada,Se verificó avance conforme al cronograma.,-6
+SIM-2025-1420,1,15-06-2026,segunda,32,Iniciada,,1
+SIM-2025-1421,1,15-06-2026,primera,57,Avanzada,"Materiales en obra, trabajo activo.",-8
+SIM-2025-1421,1,15-06-2026,segunda,57,Avanzada,Obra en progreso normal.,3
+SIM-2024-1424,1,15-06-2026,primera,51,Avanzada,,8
+SIM-2025-1425,1,15-06-2026,primera,23,Iniciada,,-6
+SIM-2024-1431,5,15-06-2026,primera,0,Iniciada,,11
+SIM-2024-1433,1,15-06-2026,primera,8,Iniciada,,3
+SIM-2024-1433,1,15-06-2026,segunda,8,Iniciada,,6
+SIM-2025-1435,2,15-06-2026,primera,25,Iniciada,Obra paralizada por falta de materiales.,-7
+SIM-2025-1435,2,15-06-2026,segunda,25,Iniciada,,8
+SIM-2025-1437,4,15-06-2026,primera,87,Avanzada,Obra próxima a finalizar.,10
+SIM-2025-1437,4,15-06-2026,segunda,89,Avanzada,,8
+SIM-2025-1441,1,15-06-2026,primera,41,Avanzada,,-6
+SIM-2025-1442,2,15-06-2026,primera,75,Avanzada,,-7
+SIM-2024-1444,6,15-06-2026,primera,0,Iniciada,,14
+SIM-2024-1448,1,15-06-2026,primera,88,Avanzada,,10
+SIM-2024-1448,1,15-06-2026,segunda,92,Avanzada,,6
+SIM-2025-1449,4,15-06-2026,primera,10,Iniciada,Sin actividad registrada en visita.,4
+SIM-2025-1452,1,15-06-2026,primera,43,Avanzada,"Materiales en obra, trabajo activo.",-8
+SIM-2025-1452,1,15-06-2026,segunda,43,Avanzada,Obra en progreso normal.,-5
+SIM-2026-1454,2,15-06-2026,primera,39,Avanzada,,-4
+SIM-2026-1454,2,15-06-2026,segunda,39,Avanzada,Se verificó avance conforme al cronograma.,-2
+SIM-2024-1456,2,15-06-2026,primera,100,Finalizada,,-7
+SIM-2026-1460,1,15-06-2026,primera,68,Avanzada,Obra en progreso normal.,-4
+SIM-2026-1460,1,15-06-2026,segunda,68,Avanzada,"Materiales en obra, trabajo activo.",-2
+SIM-2024-1463,1,15-06-2026,primera,35,Iniciada,,12
+SIM-2024-1463,1,15-06-2026,segunda,51,Avanzada,Obra en progreso normal.,-4
+SIM-2025-1464,2,15-06-2026,primera,17,Iniciada,,9
+SIM-2025-1464,2,15-06-2026,segunda,23,Iniciada,Equipo de trabajo reducido.,3
+SIM-2026-1466,1,15-06-2026,primera,6,Iniciada,Sin actividad registrada en visita.,-5
+SIM-2026-1466,1,15-06-2026,segunda,6,Iniciada,,-1
+SIM-2025-1467,3,15-06-2026,primera,59,Avanzada,Se verificó avance conforme al cronograma.,13
+SIM-2026-1475,5,15-06-2026,primera,26,Iniciada,,10
+SIM-2026-1477,1,15-06-2026,primera,33,Iniciada,,10
+SIM-2026-1477,1,15-06-2026,segunda,36,Avanzada,Obra en progreso normal.,7
+SIM-2025-1478,5,15-06-2026,primera,55,Avanzada,,-3
+SIM-2025-1481,4,15-06-2026,primera,95,Avanzada,Obra próxima a finalizar.,3
+SIM-2025-1481,4,15-06-2026,segunda,95,Avanzada,,9
+SIM-2026-1483,1,15-06-2026,primera,0,Iniciada,,14
+SIM-2026-1483,1,15-06-2026,segunda,0,Iniciada,Terreno con problemas de acceso.,9
+SIM-2026-1484,1,15-06-2026,primera,2,Iniciada,,-1
+SIM-2026-1484,1,15-06-2026,segunda,2,Iniciada,Equipo de trabajo reducido.,0
+SIM-2026-1485,1,15-06-2026,primera,6,Iniciada,,11
+SIM-2026-1485,1,15-06-2026,segunda,11,Iniciada,,6
+SIM-2024-1486,1,15-06-2026,primera,19,Iniciada,,-5
+SIM-2025-1487,1,15-06-2026,primera,72,Avanzada,Obra próxima a finalizar.,13
+SIM-2025-1487,1,15-06-2026,segunda,87,Avanzada,,-2
+SIM-2026-1488,1,15-06-2026,primera,13,Iniciada,Obra paralizada por falta de materiales.,3
+SIM-2025-1490,1,15-06-2026,primera,77,Avanzada,,6
+SIM-2025-1490,1,15-06-2026,segunda,85,Avanzada,Calidad de construcción satisfactoria.,-2
+SIM-2025-1491,2,15-06-2026,primera,12,Iniciada,,-7
+SIM-2023-1496,1,15-06-2026,primera,34,Iniciada,,14
+SIM-2023-1496,1,15-06-2026,segunda,41,Avanzada,,7
+SIM-2025-1498,1,15-06-2026,primera,50,Avanzada,Obra en progreso normal.,10
+SIM-2026-1499,1,15-06-2026,primera,76,Avanzada,,1

@@ -15,3 +15,9 @@ __pycache__/
 *.pyc
 .ipynb_checkpoints/
 .venv/
+
+# Docs internos de presentación (material de cátedra): se conservan en local
+# pero NO se versionan — el repo se comparte con el equipo de Desarrollo.
+docs/guia-presentaciones.md
+docs/guion-presentacion-hito2.md
+docs/prompt-pptx-hito2.md

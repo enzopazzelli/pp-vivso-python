@@ -71,14 +71,13 @@ vivso-python/
 │   ├── generar_figuras.py           # regenera las figuras del informe desde el dataset
 │   ├── figuras/                     # PNGs del informe (regenerables)
 │   ├── documentacion-analisis.md    # POR QUÉ de cada análisis — para entender y explicar
-│   ├── prompt-pptx-hito2.md         # Prompt de la presentación Hito 2 (plantilla para H3)
-│   ├── guion-presentacion-hito2.md  # Guion de defensa (formato subtexto)
+│   ├── para-desarrollo.md           # Guía de integración para el equipo de Programación (Java)
 │   └── afo.jpeg / tipos.jpeg        # Capturas del sistema legacy (evidencia de dominio)
 ├── ROADMAP.md             # Ruta de trabajo + bitácora del proceso (documento vivo)
 └── README.md              # Este archivo
 ```
 
-**Convenciones:** paleta estándar en todos los gráficos (índigo `#4f46e5` base + esmeralda/ámbar/rosa como semáforo); celdas markdown para interpretaciones; **código sencillo y claro (no austero) — toda función o paso no obvio lleva un comentario con su propósito o porqué**. Para presentaciones y guiones, es obligatorio [docs/guia-presentaciones.md](docs/guia-presentaciones.md) (lecciones de la devolución del Hito 2: As is → To be, resultados antes que métodos, el guion se entiende, no se memoriza).
+**Convenciones:** paleta estándar en todos los gráficos (índigo `#4f46e5` base + esmeralda/ámbar/rosa como semáforo); celdas markdown para interpretaciones; **código sencillo y claro (no austero) — toda función o paso no obvio lleva un comentario con su propósito o porqué**.
 
 ---
 

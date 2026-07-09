@@ -115,6 +115,7 @@ De las 1.500 obras, **901 están en obra** (Iniciada + Avanzada) y **599 termina
 (Finalizada + Adjudicada) → **tasa de finalización del 39,9%**.
 
 ![Viviendas por estado](figuras/01_estados.png)
+*Figura 1. Distribución de viviendas por estado (Iniciada / Avanzada / Finalizada / Adjudicada).*
 
 ### 4.2 Criterio de inclusión
 
@@ -123,6 +124,7 @@ y **Exclusión** (210). La presencia de obras con criterio Exclusión que muestr
 señal a vigilar: puede indicar errores de selección de beneficiario en el origen.
 
 ![Viviendas por criterio](figuras/02_criterio.png)
+*Figura 2. Viviendas por criterio de clasificación (Inclusión / Otro / Exclusión).*
 
 ### 4.3 Distribución del AFO
 
@@ -130,6 +132,7 @@ El AFO promedio es del **64,9%**. El histograma muestra obras repartidas a lo la
 rango con una acumulación en el 100% (las terminadas).
 
 ![Histograma del AFO](figuras/03_afo_hist.png)
+*Figura 3. Distribución del Avance Físico de Obra (AFO) sobre las 1.500 viviendas.*
 
 ### 4.4 Distribución geográfica
 
@@ -137,6 +140,7 @@ Las obras se concentran en los departamentos más poblados (Capital, Banda), per
 en los 18 departamentos. Esta distribución es la que determina la logística de visitas técnicas.
 
 ![Viviendas por departamento](figuras/04_departamentos.png)
+*Figura 4. Viviendas por departamento — los 18 departamentos de la provincia.*
 
 ### 4.5 Nivel de riesgo (primer diagnóstico)
 
@@ -144,6 +148,7 @@ en los 18 departamentos. Esta distribución es la que determina la logística de
 sin riesgo. El detalle del modelo que produce esta clasificación está en la sección 6.
 
 ![Nivel de riesgo](figuras/05_riesgo.png)
+*Figura 5. Viviendas activas por nivel de riesgo (alto / medio / sin riesgo).*
 
 ---
 
@@ -168,6 +173,7 @@ tipo I. Resultado: **F = 1,57, p = 0,21** → no hay diferencia estadísticament
 (de hecho las rurales promedian 161 días, menos que las urbanas con 170).
 
 ![Duración por tipo de vivienda](figuras/07_duracion_tipo.png)
+*Figura 6. Duración de obra (días) por tipo de vivienda — Urbana / Rural / Económica.*
 
 **Implicancia metodológica:** confirmar o descartar esta relación de forma definitiva requiere
 **datos reales** — el generador sintético no codificó esa diferencia. Queda como hipótesis a
@@ -197,6 +203,7 @@ el número ante una ONG**. La figura muestra cómo las dos líneas (90 días y 8
 limpiamente las tres bandas de riesgo.
 
 ![Modelo de riesgo](figuras/06_modelo_riesgo.png)
+*Figura 7. Umbrales del modelo de riesgo: 90 días de plazo × % de avance.*
 
 **Hallazgo estructural:** el atraso no es la excepción sino la norma. El **85,1% de las obras
 terminadas superó los 90 días** (duración media real **167 días**, casi el doble del plazo) y
@@ -211,29 +218,48 @@ activa** (el primer rubro que no llegó al 98%). El cuello de botella del progra
 estructural más pesada.
 
 ![Cuello de botella](figuras/08_cuello_botella.png)
+*Figura 8. Obras activas por etapa constructiva (rubro AFO) donde están bloqueadas.*
 
 Como la construcción es responsabilidad de la **organización gestora** (el ministerio no manda
 cuadrillas), este dato permite reclamar con **precisión de etapa** a cada gestora y focalizar
 las visitas de verificación, en lugar de solo saber que "la obra no avanza".
 
-### 6.3 Confiabilidad de las ONGs (sobre-reporte y cobertura)
+### 6.3 Cuello de botella administrativo (actas)
+
+El segundo cuello de botella del programa no es constructivo: una obra puede estar **100%
+construida** y seguir sin entregarse. El estado `Finalizada` significa "la obra terminó"; para
+pasar a `Adjudicada` (entregada a la familia) falta tramitar el **acta de finalización**, y ese
+trámite se demora por falta de seguimiento.
+
+De las **329 obras en estado Finalizada, 148 (45%) tienen el acta atascada** — más de 6 meses
+esperando trámite, con una espera promedio de **~365 días** dentro de ese grupo (~204 días en
+promedio si se cuentan todas las finalizadas, atascadas o no).
+
+**Por qué importa distinguir los dos cuellos de botella:** se resuelven distinto. El
+constructivo (sección 6.2) necesita materiales o cuadrillas de la gestora; el administrativo se
+resuelve **destrabando papeles** — es la intervención más rápida y barata que tiene el
+ministerio a mano, y hoy nadie la está midiendo.
+
+### 6.4 Confiabilidad de las ONGs (sobre-reporte y cobertura)
 
 Cruzando las visitas técnicas con el avance reportado por las ONGs surge la **discrepancia**
 (`diferencia_ong` = reportado − verificado). El **61% de las visitas detecta sobre-reporte**
 (la ONG reporta más avance del verificado), con una media de **+3,15 puntos** y picos de **+15**.
 
 ![Confiabilidad por ONG](figuras/09_ong_confiabilidad.png)
+*Figura 9. Sobre-reporte y cobertura de verificación por ONG gestora.*
 
 El caso más crítico no es de sobre-reporte sino de **falta total de control**: la **MUTUAL
 PROGRESO FAMILIAR tiene 0% de sus obras verificadas** (0 de 414) — está en estado FINALIZADA y
 su avance nunca pasó por una visita técnica. Las otras dos ONGs rondan el 70% de cobertura.
 
-### 6.4 Síntesis de indicadores
+### 6.5 Síntesis de indicadores
 
-Los siete KPIs operativos (tasa de finalización, obras en riesgo alto/medio, tiempo promedio,
-rendimiento por ONG, cobertura geográfica y etapa cuello de botella) están materializados en el
-dashboard y desarrollados en [documentacion-analisis.md](documentacion-analisis.md) §Notebook 04.
-La regla de diseño es estricta: **un KPI que no habilita una decisión no entra**.
+Siete KPIs operativos están materializados en el dashboard y desarrollados en
+[documentacion-analisis.md](documentacion-analisis.md) §Notebook 04: tasa de finalización,
+obras en riesgo (alto/medio), tiempo promedio de atraso, **actas atascadas**, rendimiento y
+confiabilidad por ONG, etapa del cuello de botella constructivo y cobertura geográfica. La regla
+de diseño es estricta: **un KPI que no habilita una decisión no entra**.
 
 ---
 
@@ -247,12 +273,15 @@ La regla de diseño es estricta: **un KPI que no habilita una decisión no entra
 | **Priorización de visitas** | El técnico elige por cercanía o criterio propio | Cola ordenada por riesgo; **71 obras en riesgo alto sin ninguna visita** quedan visibles |
 | **Control de ONGs** | El avance reportado se acepta sin contraste | Se mide el sobre-reporte (**+3,15 pts, 61% de visitas**) y la cobertura (**una ONG al 0%**) |
 | **Diagnóstico de obra** | "La obra no avanza" | "Está trabada en *Mampostería hasta dintel*" (184 obras) |
+| **Entrega de vivienda terminada** | Nadie lo mide; se descubre cuando reclama la familia | **148 actas atascadas** (45% de las finalizadas) visibles con días de espera |
 | **Reporte de gestión** | Narrativo y subjetivo | KPIs concretos: 39,9% finalización · 316 en riesgo alto · 167 días promedio |
 
 ### 7.2 Hallazgos principales
 
 1. El **atraso es estructural**, no excepcional: 85% de las terminadas superó el plazo de 90 días.
-2. Existe un **cuello de botella constructivo identificable** (mampostería) que concentra los bloqueos.
+2. Hay **dos cuellos de botella distintos, y se resuelven distinto**: el constructivo
+   (mampostería, 184 obras) necesita materiales o cuadrillas de la gestora; el administrativo
+   (148 actas atascadas, 45% de las finalizadas) se resuelve destrabando trámites.
 3. Hay **sobre-reporte sistemático** de las ONGs y una organización **sin ningún control**.
 4. El criterio de inclusión y el tipo de vivienda **no explican** el avance ni la duración en
    estos datos — el atraso es transversal (resultado honesto, a re-evaluar con datos reales).

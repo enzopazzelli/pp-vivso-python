@@ -18,13 +18,6 @@ scikit-learn>=1.4
 matplotlib>=3.8
 seaborn>=0.13
 
-# OCR (WS4 — PP3): se reactivan cuando se trabaje el pipeline de documentos.
-# Se quitaron del deploy porque opencv-python rompe el build en Streamlit Cloud
-# (requiere libGL) y el dashboard no las usa.
-# opencv-python>=4.9
-# pytesseract>=0.3
-# Pillow>=10.0
-
 # Notebooks: corren en Google Colab (no hacen falta localmente ni en el deploy).
 # jupyter
 # ipykernel

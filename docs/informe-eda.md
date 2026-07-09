@@ -6,10 +6,10 @@
 **Entidad:** Subsecretaría de Promoción Humana — Ministerio de Desarrollo Social, Santiago del Estero
 **Fecha:** junio 2026
 
-> Este informe consolida en un único documento el análisis exploratorio del programa de
-> viviendas sociales: dataset, preprocesamiento, hallazgos con figuras, modelo de riesgo e
-> indicadores de gestión. El detalle del *por qué* de cada decisión metodológica está en
-> [documentacion-analisis.md](documentacion-analisis.md); el prototipo funcionando, en `dashboard/`.
+> Este informe consolida el análisis exploratorio del programa de viviendas sociales: dataset,
+> preprocesamiento, hallazgos univariados y bivariados con tablas de apoyo, modelo de riesgo e
+> indicadores de gestión. Es un documento autocontenido: todas las cifras se calculan
+> directamente sobre el dataset y pueden reproducirse con los pasos de la sección 8.
 
 ---
 
@@ -35,17 +35,17 @@ GEDO) y en planillas de papel. El problema central es de **visibilidad y control
 1. Caracterizar el estado del programa con datos estructurados (no narrativos).
 2. Construir un **modelo de riesgo transparente** que priorice qué obras atender primero.
 3. Producir **indicadores de gestión accionables** (cada uno habilita una decisión concreta).
-4. Entregar un **prototipo funcionando** (dashboard) que ponga el análisis frente a cada rol.
+4. Entregar un **prototipo funcionando** (dashboard interactivo) que ponga el análisis frente a
+   cada rol.
 
 ### 1.3 Encuadre metodológico
 
-El proyecto combina tres tipos de solución de la cátedra:
+El proyecto combina dos tipos de solución de la cátedra:
 
 | Tipo de solución | Componente en VIVSO |
 |---|---|
-| **Panel** (tablero de indicadores para dirección pública) | Dashboard Streamlit con KPIs, mapa de riesgo y vistas por rol |
-| **Pipeline** (ETL reproducible) | `etl/` + `synthetic/` → base local → datasets procesados |
-| **Visión por computadora** (prototipo, PP3) | OCR de formularios de relevamiento (OpenCV + Tesseract) |
+| **Panel** (tablero de indicadores para dirección pública) | Dashboard con KPIs, mapa de riesgo y vistas por rol |
+| **Pipeline** (ETL reproducible) | Extracción y generación sintética → base local → datasets procesados |
 
 El análisis cubre las etapas **3 (Preprocesamiento), 4 (EDA) y 5 (Modelo)** del mapa de la
 práctica.
@@ -93,8 +93,8 @@ entorno (`API → MySQL → CSV sintético`) sin tocar una línea de análisis.
 ## 3. Preprocesamiento (etapa 3)
 
 El dataset crudo no es directamente analizable: fechas como texto, categóricas como strings y
-escalas numéricas dispares. El notebook `02_normalizacion` produce un dataset procesado nuevo
-(no modifica el original) con estas transformaciones, cada una justificada:
+escalas numéricas dispares. El preprocesamiento produce un dataset procesado nuevo (no modifica
+el original) con estas transformaciones, cada una justificada:
 
 | Transformación | Justificación técnica | Justificación de negocio |
 |---|---|---|
@@ -114,8 +114,13 @@ escalas numéricas dispares. El notebook `02_normalizacion` produce un dataset p
 De las 1.500 obras, **901 están en obra** (Iniciada + Avanzada) y **599 terminadas**
 (Finalizada + Adjudicada) → **tasa de finalización del 39,9%**.
 
-![Viviendas por estado](figuras/01_estados.png)
-*Figura 1. Distribución de viviendas por estado (Iniciada / Avanzada / Finalizada / Adjudicada).*
+| Estado | Cantidad | % del total |
+|---|---:|---:|
+| Iniciada | 409 | 27,3% |
+| Avanzada | 492 | 32,8% |
+| Finalizada | 329 | 21,9% |
+| Adjudicada | 270 | 18,0% |
+| **Total** | **1.500** | **100,0%** |
 
 ### 4.2 Criterio de inclusión
 
@@ -123,32 +128,62 @@ Predomina **Inclusión** (871 obras, el caso típico de intervención), seguido 
 y **Exclusión** (210). La presencia de obras con criterio Exclusión que muestran avance es una
 señal a vigilar: puede indicar errores de selección de beneficiario en el origen.
 
-![Viviendas por criterio](figuras/02_criterio.png)
-*Figura 2. Viviendas por criterio de clasificación (Inclusión / Otro / Exclusión).*
+| Criterio | Cantidad | % del total |
+|---|---:|---:|
+| Inclusión | 871 | 58,1% |
+| Otro | 419 | 27,9% |
+| Exclusión | 210 | 14,0% |
 
 ### 4.3 Distribución del AFO
 
-El AFO promedio es del **64,9%**. El histograma muestra obras repartidas a lo largo de todo el
-rango con una acumulación en el 100% (las terminadas).
+El AFO promedio es del **64,9%** (desvío estándar 35,7 puntos; mediana 78%). La distribución no
+es uniforme: hay una fuerte concentración de obras recién iniciadas (0–20% de avance) y una
+concentración aún mayor de obras cercanas o iguales a 100% (las terminadas).
 
-![Histograma del AFO](figuras/03_afo_hist.png)
-*Figura 3. Distribución del Avance Físico de Obra (AFO) sobre las 1.500 viviendas.*
+| Rango de AFO | Cantidad de obras | % del total |
+|---|---:|---:|
+| 0–20% | 325 | 21,7% |
+| 20–40% | 123 | 8,2% |
+| 40–60% | 136 | 9,1% |
+| 60–80% | 190 | 12,7% |
+| 80–100% | 726 | 48,4% |
 
 ### 4.4 Distribución geográfica
 
 Las obras se concentran en los departamentos más poblados (Capital, Banda), pero hay presencia
 en los 18 departamentos. Esta distribución es la que determina la logística de visitas técnicas.
 
-![Viviendas por departamento](figuras/04_departamentos.png)
-*Figura 4. Viviendas por departamento — los 18 departamentos de la provincia.*
+| Departamento | Obras | % del total |
+|---|---:|---:|
+| Capital | 340 | 22,7% |
+| Banda | 255 | 17,0% |
+| Silípica | 106 | 7,1% |
+| Robles | 105 | 7,0% |
+| Choya | 81 | 5,4% |
+| Jiménez | 75 | 5,0% |
+| Moreno | 65 | 4,3% |
+| Mitre | 56 | 3,7% |
+| Figueroa | 55 | 3,7% |
+| General Taboada | 52 | 3,5% |
+| Aguirre | 45 | 3,0% |
+| Guasayán | 43 | 2,9% |
+| Ojo de Agua | 41 | 2,7% |
+| Atamisqui | 41 | 2,7% |
+| Copo | 38 | 2,5% |
+| Rivadavia | 36 | 2,4% |
+| Salavina | 35 | 2,3% |
+| Pellegrini | 31 | 2,1% |
 
 ### 4.5 Nivel de riesgo (primer diagnóstico)
 
-**316 obras (21%) están en riesgo alto** y 204 (14%) en riesgo medio. Casi dos tercios están
+**316 obras (21,1%) están en riesgo alto** y 204 (13,6%) en riesgo medio. Casi dos tercios están
 sin riesgo. El detalle del modelo que produce esta clasificación está en la sección 6.
 
-![Nivel de riesgo](figuras/05_riesgo.png)
-*Figura 5. Viviendas activas por nivel de riesgo (alto / medio / sin riesgo).*
+| Nivel de riesgo | Cantidad | % del total |
+|---|---:|---:|
+| Alto | 316 | 21,1% |
+| Medio | 204 | 13,6% |
+| Sin riesgo (bajo) | 980 | 65,3% |
 
 ---
 
@@ -169,11 +204,16 @@ es transversal y no se concentra en un tipo de beneficiario.
 
 Hipótesis: las viviendas rurales tardarían más por dificultad de acceso. Se aplicó **ANOVA**
 (tres grupos: Urbana/Rural/Económica) en lugar de t-tests múltiples para no inflar el error
-tipo I. Resultado: **F = 1,57, p = 0,21** → no hay diferencia estadísticamente significativa
-(de hecho las rurales promedian 161 días, menos que las urbanas con 170).
+tipo I sobre las 599 obras terminadas (única población con duración real conocida).
 
-![Duración por tipo de vivienda](figuras/07_duracion_tipo.png)
-*Figura 6. Duración de obra (días) por tipo de vivienda — Urbana / Rural / Económica.*
+| Tipo de vivienda | Obras terminadas | Duración media (días) |
+|---|---:|---:|
+| Urbana | 332 | 170,4 |
+| Rural | 215 | 161,3 |
+| Económica | 52 | 174,2 |
+
+Resultado: **F = 1,57, p = 0,21** → no hay diferencia estadísticamente significativa (de hecho
+las rurales promedian menos días que las urbanas).
 
 **Implicancia metodológica:** confirmar o descartar esta relación de forma definitiva requiere
 **datos reales** — el generador sintético no codificó esa diferencia. Queda como hipótesis a
@@ -199,11 +239,9 @@ ministerio priorizar la supervisión de esos códigos desde el inicio.
 - 🟢 **Sin riesgo:** el resto.
 
 Se eligió una **regla y no un modelo de ML** a propósito: el ministerio debe poder **explicar
-el número ante una ONG**. La figura muestra cómo las dos líneas (90 días y 80%) separan
-limpiamente las tres bandas de riesgo.
-
-![Modelo de riesgo](figuras/06_modelo_riesgo.png)
-*Figura 7. Umbrales del modelo de riesgo: 90 días de plazo × % de avance.*
+el número ante una ONG**. Los dos umbrales (90 días de plazo y 80% de avance) separan
+limpiamente las tres bandas: por debajo de 90 días ninguna obra activa entra en riesgo;
+superado ese plazo, el nivel de avance divide entre riesgo medio (≥30%) y riesgo alto (<30%).
 
 **Hallazgo estructural:** el atraso no es la excepción sino la norma. El **85,1% de las obras
 terminadas superó los 90 días** (duración media real **167 días**, casi el doble del plazo) y
@@ -217,8 +255,23 @@ activa** (el primer rubro que no llegó al 98%). El cuello de botella del progra
 **184 obras activas están trabadas en "Mampostería hasta dintel"** (rubro 3), la etapa
 estructural más pesada.
 
-![Cuello de botella](figuras/08_cuello_botella.png)
-*Figura 8. Obras activas por etapa constructiva (rubro AFO) donde están bloqueadas.*
+| Rubro (etapa constructiva) | Obras activas | % de las 901 activas |
+|---|---:|---:|
+| 3 · Mampostería hasta dintel | 184 | 20,4% |
+| 2 · Excavación e impermeabilización | 95 | 10,5% |
+| 10 · Carpintería | 93 | 10,3% |
+| 6 · Revoque interior | 80 | 8,9% |
+| 12 · Instalación eléctrica | 69 | 7,7% |
+| 4 · Mampostería cerámico/Block | 69 | 7,7% |
+| 11 · Instalación de agua | 58 | 6,4% |
+| 7 · Revoque exterior | 49 | 5,4% |
+| 13 · Instalación sanitaria | 48 | 5,3% |
+| 8 · Cielorraso con aislante térmico | 33 | 3,7% |
+| 9 · Construcción de cielorrasos | 33 | 3,7% |
+| 14 · Revestimiento exterior | 31 | 3,4% |
+| 5 · Encadenado | 27 | 3,0% |
+| 15 · Varios | 18 | 2,0% |
+| 1 · Terreno y limpieza | 14 | 1,6% |
 
 Como la construcción es responsabilidad de la **organización gestora** (el ministerio no manda
 cuadrillas), este dato permite reclamar con **precisión de etapa** a cada gestora y focalizar
@@ -243,23 +296,41 @@ ministerio a mano, y hoy nadie la está midiendo.
 ### 6.4 Confiabilidad de las ONGs (sobre-reporte y cobertura)
 
 Cruzando las visitas técnicas con el avance reportado por las ONGs surge la **discrepancia**
-(`diferencia_ong` = reportado − verificado). El **61% de las visitas detecta sobre-reporte**
-(la ONG reporta más avance del verificado), con una media de **+3,15 puntos** y picos de **+15**.
+(`diferencia_ong` = reportado − verificado). El **60,3% de las visitas detecta sobre-reporte**
+(la ONG reporta más avance del verificado), con una media de **+3,12 puntos** y picos de **+15**.
 
-![Confiabilidad por ONG](figuras/09_ong_confiabilidad.png)
-*Figura 9. Sobre-reporte y cobertura de verificación por ONG gestora.*
+| ONG | Sobre-reporte medio (puntos de AFO) | Cobertura de verificación |
+|---|---:|---:|
+| Coop. de Trabajo San Antonio | +3,24 | 70,2% |
+| Asoc. Civil Construir Juntos | +3,07 | 72,3% |
+| Mutual Progreso Familiar | sin verificación | 0,0% |
 
-El caso más crítico no es de sobre-reporte sino de **falta total de control**: la **MUTUAL
-PROGRESO FAMILIAR tiene 0% de sus obras verificadas** (0 de 414) — está en estado FINALIZADA y
+El caso más crítico no es de sobre-reporte sino de **falta total de control**: la **Mutual
+Progreso Familiar tiene 0% de sus obras verificadas** (0 de 414) — está en estado Finalizada y
 su avance nunca pasó por una visita técnica. Las otras dos ONGs rondan el 70% de cobertura.
 
 ### 6.5 Síntesis de indicadores
 
-Siete KPIs operativos están materializados en el dashboard y desarrollados en
-[documentacion-analisis.md](documentacion-analisis.md) §Notebook 04: tasa de finalización,
-obras en riesgo (alto/medio), tiempo promedio de atraso, **actas atascadas**, rendimiento y
-confiabilidad por ONG, etapa del cuello de botella constructivo y cobertura geográfica. La regla
-de diseño es estricta: **un KPI que no habilita una decisión no entra**.
+El programa se resume en siete KPIs operativos, cada uno pensado para habilitar una decisión
+concreta (regla de diseño estricta: **un KPI que no habilita una decisión no entra**):
+
+1. **Tasa de finalización** — % de obras completadas sobre el total. Habilita reportar avance
+   al gobierno provincial con un número concreto en lugar de un relato.
+2. **Obras en riesgo alto** — vencidas (>90 días) y avance <30%. Habilita priorizar visitas
+   técnicas y activar el protocolo de seguimiento de la ONG responsable.
+3. **Obras en riesgo medio** — vencidas y avance 30–80%. Habilita seguimiento preventivo antes
+   de que la obra escale a riesgo alto.
+4. **Tiempo promedio de ejecución** (solo obras terminadas, para no sesgar con obras en curso)
+   — habilita comparar el desempeño de cada ONG contra el promedio del programa.
+5. **Rendimiento por ONG** — avance, riesgo y días promedio por organización. Habilita
+   decisiones de pago, frecuencia de visitas o revisión contractual.
+6. **Cobertura geográfica activa** — obras en curso por departamento. Habilita la planificación
+   de recorridos técnicos.
+7. **Etapa cuello de botella** — rubro constructivo donde se acumulan más obras activas.
+   Habilita el reclamo a la gestora con precisión de etapa.
+
+Estos KPIs están materializados en un prototipo funcional (dashboard interactivo) con vistas
+diferenciadas por rol: subsecretario, jefe de área técnica y técnico individual.
 
 ---
 
@@ -271,7 +342,7 @@ de diseño es estricta: **un KPI que no habilita una decisión no entra**.
 |---|---|---|
 | **Visibilidad** | 3 sistemas desconectados + papel | Panel único: 1.500 obras y mapa de riesgo en un pantallazo |
 | **Priorización de visitas** | El técnico elige por cercanía o criterio propio | Cola ordenada por riesgo; **71 obras en riesgo alto sin ninguna visita** quedan visibles |
-| **Control de ONGs** | El avance reportado se acepta sin contraste | Se mide el sobre-reporte (**+3,15 pts, 61% de visitas**) y la cobertura (**una ONG al 0%**) |
+| **Control de ONGs** | El avance reportado se acepta sin contraste | Se mide el sobre-reporte (**+3,12 pts, 60% de visitas**) y la cobertura (**una ONG al 0%**) |
 | **Diagnóstico de obra** | "La obra no avanza" | "Está trabada en *Mampostería hasta dintel*" (184 obras) |
 | **Entrega de vivienda terminada** | Nadie lo mide; se descubre cuando reclama la familia | **148 actas atascadas** (45% de las finalizadas) visibles con días de espera |
 | **Reporte de gestión** | Narrativo y subjetivo | KPIs concretos: 39,9% finalización · 316 en riesgo alto · 167 días promedio |
@@ -288,22 +359,48 @@ de diseño es estricta: **un KPI que no habilita una decisión no entra**.
 
 ### 7.3 Trabajo futuro (PP3)
 
-- Integración con la base real (`vivso3`) y validación de los hallazgos contra datos reales.
-- Materializar los indicadores en tablas `cd_*` consumibles por cualquier front (sin notebooks).
-- Prototipo OCR (OpenCV + Tesseract) para la carga de formularios de relevamiento.
+- Integración con la base real y validación de los hallazgos contra datos reales.
+- Materializar los indicadores en tablas de datos consumibles por cualquier front (sin depender
+  de notebooks para su cálculo).
 
 ---
 
 ## 8. Reproducibilidad
 
+Todas las cifras de este informe se calculan directamente sobre el dataset generado por el
+pipeline sintético; no hay números editados a mano. Para reproducirlas de punta a punta:
+
 ```powershell
-python -m db.setup            # crea tablas + catálogo de rubros
-python -m synthetic.generate  # genera el dataset (1.500 viviendas + visitas + rubros)
-python docs/generar_figuras.py  # regenera las figuras de este informe en docs/figuras/
-streamlit run dashboard/app.py  # levanta el prototipo
+python -m db.setup              # crea las tablas y el catálogo de rubros
+python -m synthetic.generate    # genera el dataset (1.500 viviendas + visitas + rubros)
+jupyter nbconvert --to notebook --execute --inplace colab/01_exploracion.ipynb
+jupyter nbconvert --to notebook --execute --inplace colab/02_normalizacion.ipynb
+jupyter nbconvert --to notebook --execute --inplace colab/03_correlaciones.ipynb
+jupyter nbconvert --to notebook --execute --inplace colab/04_indicadores.ipynb
+jupyter nbconvert --to notebook --execute --inplace colab/05_tecnicos.ipynb
+streamlit run dashboard/app.py  # levanta el prototipo interactivo
 ```
 
-Todas las figuras de este documento se generan automáticamente desde el dataset con
-[generar_figuras.py](generar_figuras.py); no hay imágenes editadas a mano. Glosario de términos
-(AFO, rubro, etapa activa, criterio, ANOVA, etc.) en
-[documentacion-analisis.md](documentacion-analisis.md) §Glosario.
+Requisitos: Python 3.13, entorno virtual con `pandas`, `numpy`, `scipy`, `scikit-learn`,
+`jupyter` y `streamlit` instalados. La generación sintética es determinística por semilla, por
+lo que dos ejecuciones producen el mismo dataset y, por lo tanto, las mismas cifras reportadas
+aquí.
+
+---
+
+## 9. Glosario
+
+| Término | Significado |
+|---|---|
+| **AFO** | Avance Físico de Obra. Porcentaje de completitud de una vivienda, calculado como suma ponderada de los 15 rubros constructivos. |
+| **Rubro** | Cada una de las 15 etapas de construcción que componen el AFO. Tienen pesos distintos y son estrictamente secuenciales. |
+| **Etapa activa** | El rubro donde está actualmente detenida una obra — el primero de la secuencia que no llegó al 98%. |
+| **Cuello de botella** | La etapa donde se concentra la mayor cantidad de obras activas simultáneamente. |
+| **Criterio** | Macrocategoría del código de clasificación: Inclusión (apta), Exclusión (rechazada), Otro (caso especial). |
+| **Clasificación** | Código de dos caracteres (1a, 2b, 5g, etc.) que describe el tipo de vivienda según el sistema VISOC. |
+| **Nivel de riesgo** | Clasificación calculada por el pipeline: alto (vencida >90 días y AFO <30%), medio (vencida >90 días y AFO 30–80%), bajo (resto). |
+| **Discrepancia ONG vs. técnico** | Diferencia entre el avance que reporta la ONG y el que verifica el técnico en la visita. Positivo = ONG sobreestimó. |
+| **Cobertura de visitas** | Porcentaje de obras asignadas (o de una ONG) que recibieron al menos una visita técnica. |
+| **ANOVA** | Analysis of Variance. Test estadístico que evalúa si las medias de más de dos grupos son significativamente distintas. |
+| **MinMaxScaler** | Técnica de normalización que lleva todas las variables numéricas al rango [0,1] para que ninguna domine por su magnitud. |
+| **VISOC** | Sistema legacy del ministerio que registraba las viviendas sociales antes de VIVSO. Define los 15 códigos de clasificación. |

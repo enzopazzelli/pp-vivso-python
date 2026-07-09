@@ -5,7 +5,7 @@
 **Entidad:** Subsecretaría de Promoción Humana — Ministerio de Desarrollo Social, Santiago del Estero
 
 > Este README es el documento de traspaso del proyecto: explica qué hay, cómo se corre y qué sigue.
-> La planificación detallada está en [ROADMAP.md](ROADMAP.md). El **Informe EDA** (entregable del Hito 3) está en [docs/informe-eda.md](docs/informe-eda.md); la explicación del *por qué* de cada análisis y decisión, en [docs/documentacion-analisis.md](docs/documentacion-analisis.md).
+> El **Informe EDA** (entregable del Hito 3) está en [docs/informe-eda.md](docs/informe-eda.md); la explicación del *por qué* de cada análisis y decisión, en [docs/documentacion-analisis.md](docs/documentacion-analisis.md).
 
 ---
 
@@ -39,7 +39,7 @@ Sin esto, el código no se entiende. Son las reglas del programa real:
 - **Plazo contractual de construcción: 90 días** (confirmado por el área). Es la constante `PLAZO_CONSTRUCCION_DIAS` en `synthetic/generate.py` — única fuente de verdad. Hallazgo clave: ~85% de las obras terminadas lo supera.
 - **Modelo de riesgo (regla transparente, no caja negra):** obra activa que superó los 90 días → 🔴 alto si avance < 30% · 🟡 medio si 30–80% · 🟢 bajo el resto. Es una regla y no ML a propósito: el ministerio debe poder explicar el número ante una ONG.
 - **Los dos cuellos de botella:** el **constructivo** (la obra se traba en una etapa, típicamente mampostería) y el **administrativo** (obra 100% construida en estado `Finalizada` esperando el **acta de finalización** para pasar a `Adjudicada` — se demora por falta de seguimiento).
-- **Regla de visitas:** máximo 2 visitas técnicas por obra. ~70% de las obras activas no tiene ninguna → el avance reportado por las ONGs está mayormente sin verificar. De ahí salen el score de priorización de visitas y la alerta de sobre-reporte.
+- **Regla de visitas:** máximo 2 visitas técnicas por obra. **203 de 901 obras activas (22,5%) no tiene ninguna** — con cobertura muy dispareja entre técnicos (del 40% al 90% según el caso, ver `COBERTURA_POR_TECNICO` en `synthetic/generate.py`) — por lo que una porción del avance reportado por las ONGs queda sin verificar. De ahí salen el score de priorización de visitas y la alerta de sobre-reporte.
 
 ---
 
@@ -73,7 +73,6 @@ vivso-python/
 │   ├── documentacion-analisis.md    # POR QUÉ de cada análisis — para entender y explicar
 │   ├── para-desarrollo.md           # Guía de integración para el equipo de Programación (Java)
 │   └── afo.jpeg / tipos.jpeg        # Capturas del sistema legacy (evidencia de dominio)
-├── ROADMAP.md             # Ruta de trabajo + bitácora del proceso (documento vivo)
 └── README.md              # Este archivo
 ```
 
@@ -121,14 +120,14 @@ Funciona aun sin correr los notebooks: si falta `viviendas_procesadas.csv`, cae 
 Cerrado en Hito 2 y posteriores:
 
 - ✅ ETL con fallback API → CSV; generador sintético con reglas de negocio reales (15 clasificaciones + criterio, rubros AFO secuenciales, ciclo de actas, plazo 90)
-- ✅ 5 notebooks de análisis con hallazgos accionables (70% sin verificación, cuellos de botella, cohortes)
+- ✅ 5 notebooks de análisis con hallazgos accionables (22,5% de obras activas sin verificación, dos cuellos de botella, cohortes)
 - ✅ Indicadores de gestión: **índice de confiabilidad de ONG**, **score de priorización de visitas**, **alerta de sobre-reporte**, **actas atascadas**, **etapa activa / cuello de botella constructivo**
 - ✅ Dashboard Streamlit con **inicio de resumen ejecutivo** (KPIs globales, alerta de obras en riesgo sin visita, mapa provincial, navegación) + 6 páginas con mapa de riesgo
 - ✅ Página **Evolución**: series de tiempo del programa (inicios vs. finalizaciones por mes, backlog acumulado, tasa de finalización por trimestre)
 - ✅ Modelo de riesgo recalibrado al plazo real de 90 días (2026-06-10)
 - ✅ Documentación completa del análisis y guion de presentación
 
-## 6. Qué se planea hacer (resumen — el detalle está en ROADMAP.md)
+## 6. Qué se planea hacer
 
 La prioridad inmediata es el **cierre de PP2 (Hito 3)**: entregable oficial = *"Informe EDA + prototipo funcionando"*. El prototipo ya funciona y el **Informe EDA está redactado** ([docs/informe-eda.md](docs/informe-eda.md), con figuras generadas desde el dataset). Queda **validar el alcance con el profesor** y preparar la presentación.
 
@@ -139,7 +138,7 @@ Después (preparación de PP3, en coordinación con el equipo de Desarrollo):
 3. **WS3 — Dashboard por roles:** vistas según el esquema de roles/auth que está construyendo Programación (gancho de auth simulada ya diseñado).
 4. **WS4 — Capa ONG + OCR:** las organizaciones cargan avances y documentación; un pipeline OCR (OpenCV + Tesseract) prellena los formularios y un humano valida — se engancha al workflow de `/documento` que el backend ya tiene.
 
-Los **pedidos pendientes al equipo de Desarrollo** (acceso a la base, API de Visita, ampliar clasificaciones a 15, esquema de roles) están en la sección 5 del ROADMAP.
+Los **pedidos pendientes al equipo de Desarrollo** (acceso a la base, API de Visita, ampliar clasificaciones a 15, esquema de roles) están documentados en [docs/para-desarrollo.md](docs/para-desarrollo.md).
 
 ---
 
@@ -151,11 +150,11 @@ Ruta de onboarding sugerida (en este orden):
 2. Leer [docs/documentacion-analisis.md](docs/documentacion-analisis.md) — explica cada análisis, por qué se eligió y qué decisión habilita. Escrito para que lo entienda un estudiante, un profesor o alguien del área.
 3. Correr el setup (sección 4) y abrir el dashboard — ver el producto antes que el código.
 4. Abrir los colabs en orden y leer las celdas markdown (las interpretaciones están ahí).
-5. Revisar [ROADMAP.md](ROADMAP.md): la sección 2 tiene el estado auditado del backend Java, la 4 los workstreams pendientes y la 7 la **bitácora** con la historia y las decisiones del proceso.
+5. Revisar [docs/para-desarrollo.md](docs/para-desarrollo.md): el estado auditado del backend Java, las brechas del modelo de datos y los pedidos pendientes a Programación.
 
 Reglas para mantener la coherencia del proyecto:
 
 - Los **supuestos del programa** (plazo, distribuciones, etapas del cuello de botella, umbrales de riesgo, etc.) están centralizados y etiquetados `[S#]` en el bloque *"SUPUESTOS DEL PROGRAMA"* al inicio de `synthetic/generate.py`. Para ajustarlos a la realidad: se edita el valor ahí y se regenera — nada de números escondidos en funciones. Cada `[S#]` se corresponde con una fila de [docs/datos-a-confirmar.md](docs/datos-a-confirmar.md), la checklist que se completa con el área.
 - Las columnas derivadas (`dias_activa`, `nivel_riesgo`) se calculan **solo** en `recalcular_derivados()` a partir de las fechas — no asignarlas a mano en otro lado.
 - Todo indicador nuevo debe responder una pregunta de gestión concreta ("¿a quién audito?", "¿a dónde mando al técnico?") — si no habilita una decisión, no entra.
-- Registrar las decisiones importantes en la bitácora del ROADMAP: este proyecto documenta su proceso de principio a fin.
+- Registrar las decisiones importantes en la bitácora interna del proyecto: este proyecto documenta su proceso de principio a fin.

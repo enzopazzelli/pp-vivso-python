@@ -21,3 +21,10 @@ __pycache__/
 docs/guia-presentaciones.md
 docs/guion-presentacion-hito2.md
 docs/prompt-pptx-hito2.md
+docs/prompt-pptx-hito3.md
+docs/guion-presentacion-hito3.md
+
+# Bitácora y planificación interna del equipo: se conserva en local pero NO se
+# versiona — el equipo de Desarrollo y la cátedra consumen README.md y
+# docs/para-desarrollo.md en su lugar.
+ROADMAP.md

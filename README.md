@@ -136,7 +136,6 @@ Después (preparación de PP3, en coordinación con el equipo de Desarrollo):
 1. **WS1 — Integración real:** ETL contra MySQL `vivso3` (la base del backend Java).
 2. **WS2 — Capa analítica en la BDD:** materializar los indicadores en tablas `cd_*` para que cualquier front los consuma sin notebooks de por medio.
 3. **WS3 — Dashboard por roles:** vistas según el esquema de roles/auth que está construyendo Programación (gancho de auth simulada ya diseñado).
-4. **WS4 — Capa ONG + OCR:** las organizaciones cargan avances y documentación; un pipeline OCR (OpenCV + Tesseract) prellena los formularios y un humano valida — se engancha al workflow de `/documento` que el backend ya tiene.
 
 Los **pedidos pendientes al equipo de Desarrollo** (acceso a la base, API de Visita, ampliar clasificaciones a 15, esquema de roles) están documentados en [docs/para-desarrollo.md](docs/para-desarrollo.md).
 

@@ -49,8 +49,7 @@ Detalle completo en [ROADMAP.md](../ROADMAP.md) §3 (arquitectura) y §4 (WS1/WS
 Basado en la auditoría del backend (último commit `Feature-1.6`, ver [ROADMAP.md](../ROADMAP.md) §2):
 
 **Ya lo aprovechamos:** API `/vivienda` (fuente principal del ETL), `/organizacion`,
-`/familia`, `/solicitud`, y sobre todo **`/documento`** con su workflow de revisión (es donde
-se enchufará el OCR).
+`/familia`, `/solicitud`, y `/documento` con su workflow de revisión.
 
 **Brechas a coordinar:**
 
@@ -71,9 +70,8 @@ se enchufará el OCR).
 | 2 | API de `Visita` (la entidad ya existe) — o aval para leer la tabla directo | Análisis de técnicos con datos reales | 🟡 Alta |
 | 3 | Ampliar `ClasificacionVivienda` a 15 códigos + campo `criterio` | Fidelidad con el sistema VISOC | 🟡 Alta |
 | 4 | Definición del esquema de roles (enum/valores) | Vistas por rol del dashboard | 🟡 Alta |
-| 5 | Punto de enganche del OCR en el flujo de `/documento` | Pipeline de documentos (PP3) | 🟢 Media |
-| 6 | Dónde persiste el avance reportado por la ONG | Comparar reporte ONG vs. verificación técnica | 🟢 Media |
-| 7 | Avisos: columna `" barrio "` con espacios en `Vivienda`; passwords en texto plano | Calidad / seguridad | 🟢 Informativo |
+| 5 | Dónde persiste el avance reportado por la ONG | Comparar reporte ONG vs. verificación técnica | 🟢 Media |
+| 6 | Avisos: columna `" barrio "` con espacios en `Vivienda`; passwords en texto plano | Calidad / seguridad | 🟢 Informativo |
 
 ---
 

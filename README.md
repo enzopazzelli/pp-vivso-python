@@ -113,6 +113,8 @@ streamlit run dashboard/app.py   # abre en http://localhost:8501
 
 Funciona aun sin correr los notebooks: si falta `viviendas_procesadas.csv`, cae automáticamente al dataset sintético.
 
+**Demo en vivo:** [pp-vivso-python.streamlit.app](https://pp-vivso-python.streamlit.app/) — no requiere instalar nada.
+
 ---
 
 ## 5. Estado actual (qué está hecho)

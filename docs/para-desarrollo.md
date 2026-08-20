@@ -94,7 +94,8 @@ El detalle del AFO, los rubros y todos los indicadores está en
 ## 6. Estado actual
 
 - Pipeline, indicadores y dashboard **funcionando** sobre datos sintéticos.
-- Dashboard desplegado en Streamlit Cloud (lee los CSV versionados en `data/`).
+- Dashboard desplegado en Streamlit Cloud (lee los CSV versionados en `data/`): [pp-vivso-python.streamlit.app](https://pp-vivso-python.streamlit.app/).
+- Repo de este componente: `github.com/enzopazzelli/pp-vivso-python` (migrado desde `vivso-python` el 2026-08-20; mismo contenido, historial reescrito).
 - Los **supuestos del modelo** (plazo, distribuciones, etapas del cuello de botella, umbrales)
   están centralizados y etiquetados `[S#]` en `synthetic/generate.py`, y se validan con el
   área en [datos-a-confirmar.md](datos-a-confirmar.md).

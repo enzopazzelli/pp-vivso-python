@@ -28,6 +28,32 @@ Datos sintéticos ─┼─► ETL Python ─► SQLite local ─► Notebooks (
 
 Mientras el backend Java no tenga datos cargados, el sistema genera un **dataset sintético de 1.500 viviendas** con distribución geográfica y reglas de negocio realistas. Cuando la API esté disponible, se cambia una variable de entorno y todo corre igual con datos reales.
 
+### Por dónde se empezó
+
+El proyecto arrancó en **Hito 1** con un diagnóstico del proceso actual, un esquema de
+integración y una arquitectura interna que todavía enmarcan el trabajo de hoy
+(`PP2_Hito1_Grupo8_v2.pptx`, diapositivas 5, 8 y 10):
+
+![Proceso actual de gestión de vivienda social, con el punto crítico de doble carga de datos](docs/hito1/proceso-as-is.svg)
+
+Así es el proceso **hoy** (As is): once pasos desde que la institución se acerca hasta la entrega
+de la vivienda, con un **punto crítico** marcado desde el principio — App GPS y VISOC desconectados
+obligan a cargar el mismo dato dos veces (10–30 min por expediente). Es el problema concreto que
+el proyecto busca resolver.
+
+![Esquema de integración VIVSO–GEDO planteado en Hito 1](docs/hito1/solucion-acordada.svg)
+
+La solución propuesta: VIVSO reemplaza ese registro manual (App GPS + VISOC), y el expediente que
+genera se adjunta a **GEDO** (el sistema provincial de expedientes) para evitar la doble carga —
+de ahí sale el vínculo `numero_expediente_gde` entre el modelo de VIVSO y GEDO.
+
+![Arquitectura interna de VIVSO planteada en Hito 1](docs/hito1/arquitectura-interna.svg)
+
+Y la arquitectura interna planteada para VIVSO (entidades, API Java, capa de transformación y
+pantallas) es la base sobre la que después se apoyó el trabajo de este componente — aunque, como
+se detalla más abajo, buena parte de esa capa de transformación terminó implementándose acá, en
+Python, en lugar del `vivso-client.js` que se había imaginado en un principio.
+
 ---
 
 ## 2. Conceptos de dominio (leer antes de tocar nada)
@@ -72,6 +98,9 @@ vivso-python/
 │   ├── figuras/                     # PNGs del informe (regenerables)
 │   ├── documentacion-analisis.md    # POR QUÉ de cada análisis — para entender y explicar
 │   ├── para-desarrollo.md           # Guía de integración para el equipo de Programación (Java)
+│   ├── roadmap-pp3.md               # Ruta de trabajo de PP3 (etapas 6-9, cierre y comunicación)
+│   ├── hito1/                       # Diagramas del esquema original (Hito 1): integración con
+│   │                                #   GEDO y arquitectura interna planteada para VIVSO
 │   └── afo.jpeg / tipos.jpeg        # Capturas del sistema legacy (evidencia de dominio)
 └── README.md              # Este archivo
 ```

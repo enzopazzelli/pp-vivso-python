@@ -18,6 +18,12 @@ scikit-learn>=1.4
 matplotlib>=3.8
 seaborn>=0.13
 
+# Componente de verificación fotográfica (vision/).
+# El módulo corre entero SIN esta dependencia: la percepción simulada, la regla de
+# decisión, el harness y la página del dashboard no la necesitan. Solo hace falta para
+# leer fotos reales con PercepcionClaude, y se importa de forma perezosa.
+# anthropic
+
 # Notebooks: corren en Google Colab (no hacen falta localmente ni en el deploy).
 # jupyter
 # ipykernel

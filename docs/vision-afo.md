@@ -20,9 +20,11 @@ o no alcanza para determinarlo.
 > según el tipo**. Ante una contradicción, a un municipio o comisión municipal se le gestiona
 > institucionalmente; a una ONG o cooperativa se le reclama por convenio.
 
-> **El sistema no aprueba nada.** El AFO lo sigue certificando el técnico, con su OK y sus
-> observaciones. La certificación de avance tiene consecuencia de pago; automatizarla no
-> está en discusión. Lo que se automatiza es el **triage**: a qué obra conviene ir primero.
+> **El sistema no aprueba nada.** El AFO lo sigue certificando el técnico, que puede
+> **aprobar**, **aprobar con observaciones** o **rechazar** —y entonces la gestora tiene que
+> rehacer el trabajo (ver §4.1)—. La certificación de avance tiene consecuencia de pago;
+> automatizarla no está en discusión. Lo que se automatiza es el **triage**: a qué obra
+> conviene ir primero.
 
 Tres cosas que el sistema **no** hace, y conviene que estén escritas:
 
@@ -204,11 +206,41 @@ Más dos chequeos que son información gratis y no hay que aprender:
 
 - **Secuencialidad:** el rubro N exige el N-1 al 100%. Un salto sin explicación es señal,
   no resultado.
-- **Monotonía:** una obra no retrocede. Contra el histórico de la misma obra, una evidencia
-  que muestra menos que la verificación anterior es un error de lectura o una foto vieja.
+- **Monotonía condicional:** una obra no retrocede **salvo que haya un rechazo registrado**
+  (ver §4.1). Un retroceso con rechazo es coherente y esperado; un retroceso **sin** rechazo
+  es una anomalía: o la foto está mal leída, o pasó algo que nadie reportó.
 
 Un clasificador apenas decente por imagen se vuelve un sistema utilizable cuando el previo
 físico hace la mitad del trabajo.
+
+### 4.1 El ciclo de rechazo y rehacer
+
+Cuando el técnico ve algo mal ejecutado **rechaza el rubro, y la gestora tiene que rehacerlo**.
+Eso tiene tres consecuencias sobre el diseño, y conviene tenerlas explícitas porque la primera
+invalidaría el sistema si se pasara por alto:
+
+1. **El AFO puede bajar legítimamente.** Un rubro certificado al 100% vuelve a 40% porque hay
+   que rehacer el trabajo. Por eso la monotonía es condicional y no una invariante dura: sin
+   esa distinción, el sistema marcaría como error de lectura a la gestora que está corrigiendo.
+2. **Una foto no distingue construir de reconstruir.** "Muros hasta dintel" se ve igual la
+   primera vez que la segunda. La capa de percepción **no puede** resolverlo; lo resuelve el
+   registro del rechazo en la capa de decisión. Es una limitación intrínseca, no un problema
+   de calidad del modelo.
+3. **Aparece el caso de sobre-reporte más grave.** Si un rubro fue rechazado y la gestora
+   sigue reportando el porcentaje previo al rechazo, eso no es optimismo: es **computar como
+   avance un trabajo que fue rechazado**. Es cualitativamente distinto de sobre-reportar cinco
+   puntos, y hoy no hay forma de detectarlo.
+
+**Consecuencia sobre el modelo de datos:** la resolución del técnico no es binaria. Son tres
+estados — **aprueba · aprueba con observaciones · rechaza (rehacer)** — y el rechazo tiene que
+quedar registrado contra el rubro y la fecha, no solo como texto libre. Sin ese registro, el
+punto 1 no se puede implementar.
+
+> **Ojo, esto excede a la verificación por foto.** El modelo de riesgo actual lee
+> *"vencida + poco avance = paralizada"*. Una obra rechazada y en proceso de rehacerse es
+> exactamente eso, y es la situación opuesta: ahí **sí** hay trabajo pasando. El modelo hoy
+> clasifica como abandono a la gestora que está corrigiendo. Es un problema del indicador que
+> ya está en el dashboard, independiente de esta propuesta, y hay que tratarlo aparte.
 
 ### Dónde vive en el repo
 
@@ -234,6 +266,8 @@ adjuntas). Lo que el sistema emite es un grado de respaldo documental.
 | **Respaldado** | Evidencia consistente con lo declarado (tolerancia ±1 rubro) | Suma normal al índice de confiabilidad |
 | **Contradicho — sobre-reporte** | La foto muestra menos que lo declarado | Va al tope de la cola de visitas |
 | **Contradicho — sub-reporte** | La foto muestra más que lo declarado | Señal distinta: reporte desactualizado, no deshonestidad |
+| **Contradicho — avance rechazado** | La foto muestra menos y **hay un rechazo registrado** sobre ese rubro, pero el reporte no lo descuenta | El caso más grave: se computa como avance un trabajo rechazado |
+| **Retroceso sin explicación** | La foto muestra menos que la verificación anterior y **no hay rechazo registrado** | Anomalía: foto mal leída, foto de otra obra, o algo que nadie reportó |
 | **Sin respaldo** | No hay foto, o no cumple el protocolo | El reporte pesa menos; no se penaliza como mentira |
 | **No determinable** | Foto útil, pero el rubro declarado cae en zona no verificable | Neutro |
 
@@ -261,8 +295,13 @@ etiquetado y sin pedirle trabajo extra a nadie, en unos meses existe el dataset 
 real que hoy no existe — que es justamente la condición que bloquea entrenar un modelo
 propio (§9).
 
-**Consecuencia de diseño:** `cd_afo_foto` debe incluir el campo de resolución del técnico
-(confirma / corrige / descarta) desde el día uno, aunque en PP3 no se use para entrenar.
+**Y el rechazo es la etiqueta más valiosa de todas.** Es un técnico diciendo *"esto está mal
+hecho"* sobre una obra y un rubro concretos, con foto. Ese es exactamente el dato que falta
+para la detección de defectos constructivos — la capacidad que en §9 queda fuera de alcance
+por no tener datos etiquetados. Con el ciclo de rechazos registrado, deja de ser aspiracional.
+
+**Consecuencia de diseño:** `cd_afo_foto` debe incluir la resolución del técnico desde el día
+uno —**aprueba · aprueba con observaciones · rechaza**— aunque en PP3 no se use para entrenar.
 
 ---
 
@@ -383,6 +422,9 @@ Convención `[V#]`, análoga a los `[S#]` de [datos-a-confirmar.md](datos-a-conf
 | [V3] | El área o las gestoras conservan fotos de obras que puedan compartir | **Sin confirmar — condiciona la Fase 1** |
 | [V4] | Las gestoras hoy envían fotos por WhatsApp como parte del reporte informal | Sin confirmar |
 | [V5] | La tolerancia de ±1 rubro es aceptable para el criterio del área | Sin confirmar |
+| [V6] | **¿El plazo de 90 días se reinicia después de un rechazo?** Tiene consecuencia contractual directa: cambia quién está incumpliendo | **Sin confirmar — afecta al modelo de riesgo, no solo a esta propuesta** |
+| [V7] | ¿El rechazo queda registrado hoy en algún lado (acta, planilla, sistema), o solo circula como observación verbal del técnico? | Sin confirmar — sin registro, §4.1 no se puede implementar |
+| [V8] | ¿Con qué frecuencia se rechaza y se rehace? Si es marginal, el ciclo es un caso borde; si es frecuente, es un indicador de calidad por derecho propio | Sin confirmar |
 
 **Riesgos:**
 

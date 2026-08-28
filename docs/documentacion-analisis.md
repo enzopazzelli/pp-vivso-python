@@ -16,13 +16,13 @@ Este documento explica **qué análisis se realizó, con qué datos y por qué**
 
 ## El problema que se analiza
 
-La Subsecretaría de Promoción Humana de Santiago del Estero gestiona un programa de viviendas sociales que involucra cientos de obras distribuidas en 18 departamentos. Estas obras son ejecutadas por Organizaciones No Gubernamentales (ONGs) bajo contrato, y supervisadas por técnicos del ministerio.
+La Subsecretaría de Promoción Humana de Santiago del Estero gestiona un programa de viviendas sociales que involucra cientos de obras distribuidas en 18 departamentos. Estas obras son ejecutadas por **organizaciones gestoras** —municipios, comisiones municipales, ONGs y cooperativas— bajo convenio, y supervisadas por técnicos del ministerio. La gestora es quien **solicita** las viviendas y se hace cargo de la obra: el ministerio no construye ni manda cuadrillas.
 
 El desafío principal es de **visibilidad y control**:
 - ¿Cuántas obras están en riesgo de no terminar a tiempo?
-- ¿Qué ONGs cumplen y cuáles necesitan seguimiento urgente?
+- ¿Qué gestoras cumplen y cuáles necesitan seguimiento urgente?
 - ¿En qué etapa de la construcción se están bloqueando las obras?
-- ¿Los datos que reportan las ONGs coinciden con lo que verifica el técnico?
+- ¿Los datos que reportan las gestoras coinciden con lo que verifica el técnico?
 
 Antes de VIVSO, esta información estaba distribuida en tres sistemas desconectados. El análisis que se describe aquí es el puente entre los datos y las decisiones.
 
@@ -39,7 +39,7 @@ El backend Java (equipo de Programación) está en desarrollo. Mientras no está
 | Tabla | Registros | Descripción |
 |-------|-----------|-------------|
 | `vivienda` | 1.500 | Una fila por expediente de obra |
-| `organizacion` | 3 | ONGs con sus datos institucionales |
+| `organizacion` | 8 | Gestoras con sus datos institucionales: 2 municipios, 2 comisiones municipales, 2 ONGs, 2 cooperativas |
 | `tecnico` | 6 | Técnicos con zona de cobertura |
 | `asignacion_tecnico` | 901 | Qué obras tiene asignadas cada técnico |
 | `visita` | 1.057 | Cada visita de campo con avance verificado |
@@ -54,7 +54,7 @@ El backend Java (equipo de Programación) está en desarrollo. Mientras no está
 - **`clasificacion`**: código del tipo de vivienda (15 posibles)
 - **`criterio`**: macrocategoría del código (Inclusion / Exclusion / Otro)
 - **`nivel_riesgo`**: alto / medio / bajo (calculado por el pipeline Python)
-- **`cuit_org`**: ONG gestora asignada (puede ser nulo: ~20% de las obras)
+- **`cuit_org`**: organización gestora asignada (nunca nulo: la gestora es quien solicita las viviendas)
 
 ---
 
@@ -183,11 +183,11 @@ Por qué importa: si las obras Exclusión que igualmente están en el programa t
 **Duración por tipo de vivienda (ANOVA)**:
 Hipótesis: las rurales tardan más por dificultades de acceso y provisión de materiales.
 Por qué ANOVA y no t-test: el t-test compara exactamente 2 grupos. Aquí hay 3 tipos (Urbana/Rural/Económica). Aplicar t-test múltiples veces sobre los mismos datos inflaría la probabilidad de falsos positivos (error tipo I). ANOVA resuelve esto en un solo test.
-Por qué importa: si se confirma, los contratos con ONGs para obras rurales deberían tener plazos diferenciados. Actualmente se usa el mismo plazo para todo.
+Por qué importa: si se confirma, los convenios con las gestoras para obras rurales deberían tener plazos diferenciados. Actualmente se usa el mismo plazo para todo.
 
 **Duración por clasificación**:
 Pregunta: ¿Hay clasificaciones que sistemáticamente toman más tiempo?
-Por qué importa: un ministerio que sepa que el código 2b tarda en promedio 400 días puede planificar mejor, asignar más recursos técnicos a esas obras o ajustar los plazos contractuales con las ONGs antes de firmar.
+Por qué importa: un ministerio que sepa que el código 2b tarda en promedio 400 días puede planificar mejor, asignar más recursos técnicos a esas obras o ajustar los plazos contractuales con las gestoras antes de firmar.
 
 **Riesgo por criterio y clasificación**:
 Pregunta: ¿Qué clasificaciones concentran más obras en riesgo alto?
@@ -210,7 +210,7 @@ Acción que habilita: el subsecretario puede reportar avance al gobierno provinc
 **KPI 2 — Obras en riesgo alto**
 Qué mide: obras activas que superaron el plazo de 90 días con menos del 30% de avance.
 Por qué ese umbral: el plazo contractual de la etapa de construcción es de 90 días. Una obra que ya lo superó y todavía está por debajo del 30% de avance tiene probabilidad cercana a cero de cerrarse sin intervención. El umbral de 90 días es el plazo contractual real del programa.
-Acción que habilita: el jefe de área puede priorizar las visitas técnicas a esas obras y activar el protocolo de seguimiento de la ONG responsable.
+Acción que habilita: el jefe de área puede priorizar las visitas técnicas a esas obras y activar el protocolo de seguimiento de la gestora responsable. Según el tipo de gestora la palanca cambia: a un municipio o comisión municipal se le gestiona institucionalmente, a una ONG o cooperativa se le reclama por convenio.
 
 **KPI 3 — Obras en riesgo medio**
 Qué mide: obras activas que superaron el plazo de 90 días con avance entre 30–80%.
@@ -218,11 +218,11 @@ Acción que habilita: seguimiento preventivo. Son obras vencidas pero que todav�
 
 **KPI 4 — Tiempo promedio de ejecución**
 Por qué solo obras terminadas: incluir obras en curso sesga el promedio. Una obra activa de 200 días podría terminar en 250 o en 700 — su duración real es desconocida. Solo las terminadas dan un dato fiable.
-Acción que habilita: comparar el tiempo de cada ONG contra el promedio. Las que sistemáticamente tardan más que la mediana necesitan revisión contractual.
+Acción que habilita: comparar el tiempo de cada gestora contra el promedio. Las que sistemáticamente tardan más que la mediana necesitan revisión del convenio.
 
-**KPI 5 — Rendimiento por ONG**
+**KPI 5 — Rendimiento por gestora**
 Qué mide: avance promedio, obras en riesgo y días promedio activos por organización.
-Acción que habilita: accountability. El programa paga a las ONGs por los avances certificados. Si una ONG tiene alto riesgo y bajo avance, el ministerio puede retener pagos, aumentar la frecuencia de visitas o cancelar el contrato.
+Acción que habilita: accountability. El programa paga a las gestoras por los avances certificados. Si una gestora tiene alto riesgo y bajo avance, el ministerio puede retener pagos, aumentar la frecuencia de visitas o revisar el convenio.
 
 **KPI 6 — Cobertura geográfica activa**
 Qué mide: cuántos departamentos tienen obras en curso y cuántas hay en cada uno.
@@ -230,7 +230,7 @@ Acción que habilita: planificación de visitas técnicas. Con máximo 2 visitas
 
 **KPI 7 — Etapa cuello de botella**
 Qué mide: en qué rubro de la secuencia constructiva se acumula la mayor cantidad de obras activas simultáneamente.
-Acción que habilita: focalizar el reclamo y el seguimiento. La construcción es responsabilidad de la **organización gestora** (que suele tercerizar los servicios) — el ministerio no manda cuadrillas. Pero si el 30% de las obras activas está trabada en "Mampostería hasta dintel", el ministerio puede exigirle explicaciones a cada gestora con precisión de etapa, priorizar las visitas técnicas de verificación en esas obras y detectar qué ONGs concentran los bloqueos.
+Acción que habilita: focalizar el reclamo y el seguimiento. La construcción es responsabilidad de la **organización gestora** (que suele tercerizar los servicios) — el ministerio no manda cuadrillas. Pero si el 30% de las obras activas está trabada en "Mampostería hasta dintel", el ministerio puede exigirle explicaciones a cada gestora con precisión de etapa, priorizar las visitas técnicas de verificación en esas obras y detectar qué gestoras concentran los bloqueos.
 
 **El análisis de etapa activa**
 
@@ -250,7 +250,7 @@ Diferencia entre "concentración" y "parálisis":
 
 **Por qué se hace**: los técnicos son el vínculo entre el ministerio y las obras. Con un máximo de 2 visitas técnicas por obra, cada visita tiene que ser eficiente. Un técnico sobrecargado deja obras sin verificar, lo que expone al ministerio a reportes de avance no validados.
 
-**Regla de negocio central**: máximo 2 visitas técnicas por obra (primera y segunda). Entre visitas, las ONGs cubren el avance con reportes fotográficos en el portal.
+**Regla de negocio central**: máximo 2 visitas técnicas por obra (primera y segunda). Entre visitas, las gestoras cubren el avance con reportes fotográficos en el portal.
 
 **Análisis y su justificación**:
 
@@ -263,12 +263,12 @@ Umbral del 70%: se estableció como objetivo mínimo de cobertura. Por debajo, e
 Permite identificar el cuadrante problemático: alto volumen de obras + baja cobertura = técnico sobrecargado. El técnico Ibáñez (40% de cobertura con muchas obras asignadas) es el caso de alerta en el dataset.
 Por qué un scatter y no una tabla: la relación entre dos variables numéricas se lee más rápido visualmente. Un punto fuera de la nube es inmediatamente visible.
 
-**Discrepancias ONG vs. técnico**:
-Qué es: avance reportado por la ONG menos avance verificado in situ por el técnico.
-Por qué es importante: si la ONG reporta 70% y el técnico verifica 60%, la diferencia es +10 puntos. Eso puede indicar:
+**Discrepancias gestora vs. técnico**:
+Qué es: avance reportado por la gestora menos avance verificado in situ por el técnico.
+Por qué es importante: si la gestora reporta 70% y el técnico verifica 60%, la diferencia es +10 puntos. Eso puede indicar:
 - Error de estimación (aceptable, pasa en cualquier registro)
 - Reporte inflado intencional (preocupante, puede afectar los pagos certificados)
-Un valor positivo consistente en la misma ONG es una señal de alerta. Un valor negativo (ONG subestimó) es menos crítico — la obra está mejor de lo que reportaron.
+Un valor positivo consistente en la misma gestora es una señal de alerta. Un valor negativo (la gestora subestimó) es menos crítico — la obra está mejor de lo que reportaron.
 
 **Cola de prioridad del técnico**:
 El técnico ve sus obras ordenadas: Sin visitar (alta prioridad) → Falta segunda visita → Completo. Dentro de cada grupo, las obras de riesgo alto van primero.
@@ -334,13 +334,13 @@ El dashboard Streamlit no es una visualización decorativa — es la interfaz en
 *Para el técnico*: puede ver qué obras de su zona están en riesgo antes de planificar visitas.
 *Para el subsecretario*: puede ver el estado general del programa en un solo pantallazo.
 
-**Página ONGs**: muestra el rendimiento comparativo de cada organización. Barras coloreadas en rojo indican ONGs con obras en riesgo.
-*Para el responsable de contratos*: identifica qué ONGs necesitan conversación urgente.
+**Página Gestoras**: muestra el rendimiento comparativo de cada organización, y una comparación por tipo de gestora. Barras coloreadas en rojo indican gestoras con obras en riesgo.
+*Para el responsable de convenios*: identifica qué gestoras necesitan conversación urgente.
 
 **Página Minería**: muestra el modelo de riesgo interactivo (scatter días vs. avance) y el análisis de rubros AFO con los dos gráficos (cuello de botella y tasa de parálisis).
 *Para el equipo técnico*: permite ver en qué etapa están concentradas las obras problemáticas.
 
-**Página Equipo Técnico**: muestra cobertura de visitas por técnico y discrepancias con las ONGs.
+**Página Equipo Técnico**: muestra cobertura de visitas por técnico y discrepancias con las gestoras.
 *Para el jefe de área*: detecta quién está sobrecargado y quién tiene discrepancias sistemáticas.
 
 **Página Mis Obras**: vista individual del técnico con su cola de prioridad.
@@ -381,11 +381,11 @@ Es una restricción técnica de la detección de etapa activa. El sistema identi
 | **Criterio** | Macrocategoría del código de clasificación: Inclusión (apta), Exclusión (rechazada), Otro (caso especial). |
 | **Clasificación** | Código de dos caracteres (1a, 2b, 5g, etc.) que describe el tipo de vivienda según el sistema VISOC. |
 | **Nivel de riesgo** | Clasificación calculada por Python: alto (vencida >90 días y AFO <30%), medio (vencida >90 días y AFO 30–80%), bajo (resto). |
-| **Discrepancia ONG vs. técnico** | Diferencia entre el avance que reporta la ONG y el que verifica el técnico en la visita. Positivo = ONG sobreestimó. |
+| **Discrepancia gestora vs. técnico** | Diferencia entre el avance que reporta la gestora y el que verifica el técnico en la visita. Positivo = la gestora sobreestimó. |
 | **Cobertura de visitas** | Porcentaje de obras asignadas a un técnico que recibieron al menos una visita presencial. |
 | **ETL** | Extract, Transform, Load. El proceso de extraer datos de una fuente, transformarlos y cargarlos en la base de datos de análisis. |
 | **ANOVA** | Analysis of Variance. Test estadístico que evalúa si las medias de más de dos grupos son significativamente distintas. |
 | **MinMaxScaler** | Técnica de normalización que lleva todas las variables numéricas al rango [0,1] para que ninguna domine por su magnitud. |
 | **encoding** | Conversión de variables categóricas (texto) a números para que los algoritmos de Machine Learning puedan procesarlas. |
-| **ONG** | Organización No Gubernamental. En VIVSO, las ONGs son los ejecutores de las obras bajo contrato con el ministerio. |
+| **Organización gestora** | Quien solicita las viviendas y ejecuta la obra bajo convenio con el ministerio. Son de cuatro tipos (`tipo_gestora`): **municipio**, **comisión municipal**, **ONG** y **cooperativa**. El *ámbito* los agrupa en público (municipio, comisión municipal) y privado (ONG, cooperativa) — es donde cambia la palanca del ministerio ante una obra trabada. |
 | **VISOC** | Sistema legacy del ministerio que registraba las viviendas sociales antes de VIVSO. Define los 15 códigos de clasificación. |

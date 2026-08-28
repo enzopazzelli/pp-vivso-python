@@ -22,9 +22,9 @@ o no alcanza para determinarlo.
 
 > **El sistema no aprueba nada.** El AFO lo sigue certificando el técnico, que puede
 > **aprobar**, **aprobar con observaciones** o **rechazar** —y entonces la gestora tiene que
-> rehacer el trabajo (ver §4.1)—. La certificación de avance tiene consecuencia de pago;
-> automatizarla no está en discusión. Lo que se automatiza es el **triage**: a qué obra
-> conviene ir primero.
+> rehacer el trabajo (§4.1)—. Puede hacerlo **desde la aplicación o en visita presencial**
+> (§4.2). La certificación de avance tiene consecuencia de pago; automatizarla no está en
+> discusión. Lo que hace el sistema es **preparar y ponderar** esa decisión.
 
 Tres cosas que el sistema **no** hace, y conviene que estén escritas:
 
@@ -35,8 +35,11 @@ Tres cosas que el sistema **no** hace, y conviene que estén escritas:
   obras activas no recibió ninguna.
 
 **El "As is → To be":** hoy el avance que reporta la gestora entra al sistema sin ningún
-respaldo para el ~70% de obras sin visita. Con esto, cada reporte entra con un grado de
-respaldo documental, y el técnico recibe una cola priorizada en lugar de una lista plana.
+respaldo para el ~70% de obras sin visita, y el tope de 2 visitas es el techo de todo lo que
+se puede verificar. Con esto, cada reporte entra con un **grado de respaldo documental**, el
+técnico recibe una cola priorizada en lugar de una lista plana, y —si el área confirma `[V9]`
+y `[V10]`— puede **resolver a distancia** las obras que no requieren ir, reservando las dos
+visitas presenciales para donde hacen falta.
 
 ---
 
@@ -231,16 +234,77 @@ invalidaría el sistema si se pasara por alto:
    avance un trabajo que fue rechazado**. Es cualitativamente distinto de sobre-reportar cinco
    puntos, y hoy no hay forma de detectarlo.
 
-**Consecuencia sobre el modelo de datos:** la resolución del técnico no es binaria. Son tres
-estados — **aprueba · aprueba con observaciones · rechaza (rehacer)** — y el rechazo tiene que
-quedar registrado contra el rubro y la fecha, no solo como texto libre. Sin ese registro, el
-punto 1 no se puede implementar.
+### 4.2 Dos canales de resolución: app y visita presencial
 
-> **Ojo, esto excede a la verificación por foto.** El modelo de riesgo actual lee
-> *"vencida + poco avance = paralizada"*. Una obra rechazada y en proceso de rehacerse es
-> exactamente eso, y es la situación opuesta: ahí **sí** hay trabajo pasando. El modelo hoy
-> clasifica como abandono a la gestora que está corrigiendo. Es un problema del indicador que
-> ya está en el dashboard, independiente de esta propuesta, y hay que tratarlo aparte.
+Tanto la **aprobación** como el **rechazo** pueden darse por dos vías: **desde la aplicación**
+(el técnico resuelve mirando las fotos) o **en visita presencial**. Eso cambia el encuadre de
+toda la propuesta, así que conviene decirlo fuerte:
+
+> Si el técnico puede **aprobar** desde la app, el sistema deja de ser solo triage. El tope de
+> **2 visitas por obra deja de ser el techo de la verificación** y pasa a ser el techo de la
+> verificación *presencial*: el resto se cubre a distancia. Es una ganancia bastante mayor que
+> ordenar una cola de visitas.
+
+Y trae dos consecuencias que hay que asumir juntas:
+
+- **La foto pasa de indicio a prueba.** Mientras el sistema era triage, una foto mala costaba
+  un viaje mal priorizado. Si sostiene una certificación con consecuencia de pago, el protocolo
+  de captura y el antifraude de §7 dejan de ser recomendables y pasan a ser **condición**.
+- **Se abre un vector de gaming nuevo.** Una gestora que logra que todo se le apruebe por app
+  nunca recibe escrutinio presencial. Es la misma forma del hallazgo de cobertura 0% que ya
+  documenta el Informe EDA, pero disfrazada de cobertura alta. **Por eso la cobertura se
+  desdobla en remota y presencial, y no se suma.**
+
+Por eso el **canal** (`app` / `presencial`) es un campo de primera clase de la resolución, no
+un metadato: cambia el peso probatorio, la trazabilidad de responsabilidad y el indicador.
+
+### 4.3 Registro de rechazos
+
+La resolución del técnico no es binaria: **aprueba · aprueba con observaciones · rechaza
+(rehacer)**. El hecho atómico que hay que registrar es:
+
+```
+rechazo/resolución = (vivienda, rubro, fecha, técnico, canal, resultado, motivo)
+```
+
+A nivel **rubro**, no a nivel obra: el técnico rechaza una etapa concreta, y es lo que permite
+saber qué parte del AFO se cae. De ahí se derivan las dos vistas de control:
+
+| Vista | Cómo se obtiene |
+|---|---|
+| **Vivienda con rechazos de etapas en obra** | Rechazos vigentes de esa vivienda, agrupados por rubro |
+| **Gestora con rechazos en viviendas** | Cuántas de sus viviendas tienen rechazos, y tasa sobre su cartera |
+
+> **Ambas marcas se derivan, no se guardan.** Un flag "tiene rechazos" almacenado en la
+> vivienda o en la gestora se desincroniza apenas alguien corrige o revierte un rechazo. La
+> tabla de resoluciones es la fuente; las marcas son consultas.
+
+**Dónde vive:** para el prototipo, en la capa `cd_*` junto a `cd_afo_foto`. Pero un rechazo es
+un **hecho operativo**, no una derivación analítica: su lugar definitivo es el backend. Va a la
+lista de pedidos de [para-desarrollo.md](para-desarrollo.md).
+
+### 4.4 Efecto sobre el modelo de riesgo (excede a esta propuesta)
+
+El modelo actual lee *"vencida + poco avance = paralizada"*. Una obra rechazada y en proceso de
+rehacerse cae exactamente ahí.
+
+**El problema no es la clasificación, es el diagnóstico.** Una obra rehaciendo probablemente
+*sí* está en riesgo —va a llegar tarde— y esa parte está bien. Lo que está mal es llamarla
+*paralizada*, porque dispara la acción equivocada: se reclama por inactividad cuando lo que
+corresponde es verificar calidad.
+
+La corrección que sirve **conteste lo que conteste el área** es separar el motivo del riesgo:
+
+| Motivo | Qué pasó | Acción del ministerio |
+|---|---|---|
+| `paralizada` | Vencida, poco avance, sin rechazos | Reclamar avance a la gestora |
+| `rehaciendo` | Vencida, poco avance, **con rechazo vigente** | Verificar calidad de la corrección |
+
+Recién después entra la pregunta del plazo (`[V6]`). Si el área confirma que **se extiende**
+—supuesto de trabajo actual—, se agrega `plazo_efectivo = 90 + extensiones por rechazo` y la
+regla de riesgo sigue funcionando **sin ramas nuevas**, que es lo que preserva el criterio de
+regla transparente. Si contesta que **no se extiende**, la obra queda vencida con razón y solo
+queda el cambio de motivo. **El diseño no debe depender de esa respuesta.**
 
 ### Dónde vive en el repo
 
@@ -286,6 +350,23 @@ Esto es una extensión de los indicadores actuales, no un proyecto paralelo:
 | Score de priorización de visitas | Nueva señal de entrada: las obras con contradicción fotográfica encabezan la cola |
 | Alerta de sobre-reporte | Deja de depender de las visitas, que cubren ~30% de las obras activas |
 | Índice de confiabilidad de gestora (componente honestidad, 20%) | Pasa de proxy a evidencia documental |
+| Cobertura de verificación | **Se desdobla en remota y presencial** (§4.2). Hoy es un solo número y mezclaría dos cosas de peso probatorio distinto |
+
+Y tres indicadores nuevos que caen solos del registro de rechazos (§4.3):
+
+- **Tasa de rechazo por gestora** — qué proporción de su cartera tiene rechazos vigentes. Es
+  una señal de **calidad de ejecución**, cualitativamente distinta del sobre-reporte: sobre-
+  reportar es optimismo, que te rechacen es trabajo defectuoso.
+- **Rubros más rechazados del programa** — el gemelo del cuello de botella constructivo. Si un
+  rubro concentra rechazos, el problema no es una gestora: es una especificación mal entendida,
+  un material, o un criterio de técnico disparejo.
+- **Ratio de resolución remota vs. presencial por gestora** — detecta la gestora que nunca
+  recibe escrutinio en terreno (§4.2).
+
+> **Sobre el índice de confiabilidad:** la tasa de rechazo *no* se agrega como cuarto
+> componente rebalanceando los pesos actuales (avance 50% · sin-riesgo 30% · honestidad 20%).
+> Ese índice ya está documentado y presentado; tocarle los pesos invalida la comparación con lo
+> anterior. La calidad de ejecución va como **indicador separado**.
 
 ### El efecto secundario que vale más que el sistema
 
@@ -422,9 +503,11 @@ Convención `[V#]`, análoga a los `[S#]` de [datos-a-confirmar.md](datos-a-conf
 | [V3] | El área o las gestoras conservan fotos de obras que puedan compartir | **Sin confirmar — condiciona la Fase 1** |
 | [V4] | Las gestoras hoy envían fotos por WhatsApp como parte del reporte informal | Sin confirmar |
 | [V5] | La tolerancia de ±1 rubro es aceptable para el criterio del área | Sin confirmar |
-| [V6] | **¿El plazo de 90 días se reinicia después de un rechazo?** Tiene consecuencia contractual directa: cambia quién está incumpliendo | **Sin confirmar — afecta al modelo de riesgo, no solo a esta propuesta** |
+| [V6] | **¿El plazo de 90 días se extiende después de un rechazo?** Supuesto de trabajo: **sí se extiende** (decisión del equipo, 2026-08-28). Hay dos respuestas defendibles con significado contractual opuesto — si no se extiende, la gestora se come la demora por haber construido mal | **Sin confirmar — pero el diseño no depende de la respuesta (§4.4)** |
 | [V7] | ¿El rechazo queda registrado hoy en algún lado (acta, planilla, sistema), o solo circula como observación verbal del técnico? | Sin confirmar — sin registro, §4.1 no se puede implementar |
 | [V8] | ¿Con qué frecuencia se rechaza y se rehace? Si es marginal, el ciclo es un caso borde; si es frecuente, es un indicador de calidad por derecho propio | Sin confirmar |
+| [V9] | **¿El tope de 2 visitas por obra aplica también a las resoluciones por app?** Si no aplica —lo esperable, porque el tope es una restricción logística de campo— ahí está la ganancia grande de la propuesta | **Sin confirmar — condiciona el tamaño del beneficio** |
+| [V10] | ¿Una aprobación remota tiene la misma validez formal que una presencial para certificar el AFO y habilitar el pago? | Sin confirmar — si no la tiene, el sistema vuelve a ser solo triage |
 
 **Riesgos:**
 

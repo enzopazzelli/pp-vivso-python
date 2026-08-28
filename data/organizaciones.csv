@@ -1,4 +1,9 @@
-cuit,nombre,tipo,dom_legal,contacto,cpe,presidente,dni_presidente,estado
-30-71782995-2,COOP DE TRABAJO SAN ANTONIO MN 65.044,Cooperativa de Trabajo,"Ruta Prov 204, San Antonio, Jimenez",3815999141,58.265,Diaz Raul Omar,16468394,ACTIVA
-30-68902314-5,ASOC. CIVIL CONSTRUIR JUNTOS MN 48.231,Asociación Civil,"Av. Belgrano 456, La Banda",3856102920,52.140,Gomez Ana Maria,22345678,ACTIVA
-30-59804127-3,MUTUAL PROGRESO FAMILIAR MN 31.088,Mutual,"Calle Rivadavia 230, Frías",3858441230,44.988,Romero Hector Daniel,18904231,FINALIZADA
+cuit,nombre,tipo,tipo_gestora,dom_legal,contacto,cpe,presidente,dni_presidente,estado
+30-71782995-2,COOP DE TRABAJO SAN ANTONIO MN 65.044,Cooperativa de Trabajo,Cooperativa,"Ruta Prov 204, San Antonio, Jimenez",3815999141,58.265,Diaz Raul Omar,16468394,ACTIVA
+30-70945612-8,COOP DE TRABAJO EL PORVENIR LTDA MN 71.209,Cooperativa de Trabajo,Cooperativa,"Bº Autonomía, Santiago del Estero",3855120744,61.402,Ledesma Carlos Alberto,24567891,ACTIVA
+30-68902314-5,ASOC. CIVIL CONSTRUIR JUNTOS MN 48.231,Asociación Civil,ONG,"Av. Belgrano 456, La Banda",3856102920,52.140,Gomez Ana Maria,22345678,ACTIVA
+30-59804127-3,MUTUAL PROGRESO FAMILIAR MN 31.088,Mutual,ONG,"Calle Rivadavia 230, Frías",3858441230,44.988,Romero Hector Daniel,18904231,FINALIZADA
+30-99903421-7,MUNICIPALIDAD DE LA BANDA,Municipalidad,Municipio,"Av. Besares 145, La Banda",3854221100,70.011,Juarez Silvia Beatriz,20114552,ACTIVA
+30-99871205-4,MUNICIPALIDAD DE FRÍAS,Municipalidad,Municipio,"San Martín 55, Frías",3854670233,70.048,Coronel Miguel Angel,17993410,ACTIVA
+30-99812340-1,COMISIÓN MUNICIPAL DE PINTO,Comisión Municipal,Comisión Municipal,"Belgrano s/n, Pinto",3855338217,70.130,Herrera Nora Isabel,26780145,ACTIVA
+30-99765488-6,COMISIÓN MUNICIPAL DE TINTINA,Comisión Municipal,Comisión Municipal,"25 de Mayo s/n, Tintina",3856904471,70.142,Sosa Ramon Eduardo,21456098,ACTIVA

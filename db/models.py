@@ -62,7 +62,8 @@ class Organizacion(Base):
 
     cuit           = Column(String(20), primary_key=True)
     nombre         = Column(String(300), nullable=False)
-    tipo           = Column(String(100))
+    tipo           = Column(String(100))   # Forma jurídica del legacy (Cooperativa/Asoc. Civil/Mutual/...)
+    tipo_gestora   = Column(String(30))    # Municipio/Comisión Municipal/ONG/Cooperativa — ver TIPOS_GESTORA
     dom_legal      = Column(String(300))
     contacto       = Column(String(100))
     cpe            = Column(String(50))
@@ -142,6 +143,7 @@ class Visita(Base):
     avance_verificado = Column(Integer)     # % verificado in situ por el técnico
     estado_relevado   = Column(String(20))  # estado que el técnico observó
     observacion       = Column(Text)
-    # Diferencia entre lo que reportó la ONG y lo que verificó el técnico
-    # Positivo = ONG reportó más avance del real (sobreestimación)
+    # Diferencia entre lo que reportó la gestora y lo que verificó el técnico
+    # Positivo = la gestora reportó más avance del real (sobreestimación).
+    # El nombre de la columna quedó de cuando se asumía que toda gestora era una ONG.
     diferencia_ong    = Column(Integer)

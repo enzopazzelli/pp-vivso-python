@@ -11,7 +11,7 @@ vive en [ROADMAP.md](../ROADMAP.md) (planificación e integración) y en
 
 Ciencia de Datos (`vivso-python`) es la **capa analítica** del sistema VIVSO: un pipeline
 Python que toma los datos operativos del programa de viviendas, calcula indicadores de
-gestión (riesgo, cuellos de botella, confiabilidad de ONGs, cobertura técnica) y los expone
+gestión (riesgo, cuellos de botella, confiabilidad de gestoras, cobertura técnica) y los expone
 en un dashboard. **No es un silo con su propia copia de los datos**: la idea es que el
 análisis viva sobre la base común y esté siempre disponible para que ustedes lo consuman.
 
@@ -34,7 +34,7 @@ Para no chocar con Hibernate (`ddl-auto=update`) ni tocar el schema que ustedes 
 - **Escritura:** escribimos **solo en tablas propias con prefijo `cd_`** (en el mismo schema
   o uno aparte, a acordar). Nunca modificamos sus tablas.
   - `cd_vivienda_indicadores` — `nivel_riesgo`, `dias_activa`, `etapa_activa`, `dias_espera_acta`, `score_prioridad_visita`
-  - `cd_ong_indicadores` — confiabilidad, sobre-reporte, % en riesgo por ONG
+  - `cd_gestora_indicadores` — confiabilidad, sobre-reporte, % en riesgo por gestora
   - `cd_rubro_obra` / `cd_avance_rubro` — desglose del AFO por etapa constructiva
   - `cd_indicadores_globales` — KPIs del programa
 - **Consumo:** cualquier front (Streamlit, Next.js) lee esas tablas; **su API puede exponerlas
@@ -70,7 +70,7 @@ Basado en la auditoría del backend (último commit `Feature-1.6`, ver [ROADMAP.
 | 2 | API de `Visita` (la entidad ya existe) — o aval para leer la tabla directo | Análisis de técnicos con datos reales | 🟡 Alta |
 | 3 | Ampliar `ClasificacionVivienda` a 15 códigos + campo `criterio` | Fidelidad con el sistema VISOC | 🟡 Alta |
 | 4 | Definición del esquema de roles (enum/valores) | Vistas por rol del dashboard | 🟡 Alta |
-| 5 | Dónde persiste el avance reportado por la ONG | Comparar reporte ONG vs. verificación técnica | 🟢 Media |
+| 5 | Dónde persiste el avance reportado por la gestora | Comparar reporte de la gestora vs. verificación técnica | 🟢 Media |
 | 6 | Avisos: columna `" barrio "` con espacios en `Vivienda`; passwords en texto plano | Calidad / seguridad | 🟢 Informativo |
 
 ---
@@ -78,7 +78,7 @@ Basado en la auditoría del backend (último commit `Feature-1.6`, ver [ROADMAP.
 ## 5. El modelo de riesgo (lo que exponemos)
 
 Es una **regla transparente, no una caja negra** (a propósito: el ministerio debe poder
-explicar el número ante una ONG):
+explicar el número ante una gestora):
 
 - **Plazo contractual de construcción: 90 días.**
 - 🔴 **Riesgo alto:** obra activa vencida (>90 días) con avance < 30%.

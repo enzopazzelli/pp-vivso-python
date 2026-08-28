@@ -18,7 +18,7 @@ El sistema **VIVSO** reemplaza tres sistemas legacy desconectados (App GPS, VISO
 | **Desarrollo** | Java Spring Boot + MySQL (schema `vivso3`) | `vivso/` |
 | **Ciencia de Datos** (este repo) | Python: ETL, análisis, indicadores, dashboard | `vivso-python/` |
 
-La misión de este componente: **modernizar la gestión** (de papel y planillas a datos estructurados) y **mejorar la toma de decisiones del área** — que el ministerio sepa qué obra visitar primero, qué ONG auditar, qué acta destrabar y dónde está el cuello de botella, con números defendibles.
+La misión de este componente: **modernizar la gestión** (de papel y planillas a datos estructurados) y **mejorar la toma de decisiones del área** — que el ministerio sepa qué obra visitar primero, qué gestora auditar, qué acta destrabar y dónde está el cuello de botella, con números defendibles.
 
 ```
 API Java / MySQL ─┐
@@ -63,9 +63,9 @@ Sin esto, el código no se entiende. Son las reglas del programa real:
 - **AFO (Avance Físico de Obra):** % de avance 0–100, calculado como suma ponderada de **15 rubros de construcción estrictamente secuenciales** (el rubro N solo arranca cuando el N-1 terminó). La secuencia y pesos salen del sistema legacy VISOC ([docs/afo.jpeg](docs/afo.jpeg)).
 - **Clasificaciones:** el sistema real tiene **15 códigos** (no 6 como el backend actual) agrupados por **criterio**: Inclusión (apta), Exclusión (rechazada), Otro (caso especial). Fuente: [docs/tipos.jpeg](docs/tipos.jpeg).
 - **Plazo contractual de construcción: 90 días** (confirmado por el área). Es la constante `PLAZO_CONSTRUCCION_DIAS` en `synthetic/generate.py` — única fuente de verdad. Hallazgo clave: ~85% de las obras terminadas lo supera.
-- **Modelo de riesgo (regla transparente, no caja negra):** obra activa que superó los 90 días → 🔴 alto si avance < 30% · 🟡 medio si 30–80% · 🟢 bajo el resto. Es una regla y no ML a propósito: el ministerio debe poder explicar el número ante una ONG.
+- **Modelo de riesgo (regla transparente, no caja negra):** obra activa que superó los 90 días → 🔴 alto si avance < 30% · 🟡 medio si 30–80% · 🟢 bajo el resto. Es una regla y no ML a propósito: el ministerio debe poder explicar el número ante una gestora.
 - **Los dos cuellos de botella:** el **constructivo** (la obra se traba en una etapa, típicamente mampostería) y el **administrativo** (obra 100% construida en estado `Finalizada` esperando el **acta de finalización** para pasar a `Adjudicada` — se demora por falta de seguimiento).
-- **Regla de visitas:** máximo 2 visitas técnicas por obra. **203 de 901 obras activas (22,5%) no tiene ninguna** — con cobertura muy dispareja entre técnicos (del 40% al 90% según el caso, ver `COBERTURA_POR_TECNICO` en `synthetic/generate.py`) — por lo que una porción del avance reportado por las ONGs queda sin verificar. De ahí salen el score de priorización de visitas y la alerta de sobre-reporte.
+- **Regla de visitas:** máximo 2 visitas técnicas por obra. **213 de 908 obras activas (23,5%) no tiene ninguna** — con cobertura muy dispareja entre técnicos (del 40% al 90% según el caso, ver `COBERTURA_POR_TECNICO` en `synthetic/generate.py`) — por lo que una porción del avance reportado por las gestoras queda sin verificar. De ahí salen el score de priorización de visitas y la alerta de sobre-reporte.
 
 ---
 
@@ -84,10 +84,10 @@ vivso-python/
 │   ├── 01_exploracion     # EDA: estados, prioridad (2b/3a), verificación técnica, riesgo
 │   ├── 02_normalizacion   # Limpieza justificada → viviendas_procesadas.csv
 │   ├── 03_correlaciones   # Criterio×tipo, ANOVA, cohortes por año, riesgo por clasificación
-│   ├── 04_indicadores     # KPIs + confiabilidad ONG + actas + etapa activa + cronograma
+│   ├── 04_indicadores     # KPIs + confiabilidad de gestoras + actas + etapa activa + cronograma
 │   └── 05_tecnicos        # Cobertura, discrepancias, score de visitas, alerta sobre-reporte
 ├── dashboard/             # Streamlit — inicio (resumen ejecutivo) + 6 páginas
-│                          #   viviendas, ONGs, minería, evolución, técnicos, mis obras
+│                          #   viviendas, gestoras, minería, evolución, técnicos, mis obras
 │                          #   components/data_loader.py centraliza la carga de CSVs
 ├── data/                  # CSVs: el dataset base se versiona (para el deploy en Streamlit
 │                          #   Cloud); los derivados de notebooks quedan gitignored. Regenerable.
@@ -125,7 +125,7 @@ copy .env.example .env          # completar VIVSO_API_URL solo si el backend est
 
 ```powershell
 python -m db.setup              # crea tablas + catálogo de rubros
-python -m synthetic.generate    # 1.500 viviendas + ONGs + técnicos + visitas + rubros AFO
+python -m synthetic.generate    # 1.500 viviendas + gestoras + técnicos + visitas + rubros AFO
 ```
 
 ### Notebooks (en Colab)
@@ -152,7 +152,7 @@ Cerrado en Hito 2 y posteriores:
 
 - ✅ ETL con fallback API → CSV; generador sintético con reglas de negocio reales (15 clasificaciones + criterio, rubros AFO secuenciales, ciclo de actas, plazo 90)
 - ✅ 5 notebooks de análisis con hallazgos accionables (22,5% de obras activas sin verificación, dos cuellos de botella, cohortes)
-- ✅ Indicadores de gestión: **índice de confiabilidad de ONG**, **score de priorización de visitas**, **alerta de sobre-reporte**, **actas atascadas**, **etapa activa / cuello de botella constructivo**
+- ✅ Indicadores de gestión: **índice de confiabilidad de gestora**, **score de priorización de visitas**, **alerta de sobre-reporte**, **actas atascadas**, **etapa activa / cuello de botella constructivo**
 - ✅ Dashboard Streamlit con **inicio de resumen ejecutivo** (KPIs globales, alerta de obras en riesgo sin visita, mapa provincial, navegación) + 6 páginas con mapa de riesgo
 - ✅ Página **Evolución**: series de tiempo del programa (inicios vs. finalizaciones por mes, backlog acumulado, tasa de finalización por trimestre)
 - ✅ Modelo de riesgo recalibrado al plazo real de 90 días (2026-06-10)

@@ -8,9 +8,15 @@ import plotly.graph_objects as go
 import pandas as pd
 from dashboard.components.data_loader import cargar_viviendas, cargar_organizaciones
 from dashboard.components.criterios import nota_criterio
+from db.setup import TIPOS_GESTORA
 
-st.set_page_config(page_title="ONGs — VIVSO", layout="wide")
-st.title("🤝 ONGs gestoras")
+st.set_page_config(page_title="Gestoras — VIVSO", layout="wide")
+st.title("🤝 Organizaciones gestoras")
+st.caption(
+    "El programa se ejecuta a través de municipios, comisiones municipales, ONGs y "
+    "cooperativas. La gestora es quien solicita las viviendas y se hace cargo de la "
+    "obra, así que toda obra tiene una."
+)
 
 df  = cargar_viviendas()
 orgs = cargar_organizaciones()
@@ -21,14 +27,18 @@ if orgs.empty:
 
 nombre_map = dict(zip(orgs["cuit"], orgs["nombre"])) if not orgs.empty else {}
 
+# El ámbito (Público/Privado) es donde se parte la palanca del ministerio ante una
+# obra trabada: al municipio se le gestiona, a la ONG se le reclama por convenio.
+orgs["ambito"] = orgs["tipo_gestora"].map(TIPOS_GESTORA)
+
 # ── KPIs globales ─────────────────────────────────────────────────────────
 c1, c2, c3, c4 = st.columns(4)
-c1.metric("ONGs registradas",  len(orgs))
-c2.metric("ONGs activas",      int((orgs["estado"] == "ACTIVA").sum()))
-c3.metric("Viviendas con ONG", int(df["cuit_org"].notna().sum()))
-c4.metric("Sin ONG asignada",  int(df["cuit_org"].isna().sum()))
+c1.metric("Gestoras registradas", len(orgs))
+c2.metric("Gestoras activas",     int((orgs["estado"] == "ACTIVA").sum()))
+c3.metric("Tipos de gestora",     int(orgs["tipo_gestora"].nunique()))
+c4.metric("De ámbito público",    int((orgs["ambito"] == "Público").sum()))
 
-nota_criterio("ongs")
+nota_criterio("gestoras")
 
 st.divider()
 
@@ -36,8 +46,10 @@ st.divider()
 st.subheader("Rendimiento comparativo por organización")
 
 df_org = df[df["cuit_org"].notna()].copy()
-df_org["nombre_org"] = df_org["cuit_org"].map(nombre_map).fillna(df_org["cuit_org"])
-df_org["org_corta"]  = df_org["nombre_org"].str[:32]
+df_org["nombre_org"]   = df_org["cuit_org"].map(nombre_map).fillna(df_org["cuit_org"])
+df_org["org_corta"]    = df_org["nombre_org"].str[:32]
+df_org["tipo_gestora"] = df_org["cuit_org"].map(dict(zip(orgs["cuit"], orgs["tipo_gestora"])))
+df_org["ambito"]       = df_org["tipo_gestora"].map(TIPOS_GESTORA)
 
 rendimiento = (
     df_org.groupby("org_corta")
@@ -87,15 +99,71 @@ with col_b:
     fig2.update_layout(margin=dict(l=0))
     st.plotly_chart(fig2, width='stretch')
 
-# ── Detalle por ONG seleccionada ──────────────────────────────────────────
+st.divider()
+
+# ── Comparación por tipo de gestora ───────────────────────────────────────
+# Dimensión nueva: no todas las gestoras son ONGs. La comparación por tipo es
+# preliminar — las proporciones del dataset son el supuesto [S16], sin confirmar
+# con el área todavía, así que sirve para ver la mecánica y no para concluir.
+st.subheader("Comparación por tipo de gestora")
+
+por_tipo = (
+    df_org.groupby("tipo_gestora")
+    .agg(
+        obras       =("avance_obra", "count"),
+        avance_prom =("avance_obra", "mean"),
+        en_riesgo   =("nivel_riesgo", lambda x: x.isin(["alto", "medio"]).sum()),
+        dias_prom   =("dias_activa", "mean"),
+    )
+    .reset_index()
+)
+por_tipo["riesgo_pct"] = (por_tipo["en_riesgo"] / por_tipo["obras"] * 100).round(1)
+por_tipo["avance_prom"] = por_tipo["avance_prom"].round(1)
+por_tipo["dias_prom"]   = por_tipo["dias_prom"].round(0)
+
+col_t1, col_t2 = st.columns(2)
+with col_t1:
+    fig_t = px.bar(
+        por_tipo.sort_values("avance_prom"),
+        x="avance_prom", y="tipo_gestora", orientation="h",
+        title="Avance promedio por tipo de gestora",
+        color="tipo_gestora",
+        color_discrete_sequence=["#4f46e5", "#10b981", "#f59e0b", "#ec4899"],
+        labels={"avance_prom": "Avance (%)", "tipo_gestora": ""},
+    )
+    fig_t.update_layout(showlegend=False, margin=dict(l=0))
+    st.plotly_chart(fig_t, width='stretch')
+
+with col_t2:
+    fig_t2 = px.bar(
+        por_tipo.sort_values("riesgo_pct"),
+        x="riesgo_pct", y="tipo_gestora", orientation="h",
+        title="Obras en riesgo por tipo de gestora (%)",
+        color="tipo_gestora",
+        color_discrete_sequence=["#4f46e5", "#10b981", "#f59e0b", "#ec4899"],
+        labels={"riesgo_pct": "En riesgo (%)", "tipo_gestora": ""},
+    )
+    fig_t2.update_layout(showlegend=False, margin=dict(l=0))
+    st.plotly_chart(fig_t2, width='stretch')
+
+st.info(
+    "Lectura pendiente: si los tipos se comportan distinto, la recomendación al área "
+    "cambia según el tipo — a un municipio o comisión municipal se le gestiona "
+    "institucionalmente, a una ONG o cooperativa se le reclama por convenio. "
+    "Hoy el reparto es un supuesto sin validar: no sacar conclusiones de estos números."
+)
+
+st.divider()
+
+# ── Detalle por gestora seleccionada ──────────────────────────────────────
 st.subheader("Detalle por organización")
 
-ong_sel = st.selectbox(
-    "Seleccioná una ONG",
+org_sel = st.selectbox(
+    "Seleccioná una gestora",
     options=rendimiento["org_corta"].tolist(),
 )
 
-df_sel = df_org[df_org["org_corta"] == ong_sel]
+df_sel = df_org[df_org["org_corta"] == org_sel]
 info_cuit = df_sel["cuit_org"].iloc[0] if len(df_sel) else None
 info_org  = orgs[orgs["cuit"] == info_cuit].iloc[0] if info_cuit and not orgs.empty else None
 
@@ -103,13 +171,15 @@ if info_org is not None:
     with st.expander("Datos de la organización", expanded=True):
         i1, i2, i3 = st.columns(3)
         i1.markdown(f"**Nombre:** {info_org.get('nombre','—')}")
-        i1.markdown(f"**Tipo:** {info_org.get('tipo','—')}")
+        i1.markdown(f"**Tipo de gestora:** {info_org.get('tipo_gestora','—')} "
+                    f"({info_org.get('ambito','—')})")
+        i1.markdown(f"**Forma jurídica:** {info_org.get('tipo','—')}")
         i2.markdown(f"**Presidente:** {info_org.get('presidente','—')}")
         i2.markdown(f"**DNI:** {info_org.get('dni_presidente','—')}")
         i3.markdown(f"**Contacto:** {info_org.get('contacto','—')}")
         i3.markdown(f"**Estado:** {info_org.get('estado','—')}")
 
-# KPIs de la ONG seleccionada
+# KPIs de la gestora seleccionada
 m1, m2, m3, m4, m5 = st.columns(5)
 m1.metric("Obras totales",   len(df_sel))
 m2.metric("Avance promedio", f"{df_sel['avance_obra'].mean():.1f}%")
@@ -117,14 +187,14 @@ m3.metric("Terminadas",      int(df_sel["estado"].isin(["Finalizada","Adjudicada
 m4.metric("Riesgo alto",     int((df_sel["nivel_riesgo"] == "alto").sum()), delta_color="inverse")
 m5.metric("Días prom.",      f"{df_sel['dias_activa'].mean():.0f}")
 
-# Distribución de estados de esta ONG
+# Distribución de estados de esta gestora
 col_p, col_q = st.columns(2)
 with col_p:
     est_sel = df_sel["estado"].value_counts().reset_index()
     est_sel.columns = ["estado", "cantidad"]
     fig3 = px.pie(
         est_sel, names="estado", values="cantidad",
-        title=f"Estados de obra — {ong_sel[:25]}",
+        title=f"Estados de obra — {org_sel[:25]}",
         color="estado",
         color_discrete_map={"Iniciada":"#f59e0b","Avanzada":"#3b82f6",
                              "Finalizada":"#22c55e","Adjudicada":"#6366f1"},

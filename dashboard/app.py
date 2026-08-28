@@ -132,7 +132,7 @@ st.subheader("Explorar el sistema")
 
 SECCIONES = [
     ("pages/01_viviendas.py", "🏘", "Viviendas", "Catastro, filtros y mapa de riesgo"),
-    ("pages/02_ongs.py",      "🤝", "ONGs",      "Rendimiento de las gestoras"),
+    ("pages/02_gestoras.py",  "🤝", "Gestoras",  "Rendimiento de las gestoras"),
     ("pages/03_mineria.py",   "🔬", "Minería",   "Modelo de riesgo, rubros y tiempos"),
     ("pages/06_evolucion.py", "📈", "Evolución", "Series de tiempo del programa"),
     ("pages/04_tecnicos.py",  "👷", "Técnicos",  "Vista del jefe de área"),

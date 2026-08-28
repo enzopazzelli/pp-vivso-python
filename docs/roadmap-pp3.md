@@ -111,6 +111,13 @@ en el sintético" y pasen a evaluarse con criterio y, si es posible, con dato re
 - [ ] Revisar si el modelo de riesgo (regla fija, calibrada a 90 días) sigue siendo defendible
       con los datos reales, o si el corte necesita recalibrarse — sin abandonar el criterio de
       "regla transparente, no caja negra" que ya se defendió en Hito 3.
+- [ ] **Corregir el falso positivo del rehacer.** El modelo lee "vencida + poco avance =
+      paralizada", pero una obra **rechazada por el técnico y en proceso de rehacerse** es
+      exactamente eso, y es la situación opuesta: ahí sí hay trabajo pasando. Hoy el indicador
+      clasifica como abandono a la gestora que está corrigiendo. Depende de dos cosas a
+      confirmar con el área: si el rechazo queda registrado en algún lado (`[V7]` en
+      [vision-afo.md](vision-afo.md)) y si el plazo de 90 días se reinicia tras un rechazo
+      (`[V6]`) — esto último tiene consecuencia contractual: cambia quién está incumpliendo.
 
 ### Etapa 7 — Insights
 

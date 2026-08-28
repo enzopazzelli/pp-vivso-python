@@ -29,7 +29,7 @@ Preguntas estructurales (no son parámetros sueltos: definen el tamaño del mode
 |---|---|:--:|---|
 | ¿Cuántas viviendas tiene el programa activo hoy? | 1.500 | ☐ | __________ |
 | ¿En cuántos departamentos hay obras? | 18 | ☐ | __________ |
-| ¿Cuántas ONGs gestoras hay (y cuántas activas)? | 3 (2 activas, 1 finalizada) | ☐ | __________ |
+| ¿Cuántas organizaciones gestoras hay, y de qué tipo? | 8: 2 municipios · 2 comisiones municipales · 2 ONGs · 2 cooperativas | ☐ | __________ |
 | ¿Cuántos técnicos de campo hay? | 6 | ☐ | __________ |
 | ¿Cuál es el máximo de visitas técnicas por obra? | 2 (primera y segunda) | ☐ | __________ |
 
@@ -98,16 +98,25 @@ esto no es así en la realidad, es lo que más cambia el relato.**
 
 ---
 
-## 6. Control técnico y gestión de ONGs
+## 6. Control técnico y gestión de las organizaciones gestoras
 
 | Cód | Supuesto | Valor que usamos | ¿Correcto? | Corregir a |
 |---|---|---|:--:|---|
-| **[S8]** | **Sobre-reporte** de la ONG vs. lo que verifica el técnico | de −8 a +15 puntos (media +3) | ☐ | __________ |
-| **[S9]** | Obras **sin ONG** asignada | 20% | ☐ | __________ |
+| **[S8]** | **Sobre-reporte** de la gestora vs. lo que verifica el técnico | de −8 a +15 puntos (media +3) | ☐ | __________ |
+| **[S16]** | **Distribución por tipo de gestora** | reparto parejo (~25% c/u) entre municipios, comisiones municipales, ONGs y cooperativas | ☐ | __________ |
 | **[S10]** | Obras finalizadas con el **acta atascada** | 45% | ☐ | __________ |
 | **[S11]** | **Cobertura de visitas** por técnico | entre 40% y 90% según el técnico | ☐ | __________ |
 
-> - ¿Es real que las ONGs tienden a reportar de más? ¿Conocen casos? ______________________
+> **[S9] — REFUTADO (2026-08-28).** Asumíamos que un **20% de las obras no tenía gestora
+> asignada**. Es imposible: la gestora (municipio, comisión municipal, ONG o cooperativa)
+> es quien **solicita** las viviendas, no al revés, así que toda obra tiene una por
+> construcción. Confirmado por el equipo, **a ratificar con el área**. El generador ya no
+> produce obras sin gestora. Este supuesto estaba marcado como no confirmado desde el
+> principio — el mecanismo funcionó como tenía que funcionar.
+
+> - ¿Es real que las gestoras tienden a reportar de más? ¿Conocen casos? __________________
+> - ¿Los cuatro tipos de gestora se comportan distinto (avance, actas, sobre-reporte)? ____
+> - ¿El trámite del acta de finalización es igual para un municipio que para una ONG? _____
 > - ¿El acta de finalización se demora tanto? ¿Quién la tramita? __________________________
 
 ---
@@ -134,5 +143,5 @@ esto no es así en la realidad, es lo que más cambia el relato.**
    negrita) y actualizarlos si cambiaron.
 5. Abrir el dashboard (`streamlit run dashboard/app.py`) para ver el resultado.
 
-> Las preguntas estructurales de la sección 1 (cantidad de ONGs, técnicos, etc.) pueden requerir
+> Las preguntas estructurales de la sección 1 (cantidad de gestoras, técnicos, etc.) pueden requerir
 > ajustes algo mayores en el generador; el resto son cambios de un solo valor.

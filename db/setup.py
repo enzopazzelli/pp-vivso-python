@@ -35,6 +35,19 @@ RUBROS_CATALOGO = [
     {"id": 15, "nombre": "Varios",                            "descripcion": "Trabajos varios de albañilería y terminaciones finales",                 "peso_pct": 3,  "orden": 15},
 ]
 
+# Tipos de organización gestora, con su ámbito institucional.
+# El programa se ejecuta a través de cuatro tipos de gestora. La distinción no es
+# cosmética: cambia la palanca del ministerio ante una obra trabada — a un municipio
+# o una comisión municipal se le gestiona institucionalmente, a una ONG o a una
+# cooperativa se le reclama por convenio. El `ambito` es como se agrupan los tipos
+# para segmentar indicadores, porque es donde se parte esa palanca.
+TIPOS_GESTORA = {
+    "Municipio":          "Público",
+    "Comisión Municipal": "Público",
+    "ONG":                "Privado",
+    "Cooperativa":        "Privado",
+}
+
 
 def crear_tablas():
     Path(DB_PATH).parent.mkdir(parents=True, exist_ok=True)

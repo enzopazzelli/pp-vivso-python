@@ -65,11 +65,76 @@ BARRIOS = [
     "Villa Jardín", "Los Ejidos", "Malvinas", "Santa Rosa", "Centenario", None,
 ]
 
-CUITS_ONG = [
-    "30-71782995-2",
-    "30-68902314-5",
-    "30-59804127-3",
+# Catálogo único de organizaciones gestoras — la fuente, no duplicar CUITs aparte.
+#
+# El ministerio no construye: la gestora SOLICITA las viviendas y se hace cargo de la
+# obra. Son cuatro tipos (ver TIPOS_GESTORA en db/setup.py) y la diferencia cambia la
+# palanca del ministerio ante una obra trabada: al municipio y a la comisión municipal
+# se les gestiona institucionalmente, a la ONG y a la cooperativa se les reclama por
+# convenio. `tipo` conserva la forma jurídica del sistema legacy; `tipo_gestora` es la
+# dimensión de análisis nueva.
+ORGANIZACIONES_CATALOGO = [
+    # ── Ámbito privado ──────────────────────────────────────────────────────
+    {
+        "cuit": "30-71782995-2", "nombre": "COOP DE TRABAJO SAN ANTONIO MN 65.044",
+        "tipo": "Cooperativa de Trabajo", "tipo_gestora": "Cooperativa",
+        "dom_legal": "Ruta Prov 204, San Antonio, Jimenez",
+        "contacto": "3815999141", "cpe": "58.265",
+        "presidente": "Diaz Raul Omar", "dni_presidente": "16468394", "estado": "ACTIVA",
+    },
+    {
+        "cuit": "30-70945612-8", "nombre": "COOP DE TRABAJO EL PORVENIR LTDA MN 71.209",
+        "tipo": "Cooperativa de Trabajo", "tipo_gestora": "Cooperativa",
+        "dom_legal": "Bº Autonomía, Santiago del Estero",
+        "contacto": "3855120744", "cpe": "61.402",
+        "presidente": "Ledesma Carlos Alberto", "dni_presidente": "24567891", "estado": "ACTIVA",
+    },
+    {
+        "cuit": "30-68902314-5", "nombre": "ASOC. CIVIL CONSTRUIR JUNTOS MN 48.231",
+        "tipo": "Asociación Civil", "tipo_gestora": "ONG",
+        "dom_legal": "Av. Belgrano 456, La Banda",
+        "contacto": "3856102920", "cpe": "52.140",
+        "presidente": "Gomez Ana Maria", "dni_presidente": "22345678", "estado": "ACTIVA",
+    },
+    {
+        "cuit": "30-59804127-3", "nombre": "MUTUAL PROGRESO FAMILIAR MN 31.088",
+        "tipo": "Mutual", "tipo_gestora": "ONG",
+        "dom_legal": "Calle Rivadavia 230, Frías",
+        "contacto": "3858441230", "cpe": "44.988",
+        "presidente": "Romero Hector Daniel", "dni_presidente": "18904231", "estado": "FINALIZADA",
+    },
+    # ── Ámbito público ──────────────────────────────────────────────────────
+    {
+        "cuit": "30-99903421-7", "nombre": "MUNICIPALIDAD DE LA BANDA",
+        "tipo": "Municipalidad", "tipo_gestora": "Municipio",
+        "dom_legal": "Av. Besares 145, La Banda",
+        "contacto": "3854221100", "cpe": "70.011",
+        "presidente": "Juarez Silvia Beatriz", "dni_presidente": "20114552", "estado": "ACTIVA",
+    },
+    {
+        "cuit": "30-99871205-4", "nombre": "MUNICIPALIDAD DE FRÍAS",
+        "tipo": "Municipalidad", "tipo_gestora": "Municipio",
+        "dom_legal": "San Martín 55, Frías",
+        "contacto": "3854670233", "cpe": "70.048",
+        "presidente": "Coronel Miguel Angel", "dni_presidente": "17993410", "estado": "ACTIVA",
+    },
+    {
+        "cuit": "30-99812340-1", "nombre": "COMISIÓN MUNICIPAL DE PINTO",
+        "tipo": "Comisión Municipal", "tipo_gestora": "Comisión Municipal",
+        "dom_legal": "Belgrano s/n, Pinto",
+        "contacto": "3855338217", "cpe": "70.130",
+        "presidente": "Herrera Nora Isabel", "dni_presidente": "26780145", "estado": "ACTIVA",
+    },
+    {
+        "cuit": "30-99765488-6", "nombre": "COMISIÓN MUNICIPAL DE TINTINA",
+        "tipo": "Comisión Municipal", "tipo_gestora": "Comisión Municipal",
+        "dom_legal": "25 de Mayo s/n, Tintina",
+        "contacto": "3856904471", "cpe": "70.142",
+        "presidente": "Sosa Ramon Eduardo", "dni_presidente": "21456098", "estado": "ACTIVA",
+    },
 ]
+
+CUITS_GESTORAS = [o["cuit"] for o in ORGANIZACIONES_CATALOGO]
 
 # ═══════════════════════════════════════════════════════════════════════════
 # SUPUESTOS DEL PROGRAMA — A VALIDAR CON EL ÁREA
@@ -117,13 +182,21 @@ ETAPAS_ESTRUCTURALES = {3, 4, 5}         # mampostería y encadenado
 ETAPAS_TERMINACIONES = {6, 7, 8, 9}      # revoques y cielorrasos
 ETAPAS_INSTALACIONES = {10, 11, 12, 13}  # carpintería e instalaciones
 
-# [S8] Discrepancia entre el avance que reporta la ONG y el que verifica el técnico
-#      (en puntos de AFO; negativo = la ONG subestimó). Mide el sobre-reporte.
-DISCREPANCIA_ONG_PRIMERA = (-8, 15)
-DISCREPANCIA_ONG_SEGUNDA = (-5, 10)
+# [S8] Discrepancia entre el avance que reporta la gestora y el que verifica el técnico
+#      (en puntos de AFO; negativo = la gestora subestimó). Mide el sobre-reporte.
+DISCREPANCIA_GESTORA_PRIMERA = (-8, 15)
+DISCREPANCIA_GESTORA_SEGUNDA = (-5, 10)
 
-# [S9] Proporción de obras sin ONG gestora asignada.
-PROP_SIN_ONG = 0.20
+# [S16] Distribución de obras por tipo de gestora. Reparto parejo entre los cuatro
+#       tipos (~25% c/u) mientras el área no confirme las proporciones reales. Se
+#       materializa vía ORGANIZACIONES_CATALOGO — 2 gestoras por tipo, asignación
+#       uniforme. Para cambiar el reparto, cambiar cuántas gestoras hay de cada tipo.
+#
+# [S9] DADO DE BAJA (2026-08-28). Modelaba un 20% de obras "sin gestora asignada" y
+#      resultó imposible: la gestora es quien SOLICITA las viviendas, no al revés, así
+#      que toda obra tiene gestora por construcción. Confirmado por el equipo, a
+#      ratificar con el área. El supuesto estaba marcado como no confirmado en
+#      docs/datos-a-confirmar.md — funcionó como tenía que funcionar.
 
 # [S10] Proporción de obras finalizadas con el acta atascada (cuello administrativo).
 PROP_ACTAS_ATASCADAS = 0.45
@@ -227,7 +300,7 @@ def generar_viviendas(n: int) -> pd.DataFrame:
 
         avance    = _avance_coherente(estado)
         dias_act  = _dias_activa(f_ini, f_fin)
-        cuit_org  = random.choice(CUITS_ONG) if random.random() > PROP_SIN_ONG else None  # [S9]
+        cuit_org  = random.choice(CUITS_GESTORAS)   # [S16] toda obra tiene gestora
         criterio  = CLASIFICACIONES[clasif][0]
 
         # nivel_riesgo y dias_activa se recalculan al final en recalcular_derivados(),
@@ -265,29 +338,34 @@ def generar_viviendas(n: int) -> pd.DataFrame:
 
 def garantizar_casos(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Da un perfil diferenciado a cada ONG para que los gráficos muestren
+    Da un perfil diferenciado a tres gestoras para que los gráficos muestren
     contrastes claros entre organizaciones que funcionan bien y mal.
 
     Perfiles asignados:
-    - COOP SAN ANTONIO (30-71782995-2): ONG eficiente — obras con buen avance,
+    - COOP SAN ANTONIO (30-71782995-2): gestora eficiente — obras con buen avance,
       pocos días activa, casi sin riesgo. Caso "referencia positiva".
 
-    - CONSTRUIR JUNTOS (30-68902314-5): ONG con problemas — obras estancadas,
+    - CONSTRUIR JUNTOS (30-68902314-5): gestora con problemas — obras estancadas,
       muchos días sin avanzar, alto porcentaje en riesgo. Caso "alerta".
 
     - MUTUAL PROGRESO (30-59804127-3): FINALIZADA — todas sus obras terminadas.
       Sirve de contraste histórico.
 
-    También garantiza diversidad en clasificaciones, estados y casos sin ONG.
+    Las otras cinco gestoras conservan el comportamiento generado. Es a propósito:
+    los tres perfiles fijos son privados, así que el contraste que se ve en los
+    gráficos surge de cómo gestiona cada una y no del tipo de gestora — que es lo
+    que se quiere poder analizar después sin haberlo plantado a mano.
+
+    También garantiza diversidad en clasificaciones y estados.
     """
     df = df.copy()
     rng = np.random.default_rng(42)
 
     # Nota: estos perfiles fijan avance, estado y FECHAS (vía _fijar_dias_activa).
     # El nivel_riesgo NO se asigna a mano — lo deriva recalcular_derivados() a partir
-    # del plazo de 90 días, así el contraste entre ONGs surge solo de los datos.
+    # del plazo de 90 días, así el contraste entre gestoras surge solo de los datos.
 
-    # ── ONG eficiente: COOP SAN ANTONIO ─────────────────────────────────────
+    # ── Gestora eficiente: COOP SAN ANTONIO ─────────────────────────────────
     # Obras dentro de plazo con buen avance → la regla las marcará "bajo"
     cuit_buena = "30-71782995-2"
     idx_buena  = df[df['cuit_org'] == cuit_buena].index
@@ -310,7 +388,7 @@ def garantizar_casos(df: pd.DataFrame) -> pd.DataFrame:
     df.loc[idx_riesgo_buena, 'estado']      = 'Iniciada'
     _fijar_dias_activa(df, idx_riesgo_buena, 150, 320, rng)   # muy pasadas de plazo
 
-    # ── ONG con problemas: CONSTRUIR JUNTOS ──────────────────────────────────
+    # ── Gestora con problemas: CONSTRUIR JUNTOS ─────────────────────────────
     # Obras vencidas y estancadas → la regla las marcará "alto"/"medio"
     cuit_mala = "30-68902314-5"
     idx_mala  = df[df['cuit_org'] == cuit_mala].index
@@ -358,48 +436,25 @@ def garantizar_casos(df: pd.DataFrame) -> pd.DataFrame:
             df.loc[idx_reemplazo, 'clasificacion'] = clasif
             df.loc[idx_reemplazo, 'criterio']      = criterio
 
-    # ── Estados — mínimo 15 de cada uno (sobre viviendas sin ONG) ───────────
-    sin_org = df[df['cuit_org'].isna()]
+    # ── Estados — mínimo 15 de cada uno ─────────────────────────────────────
+    # Se retoca solo el pool de gestoras sin perfil fijado arriba, para no romper
+    # los contrastes de COOP SAN ANTONIO / CONSTRUIR JUNTOS / MUTUAL PROGRESO.
+    pool_libre = df[~df['cuit_org'].isin([cuit_buena, cuit_mala, cuit_fin])]
     for estado, av_lo, av_hi in [('Iniciada', 0, 35), ('Avanzada', 36, 79),
                                    ('Finalizada', 80, 100), ('Adjudicada', 100, 100)]:
         n_actual = (df['estado'] == estado).sum()
         if n_actual < 15:
             faltan = 15 - n_actual
-            pool   = sin_org.sample(min(faltan, len(sin_org)), random_state=3).index
+            pool   = pool_libre.sample(min(faltan, len(pool_libre)), random_state=3).index
             df.loc[pool, 'estado']     = estado
             df.loc[pool, 'avance_obra'] = rng.integers(av_lo, av_hi + 1, size=len(pool))
-
-    # ── Mínimo 15 obras sin ONG asignada ────────────────────────────────────
-    if (df['cuit_org'].isna()).sum() < 15:
-        faltan = 15 - (df['cuit_org'].isna()).sum()
-        idx    = df[df['cuit_org'].notna()].sample(faltan, random_state=4).index
-        df.loc[idx, 'cuit_org'] = None
 
     return df
 
 
 def generar_organizaciones() -> pd.DataFrame:
-    tipos = ["Cooperativa de Trabajo", "Asociación Civil", "Mutual"]
-    return pd.DataFrame([
-        {
-            "cuit": "30-71782995-2", "nombre": "COOP DE TRABAJO SAN ANTONIO MN 65.044",
-            "tipo": "Cooperativa de Trabajo", "dom_legal": "Ruta Prov 204, San Antonio, Jimenez",
-            "contacto": "3815999141", "cpe": "58.265",
-            "presidente": "Diaz Raul Omar", "dni_presidente": "16468394", "estado": "ACTIVA",
-        },
-        {
-            "cuit": "30-68902314-5", "nombre": "ASOC. CIVIL CONSTRUIR JUNTOS MN 48.231",
-            "tipo": "Asociación Civil", "dom_legal": "Av. Belgrano 456, La Banda",
-            "contacto": "3856102920", "cpe": "52.140",
-            "presidente": "Gomez Ana Maria", "dni_presidente": "22345678", "estado": "ACTIVA",
-        },
-        {
-            "cuit": "30-59804127-3", "nombre": "MUTUAL PROGRESO FAMILIAR MN 31.088",
-            "tipo": "Mutual", "dom_legal": "Calle Rivadavia 230, Frías",
-            "contacto": "3858441230", "cpe": "44.988",
-            "presidente": "Romero Hector Daniel", "dni_presidente": "18904231", "estado": "FINALIZADA",
-        },
-    ])
+    """Las gestoras salen del catálogo único de arriba, no se definen acá."""
+    return pd.DataFrame(ORGANIZACIONES_CATALOGO)
 
 
 def generar_tecnicos() -> pd.DataFrame:
@@ -489,9 +544,9 @@ def generar_visitas(
 
         # Primera visita
         avance_real     = avance_map.get(viv_id, 0)
-        # El técnico verifica un avance que puede diferir del reportado por la ONG.
-        # diferencia_ong > 0 → ONG sobreestimó; < 0 → ONG subestimó. Rango en [S8].
-        diferencia      = random.randint(*DISCREPANCIA_ONG_PRIMERA)
+        # El técnico verifica un avance que puede diferir del reportado por la gestora.
+        # diferencia_ong > 0 → la gestora sobreestimó; < 0 → subestimó. Rango en [S8].
+        diferencia      = random.randint(*DISCREPANCIA_GESTORA_PRIMERA)
         avance_verif    = max(0, min(100, avance_real - diferencia))
         f_primera       = fake.date_between(start_date="-5m", end_date="-1m")
 
@@ -508,7 +563,7 @@ def generar_visitas(
 
         # Segunda visita (probabilidad por técnico)
         if random.random() < segunda_visita_prob.get(tec_id, 0.3):
-            diferencia2   = random.randint(*DISCREPANCIA_ONG_SEGUNDA)  # [S8]
+            diferencia2   = random.randint(*DISCREPANCIA_GESTORA_SEGUNDA)  # [S8]
             avance_verif2 = max(avance_verif, min(100, avance_real - diferencia2))
             f_segunda     = fake.date_between(start_date=f_primera, end_date="today")
             registros.append({

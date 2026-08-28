@@ -97,10 +97,10 @@ with col2:
     fig2.update_layout(coloraxis_showscale=False, height=350)
     st.plotly_chart(fig2, width='stretch')
 
-# ── Discrepancias ONG vs. técnico ─────────────────────────────────────────
-st.subheader("Discrepancias: lo que reporta la ONG vs. lo que verifica el técnico")
+# ── Discrepancias gestora vs. técnico ─────────────────────────────────────
+st.subheader("Discrepancias: lo que reporta la gestora vs. lo que verifica el técnico")
 st.caption(
-    "Valores positivos = la ONG reportó más avance del que el técnico encontró. "
+    "Valores positivos = la gestora reportó más avance del que el técnico encontró. "
     "Una discrepancia alta y consistente puede indicar sobreestimación deliberada."
 )
 

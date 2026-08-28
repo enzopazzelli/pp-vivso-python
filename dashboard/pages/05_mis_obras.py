@@ -133,7 +133,7 @@ with col_a:
     st.plotly_chart(fig, width='stretch')
 
 with col_b:
-    # Avance ONG vs avance verificado en las obras visitadas
+    # Avance reportado por la gestora vs. avance verificado en las obras visitadas
     comparar = mis_viv[mis_viv["avance_verificado"].notna()].copy()
     if not comparar.empty:
         fig2 = px.scatter(
@@ -142,8 +142,8 @@ with col_b:
             color="nivel_riesgo",
             color_discrete_map={"bajo":"#22c55e","medio":"#f59e0b","alto":"#ef4444"},
             hover_data={"num_exp": True, "localidad": True},
-            title="Avance reportado (ONG) vs. verificado (técnico)",
-            labels={COL_AV: "Avance ONG (%)", "avance_verificado": "Verificado (%)"},
+            title="Avance reportado (gestora) vs. verificado (técnico)",
+            labels={COL_AV: "Avance gestora (%)", "avance_verificado": "Verificado (%)"},
         )
         fig2.add_shape(type="line", x0=0, y0=0, x1=100, y1=100,
                        line=dict(color="#94a3b8", dash="dash"))

@@ -30,10 +30,13 @@ NOTAS = {
         "panel lateral (departamento, estado, riesgo…); los KPIs y gráficos se recalculan "
         "sobre ese subconjunto.",
 
-    "ongs":
-        "Agrupa las obras (tabla **vivienda**) por su **ONG gestora** (tabla "
-        "**organizacion**) para comparar el desempeño de cada organización: su avance "
-        "promedio y cuántas de sus obras están **en riesgo** (vencidas y con poco avance).",
+    "gestoras":
+        "Agrupa las obras (tabla **vivienda**) por su **organización gestora** (tabla "
+        "**organizacion**) para comparar el desempeño de cada una: su avance promedio y "
+        "cuántas de sus obras están **en riesgo** (vencidas y con poco avance). La gestora "
+        "puede ser un **municipio**, una **comisión municipal**, una **ONG** o una "
+        "**cooperativa** (`tipo_gestora`); el *ámbito* agrupa esos tipos en público y "
+        "privado, que es donde cambia la palanca del ministerio ante una obra trabada.",
 
     "riesgo":
         "Cada obra se ubica por sus **días activa** y su **avance** (tabla **vivienda**). "
@@ -54,7 +57,7 @@ NOTAS = {
         "Cruza tres fuentes: **asignacion_tecnico** (qué obras tiene cada técnico), "
         "**visita** (las visitas hechas, con el avance verificado en el campo) y "
         "**vivienda**. *Cobertura*: % de obras con al menos una visita · *Discrepancia*: "
-        "avance que reporta la ONG menos el que verifica el técnico.",
+        "avance que reporta la gestora menos el que verifica el técnico.",
 
     "mis_obras":
         "Muestra las obras asignadas al técnico seleccionado (**asignacion_tecnico**), con "

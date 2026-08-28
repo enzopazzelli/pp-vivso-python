@@ -64,6 +64,15 @@ NOTAS = {
         "sus **visitas** y el riesgo de cada obra (**vivienda**). La cola de trabajo se "
         "ordena por estado de visita y nivel de riesgo.",
 
+    "verificacion_foto":
+        "Un modelo de visión reporta la **evidencia física observable** en la foto (¿hay "
+        "muros?, ¿a qué altura?, ¿encadenado?, ¿aberturas?) y una **regla determinista** la "
+        "convierte en rubro alcanzado y AFO usando el catálogo de **rubro_obra** — el modelo "
+        "nunca estima el porcentaje. Ese AFO se contrasta con lo que declaró la gestora para "
+        "darle un **grado de respaldo documental**. Los supuestos del componente son los "
+        "`[V#]` de `vision/rubrica.py`. **Hoy la percepción está simulada**: no hay fotos ni "
+        "modelo conectado, así que los números miden la regla y la cola, no el modelo real.",
+
     "evolucion":
         "Agrupa por mes las fechas de inicio y de fin de las obras (tabla **vivienda**). "
         "El *backlog* son las obras abiertas en cada momento: inicios acumulados menos "

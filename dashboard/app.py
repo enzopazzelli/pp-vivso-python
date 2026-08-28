@@ -137,6 +137,8 @@ SECCIONES = [
     ("pages/06_evolucion.py", "📈", "Evolución", "Series de tiempo del programa"),
     ("pages/04_tecnicos.py",  "👷", "Técnicos",  "Vista del jefe de área"),
     ("pages/05_mis_obras.py", "🗂", "Mis obras", "Cola de trabajo del técnico"),
+    ("pages/07_verificacion_foto.py", "📷", "Verificación por foto",
+     "Ponderar el reporte de la gestora con evidencia visual"),
 ]
 
 cols = st.columns(len(SECCIONES))

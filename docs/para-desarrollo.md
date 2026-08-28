@@ -72,6 +72,13 @@ Basado en la auditoría del backend (último commit `Feature-1.6`, ver [ROADMAP.
 | 4 | Definición del esquema de roles (enum/valores) | Vistas por rol del dashboard | 🟡 Alta |
 | 5 | Dónde persiste el avance reportado por la gestora | Comparar reporte de la gestora vs. verificación técnica | 🟢 Media |
 | 6 | Avisos: columna `" barrio "` con espacios en `Vivienda`; passwords en texto plano | Calidad / seguridad | 🟢 Informativo |
+| 7 | **Registro de resoluciones del técnico por rubro**: `(vivienda, rubro, fecha, técnico, canal, resultado, motivo)` — donde `resultado` es aprueba / aprueba con observaciones / **rechaza**, y `canal` es app / presencial | Sin esto no se puede saber que una obra está **rehaciendo** y no paralizada. Ver [vision-afo.md](vision-afo.md) §4.3 | 🟡 Alta |
+
+> El pedido 7 es un **hecho operativo**, no una derivación analítica: su lugar es el backend,
+> no las tablas `cd_`. Mientras no exista, CD lo modela en `cd_` para el prototipo, pero es
+> una solución provisoria. Hoy el rechazo —cuando ocurre— no queda registrado en ningún lado
+> consultable, así que el sistema no puede distinguir una obra abandonada de una que se está
+> corrigiendo.
 
 ---
 

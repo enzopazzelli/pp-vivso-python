@@ -37,9 +37,12 @@ Tres cosas que el sistema **no** hace, y conviene que estén escritas:
 **El "As is → To be":** hoy el avance que reporta la gestora entra al sistema sin ningún
 respaldo para el ~70% de obras sin visita, y el tope de 2 visitas es el techo de todo lo que
 se puede verificar. Con esto, cada reporte entra con un **grado de respaldo documental**, el
-técnico recibe una cola priorizada en lugar de una lista plana, y —si el área confirma `[V9]`
-y `[V10]`— puede **resolver a distancia** las obras que no requieren ir, reservando las dos
-visitas presenciales para donde hacen falta.
+técnico recibe una cola priorizada en lugar de una lista plana, y puede **resolver a distancia**
+las obras que no requieren ir, reservando las dos visitas presenciales para donde hacen falta.
+
+> Ese último punto se apoya en `[V9]` y `[V10]`, que son **supuestos de diseño, no preguntas
+> pendientes** (§11). Si resultaran falsos, el sistema vuelve a ser triage: el mismo código
+> rindiendo menos, no un rediseño.
 
 ---
 
@@ -99,7 +102,9 @@ cuando ese rubro está terminado.
 ### La regla que hace auditable al catálogo
 
 Los rubros 11 y 12 parecen trabajo enterrado, pero no lo son. Confirmado con el equipo
-(2026-08-28, a ratificar con el área):
+(2026-08-28). Es lo único del diseño que conviene que revise alguien que sepa de obra —no hace
+falta que sea del área— porque acá un error no es un supuesto discutible sino un error de
+construcción:
 
 > Tanto en agua como en electricidad, durante la mampostería se pasan **mangueras vacías**
 > por las paredes y se tapan con el revoque. Ese trabajo queda absorbido en los rubros de
@@ -412,10 +417,15 @@ del diseño y no un agregado:
 
 Sin esto es una demo, no un entregable.
 
-**Gold set:** 100-150 fotos etiquetadas por el grupo y **validadas por un técnico del área**.
-Fuente preferida: fotos que el área o las gestoras ya tengan (hoy circulan por WhatsApp).
-Fuente de respaldo: imágenes públicas de construcción de vivienda social — peor validez
-externa, pero permite avanzar.
+**Gold set:** 100-150 fotos etiquetadas por el grupo. **Fuente de arranque: imágenes públicas**
+de construcción de vivienda social — no depende de que nadie nos entregue nada, y alcanza para
+medir. Si más adelante aparecen fotos del área o de las gestoras (hoy circulan por WhatsApp),
+la validez externa mejora; no es condición para empezar.
+
+El etiquetado lo hace el grupo contra la rúbrica de §3. Lo que conviene que revise **alguien
+que sepa de construcción** —un profesor, alguien del rubro, un técnico conocido; no hace falta
+que sea del área— es la rúbrica misma, no las etiquetas: ahí un error no es un supuesto
+discutible sino un error de obra.
 
 **Métricas:**
 
@@ -443,13 +453,14 @@ bajo y honesto, y cualquier mejora sobre él es ganancia medible sin inflar nada
 
 | Fase | Qué | Entregable |
 |---|---|---|
-| 0 | Rúbrica de evidencia (§3) + tabla de verificabilidad. Sin código. | Insumo para la reunión con el área |
+| 0 | Rúbrica de evidencia (§3) + tabla de verificabilidad. Sin código. | Base del componente — se revisa con alguien que sepa de obra |
 | 1 | Gold set + baseline zero-shot + matriz de confusión | **Etapa 6 — Evaluación** |
 | 2 | Capa de decisión (secuencialidad, monotonía, contraste) + integración con indicadores | **Etapa 7 — Insights** |
 | 3 | Página en el dashboard + demo end-to-end con 3-4 casos | **Etapa 8** + presentación final |
 
-Fase 0 **usa** la reunión con el área en lugar de esperarla: la rúbrica es material concreto
-que un técnico valida en minutos.
+Ninguna fase espera a nadie. La rúbrica de la Fase 0 se revisa con cualquiera que sepa de
+construcción, y el gold set de la Fase 1 arranca con imágenes públicas — ver
+[supuestos-abiertos.md](supuestos-abiertos.md) §3.
 
 ### Fuera de alcance, explícitamente
 
@@ -492,28 +503,41 @@ porque va a ser la primera objeción.
 
 ---
 
-## 11. Supuestos a confirmar y riesgos
+## 11. Supuestos de diseño y riesgos
 
 Convención `[V#]`, análoga a los `[S#]` de [datos-a-confirmar.md](datos-a-confirmar.md).
+
+> **Estos supuestos no se consultan antes de construir.** Es una decisión deliberada, con su
+> razonamiento en [supuestos-abiertos.md](supuestos-abiertos.md) §1: la obligación de PP3 ya
+> está cubierta por el dashboard, así que este componente es excedente y no hay riesgo de
+> entrega en avanzar sobre supuestos. Preguntar sobre algo que todavía no existe delega la
+> decisión de diseño; un prototipo andando la recupera.
+>
+> **La condición:** cada uno de estos supuestos tiene que ser barato de cambiar — constante
+> nombrada arriba del archivo, nunca hundida en la lógica. Si cambiar uno no es cambiar un
+> renglón, está mal implementado. La tabla de costos está en `supuestos-abiertos.md` §2.
 
 | ID | Supuesto | Estado |
 |---|---|---|
 | [V1] | En agua y electricidad las mangueras van vacías y embutidas durante mampostería; los rubros 11 y 12 certifican cables/tablero y tanque/conexiones | Confirmado por el equipo 2026-08-28 · ratificar con el área |
 | [V2] | El rubro 15 "Varios" no tiene manifestación visible propia | Sin confirmar |
-| [V3] | El área o las gestoras conservan fotos de obras que puedan compartir | **Sin confirmar — condiciona la Fase 1** |
-| [V4] | Las gestoras hoy envían fotos por WhatsApp como parte del reporte informal | Sin confirmar |
+| [V3] | El área o las gestoras conservan fotos de obras que puedan compartir | Supuesto: **no las tenemos**. El gold set arranca con imágenes públicas; si aparecen, mejora la validez externa |
+| [V4] | Las gestoras hoy envían fotos por WhatsApp como parte del reporte informal | Sin confirmar — no condiciona nada; si es así, refuerza el argumento del "As is" |
 | [V5] | La tolerancia de ±1 rubro es aceptable para el criterio del área | Sin confirmar |
 | [V6] | **¿El plazo de 90 días se extiende después de un rechazo?** Supuesto de trabajo: **sí se extiende** (decisión del equipo, 2026-08-28). Hay dos respuestas defendibles con significado contractual opuesto — si no se extiende, la gestora se come la demora por haber construido mal | **Sin confirmar — pero el diseño no depende de la respuesta (§4.4)** |
-| [V7] | ¿El rechazo queda registrado hoy en algún lado (acta, planilla, sistema), o solo circula como observación verbal del técnico? | Sin confirmar — sin registro, §4.1 no se puede implementar |
+| [V7] | ¿El rechazo queda registrado hoy en algún lado (acta, planilla, sistema), o solo circula como observación verbal del técnico? | Supuesto: **no hay registro**, lo modelamos nosotros en `cd_`. Si ya existe, se conecta — menos trabajo, no más |
 | [V8] | ¿Con qué frecuencia se rechaza y se rehace? Si es marginal, el ciclo es un caso borde; si es frecuente, es un indicador de calidad por derecho propio | Sin confirmar |
-| [V9] | **¿El tope de 2 visitas por obra aplica también a las resoluciones por app?** Si no aplica —lo esperable, porque el tope es una restricción logística de campo— ahí está la ganancia grande de la propuesta | **Sin confirmar — condiciona el tamaño del beneficio** |
-| [V10] | ¿Una aprobación remota tiene la misma validez formal que una presencial para certificar el AFO y habilitar el pago? | Sin confirmar — si no la tiene, el sistema vuelve a ser solo triage |
+| [V9] | ¿El tope de 2 visitas por obra aplica también a las resoluciones por app? | Supuesto: **no aplica** (el tope es logística de campo). Si aplicara, el sistema vuelve a triage: mismo código, menos beneficio |
+| [V10] | ¿Una aprobación remota tiene la misma validez formal que una presencial para certificar el AFO y habilitar el pago? | Supuesto: **sí la tiene**. El demo puede mostrar los dos escenarios sin cambiar código |
 
 **Riesgos:**
 
-- **[V3] es el riesgo real, y no es técnico.** Si el área no tiene fotos, el gold set sale de
-  imágenes públicas y la validez externa cae. Conviene preguntarlo *antes* de la reunión,
-  porque cambia la Fase 1 entera.
+- **El riesgo de la postura de §11, no de los supuestos.** Construir antes de consultar deja
+  expuesto a un "eso no es así" delante del área. Se mitiga con la disciplina de mantener cada
+  supuesto como constante nombrada y visible en pantalla — no preguntando antes.
+- **Validez externa del gold set.** Con imágenes públicas se puede medir, pero no representan
+  exactamente la obra del programa. Es una limitación a declarar en la presentación, no a
+  esconder.
 - **Sesgo de selección:** la gestora sube la foto que más le conviene. El protocolo de tomas
   obligatorias lo mitiga en parte, no lo elimina.
 - **Foto ≠ obra:** hay un 3% no verificable y un 10% que depende de capturar la ventana

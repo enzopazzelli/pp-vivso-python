@@ -1,0 +1,119 @@
+# Supuestos abiertos — punto de entrada único
+## Componente de Ciencia de Datos · PP3 · ITSE
+
+**Creado:** 2026-08-28
+
+> Los supuestos y las consultas del proyecto estaban repartidos en cuatro documentos.
+> Este archivo **no los copia**: los ordena y dice **cuáles se preguntan y cuáles no**.
+> El detalle vive donde siempre estuvo — [datos-a-confirmar.md](datos-a-confirmar.md),
+> [vision-afo.md](vision-afo.md), [para-desarrollo.md](para-desarrollo.md).
+>
+> **Regla de higiene:** toda pregunta o supuesto nace con un ID en su documento de origen
+> (`[S#]` dataset · `[V#]` verificación fotográfica · `pedido #` a Desarrollo). Acá se lo
+> referencia, nunca se lo transcribe. Si este archivo empieza a tener textos propios,
+> volvimos al problema que vino a resolver.
+
+---
+
+## 1. La postura: construir primero, refinar después
+
+**El componente de verificación fotográfica no se consulta antes de construirlo.** Es una
+decisión deliberada del equipo, no un descuido, y conviene que esté escrita porque va a
+parecer una omisión:
+
+- **La obligación de PP3 ya está cubierta** por el dashboard y el Informe EDA. El componente
+  de visión es **excedente, no alcance comprometido** — no hay riesgo de entrega en construirlo
+  sobre supuestos.
+- **Preguntar antes de que exista no es levantar información, es pedir permiso.** Ante un
+  *"¿les serviría que el sistema…?"* lo más probable es que nos definan ellos la forma de
+  trabajar sobre algo que todavía no vieron, o que digan que no — que es la respuesta más
+  barata de dar frente a una idea abstracta.
+- **Un prototipo andando cambia la conversación.** Reaccionar a algo concreto es mucho más
+  fácil que imaginarlo. La corrección que buscamos sale mejor de *"esto no es así"* mirando
+  una pantalla que de una pregunta en el aire.
+- Y el proyecto **sigue** después de la nota. Esto se hace para seguir construyendo.
+
+**La condición que hace sostenible la postura:** si se construye sobre supuestos, los supuestos
+tienen que ser **baratos de cambiar**. Ninguno se hunde en la lógica: todos viven como constante
+nombrada arriba del archivo, igual que los `[S#]` en `synthetic/generate.py`. Refinar tiene que
+ser cambiar un valor y regenerar, nunca reescribir. **Si un supuesto no se puede cambiar en un
+renglón, está mal implementado.**
+
+---
+
+## 2. Supuestos de diseño del componente de visión — no se preguntan
+
+Cada uno tiene un valor por defecto y un costo conocido si resulta falso. Detalle en
+[vision-afo.md](vision-afo.md) §11.
+
+| ID | Supuesto | Valor por defecto | Si resulta falso |
+|---|---|---|---|
+| `[V6]` | ¿El plazo de 90 días se extiende tras un rechazo? | **Sí se extiende** | Nada. El diseño ya está hecho para no depender de la respuesta (§4.4): la corrección que importa —separar `paralizada` de `rehaciendo`— sirve igual |
+| `[V7]` | ¿El rechazo queda registrado hoy en algún lado? | **No existe registro** — lo modelamos nosotros en `cd_` | Si ya existe, mejor: se conecta en vez de crearse. Es menos trabajo, no más |
+| `[V9]` | ¿El tope de 2 visitas aplica a las resoluciones por app? | **No aplica** (el tope es logística de campo) | El sistema vuelve a ser triage. **Mismo código, menos beneficio** — no se cae, se achica |
+| `[V10]` | ¿Una aprobación remota certifica el AFO? | **Sí certifica** | Igual que `[V9]`. El demo puede mostrar los dos escenarios sin cambiar nada |
+| `[V5]` | Tolerancia de ±1 rubro | **Aceptable** | Es un umbral: se cambia en un renglón |
+| `[V2]` | El rubro 15 (Varios) no tiene evidencia visible propia | **No la tiene** | Sube la cobertura fotográfica del 87% al 90%. A favor nuestro |
+| `[V8]` | Frecuencia de rechazo y rehacer | **Desconocida** — el ciclo se implementa igual | Si es marginal, es un caso borde bien resuelto. Si es frecuente, el indicador de calidad vale más de lo que creíamos |
+
+> Ninguna de estas filas bloquea nada. El peor caso de toda la columna derecha es que el
+> beneficio sea menor al esperado — **ninguna vuelve inútil el trabajo**.
+
+---
+
+## 3. Lo único que sí conviene chequear del diseño
+
+**No es con el área, y no es pedir permiso.**
+
+**La rúbrica constructiva** ([vision-afo.md](vision-afo.md) §3): qué se ve en una foto de cada
+uno de los 15 rubros, y en particular `[V1]` (las mangueras embutidas) y las dos ventanas
+temporales. Equivocarse acá no es un supuesto discutible: es un **error de obra**, y hace que
+el demo se caiga solo delante de cualquiera que haya pisado una construcción.
+
+Lo puede validar cualquiera que sepa de construcción — un profesor, alguien del rubro, un
+conocido, un técnico. **No hace falta que sea del área**, y por eso no le impone nada al
+proyecto.
+
+**Las fotos** (`[V3]`, `[V4]`) tampoco se piden como requisito. El gold set arranca con
+imágenes públicas de construcción de vivienda social; si más adelante aparecen fotos reales,
+el trabajo mejora. No es una condición de arranque.
+
+---
+
+## 4. Lo que sí es del ámbito de la práctica
+
+Esto no es diseño del sistema, es gestión de la cursada. Acá preguntar no cuesta nada.
+
+| A quién | Qué | Por qué sí |
+|---|---|---|
+| **Cátedra** | Fecha de la presentación final y si asiste alguien de la entidad | Ordena el cronograma de todo lo demás |
+| **Cátedra** | ¿El componente de visión puede entrar como **prototipo evaluado** y no desplegado? | Define si la Fase 3 de §9 es obligatoria o línea futura |
+| **Desarrollo** | **¿Siguen activos en el proyecto para PP3?** Una sola pregunta | Si la respuesta es no, se activa la contingencia de [roadmap-pp3.md](roadmap-pp3.md) §6 y no hay nada más que preguntarles |
+| **Área** | El checklist `[S#]` de [datos-a-confirmar.md](datos-a-confirmar.md) | Son **parámetros del dataset**, no la forma de trabajar. Corregir un `[S#]` es editar una constante y regenerar |
+
+> La distinción que ordena todo este documento: preguntar **parámetros** es levantar
+> información; preguntar **si algo les serviría** es delegar la decisión de diseño.
+
+---
+
+## 5. Cómo se refina, después
+
+1. Se construye el prototipo con los supuestos de §2 tal como están.
+2. **Los supuestos se muestran en pantalla**, no se esconden — el dashboard ya lo hace con
+   los `[S#]`, misma convención. Que se vea de qué se está partiendo es lo que habilita que
+   alguien lo corrija.
+3. Se demuestra funcionando. **El demo es la pregunta.**
+4. Cada corrección que salga de esa reacción es cambiar un valor y regenerar.
+
+Ese orden es también el mejor material para el entregable de PP3, que es una **presentación
+profesional a la entidad**: convierte *"acá está el dashboard que ya vieron"* en *"y además,
+miren esto"*.
+
+---
+
+## 6. Referencias
+
+- Supuestos del dataset `[S#]`: [datos-a-confirmar.md](datos-a-confirmar.md)
+- Supuestos de verificación fotográfica `[V#]`: [vision-afo.md](vision-afo.md) §11
+- Pedidos a Desarrollo: [para-desarrollo.md](para-desarrollo.md) §4
+- Bloqueantes y contingencia: [roadmap-pp3.md](roadmap-pp3.md) §3 y §6

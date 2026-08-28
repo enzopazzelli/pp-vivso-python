@@ -218,6 +218,7 @@ descubrirlo tarde:
 
 ## 8. Referencias
 
+- **Supuestos abiertos y qué se pregunta (punto de entrada único): [supuestos-abiertos.md](supuestos-abiertos.md)**
 - Verificación fotográfica del AFO (diseño): [vision-afo.md](vision-afo.md)
 - Ruta y bitácora completa de PP2: `ROADMAP.md`
 - Guía de integración para Desarrollo (pedidos, brechas): `docs/para-desarrollo.md`

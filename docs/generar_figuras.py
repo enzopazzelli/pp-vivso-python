@@ -163,19 +163,19 @@ def main():
     ax.set_xlabel("Obras activas")
     guardar(fig, "08_cuello_botella.png")
 
-    # 9 — Sobre-reporte y cobertura de verificación por ONG
+    # 9 — Sobre-reporte y cobertura de verificación por gestora
     nombre = dict(zip(org["cuit"], org["nombre"]))
     m = vis.merge(df[["num_exp", "cuit_org"]], left_on="vivienda_id", right_on="num_exp")
     m = m[m["cuit_org"].notna()]
     sobre = m.groupby("cuit_org")["diferencia_ong"].mean()
     verif = set(vis["vivienda_id"])
-    # Cobertura sobre TODAS las ONGs con obras (incluye la que tiene 0 visitas).
+    # Cobertura sobre TODAS las gestoras con obras (incluye la que tiene 0 visitas).
     cob = (df[df["cuit_org"].notna()]
            .assign(v=lambda d: d["num_exp"].isin(verif))
            .groupby("cuit_org")["v"].mean() * 100).sort_values()
-    cuits = cob.index                       # las 3 ONGs, ordenadas por cobertura
-    # `sobre` solo tiene a las ONGs que recibieron visitas (las demás no aparecen en el
-    # groupby). Al reindexar a las 3, la ONG sin verificar queda NaN → la marcamos como
+    cuits = cob.index                       # todas las gestoras, ordenadas por cobertura
+    # `sobre` solo tiene a las gestoras que recibieron visitas (las demás no aparecen en el
+    # groupby). Al reindexar, la gestora sin verificar queda NaN → la marcamos como
     # "sin verificación" en vez de mostrar un +0 engañoso (no es que reporte bien: no la controlan).
     sobre = sobre.reindex(cuits)
     etiquetas = [nombre.get(c, c)[:22] for c in cuits]
@@ -187,16 +187,16 @@ def main():
                 ha="center", va="bottom", fontsize=8, rotation=90 if pd.isna(v) else 0,
                 color="#475569")
     a1.set_xticks(x); a1.set_xticklabels(etiquetas, rotation=20, ha="right", fontsize=8)
-    a1.set_title("Sobre-reporte promedio por ONG\n(avance reportado − verificado, en puntos)")
+    a1.set_title("Sobre-reporte promedio por gestora\n(avance reportado − verificado, en puntos)")
     a1.set_ylabel("Puntos de AFO")
     a2.bar(x, cob.values, color=[VERDE if v >= 50 else ROJO for v in cob.values])
     for i, v in enumerate(cob.values):
         a2.text(i, v + 2, f"{v:.0f}%", ha="center", fontsize=9)
     a2.set_xticks(x); a2.set_xticklabels(etiquetas, rotation=20, ha="right", fontsize=8)
     a2.axhline(70, color=GRIS, ls="--", lw=1)
-    a2.set_title("Cobertura de verificación por ONG\n(% de obras con al menos una visita)")
+    a2.set_title("Cobertura de verificación por gestora\n(% de obras con al menos una visita)")
     a2.set_ylabel("% verificada"); a2.set_ylim(0, 100)
-    guardar(fig, "09_ong_confiabilidad.png")
+    guardar(fig, "09_gestoras_confiabilidad.png")
 
     print("Figuras generadas en docs/figuras/")
 

@@ -41,6 +41,42 @@ renglón, está mal implementado.**
 
 ---
 
+## 1.b De dónde viene lo que damos por sabido
+
+El diseño se apoya en reglas de dominio que **no tienen todas la misma fuerza**. Están escritas
+como hecho plano en el código y en el Informe EDA —hedgear cada oración haría los documentos
+ilegibles— así que la procedencia se registra acá, una sola vez.
+
+| Regla de dominio | Fuente | Firmeza |
+|---|---|---|
+| Los 15 rubros del AFO, sus pesos y su orden | Capturas del sistema legacy (`afo.jpeg`, `tipos.jpeg`) | **Evidencia documental** |
+| Plazo contractual de construcción: 90 días | Confirmado por el área, 2026-06-10 | **Confirmado** |
+| El ministerio no construye; ejecuta la gestora | Conocimiento del equipo, de larga data | Firme, no ratificado |
+| **La gestora solicita las viviendas, no al revés** (refuta `[S9]`) | Conocimiento del equipo, 2026-08-28 | Sin ratificar |
+| **Cuatro tipos de gestora** (municipio · comisión municipal · ONG · cooperativa) | Conocimiento del equipo, 2026-08-28 | Sin ratificar |
+| **Rubros 11 y 12:** mangueras vacías embutidas; el rubro certifica cables/tanque (`[V1]`) | Conocimiento del equipo, 2026-08-28 | Sin ratificar — **es lo que conviene revisar con alguien de obra** (§3) |
+| **Ciclo de rechazo:** el técnico rechaza y la gestora rehace | Conocimiento del equipo, 2026-08-28 | Sin ratificar |
+| Ciclo de actas: `Finalizada` → acta → `Adjudicada` | Conocimiento del equipo | Sin ratificar |
+
+> Todas las filas "sin ratificar" vienen de lo que el equipo conoce del área por trabajar con
+> ella. Es buen conocimiento y probablemente sea correcto — pero **no es lo mismo que
+> validado**, y la diferencia importa en la presentación: si algo enunciado como hecho recibe
+> un *"no es así"*, arrastra la credibilidad del resto. Enunciado como entendimiento del
+> equipo, la misma corrección es una refinación normal.
+
+### Y una categoría que no es conocimiento
+
+**Los dos canales de resolución (app / presencial) no describen cómo trabaja el área hoy:
+describen cómo queremos que trabaje.** La app de carga no existe —está fuera de alcance en
+[vision-afo.md](vision-afo.md) §9— y el registro de rechazos es el pedido 7 a Desarrollo.
+
+Eso reencuadra `[V9]` y `[V10]`: no son preguntas sobre la práctica actual sino sobre **qué
+aceptarían en un sistema que todavía no existe**. Nadie puede opinar sobre la validez formal
+de una aprobación remota antes de haber visto una funcionando. Acá construir y mostrar no es
+una táctica para evitar que nos condicionen — **es la única forma de obtener la respuesta.**
+
+---
+
 ## 2. Supuestos de diseño del componente de visión — no se preguntan
 
 Cada uno tiene un valor por defecto y un costo conocido si resulta falso. Detalle en

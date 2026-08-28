@@ -19,6 +19,13 @@
 > misma pasada. Los hallazgos estructurales se mantienen; el único que cambió de lectura es
 > el **5.1**, que ahora da significativo y se explica ahí por qué igual no es un hallazgo.
 
+> **Procedencia de las reglas de dominio.** Este informe enuncia como hecho varias reglas del
+> programa —tipos de gestora, ciclo de actas, quién solicita las viviendas, qué certifica cada
+> rubro—. No todas tienen la misma fuente: algunas salen de capturas del sistema legacy, una
+> fue confirmada por el área y varias provienen del conocimiento que el equipo tiene del área
+> por trabajar con ella, **sin ratificación formal**. El registro completo, regla por regla,
+> está en [supuestos-abiertos.md](supuestos-abiertos.md) §1.b.
+
 ---
 
 ## 1. Introducción

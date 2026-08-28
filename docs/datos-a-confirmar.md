@@ -114,6 +114,14 @@ esto no es así en la realidad, es lo que más cambia el relato.**
 > produce obras sin gestora. Este supuesto estaba marcado como no confirmado desde el
 > principio — el mecanismo funcionó como tenía que funcionar.
 
+> **Además de los `[S#]`, hay reglas de dominio sin ratificar.** Los cuatro tipos de gestora,
+> qué certifican los rubros 11 y 12, el ciclo de rechazo y el de actas están hoy escritos como
+> hecho en el código y en el informe, pero vienen del conocimiento del equipo y no de una
+> confirmación del área. Están listadas una por una en
+> [supuestos-abiertos.md](supuestos-abiertos.md) §1.b — **si hay reunión, ratificarlas vale
+> más que corregir cualquier `[S#]`**: un `[S#]` mal calibrado mueve un número, una regla de
+> dominio equivocada invalida un análisis entero.
+
 > - ¿Es real que las gestoras tienden a reportar de más? ¿Conocen casos? __________________
 > - ¿Los cuatro tipos de gestora se comportan distinto (avance, actas, sobre-reporte)? ____
 > - ¿El trámite del acta de finalización es igual para un municipio que para una ONG? _____

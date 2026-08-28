@@ -12,7 +12,6 @@ que el sistema le sirva al área.
 import numpy as np
 import pandas as pd
 
-from synthetic.generate import DISCREPANCIA_GESTORA_PRIMERA   # [S8]
 from vision.rubrica import ORDEN_RUBROS, UMBRAL_RUBRO_COMPLETO, peso_acumulado
 
 # Cuánto tiene que exceder un reporte a la realidad para considerarlo sobre-reporte
@@ -56,7 +55,14 @@ def inyectar_reportes(df_verdad: pd.DataFrame, seed: int = 7) -> pd.DataFrame:
     El rango sale de [S8] en `synthetic/generate.py` —la misma distribución de
     sobre-reporte que ya usa el dataset para las visitas técnicas—, así que no se
     inventa un supuesto nuevo: se reutiliza uno ya documentado y confirmable.
+
+    El import va acá adentro a propósito: el dashboard desplegado consume este módulo,
+    y no tiene por qué cargar el generador de datos entero —con Faker y todo— en cada
+    arranque en frío solo para leer una constante. Además desacopla el deploy de un
+    módulo que existe para correrse a mano.
     """
+    from synthetic.generate import DISCREPANCIA_GESTORA_PRIMERA   # [S8]
+
     rng = np.random.default_rng(seed)
     df = df_verdad.copy()
     lo, hi = DISCREPANCIA_GESTORA_PRIMERA

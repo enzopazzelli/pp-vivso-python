@@ -2,7 +2,9 @@
 ## Componente de Ciencia de Datos · PP3 · ITSE
 
 **Creado:** 2026-08-28
-**Estado:** propuesta de diseño — no implementado
+**Estado:** implementado en `vision/`, con la **capa de percepción simulada** — todavía sin
+fotos ni modelo de visión conectado. Corre entero sin API: `python -m vision.demo`, y la
+página «Verificación por foto» del dashboard.
 **Encaja en:** PP3, etapas 6-Evaluación, 7-Insights y 8-Despliegue en pruebas
 ([roadmap-pp3.md](roadmap-pp3.md))
 

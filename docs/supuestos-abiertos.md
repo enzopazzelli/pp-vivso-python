@@ -57,6 +57,8 @@ ilegibles— así que la procedencia se registra acá, una sola vez.
 | **Rubros 11 y 12:** mangueras vacías embutidas; el rubro certifica cables/tanque (`[V1]`) | Conocimiento del equipo, 2026-08-28 | Sin ratificar — **es lo que conviene revisar con alguien de obra** (§3) |
 | **Ciclo de rechazo:** el técnico rechaza y la gestora rehace | Conocimiento del equipo, 2026-08-28 | Sin ratificar |
 | Ciclo de actas: `Finalizada` → acta → `Adjudicada` | Conocimiento del equipo | Sin ratificar |
+| **La unidad de análisis es la solicitud** —el seguimiento de cómo se hacen las viviendas— y la gestora se sigue de ella. Ambas importan | Conocimiento del equipo, 2026-08-28 | Sin ratificar — **no modelado todavía** |
+| Desarrollo trabaja en una **capa intermedia entre solicitud y aprobación**, donde quedan las no aprobadas | Conocimiento del equipo, 2026-08-28 | Sin ratificar |
 
 > Todas las filas "sin ratificar" vienen de lo que el equipo conoce del área por trabajar con
 > ella. Es buen conocimiento y probablemente sea correcto — pero **no es lo mismo que

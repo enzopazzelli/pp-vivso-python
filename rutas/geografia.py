@@ -27,11 +27,23 @@ def tiempo_viaje_horas(a: Punto, b: Punto) -> float:
     return km / VELOCIDAD_PROMEDIO_KMH
 
 
+# [R8] La base de todo técnico es Santiago Capital, donde está el ministerio — no
+#      la zona que cubre. Corregido 2026-08-29 (antes se asumía la cabecera del
+#      primer departamento de su cobertura, un supuesto de conveniencia sin
+#      respaldo). El técnico recorre distancia real desde el ministerio hasta su
+#      zona antes de empezar a visitar, y eso es justamente lo que hace largos a
+#      los viajes de varios días — no es un costo a minimizar, es el punto de
+#      partida real.
+DEPARTAMENTO_BASE = "Capital"
+
+
 def base_tecnico(departamentos: str) -> Punto:
     """
-    Punto de partida y llegada de los viajes de un técnico [R8]: la cabecera del
-    primer departamento de su zona de cobertura, tomada del mismo catálogo que usa
-    el generador de datos.
+    Punto de partida y llegada de los viajes de un técnico [R8]: siempre Santiago
+    Capital, sin importar qué departamentos cubra. El parámetro `departamentos` no
+    se usa para elegir la base — se conserva en la firma porque el resto de
+    `rutas/` ya lo pasa, y porque un cambio futuro (ej. bases regionales) solo
+    tendría que tocar esta función.
 
     Import perezoso a propósito: synthetic.generate carga Faker y el resto del
     generador de datos solo para leer esta tabla — mismo motivo que en
@@ -40,14 +52,11 @@ def base_tecnico(departamentos: str) -> Punto:
     """
     from synthetic.generate import LOCALIDADES
 
-    primer_depto = departamentos.split(",")[0].strip()
-    loc = next((l for l in LOCALIDADES if l["departamento"] == primer_depto), None)
+    loc = next((l for l in LOCALIDADES if l["departamento"] == DEPARTAMENTO_BASE), None)
     if loc is None:
-        raise ValueError(
-            f"Departamento '{primer_depto}' no está en synthetic.generate.LOCALIDADES"
-        )
+        raise ValueError(f"'{DEPARTAMENTO_BASE}' no está en synthetic.generate.LOCALIDADES")
     return Punto(
         lat=loc["lat"], lng=loc["lng"], localidad=loc["localidad"],
-        departamento=primer_depto, num_exp=None, urgente=False,
+        departamento=DEPARTAMENTO_BASE, num_exp=None, urgente=False,
         nivel_riesgo=None, estado_visita=None,
     )

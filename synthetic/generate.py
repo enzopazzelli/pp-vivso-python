@@ -71,9 +71,9 @@ LOCALIDADES = [
 #       concentrados y los rurales de territorio grande (peso bajo, como Guasayán o
 #       Pellegrini) se esparcen más — en vez de apilar todas las viviendas sobre el
 #       centro exacto de la cabecera, sea cual sea el tamaño real del departamento.
-#       Con este valor el rango va de ~5 km (Capital) a ~16 km (los de peso 0.02),
+#       Con este valor el rango va de ~9 km (Capital) a ~28 km (los de peso 0.02),
 #       ANTES de aplicar [S18] y el tope de [S19].
-DISPERSION_BASE = 0.02
+DISPERSION_BASE = 0.035
 
 # [S18] Las obras más atrasadas están más lejos de la cabecera departamental —
 #       "monte adentro" — donde el acceso es más difícil, llegan menos visitas y el
@@ -88,29 +88,48 @@ FACTOR_REMOTIDAD_POR_RIESGO = {"bajo": 0.5, "medio": 1.0, "alto": 1.8}
 # [S19] Límites reales de la provincia (fuente: extensión geográfica documentada,
 #       25°35'S-30°41'20"S y 61°34'W-65°34'W), con un margen de seguridad porque el
 #       territorio real es un rectángulo irregular (más irregular al oeste y al sur)
-#       y una caja rectangular siempre lo excede en las esquinas. Antes, la dispersión
-#       de [S17] no tenía techo: con departamentos cerca del límite provincial (Copo,
-#       Rivadavia) y suficientes obras, la cola de la normal terminaba cruzando a
-#       Salta, Catamarca, Santa Fe o Chaco. Ahora cada departamento tiene un radio
-#       máximo — la mitad de su distancia a la caja de abajo — y ningún punto final
-#       puede salir de la caja aunque el tope por departamento fallara.
+#       y una caja rectangular siempre lo excede en las esquinas.
+#
+# Corrección 2026-08-29 (v2): el primer tope era un radio ÚNICO — el mínimo de las
+# cuatro direcciones aplicado por igual a las cuatro. Eso prevenía cruzar el límite,
+# pero dejaba un artefacto visual: cada departamento se veía como un círculo
+# perfecto, apretado incluso hacia el lado donde sobra territorio de provincia. Frías
+# y El Charco (cerca del límite oeste, con Catamarca) quedaban igual de apretados
+# hacia el este, donde no hay ningún límite cerca; Pinto (cerca del límite este, con
+# Santa Fe) quedaba apretado también hacia el oeste. Ahora el tope es direccional —
+# uno por cada punto cardinal — así que cada departamento se aprieta solo del lado
+# real de la provincia y se esparce libremente hacia los demás.
+#
+# Ese mismo cambio destapó un bug más serio, ya corregido: al convertir el desvío de
+# vuelta a lat/lng, los ejes estaban cruzados (este/oeste sumaba a la latitud,
+# norte/sur a la longitud). El tope "norte" de Copo nunca actuaba sobre la latitud
+# — quedaba regida por el tope este/oeste, mucho más laxo — y algunos puntos
+# terminaban pegados exactos al borde de la caja de seguridad. Ver
+# aplicar_dispersion_geografica() más abajo.
 LAT_MIN_PROVINCIA, LAT_MAX_PROVINCIA = -30.68889, -25.58333
 LNG_MIN_PROVINCIA, LNG_MAX_PROVINCIA = -65.56667, -61.56667
-MARGEN_SEGURIDAD_BORDE = 0.5   # fracción de la distancia al borde que se admite usar
+MARGEN_SEGURIDAD_BORDE = 0.6   # fracción de la distancia al borde que se admite usar
 KM_POR_GRADO_LAT = 111.0
 
 
-def _radio_maximo_km(lat: float, lng: float) -> float:
+def _topes_direccionales_km(lat: float, lng: float) -> dict:
     """
-    Cuánto se puede alejar una obra de su cabecera sin arriesgarse a cruzar el
-    límite provincial [S19]. Se calcula en vez de fijarse a mano para que, si
-    LOCALIDADES cambia (como la corrección de Jiménez), el tope se recalcule solo
-    en vez de quedar desactualizado en un valor hardcodeado en otro lado.
+    Cuánto se puede alejar una obra de su cabecera en cada dirección cardinal, sin
+    arriesgarse a cruzar el límite provincial [S19]. Se calculan las cuatro por
+    separado (no un único mínimo) para no achatar en un círculo la dispersión de
+    departamentos que están cerca del límite en una sola dirección.
+
+    Se calcula en vez de fijarse a mano para que, si LOCALIDADES cambia (como la
+    corrección de Jiménez), los topes se recalculen solos en vez de quedar
+    desactualizados en un valor hardcodeado en otro lado.
     """
     km_por_grado_lng = KM_POR_GRADO_LAT * math.cos(math.radians(lat))
-    dist_lat_km = min(lat - LAT_MIN_PROVINCIA, LAT_MAX_PROVINCIA - lat) * KM_POR_GRADO_LAT
-    dist_lng_km = min(lng - LNG_MIN_PROVINCIA, LNG_MAX_PROVINCIA - lng) * km_por_grado_lng
-    return min(dist_lat_km, dist_lng_km) * MARGEN_SEGURIDAD_BORDE
+    return {
+        "norte": (LAT_MAX_PROVINCIA - lat) * KM_POR_GRADO_LAT * MARGEN_SEGURIDAD_BORDE,
+        "sur":   (lat - LAT_MIN_PROVINCIA) * KM_POR_GRADO_LAT * MARGEN_SEGURIDAD_BORDE,
+        "este":  (LNG_MAX_PROVINCIA - lng) * km_por_grado_lng * MARGEN_SEGURIDAD_BORDE,
+        "oeste": (lng - LNG_MIN_PROVINCIA) * km_por_grado_lng * MARGEN_SEGURIDAD_BORDE,
+    }
 
 BARRIOS = [
     "Belgrano", "Centro", "San Martín", "Rivadavia", "FONAVI", "Villa del Parque",
@@ -851,15 +870,17 @@ def aplicar_dispersion_geografica(df: pd.DataFrame, rng) -> pd.DataFrame:
     recalcular_derivados() a propósito: necesita el nivel_riesgo ya definitivo, no
     el placeholder que trae generar_viviendas().
 
-    El desvío se genera en kilómetros (no en grados) para poder acotarlo con un
-    radio máximo por departamento [S19] antes de convertirlo a lat/lng: así ninguna
-    obra, ni siquiera una de riesgo alto en un departamento rural, puede terminar
-    cruzando el límite provincial. Se recorta también contra la caja de la
-    provincia entera, como respaldo final.
+    El desvío se genera en kilómetros (no en grados) para poder acotarlo con los
+    topes direccionales de [S19] antes de convertirlo a lat/lng: cada obra respeta
+    el límite del lado de la provincia hacia el que le tocó desviarse (norte, sur,
+    este u oeste), no un radio único igual en las cuatro direcciones — eso es lo
+    que producía departamentos con forma de círculo perfecto en vez de una mancha
+    irregular. Se recorta también contra la caja de la provincia entera, como
+    respaldo final.
     """
     df = df.copy()
     por_depto = {l["departamento"]: l for l in LOCALIDADES}
-    radio_maximo = {d: _radio_maximo_km(l["lat"], l["lng"]) for d, l in por_depto.items()}
+    topes_por_depto = {d: _topes_direccionales_km(l["lat"], l["lng"]) for d, l in por_depto.items()}
 
     lats, lngs = [], []
     for _, row in df.iterrows():
@@ -869,14 +890,23 @@ def aplicar_dispersion_geografica(df: pd.DataFrame, rng) -> pd.DataFrame:
 
         dx_km = rng.normal(0, sigma * KM_POR_GRADO_LAT)
         dy_km = rng.normal(0, sigma * KM_POR_GRADO_LAT)
-        r_km  = math.hypot(dx_km, dy_km)
-        tope  = radio_maximo[row["departamento"]]
-        if r_km > tope:
-            dx_km, dy_km = dx_km * tope / r_km, dy_km * tope / r_km
 
+        # Elipse, no círculo: el tope depende del cuadrante hacia el que apunta
+        # ESTE desvío en particular (dx>0 = este, dy>0 = norte), no del peor de
+        # los cuatro. Si cae fuera de la elipse se reescala hacia su borde, sin
+        # cambiar de dirección — así conserva hacia dónde "quería" irse la obra.
+        topes = topes_por_depto[row["departamento"]]
+        cap_x = topes["este"] if dx_km >= 0 else topes["oeste"]
+        cap_y = topes["norte"] if dy_km >= 0 else topes["sur"]
+        factor = math.hypot(dx_km / cap_x, dy_km / cap_y) if cap_x > 0 and cap_y > 0 else 0.0
+        if factor > 1.0:
+            dx_km /= factor
+            dy_km /= factor
+
+        # dx_km es el desvío este/oeste → longitud; dy_km es norte/sur → latitud.
         km_por_grado_lng = KM_POR_GRADO_LAT * math.cos(math.radians(loc["lat"]))
-        lat = loc["lat"] + dx_km / KM_POR_GRADO_LAT
-        lng = loc["lng"] + dy_km / km_por_grado_lng
+        lat = loc["lat"] + dy_km / KM_POR_GRADO_LAT
+        lng = loc["lng"] + dx_km / km_por_grado_lng
 
         # Respaldo final: la caja de la provincia entera, por si algún departamento
         # quedara mal medido o LOCALIDADES cambiara sin recalcular el resto.

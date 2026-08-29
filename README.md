@@ -26,7 +26,7 @@ Datos sintéticos ─┼─► ETL Python ─► SQLite local ─► Notebooks (
                   ┘                                  indicadores            inicio + 6 vistas
 ```
 
-Mientras el backend Java no tenga datos cargados, el sistema genera un **dataset sintético de 1.500 viviendas** con distribución geográfica y reglas de negocio realistas. Cuando la API esté disponible, se cambia una variable de entorno y todo corre igual con datos reales.
+Mientras el backend Java no tenga datos cargados, el sistema genera un **dataset sintético de 5.000 viviendas** (tamaño configurable con `--n`) con distribución geográfica y reglas de negocio realistas. Cuando la API esté disponible, se cambia una variable de entorno y todo corre igual con datos reales.
 
 ### Por dónde se empezó
 
@@ -125,7 +125,8 @@ copy .env.example .env          # completar VIVSO_API_URL solo si el backend est
 
 ```powershell
 python -m db.setup              # crea tablas + catálogo de rubros
-python -m synthetic.generate    # 1.500 viviendas + gestoras + técnicos + visitas + rubros AFO
+python -m synthetic.generate    # 5.000 viviendas + gestoras + técnicos + visitas + rubros AFO
+                                 #   (usar --n para cambiar la cantidad)
 ```
 
 ### Notebooks (en Colab)

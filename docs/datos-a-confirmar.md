@@ -39,7 +39,7 @@ Preguntas estructurales (no son parámetros sueltos: definen el tamaño del mode
 
 | Cód | Supuesto | Valor que usamos | ¿Correcto? | Corregir a |
 |---|---|---|:--:|---|
-| **[S2]** | Distribución por **estado** | Iniciada 35% · Avanzada 25% · Finalizada 25% · Adjudicada 15% | ☐ | __________ |
+| **[S2]** | Distribución por **estado** | Iniciada 18% · Avanzada 17% · Finalizada 38% · Adjudicada 27% (terminadas 65%) | ☐ | __________ |
 | **[S12]** | Distribución por **tipo** | Urbana 55% · Rural 38% · Económica 7% | ☐ | __________ |
 | **[S12]** | **Dormitorios** | 2 dorm. 60% · 3 dorm. 25% · 1 dorm. 15% | ☐ | __________ |
 | **[S13]** | **Clasificaciones** más frecuentes | 2a (Precaria) 24% · 1a (Rancho) 18% · 2b (derrumbe) 12% | ☐ | __________ |

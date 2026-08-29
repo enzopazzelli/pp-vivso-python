@@ -11,13 +11,17 @@
 > indicadores de gestión. Es un documento autocontenido: todas las cifras se calculan
 > directamente sobre el dataset y pueden reproducirse con los pasos de la sección 8.
 
-> **Cifras recalculadas el 2026-08-28** sobre el modelo de datos nuevo: las organizaciones
-> gestoras pasaron de 3 a 8 y de un solo tipo a cuatro (municipio, comisión municipal, ONG,
-> cooperativa), y se eliminó el 20% de obras "sin gestora" —el supuesto **[S9]**, que resultó
-> imposible: la gestora es quien solicita las viviendas—. Todas las tablas y valores de las
-> secciones 4 a 6 salen de ese dataset; las figuras de `docs/figuras/` se regeneraron en la
-> misma pasada. Los hallazgos estructurales se mantienen; el único que cambió de lectura es
-> el **5.1**, que ahora da significativo y se explica ahí por qué igual no es un hallazgo.
+> ⚠️ **Cifras pendientes de recálculo (2026-08-29).** El dataset volvió a cambiar: pasó de
+> 1.500 a **5.000 viviendas** y la proporción de obras terminadas subió del ~40% al ~65%
+> (ajuste de `[S2]`, decisión del equipo — no dato confirmado por el área). De paso se corrigió
+> un bug real en el generador: la gestora "eficiente" (COOP SAN ANTONIO) nunca llegaba a
+> `Finalizada` por un límite superior exclusivo en un sorteo de NumPy, así que terminaba menos
+> que el promedio del programa a pesar de ser la referencia positiva. **Las tablas numéricas de
+> las secciones 4 a 6 corresponden al dataset anterior (1.500 viviendas, 40% terminación)** y
+> hay que regenerarlas (`python -m synthetic.generate` + `python docs/generar_figuras.py`)
+> antes de volver a presentar este informe. Los hallazgos estructurales no deberían cambiar de
+> lectura, salvo que valga la pena revisar si el **5.1** (criterio de inclusión vs. avance)
+> se sostiene con la nueva distribución de estados.
 
 > **Procedencia de las reglas de dominio.** Este informe enuncia como hecho varias reglas del
 > programa —tipos de gestora, ciclo de actas, quién solicita las viviendas, qué certifica cada

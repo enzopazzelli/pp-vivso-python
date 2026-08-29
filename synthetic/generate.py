@@ -154,7 +154,11 @@ CUITS_GESTORAS = [o["cuit"] for o in ORGANIZACIONES_CATALOGO]
 PLAZO_CONSTRUCCION_DIAS = 90
 
 # [S2] Distribución de obras por estado.
-ESTADOS_PROB = {"Iniciada": 0.35, "Avanzada": 0.25, "Finalizada": 0.25, "Adjudicada": 0.15}
+# Ajustado 2026-08-29 (decisión del equipo, no dato del área): sube la proporción de
+# obras terminadas del 40% al 65% para mostrar un programa más maduro en la demo. Sigue
+# siendo el mismo supuesto sin confirmar de docs/datos-a-confirmar.md — cambia el valor
+# de trabajo, no su estado de confirmación.
+ESTADOS_PROB = {"Iniciada": 0.18, "Avanzada": 0.17, "Finalizada": 0.38, "Adjudicada": 0.27}
 
 # [S3] Rango de avance físico (AFO %) coherente con cada estado.
 AVANCE_POR_ESTADO = {
@@ -366,24 +370,42 @@ def garantizar_casos(df: pd.DataFrame) -> pd.DataFrame:
     # del plazo de 90 días, así el contraste entre gestoras surge solo de los datos.
 
     # ── Gestora eficiente: COOP SAN ANTONIO ─────────────────────────────────
-    # Obras dentro de plazo con buen avance → la regla las marcará "bajo"
+    # Su terminación tiene que quedar POR ENCIMA del promedio del programa — es la
+    # referencia positiva, no tendría sentido que termine menos que el resto.
+    #
+    # Bug corregido 2026-08-29: acá antes se sorteaba avance_obra en [55,100) con
+    # rng.integers (límite superior EXCLUSIVO en NumPy) y se asignaba 'Finalizada'
+    # solo si avance_obra == 100 — un valor que ese sorteo nunca podía producir. La
+    # gestora "eficiente" jamás terminaba una obra. Pasaba desapercibido con el 40%
+    # de finalización general; se volvió visible al subir la finalización del
+    # programa a 65% ([S2]), porque ahí la "referencia positiva" quedaba peor que
+    # el promedio. Se reemplaza por asignación explícita de estado, sin depender
+    # de que un sorteo continuo pegue en un valor exacto.
     cuit_buena = "30-71782995-2"
     idx_buena  = df[df['cuit_org'] == cuit_buena].index
+    n_buena    = len(idx_buena)
 
-    n_buenas = int(len(idx_buena) * 0.70)
-    idx_ok   = rng.choice(idx_buena, size=n_buenas, replace=False)
-    df.loc[idx_ok, 'avance_obra'] = rng.integers(55, 100, size=n_buenas)
-    _fijar_dias_activa(df, idx_ok, 20, 88, rng)        # dentro del plazo de 90
-    for i in idx_ok:
-        av = df.at[i, 'avance_obra']
-        df.at[i, 'estado'] = 'Finalizada' if av == 100 else ('Avanzada' if av >= 36 else 'Iniciada')
+    # 75% terminadas: bastante por encima del promedio general del programa.
+    n_term   = int(n_buena * 0.75)
+    idx_term = rng.choice(idx_buena, size=n_term, replace=False)
+    df.loc[idx_term, 'estado']      = rng.choice(['Finalizada', 'Adjudicada'],
+                                                  size=n_term, p=[0.5, 0.5])
+    df.loc[idx_term, 'avance_obra'] = 100
+    _fijar_dias_activa(df, idx_term, 40, 89, rng)      # terminó dentro de plazo
 
-    # Solo 2 obras vencidas y estancadas (para que aparezca riesgo pero no domine)
-    idx_riesgo_buena = rng.choice(
-        df[(df['cuit_org'] == cuit_buena) & df['estado'].isin(['Iniciada','Avanzada'])].index,
-        size=min(2, len(df[df['cuit_org'] == cuit_buena])),
-        replace=False
-    )
+    # 20% en curso, avanzando bien y dentro de plazo → la regla las marca "bajo".
+    resto_buena  = idx_buena.difference(idx_term)
+    n_avanzada   = int(n_buena * 0.20)
+    idx_avanzada = rng.choice(resto_buena, size=min(n_avanzada, len(resto_buena)),
+                              replace=False)
+    df.loc[idx_avanzada, 'avance_obra'] = rng.integers(45, 95, size=len(idx_avanzada))
+    df.loc[idx_avanzada, 'estado']      = 'Avanzada'
+    _fijar_dias_activa(df, idx_avanzada, 20, 88, rng)
+
+    # El resto (~5%): un puñado vencido y estancado, para que aparezca riesgo sin
+    # dominar — ni la gestora de referencia está en 0% de riesgo.
+    resto_riesgo      = resto_buena.difference(idx_avanzada)
+    idx_riesgo_buena  = rng.choice(resto_riesgo, size=len(resto_riesgo), replace=False)
     df.loc[idx_riesgo_buena, 'avance_obra'] = rng.integers(8, 18, size=len(idx_riesgo_buena))
     df.loc[idx_riesgo_buena, 'estado']      = 'Iniciada'
     _fijar_dias_activa(df, idx_riesgo_buena, 150, 320, rng)   # muy pasadas de plazo

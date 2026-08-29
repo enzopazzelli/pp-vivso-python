@@ -73,6 +73,14 @@ NOTAS = {
         "`[V#]` de `vision/rubrica.py`. **Hoy la percepción está simulada**: no hay fotos ni "
         "modelo conectado, así que los números miden la regla y la cola, no el modelo real.",
 
+    "rutas":
+        "Toma las obras pendientes del técnico (**vivienda** + **asignacion_tecnico**, "
+        "misma cola que en Mis obras) y arma un viaje de varios días: primero encadena las "
+        "**urgentes** (riesgo alto o medio) por el camino más corto, y en modo mezcla suma "
+        "pendientes no urgentes que queden de paso sin desviarse mucho. No hay red vial real: "
+        "la distancia se aproxima con línea recta corregida por un factor de ruta. Los "
+        "supuestos son los `[R#]` de `rutas/parametros.py`.",
+
     "evolucion":
         "Agrupa por mes las fechas de inicio y de fin de las obras (tabla **vivienda**). "
         "El *backlog* son las obras abiertas en cada momento: inicios acumulados menos "

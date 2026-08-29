@@ -36,6 +36,12 @@ DB_PATH = os.getenv("DB_PATH", "db/vivso_local.db")
 # ---------------------------------------------------------------------------
 # [S15] Distribución geográfica real de Santiago del Estero
 # Los pesos reflejan la concentración poblacional de cada departamento
+#
+# Corrección 2026-08-29: Jiménez tenía "Añatuya" como cabecera, con coordenadas casi
+# idénticas a las de General Taboada (que sí tiene Añatuya como cabecera real). La
+# cabecera real de Jiménez es Pozo Hondo (-27,163, -64,491) — verificado en Wikipedia,
+# https://en.wikipedia.org/wiki/Jim%C3%A9nez_Department. El resto de las localidades
+# de esta tabla no se re-verificó contra fuente externa; siguen bajo [S15].
 # ---------------------------------------------------------------------------
 LOCALIDADES = [
     {"departamento": "Capital",         "localidad": "Santiago del Estero", "lat": -27.795, "lng": -64.261, "peso": 0.22},
@@ -44,7 +50,7 @@ LOCALIDADES = [
     {"departamento": "Silípica",        "localidad": "Clodomira",           "lat": -27.571, "lng": -64.133, "peso": 0.06},
     {"departamento": "Choya",           "localidad": "Frías",               "lat": -28.648, "lng": -65.137, "peso": 0.06},
     {"departamento": "Moreno",          "localidad": "Quimilí",             "lat": -27.638, "lng": -62.413, "peso": 0.05},
-    {"departamento": "Jiménez",         "localidad": "Añatuya",             "lat": -28.460, "lng": -62.841, "peso": 0.05},
+    {"departamento": "Jiménez",         "localidad": "Pozo Hondo",          "lat": -27.163, "lng": -64.491, "peso": 0.05},
     {"departamento": "Figueroa",        "localidad": "Suncho Corral",       "lat": -28.558, "lng": -63.443, "peso": 0.04},
     {"departamento": "Mitre",           "localidad": "Bandera",             "lat": -29.274, "lng": -62.268, "peso": 0.04},
     {"departamento": "General Taboada", "localidad": "Añatuya",             "lat": -28.471, "lng": -62.829, "peso": 0.04},

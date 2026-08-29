@@ -10,6 +10,7 @@ Uso:
     python -m synthetic.generate --n 500  # cantidad personalizada
 """
 import argparse
+import math
 import os
 import random
 from datetime import date, timedelta
@@ -70,8 +71,46 @@ LOCALIDADES = [
 #       concentrados y los rurales de territorio grande (peso bajo, como Guasayán o
 #       Pellegrini) se esparcen más — en vez de apilar todas las viviendas sobre el
 #       centro exacto de la cabecera, sea cual sea el tamaño real del departamento.
-#       Con este valor el rango va de ~5 km (Capital) a ~16 km (los de peso 0.02).
+#       Con este valor el rango va de ~5 km (Capital) a ~16 km (los de peso 0.02),
+#       ANTES de aplicar [S18] y el tope de [S19].
 DISPERSION_BASE = 0.02
+
+# [S18] Las obras más atrasadas están más lejos de la cabecera departamental —
+#       "monte adentro" — donde el acceso es más difícil, llegan menos visitas y el
+#       seguimiento de la gestora es más débil. No es ruido geográfico neutro: la
+#       dispersión de cada obra se multiplica por este factor según su nivel de
+#       riesgo YA CALCULADO (recalcular_derivados()), así que la geografía se asigna
+#       recién al final del pipeline, no en generar_viviendas(). Confirmado por el
+#       equipo 2026-08-29, no dato del área — mismo criterio de procedencia que el
+#       resto de los supuestos [S#].
+FACTOR_REMOTIDAD_POR_RIESGO = {"bajo": 0.5, "medio": 1.0, "alto": 1.8}
+
+# [S19] Límites reales de la provincia (fuente: extensión geográfica documentada,
+#       25°35'S-30°41'20"S y 61°34'W-65°34'W), con un margen de seguridad porque el
+#       territorio real es un rectángulo irregular (más irregular al oeste y al sur)
+#       y una caja rectangular siempre lo excede en las esquinas. Antes, la dispersión
+#       de [S17] no tenía techo: con departamentos cerca del límite provincial (Copo,
+#       Rivadavia) y suficientes obras, la cola de la normal terminaba cruzando a
+#       Salta, Catamarca, Santa Fe o Chaco. Ahora cada departamento tiene un radio
+#       máximo — la mitad de su distancia a la caja de abajo — y ningún punto final
+#       puede salir de la caja aunque el tope por departamento fallara.
+LAT_MIN_PROVINCIA, LAT_MAX_PROVINCIA = -30.68889, -25.58333
+LNG_MIN_PROVINCIA, LNG_MAX_PROVINCIA = -65.56667, -61.56667
+MARGEN_SEGURIDAD_BORDE = 0.5   # fracción de la distancia al borde que se admite usar
+KM_POR_GRADO_LAT = 111.0
+
+
+def _radio_maximo_km(lat: float, lng: float) -> float:
+    """
+    Cuánto se puede alejar una obra de su cabecera sin arriesgarse a cruzar el
+    límite provincial [S19]. Se calcula en vez de fijarse a mano para que, si
+    LOCALIDADES cambia (como la corrección de Jiménez), el tope se recalcule solo
+    en vez de quedar desactualizado en un valor hardcodeado en otro lado.
+    """
+    km_por_grado_lng = KM_POR_GRADO_LAT * math.cos(math.radians(lat))
+    dist_lat_km = min(lat - LAT_MIN_PROVINCIA, LAT_MAX_PROVINCIA - lat) * KM_POR_GRADO_LAT
+    dist_lng_km = min(lng - LNG_MIN_PROVINCIA, LNG_MAX_PROVINCIA - lng) * km_por_grado_lng
+    return min(dist_lat_km, dist_lng_km) * MARGEN_SEGURIDAD_BORDE
 
 BARRIOS = [
     "Belgrano", "Centro", "San Martín", "Rivadavia", "FONAVI", "Villa del Parque",
@@ -313,12 +352,6 @@ def generar_viviendas(n: int) -> pd.DataFrame:
             # Duración de construcción: el plazo es 90 días, en la práctica se estira [S5].
             f_fin = f_ini + timedelta(days=random.randint(*DURACION_CONSTRUCCION_DIAS))
 
-        # Ruido gaussiano en coordenadas — la dispersión depende de la densidad del
-        # departamento [S17], no es un radio fijo igual para todos.
-        sigma = DISPERSION_BASE / (loc["peso"] ** 0.5)
-        lat = round(loc["lat"] + np.random.normal(0, sigma), 6)
-        lng = round(loc["lng"] + np.random.normal(0, sigma), 6)
-
         avance    = _avance_coherente(estado)
         dias_act  = _dias_activa(f_ini, f_fin)
         cuit_org  = random.choice(CUITS_GESTORAS)   # [S16] toda obra tiene gestora
@@ -327,6 +360,10 @@ def generar_viviendas(n: int) -> pd.DataFrame:
         # nivel_riesgo y dias_activa se recalculan al final en recalcular_derivados(),
         # tomando las fechas como única fuente de verdad. Acá va un valor inicial.
         nivel_riesgo = "bajo"
+
+        # lat/lng son un placeholder (la cabecera exacta, sin dispersión): la
+        # posición final depende del nivel de riesgo [S18], que todavía no existe en
+        # este punto del pipeline. La asigna aplicar_dispersion_geografica() al final.
 
         registros.append({
             "num_exp":         f"SIM-{f_ini.year}-{i:04d}",
@@ -338,8 +375,8 @@ def generar_viviendas(n: int) -> pd.DataFrame:
             "fecha_inic":      f_ini.strftime("%d-%m-%Y"),
             "fecha_fin":       f_fin.strftime("%d-%m-%Y") if f_fin else None,
             "estado":          estado,
-            "lat":             lat,
-            "lng":             lng,
+            "lat":             loc["lat"],
+            "lng":             loc["lng"],
             "avance_obra":     avance,
             "clasificacion":   clasif,
             "criterio":        criterio,
@@ -805,6 +842,54 @@ def recalcular_derivados(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
+def aplicar_dispersion_geografica(df: pd.DataFrame, rng) -> pd.DataFrame:
+    """
+    Asigna la posición final de cada obra: se aleja de la cabecera departamental
+    según la densidad del departamento [S17] y según su propio nivel de riesgo
+    [S18] — una obra de riesgo alto queda, en promedio, bastante más lejos de la
+    cabecera que una de riesgo bajo ("monte adentro"). Corre DESPUÉS de
+    recalcular_derivados() a propósito: necesita el nivel_riesgo ya definitivo, no
+    el placeholder que trae generar_viviendas().
+
+    El desvío se genera en kilómetros (no en grados) para poder acotarlo con un
+    radio máximo por departamento [S19] antes de convertirlo a lat/lng: así ninguna
+    obra, ni siquiera una de riesgo alto en un departamento rural, puede terminar
+    cruzando el límite provincial. Se recorta también contra la caja de la
+    provincia entera, como respaldo final.
+    """
+    df = df.copy()
+    por_depto = {l["departamento"]: l for l in LOCALIDADES}
+    radio_maximo = {d: _radio_maximo_km(l["lat"], l["lng"]) for d, l in por_depto.items()}
+
+    lats, lngs = [], []
+    for _, row in df.iterrows():
+        loc = por_depto[row["departamento"]]
+        sigma = (DISPERSION_BASE / (loc["peso"] ** 0.5)
+                 * FACTOR_REMOTIDAD_POR_RIESGO[row["nivel_riesgo"]])
+
+        dx_km = rng.normal(0, sigma * KM_POR_GRADO_LAT)
+        dy_km = rng.normal(0, sigma * KM_POR_GRADO_LAT)
+        r_km  = math.hypot(dx_km, dy_km)
+        tope  = radio_maximo[row["departamento"]]
+        if r_km > tope:
+            dx_km, dy_km = dx_km * tope / r_km, dy_km * tope / r_km
+
+        km_por_grado_lng = KM_POR_GRADO_LAT * math.cos(math.radians(loc["lat"]))
+        lat = loc["lat"] + dx_km / KM_POR_GRADO_LAT
+        lng = loc["lng"] + dy_km / km_por_grado_lng
+
+        # Respaldo final: la caja de la provincia entera, por si algún departamento
+        # quedara mal medido o LOCALIDADES cambiara sin recalcular el resto.
+        lat = min(max(lat, LAT_MIN_PROVINCIA), LAT_MAX_PROVINCIA)
+        lng = min(max(lng, LNG_MIN_PROVINCIA), LNG_MAX_PROVINCIA)
+
+        lats.append(round(lat, 6))
+        lngs.append(round(lng, 6))
+
+    df["lat"], df["lng"] = lats, lngs
+    return df
+
+
 def cargar_en_db(
     df_viviendas:     pd.DataFrame,
     df_orgs:          pd.DataFrame,
@@ -842,6 +927,7 @@ if __name__ == "__main__":
     df_viviendas     = garantizar_casos(df_viviendas)
     df_viviendas     = modelar_actas(df_viviendas)        # cuello de botella administrativo (actas)
     df_viviendas     = recalcular_derivados(df_viviendas) # dias_activa + nivel_riesgo (fuente única)
+    df_viviendas     = aplicar_dispersion_geografica(df_viviendas, np.random.default_rng(13))
     df_orgs          = generar_organizaciones()
     df_tecnicos      = generar_tecnicos()
     df_asignaciones  = generar_asignaciones(df_viviendas, df_tecnicos)

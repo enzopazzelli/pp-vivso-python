@@ -66,8 +66,8 @@ st.sidebar.markdown(f"**Zona:** {DEPARTAMENTOS}")
 
 plantilla = st.sidebar.selectbox(
     "Plantilla de viaje", PLANTILLAS, format_func=lambda p: p["nombre"],
-    help="'2 y 1' = 2 noches, 1 día completo de terreno. "
-         "'3 y 2' = 3 noches, 2 días completos.",
+    help="'2 y 1' = 2 días, 1 noche: ida y vuelta corta, sin día completo en el medio. "
+         "'3 y 2' = 3 días, 2 noches: salida, 1 día completo en la zona, regreso.",
 )
 modo_label = st.sidebar.radio(
     "Selección de visitas",

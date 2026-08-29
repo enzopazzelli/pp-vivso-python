@@ -7,6 +7,7 @@ import pandas as pd
 import plotly.express as px
 from dashboard.components.data_loader import cargar_viviendas, cargar_visitas
 from dashboard.components.criterios import nota_criterio
+from dashboard.components.mapa import CENTRO_PROVINCIA, ZOOM_PROVINCIA
 
 st.set_page_config(
     page_title="VIVSO — Resumen Ejecutivo",
@@ -118,7 +119,7 @@ if not mapa_df.empty:
         color_discrete_map={"bajo": "#22c55e", "medio": "#f59e0b", "alto": "#ef4444"},
         hover_data={"num_exp": True, "localidad": True, "avance_obra": True,
                     "lat": False, "lng": False},
-        zoom=6, map_style="carto-positron",
+        center=CENTRO_PROVINCIA, zoom=ZOOM_PROVINCIA, map_style="carto-positron",
     )
     fig_mapa.update_layout(margin=dict(l=0, r=0, t=0, b=0), height=380,
                            legend=dict(orientation="h", y=-0.05))
@@ -139,6 +140,7 @@ SECCIONES = [
     ("pages/05_mis_obras.py", "🗂", "Mis obras", "Cola de trabajo del técnico"),
     ("pages/07_verificacion_foto.py", "📷", "Verificación por foto",
      "Ponderar el reporte de la gestora con evidencia visual"),
+    ("pages/08_rutas.py", "🗺️", "Rutas", "Armar viajes de varios días para los técnicos"),
 ]
 
 cols = st.columns(len(SECCIONES))

@@ -6,7 +6,7 @@ La distribución geográfica, los estados y las clasificaciones siguen
 proporciones basadas en los datos reales del ministerio.
 
 Uso:
-    python -m synthetic.generate          # genera 1500 viviendas (default)
+    python -m synthetic.generate          # genera 5000 viviendas (default)
     python -m synthetic.generate --n 500  # cantidad personalizada
 """
 import argparse
@@ -57,6 +57,15 @@ LOCALIDADES = [
     {"departamento": "Rivadavia",       "localidad": "Pinto",               "lat": -29.153, "lng": -61.897, "peso": 0.02},
     {"departamento": "Pellegrini",      "localidad": "Tintina",             "lat": -27.034, "lng": -62.716, "peso": 0.02},
 ]
+
+# [S17] Dispersión geográfica dentro de cada departamento, alrededor de su cabecera.
+#       No es un radio fijo: se calcula DISPERSION_BASE / sqrt(peso), así que los
+#       departamentos densos y urbanos (peso alto, como Capital) quedan más
+#       concentrados y los rurales de territorio grande (peso bajo, como Guasayán o
+#       Pellegrini) se esparcen más — en vez de apilar todas las viviendas sobre el
+#       centro exacto de la cabecera, sea cual sea el tamaño real del departamento.
+#       Con este valor el rango va de ~5 km (Capital) a ~16 km (los de peso 0.02).
+DISPERSION_BASE = 0.02
 
 BARRIOS = [
     "Belgrano", "Centro", "San Martín", "Rivadavia", "FONAVI", "Villa del Parque",
@@ -298,9 +307,11 @@ def generar_viviendas(n: int) -> pd.DataFrame:
             # Duración de construcción: el plazo es 90 días, en la práctica se estira [S5].
             f_fin = f_ini + timedelta(days=random.randint(*DURACION_CONSTRUCCION_DIAS))
 
-        # Ruido gaussiano en coordenadas (~2 km de dispersión)
-        lat = round(loc["lat"] + np.random.normal(0, 0.018), 6)
-        lng = round(loc["lng"] + np.random.normal(0, 0.018), 6)
+        # Ruido gaussiano en coordenadas — la dispersión depende de la densidad del
+        # departamento [S17], no es un radio fijo igual para todos.
+        sigma = DISPERSION_BASE / (loc["peso"] ** 0.5)
+        lat = round(loc["lat"] + np.random.normal(0, sigma), 6)
+        lng = round(loc["lng"] + np.random.normal(0, sigma), 6)
 
         avance    = _avance_coherente(estado)
         dias_act  = _dias_activa(f_ini, f_fin)
@@ -817,7 +828,7 @@ def cargar_en_db(
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--n", type=int, default=1500, help="Cantidad de viviendas a generar")
+    parser.add_argument("--n", type=int, default=5000, help="Cantidad de viviendas a generar")
     args = parser.parse_args()
 
     print(f"Generando {args.n} viviendas sintéticas...")

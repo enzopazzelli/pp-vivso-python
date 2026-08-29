@@ -44,9 +44,11 @@ Preguntas estructurales (no son parámetros sueltos: definen el tamaño del mode
 | **[S12]** | **Dormitorios** | 2 dorm. 60% · 3 dorm. 25% · 1 dorm. 15% | ☐ | __________ |
 | **[S13]** | **Clasificaciones** más frecuentes | 2a (Precaria) 24% · 1a (Rancho) 18% · 2b (derrumbe) 12% | ☐ | __________ |
 | **[S15]** | Concentración **geográfica** | Capital 22% · Banda 16% · resto repartido | ☐ | __________ |
+| **[S17]** | **Dispersión** dentro de cada departamento | ~5 km en Capital/Banda hasta ~16 km en los rurales de menor peso | ☐ | __________ |
 
 > ¿Hay departamentos con muchas más obras de las que asumimos? ¿Alguna clasificación que
-> domine y no estemos reflejando? Anotar: ______________________________________________
+> domine y no estemos reflejando? ¿Las viviendas de un departamento rural se concentran
+> cerca de la cabecera o realmente se reparten por el territorio? Anotar: ________________
 
 ---
 

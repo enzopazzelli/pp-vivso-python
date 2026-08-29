@@ -6,6 +6,7 @@ import streamlit as st
 import plotly.express as px
 from dashboard.components.data_loader import cargar_viviendas
 from dashboard.components.criterios import nota_criterio
+from dashboard.components.mapa import CENTRO_PROVINCIA, ZOOM_PROVINCIA
 
 st.set_page_config(page_title="Viviendas — VIVSO", layout="wide")
 st.title("🏘 Viviendas")
@@ -121,7 +122,8 @@ if not mapa_df.empty:
         color_discrete_map={"bajo": "#22c55e", "medio": "#f59e0b", "alto": "#ef4444"},
         hover_data={"num_exp": True, "localidad": True, "avance_obra": True,
                     "estado": True, "lat": False, "lng": False},
-        zoom=6,
+        center=CENTRO_PROVINCIA,
+        zoom=ZOOM_PROVINCIA,
         map_style="carto-positron",
         title="Distribución geográfica por nivel de riesgo",
     )

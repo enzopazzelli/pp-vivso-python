@@ -35,8 +35,8 @@ def presupuesto_por_dia(plantilla: dict) -> list[float]:
     Horas disponibles cada día del viaje, según [R5]: el primero y el último son
     parciales (viaje de ida/vuelta desde la base); el resto, jornada completa.
 
-    "2 y 1" (2 noches) → [parcial, completo] + [parcial] = 1 día completo.
-    "3 y 2" (3 noches) → [parcial, completo, completo, parcial] = 2 días completos.
+    "2 y 1" (2 días, 1 noche) → [parcial, parcial] = 0 días completos, solo ida y vuelta.
+    "3 y 2" (3 días, 2 noches) → [parcial, completo, parcial] = 1 día completo.
     """
     dias_totales = plantilla["noches"] + 1
     parcial = HORAS_JORNADA * FRACCION_DIA_PARCIAL

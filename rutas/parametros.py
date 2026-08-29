@@ -47,13 +47,18 @@ UMBRAL_DESVIO_FRACCION_VIAJE = 0.10
 MODO_MEZCLA         = "mezcla"
 MODO_SOLO_URGENTES  = "solo_urgentes"
 
-# [R7] Plantillas de viaje: "N noches" define cuántos días dura el viaje y cuántos
-#      son jornada completa. días_totales = noches + 1; de esos, el primero y el
-#      último son parciales (viaje de ida/vuelta) y el resto son jornada completa.
-#      "2 y 1" → 2 noches, 1 día completo (salida parcial, 1 completo, regreso parcial).
-#      "3 y 2" → 3 noches, 2 días completos.
-VIAJE_CORTO = {"nombre": "2 y 1", "noches": 2}
-VIAJE_LARGO = {"nombre": "3 y 2", "noches": 3}
+# [R7] Plantillas de viaje: el nombre es "días y noches", como un paquete turístico
+#      (3 días 2 noches = un finde largo clásico) — el primer número son los días
+#      totales, el segundo las noches. días_totales = noches + 1; de esos días, el
+#      primero y el último son parciales (viaje de ida/vuelta) y el resto son
+#      jornada completa.
+#      "2 y 1" → 2 días, 1 noche: sale y vuelve, sin ningún día completo en el medio
+#                (salida parcial, regreso parcial) — un viaje corto de ida y vuelta.
+#      "3 y 2" → 3 días, 2 noches: salida parcial, 1 día completo, regreso parcial.
+#      Corregido 2026-08-30: estaban invertidos (se leía "noches y días", no "días
+#      y noches" como se usa en la práctica).
+VIAJE_CORTO = {"nombre": "2 y 1", "noches": 1}
+VIAJE_LARGO = {"nombre": "3 y 2", "noches": 2}
 PLANTILLAS  = [VIAJE_CORTO, VIAJE_LARGO]
 
 # [R8] Base de un técnico: la cabecera del PRIMER departamento de su zona de

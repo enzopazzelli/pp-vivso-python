@@ -105,7 +105,7 @@ Detalle en `rutas/parametros.py`.
 |---|---|---|---|
 | `[R1]` | Velocidad promedio de viaje | **55 km/h** (ruta provincial + tramos de tierra) | Es un factor de escala: cambia horas y "días completos", no la lógica de la ruta |
 | `[R2]` | No hay red vial real — la distancia se aproxima con línea recta × un factor | **Factor 1,35** | Mismo caso: reescala km y horas, no cambia qué ruta se arma |
-| `[R8]` | Base del técnico = cabecera del primer departamento de su zona (el dataset no tiene domicilio real) | **Así queda** | Si se define un domicilio real, se reemplaza `base_tecnico()` sin tocar el resto del módulo |
+| `[R8]` | Base del técnico | **Confirmado 2026-08-29: siempre Santiago Capital**, sede del ministerio — no la cabecera de su zona de cobertura, que era el supuesto inicial | Ya no es un supuesto sin validar; corregido en `base_tecnico()` |
 
 > Estos tres son parámetros de escala, no de diseño: si están mal calibrados, los viajes
 > que arma el sistema siguen siendo los mismos, con horas y kilómetros distintos. Ninguno

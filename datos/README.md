@@ -101,7 +101,7 @@ for indicador in calcular_todos(obtener_fuente()):
 
 Cada indicador trae su `explicacion` y su `como_leerlo` en lenguaje llano, y su `capacidad`
 ("disponible", "parcial" o "no_disponible") con la fuente que se usó para calcularlo. Faltan por armar
-los que dependen de GDE (reclamos, estado de pago) y de precios: esperan a los importadores del Plan 4.
+los que dependen de GDE (reclamos, estado de pago) y de precios: esperan a sus importadores.
 
 ## Fuentes intercambiables
 
@@ -125,6 +125,29 @@ un espacio vacío sin explicación.
 **Las páginas del tablero (`dashboard/`) y `etl/extract.py` todavía no leen de acá:** siguen con su
 `data_loader.py` propio. Migrarlas es un plan aparte, porque es trabajo de integración por pantalla
 (mejor verificado corriendo la app) y no de la capa de datos en sí.
+
+## API
+
+`datos/api/` expone por HTTP, en JSON, todo lo de arriba. Para levantarla:
+
+    .venv/Scripts/python.exe -m uvicorn datos.api.app:app --reload
+
+Con el servidor arriba, `http://localhost:8000/docs` muestra la documentación interactiva (la arma
+FastAPI solo). Cada endpoint acepta `?fuente=propia|simulada|json_prueba` (por defecto, la que diga la
+variable de entorno `FUENTE`, o «propia»).
+
+| Endpoint | Devuelve |
+| :--- | :--- |
+| `GET /viviendas`, `/organizaciones`, `/medidas`, `/expedientes`, `/reclamos`, `/medidas-categoria` | La colección, en JSON, con filtros simples por query |
+| `GET /indicadores`, `/indicadores/{codigo}` | El valor, la confianza, la capacidad y las dos explicaciones |
+| `GET /capacidades` | Qué colecciones y qué indicadores están disponibles con la fuente elegida |
+| `GET /catalogo-reportes` | Las fichas de los reportes (igual sin importar la fuente) |
+| `GET /importaciones` | Qué se importó, cuándo y con qué resultado (siempre de la base propia) |
+| `POST /importar` | Sube un archivo (`multipart/form-data`, campo `archivo`) y devuelve el resultado |
+
+**`POST /importar` no tiene autenticación** (escribe en la base con datos reales del área): pensada para
+correr en `localhost`, para el equipo. No exponerla con `--host 0.0.0.0` sin agregar antes algún control
+de acceso. Rechaza archivos de más de 20 MB.
 
 ## Migraciones del esquema
 

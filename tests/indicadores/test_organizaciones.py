@@ -86,3 +86,25 @@ def test_la_explicacion_aclara_que_las_organizaciones_ausentes_quedan_afuera_no_
     # que el texto tiene que decirlo en vez de dejarlo implícito.
     indicador = tasa_activacion_finalizacion(FuentePropia(sesion=sesion))
     assert "ausente" in indicador.explicacion.lower() or "no aparece" in indicador.explicacion.lower()
+
+
+def test_por_organizacion_da_tipos_nativos_no_numpy(sesion):
+    importador = VisocPorSolicitante()
+    importador.mapear(importador.lectura_desde_lineas(LINEAS_PS, consulta="solicitadas"),
+                      sesion, _importacion(sesion, "1" * 64))
+    importador.mapear(importador.lectura_desde_lineas(LINEAS_PS, consulta="activadas"),
+                      sesion, _importacion(sesion, "2" * 64))
+    importador.mapear(importador.lectura_desde_lineas(LINEAS_PS, consulta="finalizadas"),
+                      sesion, _importacion(sesion, "3" * 64))
+    sesion.commit()
+
+    indicador = tasa_activacion_finalizacion(FuentePropia(sesion=sesion))
+    fila = indicador.valor["por_organizacion"][0]
+    for campo in ("solicitudes", "activadas", "fin_obras"):
+        assert type(fila[campo]) is int, f"{campo} es {type(fila[campo])}, no int nativo"
+    for campo in ("tasa_activacion", "tasa_finalizacion"):
+        assert fila[campo] is None or type(fila[campo]) is float, f"{campo} es {type(fila[campo])}"
+
+    # Con tipos numpy, jsonable_encoder de FastAPI falla; con tipos nativos, no.
+    import json
+    json.dumps(indicador.valor)   # si algún valor sigue siendo numpy, esto ya tira TypeError

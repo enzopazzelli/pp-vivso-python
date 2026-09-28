@@ -3,3 +3,11 @@
 pdfplumber>=0.11
 alembic>=1.13
 pytest>=8.0
+fastapi>=0.110
+# uvicorn y httpx hoy llegan igual como dependencia transitiva de streamlit (arriba, en
+# requirements.txt) — se listan acá explícitos porque la API los necesita por su cuenta
+# (servidor y TestClient de las pruebas) y no hay que depender de que streamlit los siga trayendo.
+uvicorn>=0.29
+httpx>=0.27
+# Requerido por FastAPI/Starlette para leer archivos subidos por POST /importar (multipart/form-data).
+python-multipart>=0.0.9

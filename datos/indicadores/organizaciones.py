@@ -43,9 +43,9 @@ def tasa_activacion_finalizacion(fuente) -> Indicador:
     completas = piv.dropna(subset=columnas_necesarias)
     por_organizacion = []
     for (cuit, nombre), fila in completas.iterrows():
-        solicitudes = fila[("solicitadas", "solicitudes")]
-        activadas = fila[("activadas", "activadas")]
-        fin_obras = fila[("finalizadas", "fin_obras")]
+        solicitudes = int(fila[("solicitadas", "solicitudes")])
+        activadas = int(fila[("activadas", "activadas")])
+        fin_obras = int(fila[("finalizadas", "fin_obras")])
         por_organizacion.append({
             "cuit": cuit, "nombre": nombre, "solicitudes": solicitudes, "activadas": activadas,
             "fin_obras": fin_obras,

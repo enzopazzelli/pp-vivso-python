@@ -147,8 +147,9 @@ avisar "esto no está disponible con la fuente actual" en vez de fallar.
   verificarlo corriendo la aplicación y no solo con pruebas automáticas.
 - **Ya se pueden calcular 6 indicadores** (qué se construye, cuánto termina, hace cuánto se espera, qué
   tanto se activa por organización, quién pide más, y cuánto tarda el proceso), cada uno con su
-  explicación en lenguaje llano. Lo que falta es mostrarlos en una pantalla con gráficos — eso es un
-  paso aparte — y los que dependen de GDE o de precios, que esperan sus importadores.
+  explicación en lenguaje llano. Ya hay una pantalla (sección 6) y una API que los expone por HTTP en
+  JSON (`datos/api/`, con documentación interactiva en `/docs`). Lo que falta son los indicadores que
+  dependen de GDE o de precios, que esperan sus importadores.
 - **Solo sabemos leer dos formatos de reporte de VISOC.** Para sumar otro (por ejemplo, de GDE o de
   precios), hace falta escribir un lector nuevo — el sistema ya está pensado para eso (por eso guarda la
   "forma" de los archivos que no reconoce), pero cada formato nuevo es trabajo adicional.

@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer, Float, Date, Text, Enum, ForeignKey
+from sqlalchemy import Boolean, Column, String, Integer, Float, Date, Text, Enum, ForeignKey
 from sqlalchemy.orm import declarative_base, relationship
 
 Base = declarative_base()
@@ -9,11 +9,11 @@ class Vivienda(Base):
 
     num_exp          = Column(String(50), primary_key=True)
     departamento     = Column(String(100), nullable=False)
-    localidad        = Column(String(100), nullable=False)
+    localidad        = Column(String(100))   # vacío en los reportes reales que no la traen
     barrio           = Column(String(100))
     direccion        = Column(String(200))
     superficie       = Column(Float)
-    fecha_inic       = Column(String(10), nullable=False)   # dd-MM-yyyy
+    fecha_inic       = Column(String(10))   # dd-MM-yyyy; vacío en datos reales que no la traen
     fecha_fin        = Column(String(10))
     estado           = Column(String(20), nullable=False)   # Iniciada/Avanzada/Finalizada/Adjudicada
     lat              = Column(Float)
@@ -28,6 +28,13 @@ class Vivienda(Base):
     id_familia       = Column(Integer, ForeignKey("familia.id"))
     representante    = Column(String(200))
     cuit_org         = Column(String(20), ForeignKey("organizacion.cuit"))
+
+    # Datos que traen los reportes reales de VISOC
+    # En datos reales, `num_exp` es una clave estable (expediente + huella del titular) y el número de
+    # expediente puro va acá: en los reportes reales algunos números se repiten en varias filas.
+    expediente        = Column(String(50), index=True)
+    fecha_solicitud   = Column(Date)
+    titular_seudonimo = Column(String(150))   # el titular ANONIMIZADO; nunca el nombre real
 
     # Columnas calculadas por el pipeline Python
     # El equipo Java puede leerlas si comparten la misma DB
@@ -70,6 +77,10 @@ class Organizacion(Base):
     presidente     = Column(String(200))
     dni_presidente = Column(String(15))
     estado         = Column(String(20), default="ACTIVA")   # ACTIVA/FINALIZADA/SUSPENDIDA
+    # Los reportes de VISOC no traen CUIT: la organización recibe uno provisional derivado del nombre
+    nombre_normalizado = Column(String(300), index=True)
+    cuit_provisional   = Column(Boolean, default=False)
+    tipo_solicitante   = Column(String(30), ForeignKey("tipo_solicitante.codigo"))
 
 
 class AvanceObra(Base):

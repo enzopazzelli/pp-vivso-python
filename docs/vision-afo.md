@@ -33,14 +33,14 @@ Tres cosas que el sistema **no** hace, y conviene que estén escritas:
 - No estima el AFO por su cuenta para reemplazar al técnico.
 - No emite veredictos de calidad constructiva. Puede señalar una fisura o una humedad como
   *observación para el técnico*, nunca como rechazo.
-- No sustituye la visita. La extiende: hoy el tope es de 2 visitas por obra y ~70% de las
-  obras activas no recibió ninguna.
+- No sustituye la visita. La extiende: el sistema nuevo prevé un tope de 2 visitas por obra
+  (todavía no vigente) y ~70% de las obras activas no recibió ninguna.
 
 **El "As is → To be":** hoy el avance que reporta la gestora entra al sistema sin ningún
-respaldo para el ~70% de obras sin visita, y el tope de 2 visitas es el techo de todo lo que
-se puede verificar. Con esto, cada reporte entra con un **grado de respaldo documental**, el
+respaldo para el ~70% de obras sin visita, y el tope de 2 visitas previsto para el sistema
+nuevo sería el techo de todo lo que se puede verificar. Con esto, cada reporte entra con un **grado de respaldo documental**, el
 técnico recibe una cola priorizada en lugar de una lista plana, y puede **resolver a distancia**
-las obras que no requieren ir, reservando las dos visitas presenciales para donde hacen falta.
+las obras que no requieren ir, reservando las visitas presenciales para donde hacen falta.
 
 > Ese último punto se apoya en `[V9]` y `[V10]`, que son **supuestos de diseño, no preguntas
 > pendientes** (§11). Si resultaran falsos, el sistema vuelve a ser triage: el mismo código
@@ -248,7 +248,7 @@ Tanto la **aprobación** como el **rechazo** pueden darse por dos vías: **desde
 toda la propuesta, así que conviene decirlo fuerte:
 
 > Si el técnico puede **aprobar** desde la app, el sistema deja de ser solo triage. El tope de
-> **2 visitas por obra deja de ser el techo de la verificación** y pasa a ser el techo de la
+> **2 visitas por obra (tope previsto para el sistema nuevo) deja de ser el techo de la verificación** y pasa a ser el techo de la
 > verificación *presencial*: el resto se cubre a distancia. Es una ganancia bastante mayor que
 > ordenar una cola de visitas.
 
@@ -529,7 +529,7 @@ Convención `[V#]`, análoga a los `[S#]` de [datos-a-confirmar.md](datos-a-conf
 | [V6] | **¿El plazo de 90 días se extiende después de un rechazo?** Supuesto de trabajo: **sí se extiende** (decisión del equipo, 2026-08-28). Hay dos respuestas defendibles con significado contractual opuesto — si no se extiende, la gestora se come la demora por haber construido mal | **Sin confirmar — pero el diseño no depende de la respuesta (§4.4)** |
 | [V7] | ¿El rechazo queda registrado hoy en algún lado (acta, planilla, sistema), o solo circula como observación verbal del técnico? | Supuesto: **no hay registro**, lo modelamos nosotros en `cd_`. Si ya existe, se conecta — menos trabajo, no más |
 | [V8] | ¿Con qué frecuencia se rechaza y se rehace? Si es marginal, el ciclo es un caso borde; si es frecuente, es un indicador de calidad por derecho propio | Sin confirmar |
-| [V9] | ¿El tope de 2 visitas por obra aplica también a las resoluciones por app? | Supuesto: **no aplica** (el tope es logística de campo). Si aplicara, el sistema vuelve a triage: mismo código, menos beneficio |
+| [V9] | ¿El tope de 2 visitas por obra (medida prevista para el sistema nuevo) aplica también a las resoluciones por app? | Supuesto: **no aplica** (el tope es logística de campo). Si aplicara, el sistema vuelve a triage: mismo código, menos beneficio |
 | [V10] | ¿Una aprobación remota tiene la misma validez formal que una presencial para certificar el AFO y habilitar el pago? | Supuesto: **sí la tiene**. El demo puede mostrar los dos escenarios sin cambiar código |
 
 **Riesgos:**

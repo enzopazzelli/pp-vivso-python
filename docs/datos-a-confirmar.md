@@ -31,7 +31,7 @@ Preguntas estructurales (no son parámetros sueltos: definen el tamaño del mode
 | ¿En cuántos departamentos hay obras? | 18 | ☐ | __________ |
 | ¿Cuántas organizaciones gestoras hay, y de qué tipo? | 8: 2 municipios · 2 comisiones municipales · 2 ONGs · 2 cooperativas | ☐ | __________ |
 | ¿Cuántos técnicos de campo hay? | 6 | ☐ | __________ |
-| ¿Cuál es el máximo de visitas técnicas por obra? | 2 (primera y segunda) | ☐ | __________ |
+| ¿Hay un máximo de visitas técnicas por obra? | Lo modelamos en 2 (primera y segunda), como medida prevista para el sistema nuevo. Hoy no rige | ☐ | __________ |
 
 ---
 

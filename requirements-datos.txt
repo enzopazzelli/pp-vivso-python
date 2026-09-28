@@ -1,0 +1,5 @@
+# Capa de datos propia (importadores, base y pruebas). No es necesaria para el tablero público.
+-r requirements.txt
+pdfplumber>=0.11
+alembic>=1.13
+pytest>=8.0

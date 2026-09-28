@@ -138,9 +138,6 @@ SECCIONES = [
     ("pages/06_evolucion.py", "📈", "Evolución", "Series de tiempo del programa"),
     ("pages/04_tecnicos.py",  "👷", "Técnicos",  "Vista del jefe de área"),
     ("pages/05_mis_obras.py", "🗂", "Mis obras", "Cola de trabajo del técnico"),
-    ("pages/07_verificacion_foto.py", "📷", "Verificación por foto",
-     "Ponderar el reporte de la gestora con evidencia visual"),
-    ("pages/08_rutas.py", "🗺️", "Rutas", "Armar viajes de varios días para los técnicos"),
 ]
 
 cols = st.columns(len(SECCIONES))
@@ -149,6 +146,19 @@ for col, (ruta, icono, titulo, desc) in zip(cols, SECCIONES):
         st.markdown(f"### {icono} {titulo}")
         st.caption(desc)
         st.page_link(ruta, label="Abrir →")
+
+# ── Capa de datos propia (Planes 1-3, en construcción) ──────────────────────
+st.divider()
+st.subheader("Novedad: capa de datos propia")
+st.caption(
+    "Reportes reales de VISOC, anonimizados y validados, con indicadores calculados sobre esa "
+    "base — ver docs/como-funciona-la-capa-de-datos.md. El resto del dashboard sigue igual, con "
+    "el modelo simulado de siempre."
+)
+with st.container(border=True):
+    st.markdown("### 🗄️ Datos reales")
+    st.caption("Importaciones, fuentes intercambiables e indicadores calculados en vivo")
+    st.page_link("pages/09_datos_reales.py", label="Abrir →")
 
 st.divider()
 st.caption(

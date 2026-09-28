@@ -28,3 +28,12 @@ docs/guion-presentacion-hito3.md
 # versiona — el equipo de Desarrollo y la cátedra consumen README.md y
 # docs/para-desarrollo.md en su lugar.
 ROADMAP.md
+
+# Informe OG/ONG con datos reales del área (2026-09): el texto libre de GDE trae DNI y
+# nombres de familias beneficiarias y reclamantes. Estos archivos NO se versionan; el
+# resto de la carpeta (scripts, DECISIONES.md, informe.html) queda a criterio del equipo.
+# sitio_web_publico/ es la copia ya depurada por generar_sitio_publico.py.
+informe_ong_og_2026/datos_fuente/
+informe_ong_og_2026/datos_web.js
+informe_ong_og_2026/datos_web.json
+informe_ong_og_2026/sitio_web/

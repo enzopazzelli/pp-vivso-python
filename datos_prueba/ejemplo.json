@@ -1,0 +1,50 @@
+{
+  "viviendas": [
+    {"num_exp": "111-11-2024#abc123", "expediente": "111-11-2024", "departamento": "Capital",
+     "localidad": null, "barrio": null, "direccion": null, "superficie": null,
+     "fecha_inic": null, "fecha_solicitud": "2024-03-01", "fecha_activacion": "2024-10-15",
+     "fecha_fin": "2024-11-20",
+     "estado": "Finalizada", "lat": null, "lng": null, "avance_obra": 100, "clasificacion": "1a",
+     "criterio": "Inclusion", "tipo_vivienda": "Urbana", "cant_dormitorios": 2, "observacion": null,
+     "id_familia": null, "representante": null, "titular_seudonimo": "Ejemplo Uno · a1b2",
+     "cuit_org": "PROV-EJ001", "nivel_riesgo": null, "cluster": null, "dias_activa": null},
+    {"num_exp": "222-22-2024#def456", "expediente": "222-22-2024", "departamento": "Banda",
+     "localidad": null, "barrio": null, "direccion": null, "superficie": null,
+     "fecha_inic": null, "fecha_solicitud": "2024-05-10", "fecha_activacion": null, "fecha_fin": null,
+     "estado": "Iniciada", "lat": null, "lng": null, "avance_obra": 0, "clasificacion": "2a",
+     "criterio": "Inclusion", "tipo_vivienda": "Rural", "cant_dormitorios": 0, "observacion": null,
+     "id_familia": null, "representante": null, "titular_seudonimo": "Ejemplo Dos · c3d4",
+     "cuit_org": "PROV-EJ002", "nivel_riesgo": null, "cluster": null, "dias_activa": null}
+  ],
+  "organizaciones": [
+    {"cuit": "PROV-EJ001", "nombre": "COMISION MUNICIPAL EJEMPLO", "tipo": null, "tipo_gestora": "Comisión Municipal",
+     "tipo_solicitante": "COMISIONADO", "dom_legal": null, "contacto": null, "cpe": null,
+     "presidente": null, "dni_presidente": null, "estado": "ACTIVA",
+     "nombre_normalizado": "COMISION MUNICIPAL EJEMPLO", "cuit_provisional": true},
+    {"cuit": "PROV-EJ002", "nombre": "ASOCIACION CIVIL EJEMPLO", "tipo": null, "tipo_gestora": "ONG",
+     "tipo_solicitante": "ASOCIACION_ONG", "dom_legal": null, "contacto": null, "cpe": null,
+     "presidente": null, "dni_presidente": null, "estado": "ACTIVA",
+     "nombre_normalizado": "ASOCIACION CIVIL EJEMPLO", "cuit_provisional": true}
+  ],
+  "medidas": [
+    {"cuit": "PROV-EJ001", "nombre_organizacion": "COMISION MUNICIPAL EJEMPLO", "tipo_reporte": "visoc_por_solicitante",
+     "consulta": "solicitadas", "metrica": "solicitudes", "valor": 3,
+     "periodo_desde": "2024-01-01", "periodo_hasta": "2024-12-01", "fecha_reporte": "2024-12-02"},
+    {"cuit": "PROV-EJ001", "nombre_organizacion": "COMISION MUNICIPAL EJEMPLO", "tipo_reporte": "visoc_por_solicitante",
+     "consulta": "solicitadas", "metrica": "activadas", "valor": 1,
+     "periodo_desde": "2024-01-01", "periodo_hasta": "2024-12-01", "fecha_reporte": "2024-12-02"}
+  ],
+  "expedientes": [
+    {"id": 1, "vivienda_num_exp": "111-11-2024#abc123", "numero": "111-11-2024", "formato": "NNNNN-NN-NNNN",
+     "tipo": "solicitud", "fecha_reporte": "2024-12-02"},
+    {"id": 2, "vivienda_num_exp": "111-11-2024#abc123", "numero": "9001", "formato": "desconocido",
+     "tipo": "reclamo", "fecha_reporte": "2024-12-02"}
+  ],
+  "reclamos": [
+    {"id": 1, "cuit": "PROV-EJ001", "expediente_id": 2, "fecha": "2024-06-15", "estado": "abierto"}
+  ],
+  "medidas_categoria": [
+    {"tipo_solicitante": "COMISIONADO", "consulta": "solicitadas", "metrica": "solicitudes", "valor": 3,
+     "periodo_desde": "2024-01-01", "periodo_hasta": "2024-12-01", "fecha_reporte": "2024-12-02"}
+  ]
+}

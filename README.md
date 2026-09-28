@@ -65,7 +65,7 @@ Sin esto, el código no se entiende. Son las reglas del programa real:
 - **Plazo contractual de construcción: 90 días** (confirmado por el área). Es la constante `PLAZO_CONSTRUCCION_DIAS` en `synthetic/generate.py` — única fuente de verdad. Hallazgo clave: ~85% de las obras terminadas lo supera.
 - **Modelo de riesgo (regla transparente, no caja negra):** obra activa que superó los 90 días → 🔴 alto si avance < 30% · 🟡 medio si 30–80% · 🟢 bajo el resto. Es una regla y no ML a propósito: el ministerio debe poder explicar el número ante una gestora.
 - **Los dos cuellos de botella:** el **constructivo** (la obra se traba en una etapa, típicamente mampostería) y el **administrativo** (obra 100% construida en estado `Finalizada` esperando el **acta de finalización** para pasar a `Adjudicada` — se demora por falta de seguimiento).
-- **Regla de visitas:** máximo 2 visitas técnicas por obra. **213 de 908 obras activas (23,5%) no tiene ninguna** — con cobertura muy dispareja entre técnicos (del 40% al 90% según el caso, ver `COBERTURA_POR_TECNICO` en `synthetic/generate.py`) — por lo que una porción del avance reportado por las gestoras queda sin verificar. De ahí salen el score de priorización de visitas y la alerta de sobre-reporte.
+- **Regla de visitas (medida prevista para el sistema nuevo, todavía no vigente):** máximo 2 visitas técnicas por obra. Nuestros datos simulados la asumen, así que las cifras que siguen describen ese escenario futuro. **213 de 908 obras activas (23,5%) no tiene ninguna** — con cobertura muy dispareja entre técnicos (del 40% al 90% según el caso, ver `COBERTURA_POR_TECNICO` en `synthetic/generate.py`) — por lo que una porción del avance reporta1rización de visitas y la alerta de sobre-reporte.
 
 ---
 
@@ -79,15 +79,22 @@ vivso-python/
 │                          #     los rubros AFO y el modelo de riesgo (recalcular_derivados)
 ├── db/
 │   ├── models.py          # Schema SQLAlchemy (9 tablas, incl. rubro_obra y avance_rubro)
-│   └── setup.py           # Crea tablas + siembra el catálogo de 15 rubros
+│   ├── setup.py           # Crea tablas + siembra el catálogo de 15 rubros
+│   └── migraciones/       # Alembic — versiona el esquema de la base propia (ver datos/, sección 6)
+├── datos/                 # Capa de datos propia (en construcción, PP3) — ver sección 6.
+│                          #   Importadores VISOC, anonimizador, fuentes intercambiables e
+│                          #   indicadores con confianza. datos/README.md es la guía técnica.
+├── datos_prueba/          # JSON mínimo de prueba para la fuente "json_prueba" (sin PDF ni base)
+├── tests/                 # Pruebas de la capa de datos (pytest; ver requirements-datos.txt)
 ├── colab/                 # LOS NOTEBOOKS CANÓNICOS (5) — pensados para Google Colab + Drive
 │   ├── 01_exploracion     # EDA: estados, prioridad (2b/3a), verificación técnica, riesgo
 │   ├── 02_normalizacion   # Limpieza justificada → viviendas_procesadas.csv
 │   ├── 03_correlaciones   # Criterio×tipo, ANOVA, cohortes por año, riesgo por clasificación
 │   ├── 04_indicadores     # KPIs + confiabilidad de gestoras + actas + etapa activa + cronograma
 │   └── 05_tecnicos        # Cobertura, discrepancias, score de visitas, alerta sobre-reporte
-├── dashboard/             # Streamlit — inicio (resumen ejecutivo) + 6 páginas
-│                          #   viviendas, gestoras, minería, evolución, técnicos, mis obras
+├── dashboard/             # Streamlit — inicio (resumen ejecutivo) + 7 páginas
+│                          #   viviendas, gestoras, minería, evolución, técnicos, mis obras,
+│                          #   datos reales (capa de datos propia, sección 6)
 │                          #   components/data_loader.py centraliza la carga de CSVs
 ├── data/                  # CSVs: el dataset base se versiona (para el deploy en Streamlit
 │                          #   Cloud); los derivados de notebooks quedan gitignored. Regenerable.
@@ -170,6 +177,41 @@ Después (preparación de PP3, en coordinación con el equipo de Desarrollo):
 3. **WS3 — Dashboard por roles:** vistas según el esquema de roles/auth que está construyendo Programación (gancho de auth simulada ya diseñado).
 
 Los **pedidos pendientes al equipo de Desarrollo** (acceso a la base, API de Visita, ampliar clasificaciones a 15, esquema de roles) están documentados en [docs/para-desarrollo.md](docs/para-desarrollo.md).
+
+### Capa de datos propia (`datos/`) — en construcción, PP3
+
+En paralelo al dataset sintético de las secciones 1-6 (que sigue siendo la base del dashboard público),
+el equipo está construyendo una **capa de datos propia** que importa los reportes reales que exporta
+VISOC y los deja disponibles con la misma estructura que ya usa el resto del sistema — así ninguna
+pantalla necesita saber si el dato viene de la simulación o de un reporte real. Nace de una limitación
+concreta del área: VISOC solo exporta a PDF y el acceso directo a su base es complicado (detalle completo
+en [docs/datos-reales-visoc-pdf.md](docs/datos-reales-visoc-pdf.md)).
+
+**Qué tiene hoy, ya implementado y con su propia suite de pruebas automatizadas:**
+
+- **Importadores** que leen los reportes PDF de VISOC "Por Solicitante", **anonimizan** cualquier nombre
+  real antes de guardar nada (seudónimo irreversible) y **validan** cada importación contra los totales
+  que trae el propio reporte.
+- **`FuenteDeDatos`**, una interfaz común para leer viviendas, organizaciones, medidas, expedientes y
+  reclamos, con tres fuentes intercambiables: la base propia (reportes ya importados), los datos
+  simulados de siempre, o un JSON mínimo de prueba.
+- **6 indicadores** calculados sobre esa base, cada uno con su nivel de confianza (confirmado / inferido
+  / sin confirmar) y una explicación en lenguaje llano de qué mide y cómo leerlo.
+- Una página nueva en el dashboard, **"Datos reales"** (accesible desde la portada), que muestra todo lo
+  anterior en vivo, con la fuente elegible desde la propia pantalla.
+
+**En diseño, ejecución pendiente:**
+
+- Una **API de solo lectura** (`datos/api/`) que expone todo lo anterior por HTTP en JSON, para que otras
+  pantallas o servicios lo consuman sin pasar por Python directo.
+
+**Referencias:**
+
+| Qué | Dónde |
+|---|---|
+| Explicación en lenguaje simple, sin jerga (para el equipo y la cátedra) | [docs/como-funciona-la-capa-de-datos.md](docs/como-funciona-la-capa-de-datos.md) |
+| Guía técnica: comandos, variables de entorno, cómo importar un reporte | [datos/README.md](datos/README.md) |
+| Qué exporta VISOC/GDE y qué adaptación necesita cada indicador según el export | [docs/datos-reales-visoc-pdf.md](docs/datos-reales-visoc-pdf.md) |
 
 ---
 

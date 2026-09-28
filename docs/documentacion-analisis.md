@@ -226,7 +226,7 @@ Acción que habilita: accountability. El programa paga a las gestoras por los av
 
 **KPI 6 — Cobertura geográfica activa**
 Qué mide: cuántos departamentos tienen obras en curso y cuántas hay en cada uno.
-Acción que habilita: planificación de visitas técnicas. Con máximo 2 visitas por obra, la distribución geográfica determina los recorridos de los técnicos. Un departamento con 50 obras activas necesita más tiempo que uno con 5.
+Acción que habilita: planificación de visitas técnicas. Con el máximo de 2 visitas por obra previsto para el sistema nuevo (todavía no vigente), la distribución geográfica determina los recorridos de los técnicos. Un departamento con 50 obras activas necesita más tiempo que uno con 5.
 
 **KPI 7 — Etapa cuello de botella**
 Qué mide: en qué rubro de la secuencia constructiva se acumula la mayor cantidad de obras activas simultáneamente.
@@ -248,9 +248,9 @@ Diferencia entre "concentración" y "parálisis":
 
 **Qué hace**: analiza el rendimiento del equipo técnico desde dos perspectivas: el jefe de área (visión global) y el técnico individual (su carga de trabajo).
 
-**Por qué se hace**: los técnicos son el vínculo entre el ministerio y las obras. Con un máximo de 2 visitas técnicas por obra, cada visita tiene que ser eficiente. Un técnico sobrecargado deja obras sin verificar, lo que expone al ministerio a reportes de avance no validados.
+**Por qué se hace**: los técnicos son el vínculo entre el ministerio y las obras. Con el máximo de 2 visitas técnicas por obra previsto para el sistema nuevo (todavía no vigente), cada visita tiene que ser eficiente. Un técnico sobrecargado deja obras sin verificar, lo que expone al ministerio a reportes de avance no validados.
 
-**Regla de negocio central**: máximo 2 visitas técnicas por obra (primera y segunda). Entre visitas, las gestoras cubren el avance con reportes fotográficos en el portal.
+**Regla de negocio central (prevista para el sistema nuevo, todavía no vigente)**: máximo 2 visitas técnicas por obra (primera y segunda). Entre visitas, las gestoras cubren el avance con reportes fotográficos en el portal.
 
 **Análisis y su justificación**:
 

@@ -88,7 +88,7 @@ Cada uno tiene un valor por defecto y un costo conocido si resulta falso. Detall
 |---|---|---|---|
 | `[V6]` | ¿El plazo de 90 días se extiende tras un rechazo? | **Sí se extiende** | Nada. El diseño ya está hecho para no depender de la respuesta (§4.4): la corrección que importa —separar `paralizada` de `rehaciendo`— sirve igual |
 | `[V7]` | ¿El rechazo queda registrado hoy en algún lado? | **No existe registro** — lo modelamos nosotros en `cd_` | Si ya existe, mejor: se conecta en vez de crearse. Es menos trabajo, no más |
-| `[V9]` | ¿El tope de 2 visitas aplica a las resoluciones por app? | **No aplica** (el tope es logística de campo) | El sistema vuelve a ser triage. **Mismo código, menos beneficio** — no se cae, se achica |
+| `[V9]` | ¿El tope de 2 visitas (medida prevista para el sistema nuevo) aplica a las resoluciones por app? | **No aplica** (el tope es logística de campo) | El sistema vuelve a ser triage. **Mismo código, menos beneficio** — no se cae, se achica |
 | `[V10]` | ¿Una aprobación remota certifica el AFO? | **Sí certifica** | Igual que `[V9]`. El demo puede mostrar los dos escenarios sin cambiar nada |
 | `[V5]` | Tolerancia de ±1 rubro | **Aceptable** | Es un umbral: se cambia en un renglón |
 | `[V2]` | El rubro 15 (Varios) no tiene evidencia visible propia | **No la tiene** | Sube la cobertura fotográfica del 87% al 90%. A favor nuestro |

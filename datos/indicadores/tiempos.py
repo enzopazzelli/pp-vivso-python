@@ -42,5 +42,7 @@ def tiempos_del_proceso(fuente) -> Indicador:
         return Indicador(**base, capacidad="no_disponible", valor={})
 
     valor = {"solicitud_a_activacion": _resumen_de_dias(solicitud_a_activacion),
-             "activacion_a_fin_obra": _resumen_de_dias(activacion_a_fin)}
+             "activacion_a_fin_obra": _resumen_de_dias(activacion_a_fin),
+             "dias_solicitud_a_activacion": sorted((f - i).days for i, f in solicitud_a_activacion if f >= i),
+             "dias_activacion_a_fin_obra": sorted((f - i).days for i, f in activacion_a_fin if f >= i)}
     return Indicador(**base, capacidad="disponible", valor=valor)

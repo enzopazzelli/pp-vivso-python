@@ -32,3 +32,15 @@ def test_calcula_dias_de_solicitud_a_activacion_y_de_activacion_a_fin(sesion, an
     assert indicador.valor["solicitud_a_activacion"]["dias_minimo"] > 0
     # activación 04/12/23, fin 06/12/23 -> 2 días
     assert indicador.valor["activacion_a_fin_obra"]["dias_minimo"] >= 0
+
+
+def test_agrega_las_listas_crudas_de_dias(sesion, anon):
+    VisocViviendasSegunSolicitante().mapear(
+        VisocViviendasSegunSolicitante().lectura_desde_lineas(LINEAS_V, anon), sesion, _importacion(sesion))
+    sesion.commit()
+
+    indicador = tiempos_del_proceso(FuentePropia(sesion=sesion))
+    assert indicador.valor["dias_solicitud_a_activacion"]
+    assert len(indicador.valor["dias_solicitud_a_activacion"]) == indicador.valor["solicitud_a_activacion"]["cantidad"]
+    assert min(indicador.valor["dias_solicitud_a_activacion"]) == indicador.valor["solicitud_a_activacion"]["dias_minimo"]
+    assert len(indicador.valor["dias_activacion_a_fin_obra"]) == indicador.valor["activacion_a_fin_obra"]["cantidad"]

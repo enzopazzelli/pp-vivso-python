@@ -46,22 +46,6 @@ def test_por_solicitante_de_punta_a_punta(cliente, tmp_path, monkeypatch):
     assert cuerpo["filas_leidas"] == 3
 
 
-def test_nombre_de_archivo_con_traversal_se_reduce_al_nombre_base():
-    # Encontrado en la revisión final: `Path(carpeta) / archivo.filename` sin sanear permite que un
-    # nombre de archivo con ".." o una ruta absoluta escriba fuera de la carpeta temporal.
-    from datos.api.importar import _nombre_seguro
-
-    assert _nombre_seguro("../../evil.txt") == "evil.txt"
-    assert _nombre_seguro("C:/Windows/evil.txt") == "evil.txt"
-    assert _nombre_seguro("..\\..\\evil.txt") == "evil.txt"
-    assert _nombre_seguro("\\\\servidor\\share\\evil.txt") == "evil.txt"
-    assert _nombre_seguro("..") == "archivo"
-    assert _nombre_seguro(".") == "archivo"
-    assert _nombre_seguro("") == "archivo"
-    assert _nombre_seguro(None) == "archivo"
-    assert _nombre_seguro("reporte.pdf") == "reporte.pdf"
-
-
 def test_un_archivo_con_nombre_malicioso_no_rompe_el_pedido(cliente, tmp_path, monkeypatch):
     monkeypatch.setenv("ANON_SECRET", "x" * 32)
     monkeypatch.setenv("DATOS_DB_URL", f"sqlite:///{(tmp_path / 'datos4.db').as_posix()}")

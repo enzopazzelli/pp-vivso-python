@@ -10,16 +10,6 @@ router = APIRouter()
 TAMANO_MAXIMO_BYTES = 20 * 1024 * 1024
 
 
-def _nombre_seguro(nombre: str | None) -> str:
-    """El nombre que manda el cliente no es confiable: una ruta absoluta o con `..` uniría con `Path`
-    fuera de la carpeta temporal (path traversal). Acá se queda solo con el nombre de archivo final,
-    sin ningún componente de carpeta ni unidad — `PureWindowsPath` porque este proyecto corre en
-    Windows y entiende tanto `/` como `\\` como separador, a diferencia de `PurePosixPath`."""
-    from pathlib import PureWindowsPath
-    base = PureWindowsPath(nombre or "").name
-    return base if base not in ("", ".", "..") else "archivo"
-
-
 def _sanear_advertencias(advertencias: list[str]) -> list[str]:
     """`importar_archivo` (Plan 1) puede meter el texto crudo de una excepción de SQLAlchemy (sentencia,
     parámetros) en una advertencia cuando falla el mapeo — pensado para la consola local, donde quien lo
@@ -41,7 +31,7 @@ def importar(archivo: UploadFile) -> dict:
 
     from datos.anonimizador import Anonimizador
     from datos.config import ConfiguracionFaltante, anon_secret
-    from datos.importar import importar_archivo
+    from datos.importar import importar_archivo, nombre_archivo_seguro
     from datos.sesion import crear_engine, migrar, sembrar_catalogos
 
     try:
@@ -56,7 +46,7 @@ def importar(archivo: UploadFile) -> dict:
 
     migrar()
     with tempfile.TemporaryDirectory() as carpeta:
-        ruta = Path(carpeta) / _nombre_seguro(archivo.filename)
+        ruta = Path(carpeta) / nombre_archivo_seguro(archivo.filename)
         ruta.write_bytes(contenido)
         engine = crear_engine()
         try:

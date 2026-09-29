@@ -3,7 +3,7 @@ import json
 import pytest
 
 from datos.importadores.base import Importador
-from datos.importar import importar_archivo, main
+from datos.importar import confirmar, importar_archivo, main, nombre_archivo_seguro, previsualizar
 from datos.modelo import Importacion, MedidaOrganizacion, RegistroCrudo
 from db.models import Organizacion, Vivienda
 from tests.fixtures_visoc import LINEAS_PS, LINEAS_V, NOMBRES_INVENTADOS
@@ -205,3 +205,83 @@ def test_la_linea_de_comandos_crea_el_esquema_con_migraciones(monkeypatch, tmp_p
     archivo.write_text("hola", encoding="utf-8")
     main([str(archivo)])
     assert "alembic_version" in inspect(create_engine(url)).get_table_names()
+
+
+# --- Plan 5: previsualizar()/confirmar() ------------------------------------------------------------
+
+def test_previsualizar_no_escribe_nada_en_la_sesion(sesion, anon, pdf_falso, leer_de_memoria):
+    leer_de_memoria(lineas_ps=LINEAS_PS)
+    previsualizar(pdf_falso, sesion, anon)
+    assert sesion.query(Importacion).count() == 0
+    assert sesion.query(RegistroCrudo).count() == 0
+
+
+def test_previsualizar_reconoce_lee_y_valida(sesion, anon, pdf_falso, leer_de_memoria):
+    leer_de_memoria(lineas_ps=LINEAS_PS)
+    previa = previsualizar(pdf_falso, sesion, anon)
+    assert previa.importador is not None and previa.importador.codigo == "visoc_por_solicitante"
+    assert previa.lectura is not None and len(previa.lectura.filas) == 3
+    assert previa.validacion.ok
+    assert previa.duplicada is None
+
+
+def test_previsualizar_marca_un_archivo_ya_importado_como_duplicada(sesion, anon, pdf_falso, leer_de_memoria):
+    leer_de_memoria(lineas_ps=LINEAS_PS)
+    importar_archivo(pdf_falso, sesion, anon)
+    previa = previsualizar(pdf_falso, sesion, anon)
+    assert previa.duplicada is not None and previa.duplicada.estado == "ok"
+
+
+def test_previsualizar_sin_formato_reconocido_da_la_sonda(sesion, anon, tmp_path):
+    archivo = tmp_path / "raro.txt"
+    archivo.write_text("hola", encoding="utf-8")
+    previa = previsualizar(archivo, sesion, anon)
+    assert previa.importador is None and previa.sonda["formato"] == ".txt"
+    assert sesion.query(Importacion).count() == 0
+
+
+def test_previsualizar_si_falla_la_lectura_no_escribe_y_guarda_solo_el_tipo_de_error(sesion, anon, pdf_falso):
+    # Reusa `ImportadorQueNoPuedeLeer`, ya definida más arriba en este mismo archivo (junto a
+    # `test_si_falla_la_lectura_queda_registrado_sin_texto_del_archivo`) — no hace falta otra clase
+    # con el mismo comportamiento.
+    previa = previsualizar(pdf_falso, sesion, anon, importador=ImportadorQueNoPuedeLeer())
+    assert previa.lectura is None and previa.error_lectura == "ValueError"
+    assert sesion.query(Importacion).count() == 0
+
+
+def test_confirmar_compone_igual_que_importar_archivo(sesion, anon, pdf_falso, leer_de_memoria):
+    leer_de_memoria(lineas_ps=LINEAS_PS)
+    previa = previsualizar(pdf_falso, sesion, anon)
+    resultado = confirmar(previa, pdf_falso, sesion)
+    assert resultado.estado == "ok" and resultado.filas_leidas == 3
+    assert sesion.query(MedidaOrganizacion).count() == 12
+
+
+def test_confirmar_respeta_un_duplicado_salvo_que_se_fuerce(sesion, anon, pdf_falso, leer_de_memoria):
+    leer_de_memoria(lineas_ps=LINEAS_PS)
+    importar_archivo(pdf_falso, sesion, anon)
+    previa = previsualizar(pdf_falso, sesion, anon)
+    assert confirmar(previa, pdf_falso, sesion).estado == "duplicada"
+    assert confirmar(previa, pdf_falso, sesion, forzar=True).estado == "ok"
+    assert sesion.query(Importacion).count() == 2
+
+
+def test_confirmar_un_archivo_no_reconocido_no_guarda_el_nombre_real(sesion, anon, tmp_path):
+    archivo = tmp_path / "reclamo_JUANA_INVENTADA_PEREZ.txt"
+    archivo.write_text("hola\n", encoding="utf-8")
+    previa = previsualizar(archivo, sesion, anon)
+    resultado = confirmar(previa, archivo, sesion)
+    guardado = sesion.get(Importacion, resultado.importacion_id).archivo_nombre
+    assert "JUANA" not in guardado.upper() and "PEREZ" not in guardado.upper()
+
+
+def test_nombre_archivo_seguro_contra_traversal():
+    assert nombre_archivo_seguro("../../evil.txt") == "evil.txt"
+    assert nombre_archivo_seguro("C:/Windows/evil.txt") == "evil.txt"
+    assert nombre_archivo_seguro("..\\..\\evil.txt") == "evil.txt"
+    assert nombre_archivo_seguro("\\\\servidor\\share\\evil.txt") == "evil.txt"
+    assert nombre_archivo_seguro("..") == "archivo"
+    assert nombre_archivo_seguro(".") == "archivo"
+    assert nombre_archivo_seguro("") == "archivo"
+    assert nombre_archivo_seguro(None) == "archivo"
+    assert nombre_archivo_seguro("reporte.pdf") == "reporte.pdf"

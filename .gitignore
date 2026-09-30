@@ -37,3 +37,7 @@ informe_ong_og_2026/datos_fuente/
 informe_ong_og_2026/datos_web.js
 informe_ong_og_2026/datos_web.json
 informe_ong_og_2026/sitio_web/
+
+# Capturas de pantalla de VISOC y diagrama de flujo que pasó el área (2026-09-30): las capturas
+# muestran nombres, DNI y teléfonos reales. Se conservan en local y NO se versionan.
+pantallas/

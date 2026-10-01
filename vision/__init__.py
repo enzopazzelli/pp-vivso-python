@@ -3,7 +3,7 @@ Verificación fotográfica del AFO — componente de Ciencia de Datos.
 
 Usa las fotos que adjunta la gestora para **ponderar su reporte de avance**, nunca
 para aprobarlo: el AFO lo sigue certificando el técnico. El diseño completo está en
-docs/vision-afo.md y los supuestos en docs/supuestos-abiertos.md.
+docs/vision/vision-afo.md y los supuestos en docs/pendientes/supuestos-abiertos.md.
 
 Arquitectura en dos capas, y la separación es deliberada:
 

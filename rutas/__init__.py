@@ -1,6 +1,6 @@
 """
 Generador de rutas para viajes de técnicos — componente extra de Ciencia de Datos,
-fuera de la obligación de PP3 (ver docs/supuestos-abiertos.md §1).
+fuera de la obligación de PP3 (ver docs/pendientes/supuestos-abiertos.md §1).
 
 Un técnico visita obras en varios departamentos, muy separados entre sí. En vez de
 un viaje de ida y vuelta por cada obra, este módulo arma un único viaje de varios

@@ -3,11 +3,11 @@ Rúbrica de evidencia observable: qué se ve en una foto cuando cada rubro del A
 está terminado.
 
 Es el insumo central del componente de verificación fotográfica; el diseño completo,
-con el porqué de cada decisión, está en docs/vision-afo.md.
+con el porqué de cada decisión, está en docs/vision/vision-afo.md.
 
 Todos los supuestos [V#] viven acá arriba como constantes nombradas. Es una condición
 del diseño y no una preferencia de estilo: este componente se construye sobre supuestos
-sin consultarlos con el área (docs/supuestos-abiertos.md §1), y esa postura solo es
+sin consultarlos con el área (docs/pendientes/supuestos-abiertos.md §1), y esa postura solo es
 sostenible si refinar un supuesto cuesta cambiar un renglón. Si alguno de estos valores
 termina hundido dentro de una función, el componente pierde su principal defensa.
 """
@@ -16,7 +16,7 @@ from db.setup import RUBROS_CATALOGO
 # ═══════════════════════════════════════════════════════════════════════════
 # SUPUESTOS DE DISEÑO [V#] — no confirmados con el área, a propósito
 # ═══════════════════════════════════════════════════════════════════════════
-# Cada uno tiene su costo documentado en docs/supuestos-abiertos.md §2. El peor
+# Cada uno tiene su costo documentado en docs/pendientes/supuestos-abiertos.md §2. El peor
 # caso de toda esa tabla es que el beneficio sea menor: ninguno invalida el trabajo.
 
 # [V2] El rubro 15 ("Varios") no tiene una manifestación visible propia, así que
@@ -30,7 +30,7 @@ V2_RUBRO_15_SIN_EVIDENCIA = True
 V5_TOLERANCIA_RUBROS = 1
 
 # [V6] ¿El plazo de 90 días se extiende tras un rechazo? El diseño está hecho para
-#      no depender de la respuesta (docs/vision-afo.md §4.4); esto solo alimenta el
+#      no depender de la respuesta (docs/vision/vision-afo.md §4.4); esto solo alimenta el
 #      cálculo de plazo_efectivo cuando se implemente.
 V6_PLAZO_SE_EXTIENDE_TRAS_RECHAZO = True
 

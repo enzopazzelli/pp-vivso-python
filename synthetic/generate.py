@@ -213,7 +213,7 @@ CUITS_GESTORAS = [o["cuit"] for o in ORGANIZACIONES_CATALOGO]
 # SUPUESTOS DEL PROGRAMA — A VALIDAR CON EL ÁREA
 # ═══════════════════════════════════════════════════════════════════════════
 # Estos son los parámetros que modelan el comportamiento del programa. Cada uno
-# está etiquetado [S#] y se corresponde con una fila de docs/datos-a-confirmar.md
+# está etiquetado [S#] y se corresponde con una fila de docs/pendientes/datos-a-confirmar.md
 # (el documento que se completa en la reunión con el responsable del área).
 #
 # Para hacer el modelo más realista cuando el área corrija un supuesto: se edita
@@ -229,7 +229,7 @@ PLAZO_CONSTRUCCION_DIAS = 90
 # [S2] Distribución de obras por estado.
 # Ajustado 2026-08-29 (decisión del equipo, no dato del área): sube la proporción de
 # obras terminadas del 40% al 65% para mostrar un programa más maduro en la demo. Sigue
-# siendo el mismo supuesto sin confirmar de docs/datos-a-confirmar.md — cambia el valor
+# siendo el mismo supuesto sin confirmar de docs/pendientes/datos-a-confirmar.md — cambia el valor
 # de trabajo, no su estado de confirmación.
 ESTADOS_PROB = {"Iniciada": 0.18, "Avanzada": 0.17, "Finalizada": 0.38, "Adjudicada": 0.27}
 
@@ -273,7 +273,7 @@ DISCREPANCIA_GESTORA_SEGUNDA = (-5, 10)
 #      resultó imposible: la gestora es quien SOLICITA las viviendas, no al revés, así
 #      que toda obra tiene gestora por construcción. Confirmado por el equipo, a
 #      ratificar con el área. El supuesto estaba marcado como no confirmado en
-#      docs/datos-a-confirmar.md — funcionó como tenía que funcionar.
+#      docs/pendientes/datos-a-confirmar.md — funcionó como tenía que funcionar.
 
 # [S10] Proporción de obras finalizadas con el acta atascada (cuello administrativo).
 PROP_ACTAS_ATASCADAS = 0.45
@@ -287,7 +287,7 @@ SEGUNDA_VISITA_PROB   = {1: 0.60, 2: 0.45, 3: 0.15, 4: 0.55, 5: 0.00, 6: 0.65}
 TIPO_PROB = {"Urbana": 0.55, "Rural": 0.38, "Económica": 0.07}
 DORM_PROB = {2: 0.60, 3: 0.25, 1: 0.15}
 
-# Sistema completo de clasificaciones del programa (sistema legacy VISOC — docs/tipos.jpeg)
+# Sistema completo de clasificaciones del programa (sistema legacy VISOC — docs/visoc/capturas/tipos.jpeg)
 # criterio: Inclusion = apta para el programa | Exclusion = rechazada | Otro = caso especial
 CLASIFICACIONES = {
     '1a': ('Inclusion',  'Vivienda Rancho'),
@@ -314,7 +314,7 @@ CLASIF_PROB = {
     '5a': 0.02, '5b': 0.04, '5c': 0.03, '5d': 0.02, '5e': 0.02, '5g': 0.01,
 }
 
-# [S14] Rubros del AFO con su peso porcentual (suma = 100) — docs/afo.jpeg.
+# [S14] Rubros del AFO con su peso porcentual (suma = 100) — docs/visoc/capturas/afo.jpeg.
 # Para no duplicar el dato, se derivan del catálogo oficial (db/setup.py → RUBROS_CATALOGO):
 # si el área corrige un peso, se cambia una sola vez allí.
 RUBROS_DEF = [{"id": r["id"], "peso": r["peso_pct"]} for r in RUBROS_CATALOGO]

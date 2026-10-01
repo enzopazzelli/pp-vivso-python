@@ -5,7 +5,7 @@
 **Entidad:** Subsecretaría de Promoción Humana — Ministerio de Desarrollo Social, Santiago del Estero
 
 > Este README es el documento de traspaso del proyecto: explica qué hay, cómo se corre y qué sigue.
-> El **Informe EDA** (entregable del Hito 3) está en [docs/informe-eda.md](docs/informe-eda.md); la explicación del *por qué* de cada análisis y decisión, en [docs/documentacion-analisis.md](docs/documentacion-analisis.md).
+> El **Informe EDA** (entregable del Hito 3) está en [docs/analisis/informe-eda.md](docs/analisis/informe-eda.md); la explicación del *por qué* de cada análisis y decisión, en [docs/analisis/documentacion-analisis.md](docs/analisis/documentacion-analisis.md).
 
 ---
 
@@ -60,8 +60,8 @@ Python, en lugar del `vivso-client.js` que se había imaginado en un principio.
 
 Sin esto, el código no se entiende. Son las reglas del programa real:
 
-- **AFO (Avance Físico de Obra):** % de avance 0–100, calculado como suma ponderada de **15 rubros de construcción estrictamente secuenciales** (el rubro N solo arranca cuando el N-1 terminó). La secuencia y pesos salen del sistema legacy VISOC ([docs/afo.jpeg](docs/afo.jpeg)).
-- **Clasificaciones:** el sistema real tiene **15 códigos** (no 6 como el backend actual) agrupados por **criterio**: Inclusión (apta), Exclusión (rechazada), Otro (caso especial). Fuente: [docs/tipos.jpeg](docs/tipos.jpeg).
+- **AFO (Avance Físico de Obra):** % de avance 0–100, calculado como suma ponderada de **15 rubros de construcción estrictamente secuenciales** (el rubro N solo arranca cuando el N-1 terminó). La secuencia y pesos salen del sistema legacy VISOC ([docs/visoc/capturas/afo.jpeg](docs/visoc/capturas/afo.jpeg)).
+- **Clasificaciones:** el sistema real tiene **15 códigos** (no 6 como el backend actual) agrupados por **criterio**: Inclusión (apta), Exclusión (rechazada), Otro (caso especial). Fuente: [docs/visoc/capturas/tipos.jpeg](docs/visoc/capturas/tipos.jpeg).
 - **Plazo contractual de construcción: 90 días** (confirmado por el área). Es la constante `PLAZO_CONSTRUCCION_DIAS` en `synthetic/generate.py` — única fuente de verdad. Hallazgo clave: ~85% de las obras terminadas lo supera.
 - **Modelo de riesgo (regla transparente, no caja negra):** obra activa que superó los 90 días → 🔴 alto si avance < 30% · 🟡 medio si 30–80% · 🟢 bajo el resto. Es una regla y no ML a propósito: el ministerio debe poder explicar el número ante una gestora.
 - **Los dos cuellos de botella:** el **constructivo** (la obra se traba en una etapa, típicamente mampostería) y el **administrativo** (obra 100% construida en estado `Finalizada` esperando el **acta de finalización** para pasar a `Adjudicada` — se demora por falta de seguimiento).
@@ -98,17 +98,18 @@ vivso-python/
 │                          #   components/data_loader.py centraliza la carga de CSVs
 ├── data/                  # CSVs: el dataset base se versiona (para el deploy en Streamlit
 │                          #   Cloud); los derivados de notebooks quedan gitignored. Regenerable.
-├── docs/
-│   ├── informe-eda.md               # INFORME EDA (entregable Hito 3) — documento formal único
-│   ├── datos-a-confirmar.md         # checklist de supuestos para validar con el área (reunión)
-│   ├── generar_figuras.py           # regenera las figuras del informe desde el dataset
-│   ├── figuras/                     # PNGs del informe (regenerables)
-│   ├── documentacion-analisis.md    # POR QUÉ de cada análisis — para entender y explicar
+├── docs/                  # Documentación, ordenada por tema — índice en docs/README.md
 │   ├── para-desarrollo.md           # Guía de integración para el equipo de Programación (Java)
 │   ├── roadmap-pp3.md               # Ruta de trabajo de PP3 (etapas 6-9, cierre y comunicación)
-│   ├── hito1/                       # Diagramas del esquema original (Hito 1): integración con
-│   │                                #   GEDO y arquitectura interna planteada para VIVSO
-│   └── afo.jpeg / tipos.jpeg        # Capturas del sistema legacy (evidencia de dominio)
+│   ├── visoc/                       # El sistema actual: flujo del programa, modelo de datos,
+│   │                                #   reportes en PDF y capturas (evidencia de dominio)
+│   ├── capa-de-datos/               # Cómo funciona la capa de datos propia, en lenguaje simple
+│   ├── analisis/                    # INFORME EDA (entregable Hito 3), el POR QUÉ de cada análisis
+│   │                                #   y las figuras del informe (regenerables)
+│   ├── vision/                      # Verificación fotográfica del AFO (documento de diseño)
+│   ├── pendientes/                  # Supuestos y datos a confirmar con el área
+│   └── hito1/                       # Diagramas del esquema original (Hito 1): integración con
+│                                    #   GEDO y arquitectura interna planteada para VIVSO
 └── README.md              # Este archivo
 ```
 
@@ -168,7 +169,7 @@ Cerrado en Hito 2 y posteriores:
 
 ## 6. Qué se planea hacer
 
-La prioridad inmediata es el **cierre de PP2 (Hito 3)**: entregable oficial = *"Informe EDA + prototipo funcionando"*. El prototipo ya funciona y el **Informe EDA está redactado** ([docs/informe-eda.md](docs/informe-eda.md), con figuras generadas desde el dataset). Queda **validar el alcance con el profesor** y preparar la presentación.
+La prioridad inmediata es el **cierre de PP2 (Hito 3)**: entregable oficial = *"Informe EDA + prototipo funcionando"*. El prototipo ya funciona y el **Informe EDA está redactado** ([docs/analisis/informe-eda.md](docs/analisis/informe-eda.md), con figuras generadas desde el dataset). Queda **validar el alcance con el profesor** y preparar la presentación.
 
 Después (preparación de PP3, en coordinación con el equipo de Desarrollo):
 
@@ -185,7 +186,7 @@ el equipo está construyendo una **capa de datos propia** que importa los report
 VISOC y los deja disponibles con la misma estructura que ya usa el resto del sistema — así ninguna
 pantalla necesita saber si el dato viene de la simulación o de un reporte real. Nace de una limitación
 concreta del área: VISOC solo exporta a PDF y el acceso directo a su base es complicado (detalle completo
-en [docs/datos-reales-visoc-pdf.md](docs/datos-reales-visoc-pdf.md)).
+en [docs/visoc/datos-reales-visoc-pdf.md](docs/visoc/datos-reales-visoc-pdf.md)).
 
 **Qué tiene hoy, ya implementado y con su propia suite de pruebas automatizadas:**
 
@@ -209,9 +210,12 @@ en [docs/datos-reales-visoc-pdf.md](docs/datos-reales-visoc-pdf.md)).
 
 | Qué | Dónde |
 |---|---|
-| Explicación en lenguaje simple, sin jerga (para el equipo y la cátedra) | [docs/como-funciona-la-capa-de-datos.md](docs/como-funciona-la-capa-de-datos.md) |
+| Explicación en lenguaje simple, sin jerga (para el equipo y la cátedra) | [docs/capa-de-datos/como-funciona-la-capa-de-datos.md](docs/capa-de-datos/como-funciona-la-capa-de-datos.md) |
 | Guía técnica: comandos, variables de entorno, cómo importar un reporte | [datos/README.md](datos/README.md) |
-| Qué exporta VISOC/GDE y qué adaptación necesita cada indicador según el export | [docs/datos-reales-visoc-pdf.md](docs/datos-reales-visoc-pdf.md) |
+| Qué exporta VISOC/GDE y qué adaptación necesita cada indicador según el export | [docs/visoc/datos-reales-visoc-pdf.md](docs/visoc/datos-reales-visoc-pdf.md) |
+| Qué guarda VISOC y cómo lo modelamos para analizar, a partir de sus pantallas | [docs/visoc/modelo-de-datos.md](docs/visoc/modelo-de-datos.md) |
+| Flujo de trabajo del programa entre VISOC y GDE, graficado desde el diagrama del área | [docs/visoc/flujo-del-programa.md](docs/visoc/flujo-del-programa.md) |
+| Índice de toda la documentación | [docs/README.md](docs/README.md) |
 
 ---
 
@@ -220,14 +224,14 @@ en [docs/datos-reales-visoc-pdf.md](docs/datos-reales-visoc-pdf.md)).
 Ruta de onboarding sugerida (en este orden):
 
 1. Leer la sección 2 de este README (conceptos de dominio) — 10 minutos.
-2. Leer [docs/documentacion-analisis.md](docs/documentacion-analisis.md) — explica cada análisis, por qué se eligió y qué decisión habilita. Escrito para que lo entienda un estudiante, un profesor o alguien del área.
+2. Leer [docs/analisis/documentacion-analisis.md](docs/analisis/documentacion-analisis.md) — explica cada análisis, por qué se eligió y qué decisión habilita. Escrito para que lo entienda un estudiante, un profesor o alguien del área.
 3. Correr el setup (sección 4) y abrir el dashboard — ver el producto antes que el código.
 4. Abrir los colabs en orden y leer las celdas markdown (las interpretaciones están ahí).
 5. Revisar [docs/para-desarrollo.md](docs/para-desarrollo.md): el estado auditado del backend Java, las brechas del modelo de datos y los pedidos pendientes a Programación.
 
 Reglas para mantener la coherencia del proyecto:
 
-- Los **supuestos del programa** (plazo, distribuciones, etapas del cuello de botella, umbrales de riesgo, etc.) están centralizados y etiquetados `[S#]` en el bloque *"SUPUESTOS DEL PROGRAMA"* al inicio de `synthetic/generate.py`. Para ajustarlos a la realidad: se edita el valor ahí y se regenera — nada de números escondidos en funciones. Cada `[S#]` se corresponde con una fila de [docs/datos-a-confirmar.md](docs/datos-a-confirmar.md), la checklist que se completa con el área.
+- Los **supuestos del programa** (plazo, distribuciones, etapas del cuello de botella, umbrales de riesgo, etc.) están centralizados y etiquetados `[S#]` en el bloque *"SUPUESTOS DEL PROGRAMA"* al inicio de `synthetic/generate.py`. Para ajustarlos a la realidad: se edita el valor ahí y se regenera — nada de números escondidos en funciones. Cada `[S#]` se corresponde con una fila de [docs/pendientes/datos-a-confirmar.md](docs/pendientes/datos-a-confirmar.md), la checklist que se completa con el área.
 - Las columnas derivadas (`dias_activa`, `nivel_riesgo`) se calculan **solo** en `recalcular_derivados()` a partir de las fechas — no asignarlas a mano en otro lado.
 - Todo indicador nuevo debe responder una pregunta de gestión concreta ("¿a quién audito?", "¿a dónde mando al técnico?") — si no habilita una decisión, no entra.
 - Registrar las decisiones importantes en la bitácora interna del proyecto: este proyecto documenta su proceso de principio a fin.

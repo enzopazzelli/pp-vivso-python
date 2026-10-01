@@ -10,7 +10,7 @@ DEPARTAMENTOS = [
     "Robles", "Salavina", "San Martín", "Sarmiento", "Silípica",
 ]
 
-# Las 15 clasificaciones de VISOC (docs/tipos.jpeg): código → (criterio, descripción).
+# Las 15 clasificaciones de VISOC (docs/visoc/capturas/tipos.jpeg): código → (criterio, descripción).
 # Es la misma tabla que usa synthetic/generate.py.
 CLASIFICACIONES = {
     "1a": ("Inclusion", "Vivienda Rancho"),

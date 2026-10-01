@@ -1,6 +1,6 @@
 """Vidriera de la capa de datos propia: seis pestañas que muestran qué hay cargado, cómo funciona el
 pipeline, los indicadores, la cobertura y confianza, permiten importar un reporte nuevo y consultan el
-catálogo de reportes — ver docs/como-funciona-la-capa-de-datos.md.
+catálogo de reportes — ver docs/capa-de-datos/como-funciona-la-capa-de-datos.md.
 
 Esta página es la única del dashboard que puede mostrar datos reales (según la fuente elegida). El
 resto de las páginas sigue usando exclusivamente el modelo simulado de PP2, sin cambios.
@@ -24,7 +24,7 @@ ETIQUETA_FUENTE = {"propia": "Base propia (reportes importados)", "simulada": "D
 st.title("🗄️ Datos reales — capa de datos propia")
 st.caption(
     "Reportes reales de VISOC, anonimizados y validados, con indicadores calculados sobre esa base — "
-    "ver docs/como-funciona-la-capa-de-datos.md. El resto del dashboard sigue igual, con el modelo "
+    "ver docs/capa-de-datos/como-funciona-la-capa-de-datos.md. El resto del dashboard sigue igual, con el modelo "
     "simulado de siempre."
 )
 

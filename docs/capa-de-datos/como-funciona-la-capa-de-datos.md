@@ -64,7 +64,7 @@ python -m datos.importar ruta/al/reporte.pdf
 El sistema reconoce solo qué tipo de reporte es (hoy sabe leer dos formatos de VISOC, ver sección 5),
 lo procesa, y te dice si quedó guardado, si hay algo para revisar, o si algo no cerró. Antes de poder
 importar hace falta configurar una clave propia en el archivo `.env` (`ANON_SECRET`), que es la que se
-usa para generar los seudónimos. Los detalles están en [`datos/README.md`](../datos/README.md).
+usa para generar los seudónimos. Los detalles están en [`datos/README.md`](../../datos/README.md).
 
 ### 4.2. Leer los datos ya cargados (para quien programe)
 

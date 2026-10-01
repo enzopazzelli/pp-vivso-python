@@ -2,7 +2,7 @@
 Supuestos de diseño del generador de rutas, como constantes nombradas.
 
 Mismo criterio que vision/rubrica.py: este componente es un plus que excede la
-obligación de PP3 (docs/supuestos-abiertos.md §1), así que se construye sobre
+obligación de PP3 (docs/pendientes/supuestos-abiertos.md §1), así que se construye sobre
 supuestos sin consultarlos antes con el área. La condición que lo sostiene es la
 misma — cada supuesto vive acá arriba, nombrado, para que refinarlo sea cambiar
 un renglón y no reescribir código.

@@ -4,7 +4,7 @@ Nota breve de "cómo se calcula" cada sección del dashboard, con la fuente de d
 de un vistazo el indicador que está viendo, sin tecnicismos ni listado de supuestos.
 
 Centralizar los textos acá permite editarlos en un solo lugar. El detalle de los
-supuestos ajustables vive aparte, en docs/datos-a-confirmar.md.
+supuestos ajustables vive aparte, en docs/pendientes/datos-a-confirmar.md.
 
 Uso en una página:
     from dashboard.components.criterios import nota_criterio
@@ -93,4 +93,4 @@ def nota_criterio(seccion: str, titulo: str = "ℹ️ Cómo se calcula") -> None
     with st.expander(titulo):
         st.markdown(NOTAS.get(seccion, ""))
         st.caption("Datos del modelo sintético; los criterios se validan con el área en "
-                   "`docs/datos-a-confirmar.md`.")
+                   "`docs/pendientes/datos-a-confirmar.md`.")

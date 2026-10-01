@@ -1,11 +1,11 @@
 """
-Genera las figuras del Informe EDA (docs/informe-eda.md) a partir del dataset.
+Genera las figuras del Informe EDA (docs/analisis/informe-eda.md) a partir del dataset.
 
 Uso (desde la raíz del repo, con el venv activo):
-    python docs/generar_figuras.py
+    python docs/analisis/generar_figuras.py
 
 Lee data/viviendas_sinteticas.csv (+ avance_rubros, visitas, organizaciones) y
-escribe los PNG en docs/figuras/. Es idempotente: re-ejecutarlo regenera todo.
+escribe los PNG en docs/analisis/figuras/. Es idempotente: re-ejecutarlo regenera todo.
 Cuando exista el dataset real, basta apuntar DATA a la fuente procesada.
 """
 from pathlib import Path
@@ -14,7 +14,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy import stats
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(__file__).resolve().parents[2]   # docs/analisis/ → raíz del repo
 DATA = ROOT / "data"
 OUT  = Path(__file__).resolve().parent / "figuras"
 OUT.mkdir(exist_ok=True)
@@ -198,7 +198,7 @@ def main():
     a2.set_ylabel("% verificada"); a2.set_ylim(0, 100)
     guardar(fig, "09_gestoras_confiabilidad.png")
 
-    print("Figuras generadas en docs/figuras/")
+    print("Figuras generadas en docs/analisis/figuras/")
 
 
 if __name__ == "__main__":

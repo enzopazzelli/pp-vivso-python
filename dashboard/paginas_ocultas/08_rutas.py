@@ -1,6 +1,6 @@
 """
 Generador de rutas para viajes de técnicos — componente extra, fuera de la
-obligación de PP3 (docs/supuestos-abiertos.md §1).
+obligación de PP3 (docs/pendientes/supuestos-abiertos.md §1).
 """
 import sys
 from pathlib import Path

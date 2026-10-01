@@ -196,7 +196,7 @@ def grado_de_respaldo(
 
     # Monotonía condicional: una obra no retrocede, SALVO que haya un rechazo
     # registrado. Sin esa distinción el sistema marcaría como error de lectura a la
-    # gestora que está corrigiendo — ver docs/vision-afo.md §4.1.
+    # gestora que está corrigiendo — ver docs/vision/vision-afo.md §4.1.
     if rubro_verificado_previo is not None and lectura.rubro_alcanzado < rubro_verificado_previo:
         if not rechazo_vigente:
             return RETROCESO_SIN_EXPL, (

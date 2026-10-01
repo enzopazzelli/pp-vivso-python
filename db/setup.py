@@ -16,7 +16,7 @@ load_dotenv()
 DB_PATH = os.getenv("DB_PATH", "db/vivso_local.db")
 
 # Catálogo oficial de rubros del AFO — suma de peso_pct = 100
-# Derivado del sistema legacy VISOC (imagen docs/afo.jpeg)
+# Derivado del sistema legacy VISOC (imagen docs/visoc/capturas/afo.jpeg)
 RUBROS_CATALOGO = [
     {"id": 1,  "nombre": "Terreno y limpieza",                "descripcion": "Limpieza del terreno y preparación del sitio de obra",                "peso_pct": 3,  "orden": 1},
     {"id": 2,  "nombre": "Excavación e impermeabilización",   "descripcion": "Excavación de cimientos y colocación de capa aisladora",               "peso_pct": 5,  "orden": 2},

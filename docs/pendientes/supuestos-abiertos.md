@@ -6,7 +6,7 @@
 > Los supuestos y las consultas del proyecto estaban repartidos en cuatro documentos.
 > Este archivo **no los copia**: los ordena y dice **cuáles se preguntan y cuáles no**.
 > El detalle vive donde siempre estuvo — [datos-a-confirmar.md](datos-a-confirmar.md),
-> [vision-afo.md](vision-afo.md), [para-desarrollo.md](para-desarrollo.md).
+> [vision-afo.md](../vision/vision-afo.md), [para-desarrollo.md](../para-desarrollo.md).
 >
 > **Regla de higiene:** toda pregunta o supuesto nace con un ID en su documento de origen
 > (`[S#]` dataset · `[V#]` verificación fotográfica · `pedido #` a Desarrollo). Acá se lo
@@ -70,7 +70,7 @@ ilegibles— así que la procedencia se registra acá, una sola vez.
 
 **Los dos canales de resolución (app / presencial) no describen cómo trabaja el área hoy:
 describen cómo queremos que trabaje.** La app de carga no existe —está fuera de alcance en
-[vision-afo.md](vision-afo.md) §9— y el registro de rechazos es el pedido 7 a Desarrollo.
+[vision-afo.md](../vision/vision-afo.md) §9— y el registro de rechazos es el pedido 7 a Desarrollo.
 
 Eso reencuadra `[V9]` y `[V10]`: no son preguntas sobre la práctica actual sino sobre **qué
 aceptarían en un sistema que todavía no existe**. Nadie puede opinar sobre la validez formal
@@ -82,7 +82,7 @@ una táctica para evitar que nos condicionen — **es la única forma de obtener
 ## 2. Supuestos de diseño del componente de visión — no se preguntan
 
 Cada uno tiene un valor por defecto y un costo conocido si resulta falso. Detalle en
-[vision-afo.md](vision-afo.md) §11.
+[vision-afo.md](../vision/vision-afo.md) §11.
 
 | ID | Supuesto | Valor por defecto | Si resulta falso |
 |---|---|---|---|
@@ -117,7 +117,7 @@ Detalle en `rutas/parametros.py`.
 
 **No es con el área, y no es pedir permiso.**
 
-**La rúbrica constructiva** ([vision-afo.md](vision-afo.md) §3): qué se ve en una foto de cada
+**La rúbrica constructiva** ([vision-afo.md](../vision/vision-afo.md) §3): qué se ve en una foto de cada
 uno de los 15 rubros, y en particular `[V1]` (las mangueras embutidas) y las dos ventanas
 temporales. Equivocarse acá no es un supuesto discutible: es un **error de obra**, y hace que
 el demo se caiga solo delante de cualquiera que haya pisado una construcción.
@@ -140,7 +140,7 @@ Esto no es diseño del sistema, es gestión de la cursada. Acá preguntar no cue
 |---|---|---|
 | **Cátedra** | Fecha de la presentación final y si asiste alguien de la entidad | Ordena el cronograma de todo lo demás |
 | **Cátedra** | ¿El componente de visión puede entrar como **prototipo evaluado** y no desplegado? | Define si la Fase 3 de §9 es obligatoria o línea futura |
-| **Desarrollo** | **¿Siguen activos en el proyecto para PP3?** Una sola pregunta | Si la respuesta es no, se activa la contingencia de [roadmap-pp3.md](roadmap-pp3.md) §6 y no hay nada más que preguntarles |
+| **Desarrollo** | **¿Siguen activos en el proyecto para PP3?** Una sola pregunta | Si la respuesta es no, se activa la contingencia de [roadmap-pp3.md](../roadmap-pp3.md) §6 y no hay nada más que preguntarles |
 | **Área** | El checklist `[S#]` de [datos-a-confirmar.md](datos-a-confirmar.md) | Son **parámetros del dataset**, no la forma de trabajar. Corregir un `[S#]` es editar una constante y regenerar |
 
 > La distinción que ordena todo este documento: preguntar **parámetros** es levantar
@@ -166,6 +166,6 @@ miren esto"*.
 ## 6. Referencias
 
 - Supuestos del dataset `[S#]`: [datos-a-confirmar.md](datos-a-confirmar.md)
-- Supuestos de verificación fotográfica `[V#]`: [vision-afo.md](vision-afo.md) §11
-- Pedidos a Desarrollo: [para-desarrollo.md](para-desarrollo.md) §4
-- Bloqueantes y contingencia: [roadmap-pp3.md](roadmap-pp3.md) §3 y §6
+- Supuestos de verificación fotográfica `[V#]`: [vision-afo.md](../vision/vision-afo.md) §11
+- Pedidos a Desarrollo: [para-desarrollo.md](../para-desarrollo.md) §4
+- Bloqueantes y contingencia: [roadmap-pp3.md](../roadmap-pp3.md) §3 y §6

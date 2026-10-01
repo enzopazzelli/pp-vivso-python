@@ -98,7 +98,7 @@ esto no es así en la realidad, es lo que más cambia el relato.**
 > **Preguntas clave para el área:**
 > - ¿En qué etapa se traban más seguido las obras en la realidad? __________________________
 > - ¿Hay una etapa que dependa de un trámite externo (municipio, EPE) y frene todo? _________
-> - Los **pesos de cada rubro** en el AFO (`[S14]`, catálogo en `db/setup.py`, ref. `docs/afo.jpeg`) — ¿siguen vigentes? ☐
+> - Los **pesos de cada rubro** en el AFO (`[S14]`, catálogo en `db/setup.py`, ref. `docs/visoc/capturas/afo.jpeg`) — ¿siguen vigentes? ☐
 
 ---
 
@@ -150,8 +150,8 @@ esto no es así en la realidad, es lo que más cambia el relato.**
 1. Por cada fila corregida, editar el parámetro **[S#]** en `synthetic/generate.py` (bloque
    *"SUPUESTOS DEL PROGRAMA"*, al inicio del archivo).
 2. Regenerar los datos: `python -m synthetic.generate`
-3. Regenerar las figuras del informe: `python docs/generar_figuras.py`
-4. Revisar en [informe-eda.md](informe-eda.md) los números citados en el texto (los que están en
+3. Regenerar las figuras del informe: `python docs/analisis/generar_figuras.py`
+4. Revisar en [informe-eda.md](../analisis/informe-eda.md) los números citados en el texto (los que están en
    negrita) y actualizarlos si cambiaron.
 5. Abrir el dashboard (`streamlit run dashboard/app.py`) para ver el resultado.
 

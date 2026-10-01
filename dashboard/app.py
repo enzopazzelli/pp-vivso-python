@@ -152,7 +152,7 @@ st.divider()
 st.subheader("Novedad: capa de datos propia")
 st.caption(
     "Reportes reales de VISOC, anonimizados y validados, con indicadores calculados sobre esa "
-    "base — ver docs/como-funciona-la-capa-de-datos.md. El resto del dashboard sigue igual, con "
+    "base — ver docs/capa-de-datos/como-funciona-la-capa-de-datos.md. El resto del dashboard sigue igual, con "
     "el modelo simulado de siempre."
 )
 with st.container(border=True):

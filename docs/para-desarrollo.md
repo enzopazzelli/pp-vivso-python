@@ -3,7 +3,7 @@
 Documento de entrada para el equipo de **Programación (Java / Spring Boot)**: qué hace
 este componente, cómo se integra con el backend y qué necesitamos coordinar. El detalle
 vive en [ROADMAP.md](../ROADMAP.md) (planificación e integración) y en
-[documentacion-analisis.md](documentacion-analisis.md) (el porqué de cada análisis).
+[documentacion-analisis.md](analisis/documentacion-analisis.md) (el porqué de cada análisis).
 
 ---
 
@@ -55,7 +55,7 @@ Basado en la auditoría del backend (último commit `Feature-1.6`, ver [ROADMAP.
 
 | Brecha | Detalle | Qué proponemos |
 |---|---|---|
-| Clasificaciones | El backend tiene 6 códigos; el sistema VISOC real tiene **15 + criterio** (Inclusión/Exclusión/Otro). `DERRUMBE` en realidad es `2b` | Les pasamos la tabla de 15 (está en [documentacion-analisis.md](documentacion-analisis.md)); mientras tanto el ETL deriva `criterio` |
+| Clasificaciones | El backend tiene 6 códigos; el sistema VISOC real tiene **15 + criterio** (Inclusión/Exclusión/Otro). `DERRUMBE` en realidad es `2b` | Les pasamos la tabla de 15 (está en [documentacion-analisis.md](analisis/documentacion-analisis.md)); mientras tanto el ETL deriva `criterio` |
 | Columnas calculadas | No existen `nivel_riesgo`, `dias_activa`, `etapa_activa` | Las escribimos nosotros en las tablas `cd_`; su API las expone con un join |
 | Rubros AFO | `avanceObra` es un entero único; no hay desglose por etapa | Viven en nuestras tablas analíticas; evaluamos juntos si pasan al modelo Java |
 | `Visita` | Entidad creada, **sin endpoints** | Pedido (ver abajo) o leemos la tabla directo mientras tanto |
@@ -72,7 +72,7 @@ Basado en la auditoría del backend (último commit `Feature-1.6`, ver [ROADMAP.
 | 4 | Definición del esquema de roles (enum/valores) | Vistas por rol del dashboard | 🟡 Alta |
 | 5 | Dónde persiste el avance reportado por la gestora | Comparar reporte de la gestora vs. verificación técnica | 🟢 Media |
 | 6 | Avisos: columna `" barrio "` con espacios en `Vivienda`; passwords en texto plano | Calidad / seguridad | 🟢 Informativo |
-| 7 | **Registro de resoluciones del técnico por rubro**: `(vivienda, rubro, fecha, técnico, canal, resultado, motivo)` — donde `resultado` es aprueba / aprueba con observaciones / **rechaza**, y `canal` es app / presencial | Sin esto no se puede saber que una obra está **rehaciendo** y no paralizada. Ver [vision-afo.md](vision-afo.md) §4.3 | 🟡 Alta |
+| 7 | **Registro de resoluciones del técnico por rubro**: `(vivienda, rubro, fecha, técnico, canal, resultado, motivo)` — donde `resultado` es aprueba / aprueba con observaciones / **rechaza**, y `canal` es app / presencial | Sin esto no se puede saber que una obra está **rehaciendo** y no paralizada. Ver [vision-afo.md](vision/vision-afo.md) §4.3 | 🟡 Alta |
 
 > El pedido 7 es un **hecho operativo**, no una derivación analítica: su lugar es el backend,
 > no las tablas `cd_`. Mientras no exista, CD lo modela en `cd_` para el prototipo, pero es
@@ -93,8 +93,8 @@ explicar el número ante una gestora):
 - 🟢 **Sin riesgo:** el resto.
 
 El detalle del AFO, los rubros y todos los indicadores está en
-[documentacion-analisis.md](documentacion-analisis.md); el análisis completo, en
-[informe-eda.md](informe-eda.md).
+[documentacion-analisis.md](analisis/documentacion-analisis.md); el análisis completo, en
+[informe-eda.md](analisis/informe-eda.md).
 
 ---
 
@@ -105,7 +105,7 @@ El detalle del AFO, los rubros y todos los indicadores está en
 - Repo de este componente: `github.com/enzopazzelli/pp-vivso-python` (migrado desde `vivso-python` el 2026-08-20; mismo contenido, historial reescrito).
 - Los **supuestos del modelo** (plazo, distribuciones, etapas del cuello de botella, umbrales)
   están centralizados y etiquetados `[S#]` en `synthetic/generate.py`, y se validan con el
-  área en [datos-a-confirmar.md](datos-a-confirmar.md).
+  área en [datos-a-confirmar.md](pendientes/datos-a-confirmar.md).
 - **Pendiente de coordinación con ustedes:** la integración real (pedidos de la sección 4).
 
 ---
@@ -116,5 +116,5 @@ El detalle del AFO, los rubros y todos los indicadores está en
 |---|---|
 | Cómo correr el proyecto, estructura, conceptos de dominio | [README.md](../README.md) |
 | Plan, auditoría del backend, arquitectura `cd_`, pedidos | [ROADMAP.md](../ROADMAP.md) |
-| Por qué de cada análisis, AFO, clasificaciones, glosario | [documentacion-analisis.md](documentacion-analisis.md) |
-| Informe EDA (hallazgos con figuras) | [informe-eda.md](informe-eda.md) |
+| Por qué de cada análisis, AFO, clasificaciones, glosario | [documentacion-analisis.md](analisis/documentacion-analisis.md) |
+| Informe EDA (hallazgos con figuras) | [informe-eda.md](analisis/informe-eda.md) |

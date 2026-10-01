@@ -6,7 +6,7 @@
 fotos ni modelo de visión conectado. Corre entero sin API: `python -m vision.demo`, y la
 página «Verificación por foto» del dashboard.
 **Encaja en:** PP3, etapas 6-Evaluación, 7-Insights y 8-Despliegue en pruebas
-([roadmap-pp3.md](roadmap-pp3.md))
+([roadmap-pp3.md](../roadmap-pp3.md))
 
 ---
 
@@ -288,7 +288,7 @@ saber qué parte del AFO se cae. De ahí se derivan las dos vistas de control:
 
 **Dónde vive:** para el prototipo, en la capa `cd_*` junto a `cd_afo_foto`. Pero un rechazo es
 un **hecho operativo**, no una derivación analítica: su lugar definitivo es el backend. Va a la
-lista de pedidos de [para-desarrollo.md](para-desarrollo.md).
+lista de pedidos de [para-desarrollo.md](../para-desarrollo.md).
 
 ### 4.4 Efecto sobre el modelo de riesgo (excede a esta propuesta)
 
@@ -318,7 +318,7 @@ queda el cambio de motivo. **El diseño no debe depender de esa respuesta.**
 ```
 vision/                     ← módulo nuevo (percepción + regla)
 data/fotos/                 ← gold set local, no versionado
-docs/vision-afo.md          ← este documento
+docs/vision/vision-afo.md          ← este documento
 dashboard/pages/            ← página nueva "Verificación por foto"
 ```
 
@@ -462,7 +462,7 @@ bajo y honesto, y cualquier mejora sobre él es ganancia medible sin inflar nada
 
 Ninguna fase espera a nadie. La rúbrica de la Fase 0 se revisa con cualquiera que sepa de
 construcción, y el gold set de la Fase 1 arranca con imágenes públicas — ver
-[supuestos-abiertos.md](supuestos-abiertos.md) §3.
+[supuestos-abiertos.md](../pendientes/supuestos-abiertos.md) §3.
 
 ### Fuera de alcance, explícitamente
 
@@ -507,10 +507,10 @@ porque va a ser la primera objeción.
 
 ## 11. Supuestos de diseño y riesgos
 
-Convención `[V#]`, análoga a los `[S#]` de [datos-a-confirmar.md](datos-a-confirmar.md).
+Convención `[V#]`, análoga a los `[S#]` de [datos-a-confirmar.md](../pendientes/datos-a-confirmar.md).
 
 > **Estos supuestos no se consultan antes de construir.** Es una decisión deliberada, con su
-> razonamiento en [supuestos-abiertos.md](supuestos-abiertos.md) §1: la obligación de PP3 ya
+> razonamiento en [supuestos-abiertos.md](../pendientes/supuestos-abiertos.md) §1: la obligación de PP3 ya
 > está cubierta por el dashboard, así que este componente es excedente y no hay riesgo de
 > entrega en avanzar sobre supuestos. Preguntar sobre algo que todavía no existe delega la
 > decisión de diseño; un prototipo andando la recupera.
@@ -552,8 +552,8 @@ Convención `[V#]`, análoga a los `[S#]` de [datos-a-confirmar.md](datos-a-conf
 ## 12. Referencias
 
 - Catálogo oficial de rubros y pesos: `db/setup.py` → `RUBROS_CATALOGO`
-- Ruta de trabajo de PP3: [roadmap-pp3.md](roadmap-pp3.md)
-- Checklist de validación con el área: [datos-a-confirmar.md](datos-a-confirmar.md)
-- El porqué de cada análisis: [documentacion-analisis.md](documentacion-analisis.md)
-- Guía de integración para Desarrollo: [para-desarrollo.md](para-desarrollo.md)
-- Capturas del AFO en el sistema legacy: `docs/afo.jpeg`, `docs/tipos.jpeg`
+- Ruta de trabajo de PP3: [roadmap-pp3.md](../roadmap-pp3.md)
+- Checklist de validación con el área: [datos-a-confirmar.md](../pendientes/datos-a-confirmar.md)
+- El porqué de cada análisis: [documentacion-analisis.md](../analisis/documentacion-analisis.md)
+- Guía de integración para Desarrollo: [para-desarrollo.md](../para-desarrollo.md)
+- Capturas del AFO en el sistema legacy: `docs/visoc/capturas/afo.jpeg`, `docs/visoc/capturas/tipos.jpeg`

@@ -18,7 +18,7 @@
 > `Finalizada` por un límite superior exclusivo en un sorteo de NumPy, así que terminaba menos
 > que el promedio del programa a pesar de ser la referencia positiva. **Las tablas numéricas de
 > las secciones 4 a 6 corresponden al dataset anterior (1.500 viviendas, 40% terminación)** y
-> hay que regenerarlas (`python -m synthetic.generate` + `python docs/generar_figuras.py`)
+> hay que regenerarlas (`python -m synthetic.generate` + `python docs/analisis/generar_figuras.py`)
 > antes de volver a presentar este informe. Los hallazgos estructurales no deberían cambiar de
 > lectura, salvo que valga la pena revisar si el **5.1** (criterio de inclusión vs. avance)
 > se sostiene con la nueva distribución de estados.
@@ -28,7 +28,7 @@
 > rubro—. No todas tienen la misma fuente: algunas salen de capturas del sistema legacy, una
 > fue confirmada por el área y varias provienen del conocimiento que el equipo tiene del área
 > por trabajar con ella, **sin ratificación formal**. El registro completo, regla por regla,
-> está en [supuestos-abiertos.md](supuestos-abiertos.md) §1.b.
+> está en [supuestos-abiertos.md](../pendientes/supuestos-abiertos.md) §1.b.
 
 ---
 

@@ -93,7 +93,7 @@ El sistema VISOC original clasifica cada vivienda con un código de dos caracter
 
 ### Qué es el AFO
 
-El **Avance Físico de Obra (AFO)** es un número entre 0 y 100% que indica cuánto se completó de una vivienda. No es subjetivo: se calcula como la **suma ponderada de 15 rubros de construcción**, donde cada rubro tiene un peso proporcional a su complejidad y costo relativo.
+El **Avance Físico de Obra (AFO)** es un número entre 0 y 100% que indica cuánto se completó de una vivienda. No es subjetivo: se calcula como la **suma ponderada de los rubros de construcción**, donde cada rubro tiene un peso proporcional a su complejidad y costo relativo. El prototipo simula 15 rubros; VISOC usa 17, con los pesos que figuran en [modelo-de-datos.md](../visoc/modelo-de-datos.md) (sección 3.2).
 
 ```
 AFO = Σ (avance_rubro_i / 100) × peso_rubro_i
@@ -374,7 +374,7 @@ Es una restricción técnica de la detección de etapa activa. El sistema identi
 
 | Término | Significado |
 |---------|-------------|
-| **AFO** | Avance Físico de Obra. Porcentaje de completitud de una vivienda, calculado como suma ponderada de los 15 rubros constructivos. |
+| **AFO** | Avance Físico de Obra. Porcentaje de completitud de una vivienda, calculado como suma ponderada de los rubros constructivos (15 en el prototipo, 17 en VISOC). |
 | **Rubro** | Cada una de las 15 etapas de construcción que componen el AFO. Tienen pesos distintos y son estrictamente secuenciales. |
 | **Etapa activa** | El rubro donde está actualmente detenida una obra — el primero de la secuencia que no llegó al 98%. |
 | **Cuello de botella** | La etapa donde se concentra la mayor cantidad de obras activas simultáneamente. |

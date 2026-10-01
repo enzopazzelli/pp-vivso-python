@@ -98,7 +98,7 @@ esto no es así en la realidad, es lo que más cambia el relato.**
 > **Preguntas clave para el área:**
 > - ¿En qué etapa se traban más seguido las obras en la realidad? __________________________
 > - ¿Hay una etapa que dependa de un trámite externo (municipio, EPE) y frene todo? _________
-> - Los **pesos de cada rubro** en el AFO (`[S14]`, catálogo en `db/setup.py`, ref. `docs/visoc/capturas/afo.jpeg`) — ¿siguen vigentes? ☐
+> - Los **pesos de cada rubro** en el AFO (`[S14]`, catálogo en `db/setup.py`) — ¿siguen vigentes? **Respondido con las capturas de VISOC (2026-09-30): no.** VISOC usa 17 rubros con otros pesos ([modelo-de-datos.md](../visoc/modelo-de-datos.md), sección 3.2); falta actualizar el catálogo del prototipo.
 
 ---
 

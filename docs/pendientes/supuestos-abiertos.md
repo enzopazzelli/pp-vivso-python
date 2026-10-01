@@ -49,7 +49,7 @@ ilegibles— así que la procedencia se registra acá, una sola vez.
 
 | Regla de dominio | Fuente | Firmeza |
 |---|---|---|
-| Los 15 rubros del AFO, sus pesos y su orden | Capturas del sistema legacy (`afo.jpeg`, `tipos.jpeg`) | **Evidencia documental** |
+| Los rubros del AFO, sus pesos y su orden | Capturas de VISOC: son **17 rubros**, con los pesos de [modelo-de-datos.md](../visoc/modelo-de-datos.md) (sección 3.2). El prototipo todavía simula 15 | **Evidencia documental** para los 17; los 15 del prototipo son simulados |
 | Plazo contractual de construcción: 90 días | Confirmado por el área, 2026-06-10 | **Confirmado** |
 | El ministerio no construye; ejecuta la gestora | Conocimiento del equipo, de larga data | Firme, no ratificado |
 | **La gestora solicita las viviendas, no al revés** (refuta `[S9]`) | Conocimiento del equipo, 2026-08-28 | Sin ratificar |

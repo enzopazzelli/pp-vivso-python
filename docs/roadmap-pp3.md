@@ -7,7 +7,7 @@
 
 > Este documento planifica **PP3** exclusivamente. El histórico de PP2 (Hito 2 y 3, auditoría
 > original del backend, bitácora completa del cuatrimestre anterior) queda en
-> [ROADMAP.md](../ROADMAP.md) — no se reescribe, se referencia.
+> `ROADMAP.md` (bitácora interna, no se publica) — no se reescribe, se referencia.
 > Misma convención: `[ ]` pendiente · `[~]` en progreso · `[x]` hecho · `[!]` bloqueado.
 
 ---
@@ -36,8 +36,8 @@ con sentido** — todo lo demás depende de destrabar esto primero.
   pipeline OCR dado de baja del alcance (2026-07-09). Es la base técnica sobre la que se
   construye PP3.
 - **Repo migrado (2026-08-20):** de `github.com/enzopazzelli/vivso-python` a
-  `github.com/enzopazzelli/pp-vivso-python` — mismo contenido. El deploy anterior de Streamlit Cloud se eliminó y se
-  recreó apuntando al repo nuevo, en la URL de arriba.
+  `github.com/enzopazzelli/pp-vivso-python`, con el mismo contenido. El deploy anterior de
+  Streamlit Cloud se eliminó y se recreó apuntando al repo nuevo, en la URL de arriba.
 - **`vivso` (backend Java):** **sin cambios desde `Feature-1.6` (2026-05-06)**. Verificado
   directo en el código: `SecurityConfig` sigue en `permitAll()`, `Visita` sigue siendo solo una
   entidad (`Model/Visita.java`) sin Controller/Service/Repository. Ninguno de los 6 pedidos a
@@ -184,7 +184,7 @@ actualizado después de que termine la práctica.
 - [ ] Formato objetivo: presentación real a la Subsecretaría (no solo al profesor) — más
       formal que la de Hito 2/3, con foco en decisiones de gestión, no en el pipeline.
 - [ ] Estructura sugerida (aplicando las lecciones de la devolución de Hito 2, ver
-      `ROADMAP.md`/histórico y [[feedback-presentaciones-codigo]] en memoria): diagnóstico (As is)
+      `ROADMAP.md`/histórico y la guía interna de presentaciones): diagnóstico (As is)
       → qué se construyó → insights priorizados (§4-Etapa 7) → recomendaciones → qué sigue
       (monitoreo, quién queda a cargo).
 - [ ] Guion como mapa de defensa, no libreto — mismo protocolo que ya funcionó: leer una vez,
@@ -235,7 +235,7 @@ descubrirlo tarde:
 
 - **Supuestos abiertos y qué se pregunta (punto de entrada único): [supuestos-abiertos.md](pendientes/supuestos-abiertos.md)**
 - Datos reales de VISOC en PDF, adaptaciones del prototipo y caminos de lectura (incluido Power BI): [datos-reales-visoc-pdf.md](visoc/datos-reales-visoc-pdf.md)
-- Informe OG/ONG con datos reales: [../informe_ong_og_2026/README.md](../informe_ong_og_2026/README.md)
+- Informe OG/ONG con datos reales: carpeta `informe_ong_og_2026/` (no se publica porque trae datos personales)
 - Verificación fotográfica del AFO (diseño): [vision-afo.md](vision/vision-afo.md)
 - Ruta y bitácora completa de PP2: `ROADMAP.md`
 - Guía de integración para Desarrollo (pedidos, brechas): `docs/para-desarrollo.md`

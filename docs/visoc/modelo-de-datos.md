@@ -474,12 +474,9 @@ normalizar el nombre, para que coincida con el de los otros reportes, y aprovech
 - GDE: este modelo cubre solo VISOC.
 - Leer el texto libre de las observaciones para sacar datos.
 
-Quedan para actualizar los documentos que describen el AFO con los 15 rubros del prototipo como si
-fueran los de VISOC: `README.md`, `docs/analisis/documentacion-analisis.md`,
-`docs/pendientes/supuestos-abiertos.md` y `docs/vision/vision-afo.md`. Los porcentajes de
-`vision-afo.md` se tendrían que recalcular con los pesos reales. En
-`docs/pendientes/datos-a-confirmar.md`, la pregunta de si siguen vigentes los pesos de los rubros ya
-tiene respuesta.
+Los documentos que describían el AFO con los 15 rubros del prototipo ya aclaran que VISOC usa 17.
+Falta pasar a los 17 rubros reales el catálogo del prototipo (`db/setup.py`) y la rúbrica de
+evidencias de `docs/vision/vision-afo.md`, con los porcentajes que salen de ella.
 
 ## 10. Palabras que usamos
 

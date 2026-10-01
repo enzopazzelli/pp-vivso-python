@@ -60,7 +60,7 @@ Python, en lugar del `vivso-client.js` que se había imaginado en un principio.
 
 Sin esto, el código no se entiende. Son las reglas del programa real:
 
-- **AFO (Avance Físico de Obra):** % de avance 0–100, calculado como suma ponderada de **15 rubros de construcción estrictamente secuenciales** (el rubro N solo arranca cuando el N-1 terminó). La secuencia y pesos salen del sistema legacy VISOC ([docs/visoc/capturas/afo.jpeg](docs/visoc/capturas/afo.jpeg)).
+- **AFO (Avance Físico de Obra):** % de avance 0–100, calculado como suma ponderada de los rubros de construcción. VISOC usa **17 rubros** con sus pesos (tabla en [docs/visoc/modelo-de-datos.md](docs/visoc/modelo-de-datos.md), sección 3.2; captura en [docs/visoc/capturas/afo.jpeg](docs/visoc/capturas/afo.jpeg)). El prototipo todavía simula **15 rubros estrictamente secuenciales** (el rubro N solo arranca cuando el N-1 terminó) con pesos estimados: pasarlo a los 17 reales es un cambio pendiente.
 - **Clasificaciones:** el sistema real tiene **15 códigos** (no 6 como el backend actual) agrupados por **criterio**: Inclusión (apta), Exclusión (rechazada), Otro (caso especial). Fuente: [docs/visoc/capturas/tipos.jpeg](docs/visoc/capturas/tipos.jpeg).
 - **Plazo contractual de construcción: 90 días** (confirmado por el área). Es la constante `PLAZO_CONSTRUCCION_DIAS` en `synthetic/generate.py` — única fuente de verdad. Hallazgo clave: ~85% de las obras terminadas lo supera.
 - **Modelo de riesgo (regla transparente, no caja negra):** obra activa que superó los 90 días → 🔴 alto si avance < 30% · 🟡 medio si 30–80% · 🟢 bajo el resto. Es una regla y no ML a propósito: el ministerio debe poder explicar el número ante una gestora.

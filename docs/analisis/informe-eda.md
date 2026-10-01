@@ -444,7 +444,7 @@ aquí.
 
 | Término | Significado |
 |---|---|
-| **AFO** | Avance Físico de Obra. Porcentaje de completitud de una vivienda, calculado como suma ponderada de los 15 rubros constructivos. |
+| **AFO** | Avance Físico de Obra. Porcentaje de completitud de una vivienda, calculado como suma ponderada de los rubros constructivos (15 en el dataset simulado, 17 en VISOC). |
 | **Rubro** | Cada una de las 15 etapas de construcción que componen el AFO. Tienen pesos distintos y son estrictamente secuenciales. |
 | **Etapa activa** | El rubro donde está actualmente detenida una obra — el primero de la secuencia que no llegó al 98%. |
 | **Cuello de botella** | La etapa donde se concentra la mayor cantidad de obras activas simultáneamente. |

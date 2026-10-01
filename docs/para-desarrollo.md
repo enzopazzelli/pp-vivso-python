@@ -2,7 +2,7 @@
 
 Documento de entrada para el equipo de **Programación (Java / Spring Boot)**: qué hace
 este componente, cómo se integra con el backend y qué necesitamos coordinar. El detalle
-vive en [ROADMAP.md](../ROADMAP.md) (planificación e integración) y en
+vive en la bitácora interna del equipo (planificación e integración, no se publica) y en
 [documentacion-analisis.md](analisis/documentacion-analisis.md) (el porqué de cada análisis).
 
 ---
@@ -40,13 +40,13 @@ Para no chocar con Hibernate (`ddl-auto=update`) ni tocar el schema que ustedes 
 - **Consumo:** cualquier front (Streamlit, Next.js) lee esas tablas; **su API puede exponerlas
   con endpoints de solo lectura** sin que toquemos su código.
 
-Detalle completo en [ROADMAP.md](../ROADMAP.md) §3 (arquitectura) y §4 (WS1/WS2).
+El detalle completo (arquitectura y WS1/WS2) está en la bitácora interna del equipo.
 
 ---
 
 ## 3. Qué del backend aprovechamos, y las brechas
 
-Basado en la auditoría del backend (último commit `Feature-1.6`, ver [ROADMAP.md](../ROADMAP.md) §2):
+Basado en la auditoría del backend (último commit `Feature-1.6`; el detalle está en la bitácora interna del equipo):
 
 **Ya lo aprovechamos:** API `/vivienda` (fuente principal del ETL), `/organizacion`,
 `/familia`, `/solicitud`, y `/documento` con su workflow de revisión.
@@ -115,6 +115,6 @@ El detalle del AFO, los rubros y todos los indicadores está en
 | Necesito… | Ir a |
 |---|---|
 | Cómo correr el proyecto, estructura, conceptos de dominio | [README.md](../README.md) |
-| Plan, auditoría del backend, arquitectura `cd_`, pedidos | [ROADMAP.md](../ROADMAP.md) |
+| Plan, auditoría del backend, arquitectura `cd_`, pedidos | Bitácora interna del equipo (no se publica); los pedidos pendientes están en este documento |
 | Por qué de cada análisis, AFO, clasificaciones, glosario | [documentacion-analisis.md](analisis/documentacion-analisis.md) |
 | Informe EDA (hallazgos con figuras) | [informe-eda.md](analisis/informe-eda.md) |

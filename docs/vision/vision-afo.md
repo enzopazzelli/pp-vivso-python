@@ -53,8 +53,8 @@ las obras que no requieren ir, reservando las visitas presenciales para donde ha
 La versión intuitiva — "una red neuronal mira la foto y devuelve el % de avance" — se
 descarta por tres motivos: no es explicable ante una gestora, no se puede validar sin fotos
 etiquetadas, y es **redundante**. El AFO ya es una función determinista: suma ponderada de
-15 rubros estrictamente secuenciales, con los pesos ya definidos en `db/setup.py`
-(`RUBROS_CATALOGO`).
+los rubros estrictamente secuenciales, con los pesos ya definidos. En el prototipo son 15 rubros
+simulados (`RUBROS_CATALOGO` en `db/setup.py`); VISOC usa 17 (ver la nota de la sección 3).
 
 El modelo no tiene que estimar el número. Tiene que estimar **la evidencia**:
 
@@ -80,8 +80,14 @@ que ya se sostuvo en Hito 3 para el modelo de riesgo: **regla transparente, no c
 
 ## 3. Rúbrica de evidencia observable
 
-El insumo central del diseño. Para cada rubro del catálogo oficial, qué se ve en una foto
-cuando ese rubro está terminado.
+El insumo central del diseño. Para cada rubro del catálogo, qué se ve en una foto cuando ese
+rubro está terminado.
+
+> **Nota (2026-09-30):** esta rúbrica se armó con los 15 rubros que simula el prototipo. Las
+> capturas de VISOC muestran que el sistema real usa **17 rubros**, con otros nombres y pesos
+> (tabla en [modelo-de-datos.md](../visoc/modelo-de-datos.md), sección 3.2). Para usarla con datos
+> reales hay que rehacer esta tabla con los 17 rubros, y con ella los porcentajes de este documento
+> (por ejemplo, la parte del AFO que se puede auditar con fotos).
 
 | # | Rubro | Peso | Acum. | Evidencia observable | Toma |
 |---|---|---|---|---|---|

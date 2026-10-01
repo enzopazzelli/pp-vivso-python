@@ -314,9 +314,10 @@ CLASIF_PROB = {
     '5a': 0.02, '5b': 0.04, '5c': 0.03, '5d': 0.02, '5e': 0.02, '5g': 0.01,
 }
 
-# [S14] Rubros del AFO con su peso porcentual (suma = 100) — docs/visoc/capturas/afo.jpeg.
-# Para no duplicar el dato, se derivan del catálogo oficial (db/setup.py → RUBROS_CATALOGO):
-# si el área corrige un peso, se cambia una sola vez allí.
+# [S14] Rubros del AFO con su peso porcentual (suma = 100). Son simulados: VISOC usa 17 rubros
+# con otros pesos (docs/visoc/modelo-de-datos.md, sección 3.2).
+# Para no duplicar el dato, se derivan del catálogo del prototipo (db/setup.py → RUBROS_CATALOGO):
+# si cambia un peso, se cambia una sola vez allí.
 RUBROS_DEF = [{"id": r["id"], "peso": r["peso_pct"]} for r in RUBROS_CATALOGO]
 
 

@@ -78,7 +78,7 @@ export lo habilitaría tal cual está:
 | Indicador de PP2 | Qué necesita | Adaptación posible con los exports actuales | Export adicional que lo habilita |
 | :--- | :--- | :--- | :--- |
 | Riesgo por plazo (obra activa con más de 90 días y poco avance) | Fecha de inicio y avance por vivienda | A nivel expediente: antigüedad desde la fecha del expediente en GDE, por estado de pago | Pases de GDE con fecha (desde cuándo tiene Orden de Pago) y avance de obra por vivienda |
-| Cuello de botella constructivo (etapa activa por rubro) | Avance en cada uno de los 15 rubros del AFO | No hay equivalente a nivel organización | Historial por vivienda de VISOC con avance por rubro |
+| Cuello de botella constructivo (etapa activa por rubro) | Avance en cada rubro del AFO (15 en el prototipo, 17 en VISOC) | No hay equivalente a nivel organización | Historial por vivienda de VISOC con avance por rubro |
 | Actas atascadas (obra terminada sin acta) | Fecha de fin de obra y de acta por vivienda | Aproximar por organización, comparando Activadas y Fin Obras (con la salvedad del punto 26 de `DECISIONES.md`) | VISOC con fecha de fin de obra y de acta por vivienda |
 | Confiabilidad de gestoras (avance, riesgo, sobre-reporte) | Avance informado por la gestora contra el verificado por el técnico | Reemplazar el componente de sobre-reporte por indicadores por organización: tasa de activación, tasa de finalización, reclamos. Es una propuesta a validar con el área | Visitas técnicas con avance verificado, y el avance que reporta cada gestora |
 | Priorización de visitas y rutas | Ubicación y estado de cada vivienda, técnico asignado | A nivel departamento (deducido del texto) | Tabla de códigos de zona, coordenadas de AppGPS, asignación de técnicos |

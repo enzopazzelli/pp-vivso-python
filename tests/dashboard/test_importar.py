@@ -19,6 +19,20 @@ def _script(tmp_path) -> str:
 _TIMEOUT = 15
 
 
+def test_sin_las_dependencias_de_importacion_no_ofrece_subir_y_explica_que_es_local(monkeypatch, tmp_path):
+    # Encontrado en el deploy público: Streamlit Cloud instala solo requirements.txt, sin pdfplumber
+    # ni alembic (están en requirements-datos.txt a propósito), y subir un PDF rompía la página con
+    # ModuleNotFoundError. Ahí la pestaña no tiene que ofrecer subir nada: los reportes reales se
+    # importan solo en la copia local del tablero. `None` en sys.modules = módulo no instalado.
+    import sys
+    monkeypatch.setitem(sys.modules, "pdfplumber", None)
+    monkeypatch.setenv("ANON_SECRET", "x" * 32)
+    at = AppTest.from_file(_script(tmp_path)).run(timeout=_TIMEOUT)
+    assert not at.exception
+    assert not at.file_uploader
+    assert any("copia local" in i.value for i in at.info)
+
+
 def test_sin_archivo_subido_no_rompe(monkeypatch, tmp_path):
     monkeypatch.setenv("ANON_SECRET", "x" * 32)
     monkeypatch.setenv("DATOS_DB_URL", f"sqlite:///{(tmp_path / 'datos.db').as_posix()}")

@@ -1,9 +1,15 @@
 """Pestaña «Importar»: subir un reporte, ver el formato reconocido y el resultado de la validación,
 y recién confirmar para que se guarde. Siempre importa a la base propia, sin importar qué fuente esté
 elegida en las demás pestañas."""
+import importlib.util
 from pathlib import Path
 
 import streamlit as st
+
+# Leer PDF y migrar la base necesitan requirements-datos.txt, que el deploy público (Streamlit Cloud) no
+# instala a propósito: los reportes reales se importan solo en la copia local del tablero. Sin estas
+# dependencias, la pestaña lo explica en vez de ofrecer subir un archivo que después rompería la página.
+_DEPENDENCIAS = ("pdfplumber", "alembic")
 
 _CLAVE_NOMBRE = "_importar_nombre_seguro"
 _CLAVE_PREVIA = "_importar_previa"
@@ -25,8 +31,19 @@ def _mostrar_chequeos(validacion) -> None:
         (st.success if chequeo.ok else st.error)(f"{chequeo.nombre}: {chequeo.detalle}")
 
 
+def _faltan_dependencias() -> list[str]:
+    return [modulo for modulo in _DEPENDENCIAS if importlib.util.find_spec(modulo) is None]
+
+
 def render() -> None:
     st.subheader("Importar un reporte")
+    if _faltan_dependencias():
+        st.info("ℹ️ La importación de reportes funciona solo en la copia local del tablero, para que los "
+                "datos reales no pasen por la versión publicada.")
+        st.caption("Para usarla en tu computadora: instalá `requirements-datos.txt` y configurá "
+                   "`ANON_SECRET` en el archivo `.env`.")
+        return
+
     st.caption(
         "Subí un PDF de VISOC. Primero vas a ver qué formato se reconoció y si valida contra sus "
         "propios totales — recién si tocás «Confirmar e importar» se guarda en la base."

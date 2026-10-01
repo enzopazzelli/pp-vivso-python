@@ -22,6 +22,23 @@ def test_con_json_prueba_las_6_pestanias_rendericen_sin_excepcion():
     assert not at.exception
 
 
+def test_como_en_el_deploy_publico_ninguna_fuente_rompe_la_pagina(monkeypatch, tmp_path):
+    # El deploy público (Streamlit Cloud) no instala requirements-datos.txt: no hay pdfplumber ni
+    # alembic, ni base propia. La página tiene que abrir igual con cualquier fuente, y la pestaña
+    # «Importar» explicar que la importación es solo local en vez de romper.
+    import sys
+    monkeypatch.setitem(sys.modules, "pdfplumber", None)
+    monkeypatch.setitem(sys.modules, "alembic", None)
+    monkeypatch.setenv("DATOS_DB_URL", f"sqlite:///{(tmp_path / 'no_existe.db').as_posix()}")
+    from streamlit.testing.v1 import AppTest
+    for fuente in ("propia", "simulada", "json_prueba"):
+        at = AppTest.from_file(RUTA_PAGINA).run(timeout=_TIMEOUT)
+        at.radio[0].set_value(fuente).run(timeout=_TIMEOUT)
+        assert not at.exception, fuente
+        assert len(at.tabs) == 6, fuente
+        assert any("copia local" in i.value for i in at.info), fuente
+
+
 def test_con_propia_sin_migrar_muestra_el_aviso_y_no_rompe(monkeypatch, tmp_path):
     # Encontrado en la revisión final: "propia" es la fuente por defecto, así que sin base migrada
     # (instalación nueva) el usuario no técnico veía SOLO el aviso, sin ninguna pestaña — ni siquiera

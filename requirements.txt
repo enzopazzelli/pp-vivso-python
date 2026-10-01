@@ -1,4 +1,7 @@
 # Núcleo del análisis y el dashboard (lo que necesita el deploy en Streamlit Cloud)
+# Lo de requirements-datos.txt (leer reportes PDF, migrar la base propia) NO va acá, a propósito: sin
+# esas dependencias la pestaña «Importar» se desactiva sola, y los reportes reales se cargan solo en la
+# copia local del tablero, nunca en la versión publicada.
 pandas>=2.0
 numpy>=1.26
 plotly>=5.20
